@@ -11,7 +11,9 @@ public class Ex03 {
 		
 		int score = 50;
 		String result = (score >= 60) ? "합격" : "불합격";
+		char result2 = (score >= 60) ? 'A' : 'B';
 		System.out.println(result);
+		System.out.println(result2);
 		
 		// 연습
 		// 순위가 1이면 "금메달", 순위가 2이면 "은메달", 순위가 3이면 "동메달"
