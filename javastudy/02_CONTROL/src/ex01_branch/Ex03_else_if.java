@@ -69,22 +69,6 @@ public class Ex03_else_if {
 		// 모듈러 연습2
 		// 일수만 고려, 1일이 수요일일때, n일후 무슨 요일인지 출력하기
 		
-//		if(day < 1 || day > 26) {
-//			weekName = "오류";
-//		} else if(n == 0) {
-//			weekName = "화";
-//		} else if(n == 1) {
-//			weekName = "수";
-//		} else if(n == 2) {
-//			weekName = "목";
-//		} else if(n == 3) {
-//			weekName = "금";
-//		} else if(n == 4) {
-//			weekName = "토";
-//		} else if(n == 5) {
-//			weekName = "일";
-//		} else {
-//			weekName = "월";
 		int day =1;
 		int n =1;
 		String weekName; // 목
