@@ -1,0 +1,113 @@
+1일차 
+
+* 설치할 프로그램
+1. 자바 11.03 버전
+2. 이클립스 21-03 패키지
+3. 폰트(학사관리)
+
+
+[1] 폴더에서 파일의 확장명(exe) 확인하는법 V
+=> 폴더-보기-파일 확장명
+
+[2] 자바설치와 환경변수 작성하기
+1. 시스템 변수에서 JAVA_HOME 새로운 변수 만들기 V
+=> C:\Program Files\Java\jdk-11.0.13(설치된 버전의 jdk폴더) 경로를 JAVA_HOME으로 부르자고 암묵적 합의
+* 컴퓨터에도 인식시키기 위해 시스템 변수에 직접 변수로 추가해야함
+* 자바 외에도 오라클, 웹의 홈도 시스템 변수에 설정
+
+2. PATH에 %JAVA_HOME%\bin 만들기 V
+=> 시스템 어디에서든 JAVA_HOME의 위치를 호출하기 위해
+=> 그 내부의 폴더에 있는 파일들을 바로 호출할 수 있다
+* 시스템에서 변수를 호출할 때는 %사용, 하위 폴더를 붙일 떄는 \
+ 
+예시) 
+JAVA_HOME = C:\Program Files\Java\jdk-11.0.13 
+%JAVA_HOME%\bin = C:\Program Files\Java\jdk-11.0.13\bin
+
+
+
+3. 명령프롬프트(CMD) 
+=> 명령프롬프트를 통해, java.exe와 javac.exe를 호출하여 제대로 컴퓨터가 인식하는지 확인할 수 있음
+
+1) java(.exe) -version 
+2) javac
+
+? 근데 굳이 설정 안해도 cmd에서 인식하는거 같은데, 그럼에도 하는 이유는? ??????????????????????????????????????????
+
+[3] 메모장으로 자바 코드짜서 실행하기 * 안중요함
+1. 메모장에 작성
+public class Hello(파일이름이 Hello기 떄문에, 클래스 명도 같아야 한다 *) {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}
+
+2. cmd로 자바 파일 실행시키기 (별로 중요하지 않음)
+1) => dir 입력: 디렉토리, 위치상 파일들 호출
+=> cd Desktop : 폴더를 바꾸겠다, Desktop로
+
+2) javac Hello.java
+=> java파일을 javac로 컴파일 해라
+=> 입력하면 클래스 파일을 만듬(컴파일됨)
+
+3) java Hello 입력
+=> 클래스 파일을 실행하기
+* 확장자명을 입력하면 오류
+
+& 한글로 출력하고 싶을떄(오류)
+=> 다른이름으로 저장-UTF-8로 인코딩 
+* 이클립스도 마찬가지로, 환경설정
+
+[4] 이클립스 설치와 세팅 V
+1. 이클립스 워크스페이스 설정 *** v
+=> 워크스페이스는 이클립스에서 만들어진 프로젝트를 저장하는 디렉토리를 말함
+=> 자바의 소스코드를 어디에 저장할 것인지, 위치를 임의로 지정할 수 있음
+=> file-swithc workspace
+
+2. 자바 보기로 바꾸기 v
+=> windows-perspective-open perspective-java
+* 이런 설정을 초기화 하려면 metadata 디렉터리를 지우면 된다
+=> metadata 디렉터리: 이클립스의 모든 설정을 담고 있음
+=> 삭제하면 모든 설정 초기화
+* workspace 안에 위치
+
+3. 이클립스 기본설정 v
+1) 화면색 변경, 글꼴 변경 v
+=> general-appearance 
+
+2) 한글출력 인식 v
+=> preference-workspace-text file excoding-utf-8
+
+3) 코딩용 폰트 만들기 (학원수업 기준 임의) v
+=> java-editor-syntax Coloring
+=> class 핑크
+=> interface 회색
+=> method 주황색
+* utf-8 유니코드 폰트 8?
+
+4) lms에서 폰트 다운받기 v
+=> preference에서 적용
+
+------------------------------------
+
+[5] 이클립스로 첫 프로그램 작성
+* 삭제시 설정 유의
+
+
+
+
+
+& 블로그 포스팅
+& 
+
+
+
+3000
+2000
+5천원
+평일: 21~22일
+10만원
+
+
+
+
