@@ -23,11 +23,12 @@ public class Day2 {
 		// => 변수선언도 실수타입으로 선언해야한다사
 		
 		// 2) 타입 고려
-		int a = 5;
+		int a = 500;
 		int b = 3;
 		
 		int result7 = a + b;
-		char result8 = (char)(a + b);
+		byte result8 = (byte)(a + b);
+		System.out.println(result8);
 		long result9 = a + b;
 		double result10 = a + b;
 		

@@ -34,6 +34,9 @@ public class Ex03 {
 		String strGrade2 = String.valueOf(grade2);
 		System.out.println(strGrade2);
 		
+		// => 간편한 방법
+		
+		
 		
 		
 		
