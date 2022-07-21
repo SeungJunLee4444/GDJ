@@ -6,8 +6,6 @@ public class Ex03_break {
 		
 		// 3. break
 		// switch 뿐 아니라 반복문(for, while)에서도 사용
-		 
-		// while 무한 루프문 8
 		
 		// 예제 : 
 		// 모금목표: 100000원

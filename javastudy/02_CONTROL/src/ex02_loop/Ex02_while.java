@@ -15,6 +15,7 @@ public class Ex02_while {
 		int balance = 79350; // 통장 잔액
 		int money = 450;  // 450원 단위로 출금됨
 		while(balance >= money) { // => 450원보다 작으면 출금되지 않는점을 고려
+			
 			System.out.println("잔액" + balance + "인출액" + money);
 			balance -= money;
 		} System.out.println("최종잔액" + balance); 
