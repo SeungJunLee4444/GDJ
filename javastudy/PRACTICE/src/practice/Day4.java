@@ -100,11 +100,23 @@ public class Day4 {
 		
 		// 연습1
 		// 주사위 출력 *
+			
+			System.out.println((int)Math.random() * 6 +1);
+			
+			for(int n = 0; n < 2; n++) {
+				System.out.println((int)Math.random() * 6 +1);
+			}
 		
 		// 연습2
 		// 6자리 숫자로 된 인증번호 만들기 
 				// String code "512345"
-		
+			
+			String str = "";
+			for(int i = 0; i < 6; i++) {
+				str += (int)(Math.random() * 10);
+				
+			} System.out.println(str);
+			
 		// 연습3
 		// 65에서 90까지 랜덤으로 유니코드값을 생성
 		
@@ -113,4 +125,5 @@ public class Day4 {
 		
 	}
 
+	}
 }

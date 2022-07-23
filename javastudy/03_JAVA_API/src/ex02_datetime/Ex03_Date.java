@@ -6,23 +6,24 @@ public class Ex03_Date {
 
 	public static void main(String[] args) {
 		
-		// java.sql.Date 클래스 *
-		// => java sql이라는 패키지의 Date 클래스
-		// * util 패키지의 Date와는 다른것
-		// sql은 데이터베이스에서 나오는 말
-		// 데이터베이스의 날짜 표시방식에 맞춰놓은 클래스
-		// => 객체 선언후 데이터베이스에서 데이터를 받겠지?
+		// 5. 메소드 첫번쨰 방법으로 호출 
 		
+		// 1) java.sql.Date 클래스 *
+			// (1) java.sql이라는 패키지의 Date클래스를 호출
+			// (2) import로 자바에서 자동으로 호출해줌
 		
-		// oracle 데이터베이스의 날짜타입("/", "-"과 매칭해서 사용할 것
+			// * java.util/sql.Date의 차이점
+				// => util은 epochtime(1970)을 참고(권장x)
+				// => sql은 데이터베이스를 다룰 때 사용(시간정보를 안다루고 0으로 초기화?)
+					// oracle 데이터베이스의 날짜타입("/", "-"과 매칭해서 사용할 것?
+			
+			// (3) 클래스 선언 후, 객체 생성
+			 Date time = new Date(System.currentTimeMillis()); // => 사용법이 틀렸다?
+		// => long 타입의 date값은 timeStemp뿐이다?
+			 // currentTimeMillis는 long타입 선언을 해야한다
+		System.out.println(time);
 		
-		Date now = new Date(System.currentTimeMillis()); // => 사용법이 틀렸다
-		// => long 타입의 date값은 timeStemp뿐이다
-		System.out.println(now);
-		
-		// 위 쓰임 안외어도됨
-		
-		
+
 		
 		
 		

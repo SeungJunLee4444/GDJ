@@ -54,7 +54,11 @@ public class Day2 {
 		
 		
 		
-		
+		String str = "";
+		for(int i = 0; i < 6; i++) {
+			str += (int)(Math.random() * 10);
+			
+		} System.out.println(str);
 		
 		
 		
