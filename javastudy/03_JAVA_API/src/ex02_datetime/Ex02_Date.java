@@ -6,56 +6,60 @@ public class Ex02_Date {
 
 	public static void main(String[] args) {
 		
-		// 3. 클래스 명명 규칙
-		// 기본적으로 클래스를 부를 때는 패키지를 먼저 불러야함
-		// => package.class명.메소드
 		
-		// java.lang.System.out.print
-		// => 보통은 사용안하고 나중에 써야하는 예외적인 경우 있음
+		/*  2. 클래스 명명 규칙 
+		 *  원래 클래스를 부를 때는 패키지를 앞에 호출해야함
+		 *  => package명.class명.메소드
+		 *  
+		 *  ex) java.lang.System.out.print
+		 *  (예외적으로 java.lang 패키지의 클래스들은 원래 패키지를 생략할 수 있었다)
+		 *  
+		 *  ex) java.utilDate => Date 사용시 import.java.util.Date; 상단에 호출
+		 *      
+		 *  => 이를 간편화하여 자바에서는 메소드를 상단에 import로 호출해준다
+		 *  
+		 */
 		
-		// java.util 패키지의 Date 클래스
-		// 1. java.util.Date (원래방법)
+		/*  3. 클래스와 객체
+		 *  1) 정의
+		 *  클래스: 객체를 만들기 위한 설계도
+		 *  객체: 클래스를 이용해서 만든 실제 객체
+		 *  
+		 *  2) 객체생성법
+		 *  클래스 객체 = new 클래스();
+		 * 
+		 *  3) 메소드 호출 2가지 방법
+		 *  (1) 클래스를 이용한 호출(기존)
+		 *  System.out.println();
+		 *  System.out.currentTimeMillis();
+		 *  System.nanoTime();
+		 *  Math.random();
+		 *  
+		 *  (2) 객체를 이용한 호출 (이런식으로 객체를 호출해야하는 경우가 개발에는있다 *)
+		 *  String str = new String("Hello"); String클래스 str 객체
+		 *  => str.equal("Hello");
+		 *  
+		 *  ex1) Date now = new Date();
+		 *  => now.getMonth();
+		 *
+		 *  ex2) StringBuilder sb = new StringBuilder
+		 *  => sb.append(); 
+		 */ 
 		
-		// 2. import.java.util.Date;
-		//    Date => 자바에서 자동으로 import를 진행시킴
+		// 4. Date 클래스의 now 객체
+		// => 메소드 호출 두번째 방법
 		
-		// * 예외규칙
-		// java. lang 패키지에 소속된 클래스들은 원래 패키지를 생략할 수 있다
-		// => import같은 애들이 필요없음
-		
-		//--------------------------------------------------------------------
-		
-		// 4. 클래스와 객체
-		// 1) 클래스 : 객체를 만들기 위한 설계도
-		// 2) 객체 : 클래스를 이용해서 만든 실제 객체
-		// 3) 일반적인 객체 생성방법
-			//클래스 객체 = new 클래스();
-		
-		// 4) 메소드 사용 방법 2가지
-		// (1) 클래스를 이용해서 호출 => 기존에 하던 방식
-		// System.out.println()
-		// System.currentTimeMillis()
-		// System.nanoTime()
-		// Math.random()
-		
-		// (2) 객체를 이용해서 호출
-		// String str = new String("Hello") // 클래스는 String, 객체는 str
-		// str.euqls("hello") => str과 같은 문자열이냐?
-		
-		// Date now = new Date(); // 클래스 이름이 Date, 객체이름은 now
-		// now.getMonth()
-		
-		// StringBuilder sb = new StringBuilder // 클래스이름이 StringBuilder, 객체이름은 sd
-		// sb.append()
-		
-		// => 이런식으로 객체를 만들어 메소드를 호출해야 하는 경우가 있음
-		
-		// 5. Date 클래스와 now 객체
-		// => 객체는 변수같은 것으로 임의로 이름지어도됨
-		
-		Date now = new Date(); // now는 date 클래스를 참조하여 정보를 출력
+		Date now = new Date();
 		System.out.println(now);
-		// 참조타입 = 클래스?
+
+		// => 여기서 Date는 클래스 now는 Date클래스를 참조하여 만든 실제 객체다
+		// => now는 Date 클래스를 참조하여 실제 시간을 계산한다
+		
+
+		
+
+		
+
 		
 	}
 

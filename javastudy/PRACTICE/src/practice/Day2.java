@@ -28,6 +28,11 @@ public class Day2 {
 		
 		int result7 = a + b;
 		byte result8 = (byte)(a + b);
+		
+		// 작은 범위로 강제로 단위를 바꾸는 것을 캐스팅이라 한다
+		// 캐스팅을 해도, 변수값이 해당 선언타입의 범주에 해당되지 않으면 잘못된 값이 도출된다
+		
+		
 		System.out.println(result8);
 		long result9 = a + b;
 		double result10 = a + b;
@@ -48,13 +53,19 @@ public class Day2 {
 		// => (2) long으로 강제 캐스팅
 		// => (3) double타입 새로운 변수 생성
 		
+		// 복합대입연산자를 이용하면 별도의 타입 변환없이도 연산이 가능하다
+		
 		
 		long aa = 10;
 		
 		
 		
 		
-		
+		String str = "";
+		for(int i = 0; i < 6; i++) {
+			str += (int)(Math.random() * 10);
+			
+		} System.out.println(str);
 		
 		
 		
