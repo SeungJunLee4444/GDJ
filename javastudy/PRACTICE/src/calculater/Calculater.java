@@ -1,20 +1,24 @@
 package calculater;
 
-import java.sql.Date;
+
 
 public class Calculater {
 
 	public static void main(String[] args) {
 
-		String str3 = new String("hi");
-		String str4 = new String("hi");
+		String fullName = "apple.jpg";
+		String fileName = ""; // apple
+		String extName = ""; //jpg
 		
-		if(!str3.equals(str4)) {
-			System.out.println("8:" + "str3, str4는 달라요");
-		} else {
-			System.out.println("9:" + "str3, str4는 같아요");
-		}
-}
+		int idxOfDot = fullName.lastIndexOf(".");
+		fileName = fullName.substring(0, idxOfDot);
+		extName = fullName.substring(idxOfDot + 1);
+		System.out.println(fileName);
+		System.out.println(extName);
+		
+		
+		
+	}
 
 
 } 

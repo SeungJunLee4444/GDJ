@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import javax.sql.rowset.serial.SQLOutputImpl;
 
-public class Day5 {
+public class Day6 {
 
 	public static void main(String[] args) {
 		
@@ -13,22 +13,23 @@ public class Day5 {
 		
 		// [String]
 				
-		// 연습1
+//&		// 연습1 풀/
 		// 파일이름을 파일명과 확장자로 분리
 		// 단, jpg, git, png 이미지인 경우에만 작업을 진행한다
+		
 		String fullName = "apple.jpg";
-		String fileName = ""; // apple
-		String extName = ""; //jpg
+		String frontName = "";
+		String endName = "";
 		
-		int idxOfDot = fullName.lastIndexOf(".");
-		fileName = fullName.substring(0, idxOfDot);
-		extName = fullName.substring(idxOfDot + 1);
-		System.out.println(fileName);
-		System.out.println(extName);
+		int indexDot = fullName.indexOf(".");
+		frontName = fullName.substring(0, indexDot);
+		endName = fullName.substring(indexDot + 1);
+		System.out.println(frontName);
+		System.out.println(endName);
 		
 		
-				
-		// 연습2
+		
+		// 연습2 풀/
 		// 문자열 "abc12345def67890ghijk"에서, 
 		// 아라비아 숫자 12345. 67890을 제외하고 한글자씩 화면에 출력하기
 		String str = "abc12345def67890ghijk";
@@ -36,7 +37,6 @@ public class Day5 {
 //		for(int i = 0; i <= str.length() -1; i++) {
 //			System.out.println(str.charAt(i));
 //		}
-		
 		for(int i = 0; i < str.length(); i++) { // =을 빼버리고 +1 *
 			if(str.charAt(i) >= '0' && str.charAt(i) <= '9' ) {
 				continue;
@@ -44,7 +44,7 @@ public class Day5 {
 			System.out.println(str.charAt(i));
 		} // => 개발자는 두번째 코드를 쓴다 *
 		
-		// 연습2-2
+		// 연습2-2 풀/
 		
 		
 //		for(int i = 0; i < str.length(); i++) { // =을 빼버리고 +1 *
@@ -92,6 +92,8 @@ public class Day5 {
 	
 		
 		String paging = sbPaging.toString();
+		
+		System.out.println(sbPaging);
 		System.out.println(paging);
 		
 		//----------------------------------------------------------------------
@@ -100,7 +102,9 @@ public class Day5 {
 		
 		// 연습1 char 타입의 성별을 입력받기
 		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("성별(남/여)을 입력하세요 >>> ");
+		
 		char gender = sc.next().charAt(0);
 		System.out.println(gender);
 		

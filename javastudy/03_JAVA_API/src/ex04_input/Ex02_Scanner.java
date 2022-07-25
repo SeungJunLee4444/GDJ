@@ -17,7 +17,7 @@ public class Ex02_Scanner {
 		// => int		: nextInt();
 		// => long		: nextLong();
 		// => double 	: nextDouble();
-		// => String	: nextLine(); -공백포함가능, next() -공백포함 불가능
+		// => String	: nextLine(); -공백포함가능, next() -공백포함 불가능 *
 		
 
 		Scanner sc = new Scanner(System.in);
@@ -25,18 +25,21 @@ public class Ex02_Scanner {
 		// => System.in은 키보드
 		
 		System.out.print("이름을 입력하세요 >>>  ");
-		String name = sc.next();
+		String name1 = sc.next();
+		
+		
+		System.out.println(name1);
+	
 		// => String을 입력받을 때 next를 쓴다
 		
 		System.out.print("나이를 입력하세요 >>>");
 		int age = sc.nextInt();
 		// => int를 입력받을 때 nextInt를 쓴다
 		
-		System.out.print("키를 입력하세요 >>>");
+	
 		
 		
-		System.out.println(name);
-		System.out.println(age);
+		
 		
 		sc.close(); //생략 가능
 		

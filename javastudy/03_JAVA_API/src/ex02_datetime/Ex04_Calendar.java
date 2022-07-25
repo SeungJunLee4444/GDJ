@@ -1,5 +1,6 @@
 package ex02_datetime;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Ex04_Calendar {
@@ -7,39 +8,33 @@ public class Ex04_Calendar {
 	public static void main(String[] args) {
 		
 		// [클래스 종류]
-		// 4. java.util.Calendar 클래스
-			// 용도 : 현재날짜나 특정날짜 표현
-			// => 날짜의 특정요소(년,월,일,시,분,초)를 쉽게 사용할 수 있음(앞의 date클래스와는 다른점)
+		// 4. Calendar 클래스
+		// => java.util.Calendar 
+		// => 현재날짜나 특정날짜 표현
+		// ex) 년,월,일,시,분,초
 		
-		// ex)
-		Calendar cal = Calendar.getInstance(); // 객체 cal은 현재날짜와 시간으로 구성
+		// 1) 사용법
+		// (1) 클래스 선언
+		Calendar cal = Calendar.getInstance(); 
+		// => 캘린더 인스턴스를 얻는다
+		// => getInstance(); 메서드를 선언하면 현재 시각으로 초기화됨
 		System.out.println(cal);
-			// 형태: 클래스 + 객체(오브젝트) =
-			// 클래스는 선택해야함
-			// => 이유 : 직접 입력하면 import를 불러오지 않기 때문
-	
-			// * 자바에서는 기본타입 8개를 제외하면 전부 클래스타입이다
+		// => java.util.GregorianCalendar[time=1658749634212,
 		
-		// ex)
-			// 년, 월, 일
-			// int year = cal.get(1); => 원래는 클래스파일에 직접 들어가 상수값을 입력해야함
+		// (2) 반환
+		// => 원래는 클래스파일의 상수값을 Calendar.뒤에 집어넣는 방식이나 아래 같은 방식으로 개선
+		int year = cal.get(Calendar.YEAR); 				// 년
+		int month = cal.get(Calendar.MONTH);			// 월 		+1 더해줘야함. 반환값이 0~11
+		int date = cal.get(Calendar.DAY_OF_MONTH);  	// 월중일	
+		int weekNo = cal.get(Calendar.DAY_OF_WEEK); 	// 주중일	1(일), 2(월) ~
+		int ampm =cal.get(Calendar.AM_PM);				// 오전(0), 오후(1)
+		int hour12 = cal.get(Calendar.HOUR); 			// 시(1~12)
+		int hour24 = cal.get(Calendar.HOUR_OF_DAY); 	// 시(0~23)
+		int minute = cal.get(Calendar.MINUTE); 			// 분(0~59)
+		int second = cal.get(Calendar.SECOND);			// 초(0~59)
 		
-		// (1) 년
-		int year = cal.get(Calendar.YEAR); // => 상수값을 호출하는 방법
-			// * 이유: 사람들은 숫자를 잘 못외운다 ex) ip주소를 못외우니 domain주소로 바꿈(네이버)
+		// * 요일과 오전오후는 별도의 문자값으로 표현해야 하기 떄문에 switch문을 활용한다
 		
-		// (2) 월
-		int month = cal.get(Calendar.MONTH);
-		
-		// (3) 일
-		int date = cal.get(Calendar.DAY_OF_MONTH); // 5, 한달 중에 몇번째 일인지
-		
-		// (4) 요일
-		int weekNo = cal.get(Calendar.DAY_OF_WEEK); // 일주일 기준 몇번째 날짜
-		
-		System.out.println(year);
-		System.out.println(month + 1); // * 월은 하나씩 적게 출력된다 / 반환값이 0~11
-		System.out.println(date);
 		switch(weekNo) {
 		case 1: System.out.println("일요일");
 		case 2: System.out.println("월요일");
@@ -50,47 +45,37 @@ public class Ex04_Calendar {
 		default: System.out.println("토요일");
 		}
 		
-		// * 일(1), 월(2) ~ 토(7) => if,switch를 이용해 요일로 표현할 수 있음
-		
-		
-		// * 초록색 글자는 평소에는 함수, 클래스와 사용되면 메소드라 부른다(자바에서는 대체로 메소드)
-		// => 객체의 기능을 메소드라 말한다
-		
-		// * ctrl + 클래스 클릭 => 해당 클래스 파일 열람 가능
-		// => 여기서 해당 필드값을 찾아내 입력 
-		
-		// * 상수 : 변하지 않는 값
-					
-		
-		// 오전/ 오후 시, 분, 초
-		// (5) 오전오후
-		int ampm =cal.get(Calendar.AM_PM); // 오전은 0, 오후는 1
-		
-		// (6) 시
-		int hour12 = cal.get(Calendar.HOUR); // 시(1~12)
-		int hour24 = cal.get(Calendar.HOUR_OF_DAY); // 시0시부터 23시까지(공공기관)
-		
-		// (7) 분
-		int minute = cal.get(Calendar.MINUTE); // 0~59분
-		
-		// (8) 초
-		int second = cal.get(Calendar.SECOND);
-		
 		switch(ampm) {
 		case 0 : System.out.println("오전"); break;
 		case 1 : System.out.println("오후"); break;
 		} 
+		
+		System.out.println(year);
+		System.out.println(month + 1); // * 월은 하나씩 적게 출력된다 / 반환값이 0~11
+		System.out.println(date);
+		System.out.println(weekNo);
 		System.out.println(hour12);
 		System.out.println(hour24);
 		System.out.println(minute);
 		System.out.println(second);
 		
-		// 캘린더를 이용한 timestamp값 구하기
+		SimpleDateFormat sdf = new SimpleDateFormat("a h:mm:ss yy-MM-dd");
+		String result = sdf.format(cal);
+		
+		
+		// 3) Calendar을 이용한 타임스탬프
+
 		long timestamp = cal.getTimeInMillis();
+		// => getTimeInMillis는 ms(천분의1)단위로 현재시간을 호출하는 메서드
+		
 		System.out.println(timestamp); 
 		
-		// & 정리
-		// ctrl + 클래스를 클릭하면 클래스 파일을 확인할 수 있다
+		// * timestamp은 currentTimeMillis(ms), nanoTime(ns) 두개의 메서드를 호출하여
+		// 단위별 현재 시간을 출력한다
+		// * currentTimeMillis는 통상적인 시간을 구할때, 
+		// * nanoTime ns는 특정 작업의 소요시간을 구할 때 사용한다
+		
+
 	
 		
 	

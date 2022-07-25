@@ -15,6 +15,8 @@
 & 학습목록
 [1] 클래스 
 
+* 클래스 호출 시, 꼭 ctrl + 스페이스바를 눌러서 추천으로 호출해야한다
+(import가 호출될 수 있도록)
 * 클래스의 동작을 함수, 메소드라 부르며 대체로 자바에서 클래스와 함께
 쓰이는 객체의 다양한 기능을 말한다
 * java.lage 패키지의 클래스들은 java를 작성할 필요도, import를 호출할 필요도 없다(예외)
@@ -49,10 +51,10 @@ Date date2 = new Date(System.currentTimeMillis());
 => 날짜의 년,월,일,요일,오전오후시,분,초를 표현할 수 있음
 
 (1) 현재 날짜 표현하는 법
-{1) 클래스 선언, 객체 생성
+{1} 클래스 선언, 객체 생성
 Calendar cal = Calendar.getInstance();
 
-{2) get 메소드로 날짜값 저장 
+{2} get 메소드로 날짜값 저장 
 int year = cal.get(Calendar.YEAR);		=> 년	
 int month = cal.get(Calendar.MONTH + 1); 	=> 월 
 int date = cal.get(Calendar.DAY_OF_MONTH);	=> 일(월중일)
@@ -177,6 +179,36 @@ String date = dtf.format(now);
 2. String 클래스
 
 * 문자값의 주소값을 객체에 저장
+
+요약
+String 클래스의 메소드들
+1) str.equalsIgnoreCase 	=> 대소문자 무시하고 비교 
+2) str.length 			=> 문자열 길이
+3) str.charAt(0)		=> 인덱스값을 지닌 위치의 문자 출력
+4) str.substring(0,1)		=> 인덱스0부터 1까지의 문자열 출력(1제외)
+   str.substring(1)		=> 인덱스 1부터 끝까지 문자열 출력
+5) str.indexOf("문자열")		=> 문자열 앞에서부터 해당 문자열이 위치한 인덱스값
+   str.lastIndexOf("문자열")  	=> 같은 문자열이 중복될 때, 중복 문자열의 제일 마지막
+				   에 위치한 문자열의 인덱스값
+int idxOfDot = fullName.lastIndexOf("."); * 인덱스값을 구할떄 int값에 저장해야한다
+
+
+* if와 주로 사용
+6) str.startWith("");		=> 문자열이 특정 문자열로 시작하는지?
+7) str.endsWith(""); 		=> 문자열이 특정 문자열로 끝나는지?
+8) str.contains(""); 		=> 문자열에 특정 패턴이 포함되는지?
+
+9) str.trim();			=> 문자열 좌우 공백 지우기
+   str.trim(); length();	=> 공백을 제외한 나머지 문자열의 길이
+
+10) str.toUpperCase(): 		=> 대문자로 변환하기
+11) str.toLowerCase(); 		=> 소문자로 변환하기
+12) str.replace("a", "b");	=> 문자열 내용에서 a를 b로 바꿔라
+    str.replaceAll(".", "_");	=> All타입은 괄호 앞의 내용이 문자열이 아닌 정규식
+				=> 값이 전부 __________나옴을 주의 *
+
+13) str.isEmpty();		=> str이 비어있는지? * 공백은 비어있지않은 것으로 간주
+    str.trim(); isEmpty();	=> 공백을 지우고, 비어있는지 검사 
 
 -----------------------------------------------------------------------
 
@@ -387,15 +419,25 @@ StringBuilder sb2 = new StringBuilder();
 => 데이터 타입별로 입력받을 수 있는 메소드를 제공
 => 콘솔에 직접 문자열을 입력할 수 있다 *
 
+1) 선언
 Scanner sc = new Scanner(System.in);
+=> (System.in)로 콘솔에 직접 정보를 입력 가능해진다
+
+2) 입력
 System.out.print("이름을 입력하세요 >>>  ");
 String name = sc.next();
+* char gender = sc.next();charAt(0);
+=> 문자, 문자열 값 출력, 0번째 인덱스값만 *
+=> 공백이 인정안되는 문자열값 입력가능
+
+3) 출력
+System.out.println(name);
 
 * 타입에 따라 쓰는 메소드가 다르다
 => int		: nextInt();
 => long		: nextLong();
 => double 	: nextDouble();
-=> String	: nextLine(); -공백포함가능, next() -공백포함 불가능
+=> char, String	: nextLine(); -공백포함가능, next() -공백포함 불가능
 
 => 실행문
 
@@ -403,13 +445,3 @@ String name = sc.next();
 
 
 
-
-
-
-
-
-& 이후
-) 진도복습
-) 블로그 업로드
-) 강의보기
-=> 클래스, 상수, 데이터베이스
