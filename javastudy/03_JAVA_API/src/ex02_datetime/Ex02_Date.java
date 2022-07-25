@@ -8,15 +8,19 @@ public class Ex02_Date {
 		
 		
 		/*  2. 클래스 명명 규칙 
+		 *  1) 오리지널 규칙
 		 *  원래 클래스를 부를 때는 패키지를 앞에 호출해야함
 		 *  => package명.class명.메소드
 		 *  
 		 *  ex) java.lang.System.out.print
-		 *  (예외적으로 java.lang 패키지의 클래스들은 원래 패키지를 생략할 수 있었다)
+		 *  (예외적으로 java.lang 패키지의 클래스들은 원래 패키지를 생략할 수 있다) *
+		 *  
+		 *  // => 즉 lang을 제외하면 모든경우 패키지를 적어줘야하는데,
 		 *  
 		 *  ex) java.utilDate => Date 사용시 import.java.util.Date; 상단에 호출
 		 *      
-		 *  => 이를 간편화하여 자바에서는 메소드를 상단에 import로 호출해준다
+		 *  => 이를 간편화하기 위해, 자바에서는 메소드를 상단에 import로 호출해준다
+		 *  ==> import를 호출하면 클래스명만 호출해도 사용 가능하다
 		 *  
 		 */
 		

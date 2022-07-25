@@ -18,10 +18,12 @@ public class Ex03_Date {
 					// oracle 데이터베이스의 날짜타입("/", "-"과 매칭해서 사용할 것?
 			
 			// (3) 클래스 선언 후, 객체 생성
-			 Date time = new Date(System.currentTimeMillis()); // => 사용법이 틀렸다?
+			 Date time = new Date(System.currentTimeMillis()); 
 		// => long 타입의 date값은 timeStemp뿐이다?
 			 // currentTimeMillis는 long타입 선언을 해야한다
 		System.out.println(time);
+		
+		// 2) 
 		
 
 		

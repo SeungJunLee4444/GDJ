@@ -17,10 +17,15 @@ public class Ex01_System {
 		long timeStamp = System.currentTimeMillis(); // => 현재시간 천분의 1초
 		System.out.println(timeStamp);
 		
+				// * 시간이 매번 늘어나기 때문에 다른값으로 도출
+				// => 다른 파일명으로서 사용할수도 있다
+		
 			// 2) System.nanoTime ( * 별로 안중요하다) 
 				// => ns단위의 long타입값을 지닌 메소드
 				// => 코드의 수행시간을 측정하는데 적합 *
 					
+		
+			// * 이 두가지는 자바가 아니라 데이터베이스에서 주로 사용된다
 				// ex) 활용법
 		
 		long beginTime = System.nanoTime();

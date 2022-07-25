@@ -148,13 +148,12 @@ public class Day4 {
 		
 		// [while]
 		
-<<<<<<< HEAD
-=======
+
 		int balance = 79350; // 통장 잔액
 		int money = 450;  // 450원 단위로 출금됨
 		while(balance >= money) { // => 450원보다 작으면 출금되지 않는점을 고려
 			
->>>>>>> 892658a7effa0567d62f393abbc428255282f0ae
+
 		
 		while(balance >= money) {
 			balance -= money; 
@@ -338,8 +337,8 @@ public class Day4 {
 	
 		}
 		
+	}
+}
 		
-	}
-
-	}
+	
 
