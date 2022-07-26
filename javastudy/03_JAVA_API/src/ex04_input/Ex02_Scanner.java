@@ -51,8 +51,9 @@ public class Ex02_Scanner {
 		// [Scanner]
 		
 		// 연습1
+		Scanner sc1 = new Scanner(System.in);
 		System.out.println("성별(남/여)을 입력하세요 >>> ");
-		char gender = 0;
+		char gender = sc1.next().charAt(0);
 		System.out.println(gender);
 		
 		sc.close(); // 생략 가능하다

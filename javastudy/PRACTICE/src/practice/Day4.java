@@ -64,24 +64,16 @@ public class Day4 {
 		int begin = 50;
 		int end = 100;
 		int sum2 = 0;
-		for (int d = begin; d <= end; d++) {
-			if(begin > end) {
-				break;
-			}
-			sum2 += d;
-		} System.out.println(sum2);
-		
-		// 주의 1 : 문제의 의도는, begin값과 end값을 배정해서 아래의 공식으로 콘솔에
-				//          값을 출력하는 것이 목적이다
-		
-		// 주의 2 : 아래와같이 둘의 값을 서로 바꿔저장하는 방법도 가능하다
 		if(begin > end) { 
 			int temp;
 			temp = begin;
 			begin = end;
 			end = temp;
-		}
-		// => 이쪽이 좀더 유도리가 있긴 하다
+			}
+		for (int d = begin; d <= end; d++) {
+			sum2 += (end - begin);
+		} System.out.println("합:" + sum2);
+
 		
 		//--------------------------------------------------------------------------------
 		
@@ -121,7 +113,7 @@ public class Day4 {
 		String str3 = "";
 		int point = 3;
 		for (int f = 1; f <= point; f++) {
-			str3 += "★";
+		str3 += "★";
 		} System.out.println(str3);
 		
 		//--------------------------------------------------------------------------------

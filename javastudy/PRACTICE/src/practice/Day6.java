@@ -1,114 +1,30 @@
 package practice;
 
-import java.sql.SQLOutput;
-import java.util.Scanner;
-
-import javax.sql.rowset.serial.SQLOutputImpl;
-
 public class Day6 {
 
 	public static void main(String[] args) {
 		
-		//----------------------------------------------------------------------
-		
-		// [String]
-				
-//&		// 연습1 풀/
-		// 파일이름을 파일명과 확장자로 분리
-		// 단, jpg, git, png 이미지인 경우에만 작업을 진행한다
-		
-		String fullName = "apple.jpg";
-		String frontName = "";
-		String endName = "";
-		
-		int indexDot = fullName.indexOf(".");
-		frontName = fullName.substring(0, indexDot);
-		endName = fullName.substring(indexDot + 1);
-		System.out.println(frontName);
-		System.out.println(endName);
+		// 자격증
+		//1. 정처기(정보처리기사) -전공이 필요없는 몇 안되는 기사
+		// => 4학년 학사급으로 봄
+		// => 일년에 3번
+		// => 필기 / 실기
+		// => 이론, 실기 모두 이론화되있음 
 		
 		
+		// 23년도부터 시험볼 수 있음
+		// 천천히 필기준비부터
 		
-		// 연습2 풀/
-		// 문자열 "abc12345def67890ghijk"에서, 
-		// 아라비아 숫자 12345. 67890을 제외하고 한글자씩 화면에 출력하기
-		String str = "abc12345def67890ghijk";
+		//2. SQLD -데이터베이스 시험
+		// => 일년에 4번
+		// => 우리 학원일정과 맞음
+		// => SQLD 검색하면 사이트에 나옴 
+		// => 이론시험 1회
+		// => 범위 : ORACLE / MS-SQL(ORACLE이 제일 시험 많이 나옴)
+		// (학원은 오라클만 배움)
 		
-//		for(int i = 0; i <= str.length() -1; i++) {
-//			System.out.println(str.charAt(i));
-//		}
-		for(int i = 0; i < str.length(); i++) { // =을 빼버리고 +1 *
-			if(str.charAt(i) >= '0' && str.charAt(i) <= '9' ) {
-				continue;
-			}
-			System.out.println(str.charAt(i));
-		} // => 개발자는 두번째 코드를 쓴다 *
-		
-		// 연습2-2 풀/
-		
-		
-//		for(int i = 0; i < str.length(); i++) { // =을 빼버리고 +1 *
-//			char ch = str.charAt(i);
-//			if(ch >= '0' && ch <= '9' ) {
-//				continue;
-//			}
-//			System.out.println(ch);
-			
-			// => 반복되는 charAt값을 별도의 변수에 저장하여 단축시키기 *
-		
-		
-		// {1} 아라비아 숫자를 제외하라
-				
-		//----------------------------------------------------------------------
-		
-		// [StringBuilder]
-		// 연습1 대문자 6자리로 구성된 인증코드 만들기
-		StringBuilder sbcode = new StringBuilder();
-		//String code = sbcode.toString();
-		//System.out.println("인증코드:" + code);
-		
-		for(int t = 0; t < 6; t++) {
-			sbcode.append((char)(int)Math.random() * 26 + 'A');
-			
-		} 
-		String code = sbcode.toString();
-		System.out.println("인증코드:" + code);
-		
-		//-----------
-		
-		// => 아래의 방식은 랜덤한 숫자를 출력하는 방식이다
-		String str4 = "";
-		for(int p = 0; p < 6; p++) {
-			str4 += (char)(int)(Math.random() * 26 +'A');
-		} System.out.println("인증코드" + str4);
-		
-		//-----------
-		
-		// 연습2 1 2 3 4 5 6 7 8 9 10 만들기
-		StringBuilder sbPaging = new StringBuilder();
-		for(int n =1; n <=10; n++) {
-			sbPaging.append(n + " ");
-		}
-	
-		
-		String paging = sbPaging.toString();
-		
-		System.out.println(sbPaging);
-		System.out.println(paging);
-		
-		//----------------------------------------------------------------------
-		
-		// [Scanner]
-		
-		// 연습1 char 타입의 성별을 입력받기
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("성별(남/여)을 입력하세요 >>> ");
-		
-		char gender = sc.next().charAt(0);
-		System.out.println(gender);
-		
-		sc.close(); // 생략 가능하다
+		// 8.8~8.12 접수
+		// 9.4일 시험
 		
 		
 		

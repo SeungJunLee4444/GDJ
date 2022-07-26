@@ -207,7 +207,7 @@ public class Ex01_String {
 		// 13) 빈 문자열인지 여부를 검사한 뒤 boolean(true, faluse) 반환
 		// {1} 문자열이 있는지 없는지
 		String id = " ";
-		if(id.trim().isEmpty()) {
+		if(id.isEmpty()) {
 			System.out.println("빈 문자열");
 		} else {
 			System.out.println("빈 문자열 아님");
