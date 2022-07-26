@@ -16,6 +16,9 @@ public class Ex02_advanced_for {
 				{"영어", "음악", "국어", "수학"}
 		};
 		
+		System.out.println(timeTable[0][0]);
+		System.out.println(timeTable[1][3]);
+		
 		for(int i = 0; i <timeTable.length; i++) {
 			for(int j = 0; j <timeTable[i].length; j++) {
 				System.out.print(timeTable[i][j] + "\t");
