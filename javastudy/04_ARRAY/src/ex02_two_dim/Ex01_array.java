@@ -59,9 +59,9 @@ public class Ex01_array {
 		arr2[1] = new int[4]; // 2번째 1차원배열의 길이는 4
 		arr2[2] = new int[8]; // 3번째 1차원배열의 길이는 8
 		
-		for(int i = 0; i < arr1.length; i++)  {
-			for(int j = 0; j < arr1[i].length; j++ ) {
-				System.out.print(arr1[i][j] + "  ");
+		for(int i = 0; i < arr2.length; i++)  {
+			for(int j = 0; j < arr2[i].length; j++ ) {
+				System.out.print(arr2[i][j] + "  ");
 			} System.out.println();
 		} 
 		

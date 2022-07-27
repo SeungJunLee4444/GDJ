@@ -17,7 +17,7 @@ public class Ex02_advanced_for {
 		};
 		
 		System.out.println(timeTable[0][0]);
-		System.out.println(timeTable[1][3]);
+		System.out.println(timeTable[1][2]);
 		
 		for(int i = 0; i <timeTable.length; i++) {
 			for(int j = 0; j <timeTable[i].length; j++) {
