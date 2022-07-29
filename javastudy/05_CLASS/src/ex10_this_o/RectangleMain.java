@@ -1,4 +1,4 @@
-package ex10_this;
+package ex10_this_o;
 
 public class RectangleMain {
 

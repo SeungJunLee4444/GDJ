@@ -1,4 +1,4 @@
-package ex10_this;
+package ex10_this_o;
 
 public class Rectangle { // & 4각형
 	
@@ -10,10 +10,15 @@ public class Rectangle { // & 4각형
 
 
 	// 2. 생성자
-	public Rectangle (int width, int height) { // 생성자의 이름은 클래스의 이름과 같다 *
+	public Rectangle (int width, int height) { 
 		this.width = width;
 		this.height = height;
 	}
+	// * 생성자는 반환타입이 없음
+	// * 메서드는필드 타입과 동일하게 작성
+	// * 만약 매개변수로 받을 타입이 다양하다는 것은
+	// 필드의 타입도 다양하다는 것이다 
+	
 	public Rectangle (int n) {
 		this(n, n);
 		// & this의 두번째 용법
