@@ -27,15 +27,18 @@ public class Bus_mine {
 		// # 세개의 매개변수를 전부 받을 수 있는 person 선언
 		
 		// # 존재하지 않는 시트번호 
-		if(seatNo <= 10 || seatNo > limit) {
+		if(seatNo <= 0 || seatNo > limit) {
 			return; // 종료
 		}
 		// # seat 번호에 탑승한 person 저장하기
 		if(seats[seatNo - 1].getPerson() == null) {				// # 자리가 남아있으면 집어넣자
 			seats[seatNo - 1].setPerson(person);
 		}
-				// # 편의상 seatNo는 1에서 25까지 사용하고 있다, 인덱스값이니 -1
+		
+		// # 편의상 seatNo는 1에서 25까지 사용하고 있다, 인덱스값이니 -1
 		// # setperson에 저장된 사람
+		
+		// # get 값이 뭔지 확인하기 위해 불러오는 메서드 / set 입력한 값
 		
 		
 		

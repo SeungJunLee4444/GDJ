@@ -3,9 +3,9 @@ package quiz_04;
 public class Customer {
 
 	// 필드
-	private int money;
+	private int money;		// # 예산
 	private int bonusPoint;
-	private int total;
+	private int total;		// # 쓴 비용 총합
 	private Product[] cart = new Product[10];
 	private int idx;  // cart에 담긴 Product의 개수. cart 배열의 인덱스.
 
@@ -28,7 +28,7 @@ public class Customer {
 	
 	// buy() 메소드
 	public void buy(Product product) {
-		int price = product.getPrice();
+		int price = product.getPrice();		// # price 구입한 제품
 		// 가진 돈보다 비싼 물건은 못 산다.
 		if(money < price) {
 			System.out.println(product.getName() + " 사려면 돈이 " + (price - money) + "원 부족합니다.");

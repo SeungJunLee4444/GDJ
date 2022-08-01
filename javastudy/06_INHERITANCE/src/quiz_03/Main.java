@@ -4,10 +4,12 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Bus_mine bus = new Bus_mine();
+		Bus bus = new Bus(3);
 		// 좌석이 25개인 버스
 		
-		Bus_mine[] bus = new Bus_mine();
+		Bus[] bus = new Bus[3];
+		
+	
 		
 		bus.ride(1, new Person("kim"));
 		bus.ride(5, new Person("choi"));

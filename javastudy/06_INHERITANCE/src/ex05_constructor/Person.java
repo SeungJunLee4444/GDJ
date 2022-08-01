@@ -5,6 +5,7 @@ public class Person {
 	public Person() {
 	System.out.println("Person의 생성");	
 	}
+	// # 생성자
 	
 
 	

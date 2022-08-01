@@ -7,24 +7,24 @@ public class Bus {
 	
 	// Bus 생성자에서 배열 생성을 진행함
 	public Bus(int cnt) {
-		seats = new Seat[cnt];  // 배열 생성, new Bus(25)인 경우 Seat가 25개 생성됨
-		limit = cnt;
+		seats = new Seat[cnt];  // # cnt 만큼의 길이를 지닌 배열 생성
+		limit = cnt;			// # 버스정원은 cnt다?
 		for(int i = 0; i < cnt; i++) {
-			seats[i] = new Seat();
+			seats[i] = new Seat(); // # ?
 		}
 	}
 	
 	// ride() 메소드
-	public void ride(int seatNo, Person person) {
+	public void ride(int seatNo, Person person) { // # seatNo는 좌석수(indx값 +1)
 		// 존재하지 않는 시트번호
 		if(seatNo <= 0 || seatNo > limit) {
 			return;  // ride() 메소드 종료
 		}
 		// 시트에 사람이 없으면, 시트번호에 Person 저장하기
-		Seat seat = seats[seatNo - 1];
-		Person p = seat.getPerson();
+		Seat seat = seats[seatNo - 1];	// 
+		Person p = seat.getPerson();	// # 사람을 데려온다
 		if(p == null) {
-			seat.setPerson(person);
+			seat.setPerson(person);		// # seat 배열에 사람을 앉힌다
 		}
 	}
 	

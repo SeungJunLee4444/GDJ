@@ -11,13 +11,14 @@ public class Americano {
 	private String type;
 	
 	public Americano(Espresso espresso, int shot, String type) {
-		// # 특정 클래스를 매개변수로 (고유명칭-espresso)
 		super();
 		this.espresso = espresso;
 		this.shot = shot;
 		this.type = type;
 	}
-	
+
+
+
 	// # 부모클래스가 없으니 새로 만들어야함
 
 	public void info() {
