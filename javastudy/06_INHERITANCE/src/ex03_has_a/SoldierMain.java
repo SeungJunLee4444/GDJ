@@ -11,7 +11,9 @@ public class SoldierMain {
 		
 		Soldier soldier = new Soldier();
 		soldier.setGun(gun);
+		soldier.getGun().shoot();
 		
+	
 		// * 자식 => 부모의 메소드까지 호출하는 법
 		// # soldier가 총을 쏜다
 		// soldier.getGun().shoot();

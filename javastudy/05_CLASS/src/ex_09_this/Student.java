@@ -25,6 +25,7 @@ public class Student {
 	// => 새로만든 생성자는 setter가 필요없다
 	// => * setter의 역할을 수행하기 떄문
 	
+	// # this의 역할 1 : 필드변수와 매개변수와의 중복 방지
 	
 	
 	// 3. 메소드

@@ -11,10 +11,12 @@ public class Soldier {
 
 	public Gun getGun() {
 		return gun;
+		// # getgun 메서드 : gun을 값으로 반환
 	}
 
 	public void setGun(Gun gun) {
 		this.gun = gun;
+		// # setgun 메서드 사용 : gun을 값으로 설정
 	}
 	
 	public void reload(int bullet) {

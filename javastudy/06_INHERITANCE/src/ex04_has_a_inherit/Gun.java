@@ -11,6 +11,9 @@ public class Gun {
 	// & final을 설정하면 get set을 가져올 때, set을 만들 수 없다
 	// => 값이 고정되기 때문 *
 	
+	// * 여기에 생성자가 없는게 아니라,
+	// 디폴트 생성자가 선언되서 굳이 만들지 않은것
+	
 	
 	// # 메소드
 	public String getModel() {
