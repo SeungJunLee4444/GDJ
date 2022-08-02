@@ -2,12 +2,12 @@ package quiz_03;
 
 public class Bus {
 
-	private Seat[] seats;      // 배열 선언
-	private int limit;         // 버스 정원
+	private Seat[] seats;      // # 배열 선언
+	private int limit;         // # 버스 정원
 	
 	// Bus 생성자에서 배열 생성을 진행함
 	public Bus(int cnt) {
-		seats = new Seat[cnt];  // # cnt 만큼의 길이를 지닌 배열 생성
+		seats = new Seat[cnt];  // # cnt 길이의 배열생성 
 		limit = cnt;			// # 버스정원은 cnt다?
 		for(int i = 0; i < cnt; i++) {
 			seats[i] = new Seat(); // # ?

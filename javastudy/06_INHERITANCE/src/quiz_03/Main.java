@@ -4,16 +4,13 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Bus bus = new Bus(3);
-		// 좌석이 25개인 버스
-		
-		Bus[] bus = new Bus[3];
 		
 	
-		
+		Bus bus = new Bus(25);  			// # 좌석 25개의 버스 배열생성
 		bus.ride(1, new Person("kim"));
-		bus.ride(5, new Person("choi"));
-		bus.ride(10, new Person("min"));
+		bus.ride(1, new Person("lee"));			
+		bus.ride(5, new Student("choi"));
+		bus.ride(10, new Alba("min"));		// # Person, student, Alba 전부 이름값만
 		bus.info();
 		
 		// 1) person 의 name 이 공통으로 포함
