@@ -24,25 +24,32 @@ public class Library {
 		System.out.println("=== 책등록 ===");
 		System.out.print("제목 입력 >>>"); // # print를 쓰면 출력문 옆에 입력 가능
 		String title = sc.next();
-		System.out.print("저자 입력 >>>");
+		System.out.print("저자 입력 >>>");	// # substring은 성황에 따라 쓰는것
 		String author = sc.next();
 		Book book = new Book(idx + 1, title, author);	// @AllArgsConstructor => 개발자생성자 추천
 		books[idx++] = book; 			// # 입력받은 book의 값을 books 배열에 저장하고 idx 1증가
-	}
+		//  getBookNo가 1부터인 이유
 	
+	}
+	// 다시 수정해야함
 	private void removeBook() {		// # 책 제거(책의 이름 또는 책의 번호로 코드작성 가능)
 		System.out.println("=== 책제거 ===");
-		System.out.print("삭제할 책의 번호(1~" + idx + ")>>> ");
-		int bookNo = sc.nextInt() -1;		// 책값을 인덱스값으로(bookNo = idx)
-		if(bookNo < 0 || bookNo >= idx) {		// # 책번호가 1보다 작거나 idx보다 많거나 클때 잘못입력
-			System.out.println("책 번호가" + (bookNo + 1) + "인 책은 없습니다");
-			return;
+		System.out.print("삭제할 책의 번호)>>> ");
+		int bookNo = sc.nextInt();
+		sc.nextLine();
+		for(int i = 0; i < idx; i++) {
+			if(books[i].getBookNo() == bookNo) {
+				System.arraycopy(books, i + 1, books, i, idx - i -1);
+				// # 원본, 복사되는 곳, 배열의 시작점, 배열의 길이
+				books[--idx] = null; // 2) 3) 한꺼번에 / idx는 책의 개수이니 인덱스면 하나 빼고 실행
+				//book[i] = null / idx--;
+				System.out.println("책 번호가" + (bookNo + 1) + "인 책을 삭제했습니다");
+				return;	// # 삭제 끝나면 바로 종료하기
+			}
 		}
-		System.arraycopy(books, bookNo + 1, books, bookNo, idx - bookNo -1);
-		// # 원본, 복사되는 곳, 배열의 길이?
-		books[--idx] = null; // 2) 3) 한꺼번에 / idx는 책의 개수이니 인덱스면 하나 빼고 실행
-		//book[i] = null / idx--;
-		System.out.println("책 번호가" + (bookNo + 1) + "인 책을 삭제했습니다");
+		System.out.println("책 번호가" + (bookNo + 1) + "인 책은 없습니다");
+		}
+		
 		
 		// * 책을 지우는 법
 		// 1) 9번째 책을, 8번째에 저장
@@ -84,6 +91,7 @@ public class Library {
 			
 			// => library.Book@735f7ae5 : 배열의 주소값이 출력 
 		}
+		
 		
 		
 	}
