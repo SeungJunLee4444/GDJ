@@ -2,17 +2,15 @@ package ex01_setter;
 
 public class User {
 	
+	// 필드
+
 	private int userNo;
 	private String id;
-	
-	@Override
-	public String toString() {
-		return "User [userNo=" + userNo + ", id=" + id + ", email=" + email + "]";
-	}
-	// => 객체의 주소값을 문자열로 변환
-	
-	
 	private String email;
+	
+	// 메서드
+	
+	
 	public int getUserNo() {
 		return userNo;
 	}
@@ -31,6 +29,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public String toString() {
+		return "User [userNo=" + userNo + ", id=" + id + ", email=" + email + "]";
 	
 	
 

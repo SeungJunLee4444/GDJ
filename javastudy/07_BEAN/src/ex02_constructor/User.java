@@ -20,6 +20,8 @@ public class User {
 		return "User [userNo=" + userNo + ", id=" + id + ", email=" + email + "]";
 	}
 	
+	// * 롬복은 호출하려는 객체의 클래스에 있어야 기능한다 
+	
 	
 	
 	

@@ -57,7 +57,7 @@ public class Library {
 		// 3) idx--;	책 개수 줄이기
 		// => arraycopy를 활용
 		
-	}
+	
 	
 	private void findBook() {		// # 책 조회
 		System.out.println("=== 책조회 ===");
