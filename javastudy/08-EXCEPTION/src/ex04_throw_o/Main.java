@@ -1,4 +1,4 @@
-package ex04_throw;
+package ex04_throw_o;
 
 import java.util.Scanner;
 

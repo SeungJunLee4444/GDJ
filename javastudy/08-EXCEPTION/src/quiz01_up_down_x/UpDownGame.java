@@ -1,4 +1,4 @@
-package ex05_up_down;
+package quiz01_up_down_x;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

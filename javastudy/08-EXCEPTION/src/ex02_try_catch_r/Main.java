@@ -1,4 +1,4 @@
-package ex02_try_catch;
+package ex02_try_catch_r;
 
 import java.io.File;
 import java.io.FileReader;
@@ -110,9 +110,9 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//m1();
-		//m2();
+		m2();
 		//m3();
-		m4();
+		//m4();
 		
 	}
 	

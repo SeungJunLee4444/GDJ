@@ -1,12 +1,9 @@
-package ex05_up_down;
+package prac2;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
-
-		new UpDownGame().play();
-		
-
+		new Hall("장충체육관").manage();
 	}
 
 }
