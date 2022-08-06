@@ -9,13 +9,13 @@ public class Espresso extends Coffee {
 		this.water = water;
 	}
 	
-	@Override
-	public void info() {
-		super.info();
+
+	
+
+	public void infom() {
+	
 		System.out.println("물" + water + "ml");
 	}
-	
-	
 	
 	
 	

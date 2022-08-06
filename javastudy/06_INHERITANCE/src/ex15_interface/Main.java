@@ -11,6 +11,7 @@ public class Main {
 		p1.call();
 		p1.sms();
 		
+		
 		if(p1 instanceof Smartphone) {
 			((Smartphone) p1).game();
 			((Smartphone) p1).internat();

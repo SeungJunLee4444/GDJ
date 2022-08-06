@@ -23,6 +23,7 @@ public class Person {
 		// => System.out.println(person); 에서 사용
 	}
 	
+	
 	@Override
 	public boolean equals(Object anObject) {
 		Person p = (Person) anObject;	// 다운캐스팅

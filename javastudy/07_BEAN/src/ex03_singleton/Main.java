@@ -4,7 +4,7 @@ public class Main {
 	
 	public Main() {
 
-		User user = new User();
+//		User user = new use
 		// => 새로운 생성자를 만들 수 없음
 		
 		User user1 = User.getInstance();

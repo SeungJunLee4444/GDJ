@@ -6,6 +6,9 @@ public class Main {
 
 		Shape s = new Circle(1);
 		System.out.println(s.getArea());
+			
+		Shape s1 = new Shape();
+		
 		
 	}
 

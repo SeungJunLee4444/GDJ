@@ -20,11 +20,11 @@ public class Main {
 		
 		System.out.println(person);				// # james이 나오게 하는게 목표
 		
-		
+
 		// # 새로운 Person(equals) 확인용)
 		// 목표: name이 같으면 동일한 객체로 인식시키기
 		Person p1 = new Person();
-		Person p2 = new Person();
+		Tatata p2 = new Tatata();
 		p1.setName("김씨");
 		p2.setName("김씨");
 		System.out.println(p1.equals(p2));			// * object와 string비교에 쓰는 equals는 다르다

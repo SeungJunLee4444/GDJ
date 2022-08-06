@@ -5,6 +5,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		Shape s = new Shape();
+
+		
 		// # shape 클래스타입의 객체는 존재할 수 없는 객체이다
 		// # 실제 도형이 아니기 때문
 		// => 생성을 막아주는 것이 좋다(abstract 처리로 객체의 생성 막기)

@@ -6,7 +6,7 @@ public class User {
 	private String id;
 	private String email;
 	
-	// #3 builder 클래스의 build() 메서드가 호출하는 생성자
+	// #1 User 생성자 만들기(Builder을 매개변수로 하는)
 	public User(Builder builder) {
 		this.userNo = builder.userNo;
 		this.id = builder.id;
@@ -57,7 +57,6 @@ public class User {
 		
 		@Override
 		public String toString() {
-			// TODO Auto-generated method stub
 			return super.toString();
 		}
 
