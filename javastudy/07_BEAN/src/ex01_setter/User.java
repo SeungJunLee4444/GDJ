@@ -4,6 +4,8 @@ public class User {
 	
 	private int userNo;
 	private String id;
+	private String email;
+
 	
 	@Override
 	public String toString() {
@@ -11,8 +13,6 @@ public class User {
 	}
 	// => 객체의 주소값을 문자열로 변환
 	
-	
-	private String email;
 	public int getUserNo() {
 		return userNo;
 	}
