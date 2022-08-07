@@ -15,10 +15,10 @@ public class Hall {
 	
 	public Hall(String hallName) {
 		this.hallName = hallName;
-		seatGroups = new SeatGroup[seatTypes.length];	// s, r, a 석이 있음을 의미
+		seatGroups = new SeatGroup[seatTypes.length];	// * 시트그룹 타입만큼 배열만들기
 		// => null
 		for(int i = 0; i < seatGroups.length; i++) {
-			seatGroups[i] = new SeatGroup(seatTypes[i], seatCount[i]);	// * 시트타입과 시트개수를 매개변수로
+			seatGroups[i] = new SeatGroup(seatTypes[i], seatCount[i]);	// * 시트타입 전달, 시트개수에 따른 생성자 부여
 		} 
 		sc = new Scanner(System.in);
 	}

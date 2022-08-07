@@ -89,7 +89,7 @@ public class SeatGroup {
 			} else {
 				System.out.print((i + 1) + (i < 9 ? "  " : " ")); // * 예약이 없는 곳에는 숫자만 표현
 			}
-			if((i + 1) % 10 == 0) {
+			if((i + 1) % 10 == 0) {		// * 출력시 10칸 넘어갈때마다 줄바꿈
 				System.out.println();
 			}
 		} System.out.println();
