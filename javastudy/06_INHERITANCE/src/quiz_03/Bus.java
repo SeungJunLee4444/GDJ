@@ -10,7 +10,7 @@ public class Bus {
 		seats = new Seat[cnt];  // # cnt 길이의 배열생성 
 		limit = cnt;			// # 버스정원은 cnt다?
 		for(int i = 0; i < cnt; i++) {
-			seats[i] = new Seat(); // # ?
+			seats[i] = new Seat(); // # seat 배열에 각각 seat 생성자 넣기
 		}
 	}
 	

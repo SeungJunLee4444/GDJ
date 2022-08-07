@@ -16,7 +16,7 @@ public class Customer {
 	public int getMoney() {
 		return money;
 	}
-	public void setMoney(int money) {
+	public void setMoney(int money) {				// #1 초기값 예산입력
 		this.money = money;
 	}
 	public int getBonusPoint() {
@@ -27,7 +27,7 @@ public class Customer {
 	}
 	
 	// buy() 메소드
-	public void buy(Product product) {
+	public void buy(Product product) {				// #2 구매메서드
 		int price = product.getPrice();		// # price 구입한 제품
 		// 가진 돈보다 비싼 물건은 못 산다.
 		if(money < price) {
@@ -47,15 +47,15 @@ public class Customer {
 	}
 	
 	// receipt() 메소드
-	public void receipt() {
+	public void receipt() {							// #3 영수증, 총 구매값
 		System.out.println();
 		System.out.println("===== 영수증 =====");
-		// 물건을 안 샀다.
+	// 물건을 안 샀다.
 		if(idx == 0) {
 			System.out.println("구매한 물건이 없습니다.");
 			return;
 		}
-		// 구매 총액 구하기 및 출력
+	// 구매 총액 구하기 및 출력
 		for(int i = 0; i < idx; i++) {
 			Product product = cart[i];
 			System.out.println(product.getName() + "  " + product.getPrice() + "원");

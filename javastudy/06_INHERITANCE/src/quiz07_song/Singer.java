@@ -16,7 +16,11 @@ public class Singer {
 		if(idx == songs.length) {	// # 저장된 곡이 length와 같으면 리턴
 			return;					// # 
 		}
-		
+		for(int i = 0; i < idx; i++) {
+			if(songs[i].equals(song)) {
+				return;
+			}
+		}
 		songs[idx++] = song; // # 입력된 곡을 앨범에 저장하고 개수 늘리기
 	}
 	

@@ -21,7 +21,7 @@ public class Main {
 		
 		// 한 대씩 주고 받기
 		// 두 유닛이 모두 살아있으면 계속 싸움
-		while(unit1.isAlive() || unit2.isAlive()) {		
+		while(unit1.isAlive() || unit2.isAlive()) {						// 둘중 하나가 살아있는한 반복
 			// while(unit.getEnergy() > 0 && unit2.getEnergy() > 0 ) 
 			if(myTurn) {
 				System.out.println(unit1.getName() + "의 공격!");
@@ -33,21 +33,21 @@ public class Main {
 				System.out.println(unit1.getName() + "의 공격!");
 				unit2.attack(unit1);	// unit1이 unit2를 공격한다 (마린은 40퍼의 확률로 한번에 상대를 죽임)
 			}
-			myTurn = !myTurn; // true였으면 false로, false면 true로
+			myTurn = !myTurn; // true였으면 false로, false면 true로, 공수교체 *
 			// ?
-			
+		}
 			System.out.println("===전투 종료===");
 			
 			// 승자확인
 			if(unit1.isAlive()) {
-				System.out.println(unit1.getName() + "의 승리! 남은 에너지" + unit2.getEnergy());
+				System.out.println(unit1.getName() + "의 승리! 남은 에너지" + unit1.getEnergy());
 			} else {
-				System.out.println(unit2.getName() + "의 승리! 남은 에너지" + unit1.getEnergy());
+				System.out.println(unit2.getName() + "의 승리! 남은 에너지" + unit2.getEnergy());
 			}
 		}
 		
 		
 
-	}
+	
 
 }
