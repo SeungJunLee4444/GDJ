@@ -31,7 +31,7 @@ public class SeatGroup {
 	}
 	
 	// # 예약
-	public boolean reserve() {
+	public void reserve() {
 		reserveInfo();	// * 예약현황 보여주기
 		
 		System.out.println("예약할 시트 번호 >>>");
@@ -39,13 +39,13 @@ public class SeatGroup {
 		sc.nextLine();
 		if(seatNo < 1 || seatNo > seats.length) {	// # 시트번호는 1부터 시작, 지정된 배열보다는 작아야한다
 			System.out.println(seatNo + "번 좌석은 없는 좌석입니다");
-			return false;	
+			return;	
 		}
 		
 		// # 예약한 시트인지 확인 ( * 시트넘버와 인덱스값 주의하기)
 		if(seats[seatNo -1].isoccupied()) {
 			System.out.println(seatNo + "번 좌석은 이미 예약된 좌석입니다");
-			return false;			// * isoccupied는 비어있지 않으면 true가 도출되기 때문에,
+			return;			// * isoccupied는 비어있지 않으면 true가 도출되기 때문에,
 		}							//   조건이 성립되면 좌석이 찬 출력문이 나와야한다
 		
 		// 예약진행
@@ -53,7 +53,7 @@ public class SeatGroup {
 		String name = sc.next();
 		seats[seatNo - 1].reserve(name);
 		System.out.println(seatNo + "번 좌석 예약 완료");
-		return true;
+		return;
 		
 	}
 

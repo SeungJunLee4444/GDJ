@@ -30,6 +30,8 @@ public class SeatGroup {
 			return false;
 		}
 		
+		// * manage swithcm 반복문이 없어도, boolean을 쓰면 다시 돌아간다?
+		
 		if(seats[seatNo-1].isOccupied()) {
 			System.out.println(seatNo + "번 좌석은 이미 예약된 자석입니다");
 			return false;
