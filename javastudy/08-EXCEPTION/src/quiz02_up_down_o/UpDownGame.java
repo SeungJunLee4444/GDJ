@@ -55,7 +55,7 @@ public class UpDownGame {
 					sc.next();
 					System.out.println("정수만 입력 가능합니다");
 				} catch (RuntimeException e) {
-					System.out.println(e.getMessage());
+					e.getMessage();
 				}
 					
 		}

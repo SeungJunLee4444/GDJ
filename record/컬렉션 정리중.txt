@@ -59,6 +59,14 @@ list.set(0, "일");
 * 배열을 리스트로 변환하는 과정을 말한다
 List<String> list = Arrays.asList("일", "월", "화", "수");
 
+* new Arraylist와 Arrays.asList의 차이
+=> Arraylist는 기본적으로 배열을 리스트화하는 것으로 이 때 새롭게 객체를 만들기 때문에,
+주소값이 기존 배열과 다르다
+
+=> aslist는 기존의 배열을 그대로 복사해 리스트화하기 때문에, 주소값이 같으며,
+배열의 길이를 조정할 수 없고(add.), 내용의 수정(set) 시 기존의 배열요소에도 영향을 준다(똑같이 수정)
+
+
 7) 리스트 길이
 int size = list.size();
 
@@ -110,10 +118,56 @@ ex) set.remove("일");
 ex) Set<String> set = new HashSet<String>(Arrays.asList("일", "월", "화", "수"));
 
 5) 세트의 길이
-int size = set.size();
+ex) int size = set.size();
 
 6) 향상 for문
-* 인덱스가 없기 때문에 일반for문 불가능
+ex) for(String element : set) {
+	System.out.println(element);
+
+7) 집합
+(1) 교집합(retain)
+ex) set1.retainAll(set2);
+(2) 합집합(addAll)	
+ex) set1.addAll(set2);
+=> (set1은 set2를 전부 더한값)
+(3) 차집합(removeAll)
+ex) set1.removeAll(set2);	
+=> 겹치는 부분을 제외한 집합을 말한다(set1은 set2를 전부 제외한값)
+(4) 부분집합(containAll)
+* 부분집합인지 아닌지, 참 거짓여부를 반환함
+ex) boolean result = set1.containsAll(set2);
+=> set2는 set1의 부분집합인지?
+
+8) 중복여부 필터링에 사용 *******************************************************************
+=> set이 중복된 값을 저장 못하는 특성을 이용
+* 방법: list를 set에 저장하고 다시 list에 저장
+
+(1) list 인터페이스로 배열만들기
+List<String> list = new ArrayList<String>();
+list.add("일");
+list.add("월");
+list.add("화");
+list.add("화");
+
+(2) set에 list의 요소를 저장
+Set<String> set = new HashSet<String>(list);
+=> 이 때, list의 특성(중복가능, 순서)가 사라진다
+		
+(3) list.clear();
+=> 기존 list의 모든 특성을 지운다
+
+(3) set을 다시 list에 저장
+list = new ArrayList<String>(set);
+=> set의 특성이 반영된 값이 다시 list에 저장된다
+
+-----------------------------------------------------------------------------------------
+
+5. Hashcode
+=> Integer타입의 십진수 주소값
+=> 많은 데이터를 효율적으로 조회하기 위해 사용된다
+=> 클래스에 hashcode() 메서드를 자동생성하여 사용한다
+
+
 
 
 & 기타
@@ -135,4 +189,4 @@ public int sum (int a, int b) {
 => 객체.sum(5, 6)
 => 11
 
-3. 
+3. 인터페이스의 초기화는 왜 하는건가?

@@ -87,22 +87,25 @@ public class Name {
 		list.add("월");
 		list.add("화");
 		list.add("화");	// #1 화요일 중복
-		
-		Set<String> set = new HashSet<String>(list);
-		
-		list.clear(); 	// * list 요소 모두 제거
-		
-		list = new ArrayList<String>(set);
 		System.out.println(list);
-		
+
+		Set<String> set = new HashSet<String>(list);
+		System.out.println(set);
+//		
+		list.clear(); 	// * list 요소 모두 제거
+//		
+		list = new ArrayList<String>(set);
+//		System.out.println(list);
+		System.out.println(list);
+//		
 		// => 화 삭제 / 순서 삭제
 		
 	}
 	
 	public static void main(String[] args) {
-		m1();
-		m2();
-		m3();
+		//m1();
+		//m2();
+		//m3();
 		m4();
 	}
 }
