@@ -191,14 +191,6 @@ public class Main {
 	}
 		
 	
-	public static void q3() {
-		
-	}
-	
-	
-	public static void q4() {
-		
-	}
 
 	
 	

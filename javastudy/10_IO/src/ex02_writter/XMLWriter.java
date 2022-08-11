@@ -26,21 +26,23 @@ public class XMLWriter {
 		// => 정해진 태그(<>)를 쓰는 html과 달리 사용자가 직접 제작
 		
 		/*
-		 <product>
-		 	<number>100</number>	// * 하나하나를 element(요소)라 하며,
-		 	<name>새우깡</name>		// 크게 보면 product도 element라 본다
-		 	<price>1500</price>		// * 계층구조이기 때문에, 
-		 <product>					// product.appendchild(product의 자식추가)
-		  <product>					// => 자바스크립트에서 자주나옴
-		 	<number>101</number>
-		 	<name>양파링</name>
-		 	<price>2000</price>
-		 <product>
-		  <product>
-		 	<number>102</number>
-		 	<name>홈런볼</name>
-		 	<price>3000</price>
-		 <product>
+		 <products>
+			 <product>
+			 	<number>100</number>	// * 하나하나를 element(요소)라 하며,
+			 	<name>새우깡</name>		// 크게 보면 product도 element라 본다
+			 	<price>1500</price>		// * 계층구조이기 때문에, 
+			 </product>					// product.appendchild(product의 자식추가)
+			  <product>					// => 자바스크립트에서 자주나옴
+			 	<number>101</number>
+			 	<name>양파링</name>
+			 	<price>2000</price>
+			 </product>
+			  <product>
+			 	<number>102</number>
+			 	<name>홈런볼</name>
+			 	<price>3000</price>
+			 </product>
+		</products>
 		 
 		 // => 이런 형태로 제공되는 데이터를 xml데이터라 한다
 		 */
@@ -51,9 +53,17 @@ public class XMLWriter {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();	// (서류 만드는클래스)
 			Document document = builder.newDocument();
-			// * 위의 세 코드를 factory 패턴이라 한다
-			
+			// => factory패턴이라 하며, 새 문서를 세팅하는 코드다 **
 			document.setXmlStandalone(true);
+			// => standalone = "no" 제거하는 코드 **
+			
+			// Document에 products 태그 추가
+			Element products = document.createElement("products");
+			document.appendChild(products);
+			// => products 태그를 만들고 문서에 추가하는 코드 **
+			// => appendchild는 자식태그메서드를 형성할 때 사용 **
+			
+			
 			
 			// 2) 태그 생성
 		  //List<String> header = Arrays.asList("제품번호", "제품명", "가격");
@@ -72,11 +82,11 @@ public class XMLWriter {
 				name.setTextContent(line.get(1));
 				Element price = document.createElement("price");
 				price.setTextContent(line.get(2));
-				// * 태그의 이름을 정해줌
+				// * 태그 생성 후 이름을 붙여주고, 데이터를 저장(settextcontent)
 			
-			// 3) 태그배치
+			// 3) 태그배치(상하관계) **
 				
-				document.appendChild(product);
+				products.appendChild(product);	// * products 밑에 product
 				product.appendChild(number);
 				product.appendChild(name);
 				product.appendChild(price);
@@ -86,8 +96,10 @@ public class XMLWriter {
 			// 4) xml 생성
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
-			transformer.setOutputProperty("ending", "UTF-8");
-			transformer.setOutputProperty("indent", "true");
+			transformer.setOutputProperty("encoding", "UTF-8");
+			transformer.setOutputProperty("indent", "true"); // * 태그간 들여쓰기 **
+			transformer.setOutputProperty("doctype-public", "yes"); // * 개행 
+			
 			
 			Source source = new DOMSource(document);
 			File file = new File("c:\\storage", "product.xml"); 

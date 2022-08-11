@@ -1,5 +1,10 @@
 package ex02_writter;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -18,6 +23,18 @@ public class JSONWriter {
 		// 1) JSON-JAVA 라이브러리
 		// => JSONObject: 객체(Map기반)
 		// => JSONArray	: 배열(List기반,arrayList와 사용이 거의 같음)
+		
+		
+		
+		// & 
+		// jsonobject를 통해, 해당 클래스의 메서드를 호출 가능해진다
+		// => map과 비슷한 put 등의 메서드를 사용가능하며, 
+		// ex) 값을 가져올때는 get
+		// => 이때 value값에 맞는 타입을 저장하기 위한 get~ 등의 메서드를 사용한다
+		
+		
+		
+		
 		
 		
 		// ** jasonobject는 map과 동일한 메서드를 사용한다
@@ -56,9 +73,9 @@ public class JSONWriter {
 	
 	public static void m3() {
 		
+		// 3. jsonobject로 각 데이터별로 나눠서 출력
+		
 		String str = "{\"name\":\"가나다\",\"man\":\"true\",\"age\":\"15\",\"height\":\"180.5\"}";
-		// * 공공api한테 받아온 데이터
-		// => 라이브러리는 각 데이터를 뽑아 나눌수있음
 		
 		JSONObject obj = new JSONObject(str);	// * map이라 생각
 		String name = obj.getString("name");
@@ -82,14 +99,109 @@ public class JSONWriter {
 	}
 		
 	public static void m4() {
+		
+		// 4. 18일차
+		
+		String str = "[{\"name\":\"제임스\",\"age\":30},{\"name\":\"에밀리\",\"age\":40}]";
 			
+		JSONArray arr = new JSONArray(str);
+		
+		// * 일반 for문
+		
+		for(int i = 0, length = arr.length(); i < length; i++) {
+			// * 저장이 되있는 요소는 총 두개있다
+			JSONObject obj = arr.getJSONObject(i);
+			// => str 배열의 요소 0번째
+			String name = obj.getString("name");
+			int age = obj.getInt("age");
+			System.out.println(name + "," + age);
+		}
+		
+		// * 향상 for문
+		// => 기본적으로 get()메서드로 동작
+		// => arr의 타입은 object기 때문에, jsonobject와 타입이 맞지 않아 오류발생
+		for(Object o : arr) {
+			JSONObject obj = (JSONObject)o;
+			String name = obj.getString("name");
+			int age = obj.getInt("age");
+			System.out.println(name + "," + age);
+			
+		}
+		
 		}
 
 	public static void main(String[] args) {
 		
-		//m1();
-		//m2();
-		m3();
+		m1();
+		m2();
+		//m3();
+		//m4();
+		
+		List<String> product1 = Arrays.asList("100", "새우깡", "1500");
+		List<String> product2 = Arrays.asList("101", "양파링", "2000");
+		List<String> product3 = Arrays.asList("102", "홈런볼", "3000");
+		
+		List<List<String>> list = Arrays.asList(product1, product2, product3);
+		
+		// # list를 json string으로 만들고 c:\\storage\\product.json 파일에 write
+		
+		JSONArray arr = new JSONArray(list);	// * collection 선택지로 list, set 전달가능
+		System.out.println(arr);
+		
+		// 결과 : [["100","새우깡","1500"],["101","양파링","2000"],["102","홈런볼","3000"]]
+		// => json 데이터의 모습이 아님(json은 map 형태)
+		
+		for(List<String> line : list) {
+			// * 향상 for문은 전하는 타입과 받는 타입이 동일해야한다
+			JSONObject obj = new JSONObject();
+			obj.put("number", line.get(0));
+			obj.put("name", line.get(1));
+			obj.put("price", line.get(2));
+			arr.put(obj);
+			// * list 데이터를 jsonobj객체에 형식에 맞게 저장하고, 이를 jsonarray에 저장
+		}
+		System.out.println(arr);
+		
+		File file = new File("c:\\storage", "product.json");
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		try {
+			fw = new FileWriter(file);
+			bw =new BufferedWriter(fw);
+			bw.write(arr.toString());	// * arr의 데이터를 문자열로 변환
+		} catch (IOException e) {
+			e.printStackTrace();  // * 오류를 화면에 그대로 찍어줌
+		} finally {
+			try {
+			if(bw != null) {
+				bw.close();
+			}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	

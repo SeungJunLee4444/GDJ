@@ -18,15 +18,13 @@ public class Main {
 		File file = new File(dir, "m1.txt");
 		// * 경로를 string 말고도, 파일 이름으로도 받아올 수 있다
 		
-		// 1. 파일을 만드는 또다른 방법, 스트림만들기
+		// 1. 파일 생성
 		
 		// 1. Filewritter(스트림)로 폴더, 파일 만들기
 				// * 출력 스트림을 이용해 파일을 만들면 마지막에 수정된 타이밍을 기준으로 최신화된다
 		
 		// 1) filewritter로 출력스트림으로 폴더와 파일 생성
-		// => 출력 스트림이 생성되면, createnewfile없이도 파일 생성가능
-		// ** file이 폴더는 관리하되 파일을 잘 만들지 않는 이유다
-		// => createnewfile 실행시 생기는 ioexception의 번거로움
+		
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter(file);	// = new FileWritter(c:\\storage\\m1.txt) *1 위와 동일
