@@ -74,6 +74,8 @@ public class Main {
 			int a = sc.nextInt();
 			System.out.println("정수2 >>>");
 			int b = sc.nextInt();
+			System.out.println(a + "/" + b + "=" + (a / b));
+			System.out.println(a + "%" + b + "=" + (a % b));
 			System.out.println(a + "+" + b + "=" + (a + b));
 			System.out.println(a + "-" + b + "=" + (a - b));
 			System.out.println(a + "*" + b + "=" + (a * b));
@@ -110,8 +112,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//m1();
-		m2();
-		//m3();
+		//m2();
+		m3();
 		//m4();
 		
 	}

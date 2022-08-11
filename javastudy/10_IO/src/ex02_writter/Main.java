@@ -11,30 +11,26 @@ public class Main {
 	
 	public static void m1() {
 		
+		// 1. 폴더 생성
+		
 		File dir = new File("c:\\storage");
 		if(dir.exists() == false) {
 			dir.mkdir();
 		} 
 		File file = new File(dir, "m1.txt");
-		// * 경로를 string 말고도, 파일 이름으로도 받아올 수 있다
+		// * 경로 외에도 폴더의 객체명을 사용해도된다
 		
-		// 1. 파일 생성
-		
-		// 1. Filewritter(스트림)로 폴더, 파일 만들기
-				// * 출력 스트림을 이용해 파일을 만들면 마지막에 수정된 타이밍을 기준으로 최신화된다
-		
-		// 1) filewritter로 출력스트림으로 폴더와 파일 생성
-		
+	
+		// 2. 스트림으로 파일만들기
+	
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter(file);	// = new FileWritter(c:\\storage\\m1.txt) *1 위와 동일
-//			fw.close(); // 문제3 아래에 close를 두는것이 정석이나, 실제로는 예외가 잘 발생하지 않기 때문에, 여기에 써도되긴함
-			// *2 stream의 생성은 언제나 exception이 필요하다
 			
-			// *3 
-			// 코드
-			// 코드 (문제1)	: 오류, 이러면 예외가 있는 코드 이후의 코드들이 실행되지 않는다
-			// 코드
+		// & 기타 -----------------------?
+		// 코드
+		// 코드  => 예외가 발생하면 아래의 예외사항이 실행되지않는다
+		// 코드	 => 공통된 예외는 언제나 멀티플하게 사용할것 *
 			
 			// *4 fw resource leak 오류
 			// => fw.close를 작성해주면된다
@@ -42,8 +38,8 @@ public class Main {
 			e.printStackTrace();	
 		} finally {			
 			try {
-				if(fw != null) {	// 문제2 해결
-					fw.close();	// *문제1해결책 finally에 작성하면, 예외가 발생하든 말든 종료된다
+				if(fw != null) {	
+					fw.close();	 // * close를 작성하지않으면 resource leak 경고가 뜬다(생략가능)
 				}
 				// * trycatch에서 null값이 메서드로 던져지면 null 오류가 발생한다
 				// => if문을 사용해 해결
@@ -53,31 +49,28 @@ public class Main {
 			}
 			}
 		
-		// createnewfile(파일생성코드) 없이 실행된 상태
+		
 		
 		
 	}
 		
 	public static void m2() {
 		
-		// 2. 데이터를 파일에 저장하기
+		// 3. 데이터를 파일에 작성하기
+		// * 데이터 저장시, 한글자씩 읽을때는 int, 여러글자를 한번에 읽을때는 char[], string을 쓴다
+		// * 데이터작성은 filewriter과 write() 메서드
 		
 		File file = new File("c:\\storage", "m2.txt");
-		
 		FileWriter fw = null;
-		
 		try {
-			// 1) 출력 스트림 생성
 			fw = new FileWriter(file);
-			
-			// 2) 데이터를 출력
-			// => 한글자일때는 int / 여러글자일때는 char[], String에 담는다
 			
 			int c = 'i';
 			char[] cbuf = {' ', 'a', 'm'};
 			String str = " IronMan";
+			// * 데이터는 빈공간도 1byte 취급한다
 			
-			// 3) 출력스트림으로 보내기
+			// 3) 출력스트림으로 문서에 데이터를 작성
 			fw.write(c);
 			fw.write(cbuf);
 			fw.write(str);
@@ -100,7 +93,7 @@ public class Main {
 	
 	public static void m3() {
 		
-		// 3. try-catch-resources 문
+		// 4. try-catch-resources 문
 		// => resource는 자원으로, 여기서는 스트림을 의미한다
 		// * 스트림의 종료(close)를 자동으로 처리하는 try-catch문을 의미한다
 		
@@ -123,7 +116,7 @@ public class Main {
 		}
 	}
 		
-		// 3-1. 일부내용만 파일에 저장하기
+		// 5. 일부내용만 파일에 저장하기
 	
 		public static void m4() {
 			File file = new File("c:\\storage", "m4.txt");
@@ -141,7 +134,7 @@ public class Main {
 		
 		public static void m5() {
 		
-			// 4. filewritter은 속도가 느리기 때문에, bufferedwriter을 추가해서 함께 사용한다
+			// 6. filewritter은 속도가 느리기 때문에, bufferedwriter을 추가해서 함께 사용한다
 			
 			File file = new File("c:\\storage", "m5.txt");
 			
@@ -150,17 +143,17 @@ public class Main {
 			
 			try {
 				
-				fw = new FileWriter(file); // *1 출력 메인스트림
+				fw = new FileWriter(file); 
 				bw = new BufferedWriter(fw); // *2 속도 향상을 위한 보조스트림(메인스트림이없으면 사용x)
 				
 			  //fw.write(null);	
-				bw.write("오늘은 수요일인데 수업이 안끝나요 ㅎㅎㅎ");	// * 만들고 나면 이걸로 사용
+				bw.write("오늘은 수요일인데 수업이 안끝나요 ㅎㅎㅎ");	
 				
 			} catch (IOException e) {
 				e.printStackTrace();	// * 정밀한 오류내역 출력
 			} finally {
 				try {
-					// *3 메인스트림은 닫을 필요가 없다(보조를 닫으면, 메인은 자동으로 닫힘)
+				
 					if(bw != null) {	// * 시작값이 null이라서?
 						bw.close();
 					}
@@ -175,11 +168,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		//m1();
-		//m2();
+		m1();
+		m2();
 		//m3();
 		//m4();
-		m5();
+		//m5();
 		
 		
 

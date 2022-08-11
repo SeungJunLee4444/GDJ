@@ -10,37 +10,32 @@ public class Main {
 	
 	public static void m1() {
 		
-		// 1. FileReader 클래스
-		// => writer의 반댓말이 reader
-		// => 입력,출력 스트림은 오직 단방향으로만 작동하는데,
+		// [1] FileReader 클래스
+		
+		// 1. 
+	
 		
 		// 1) 생성
-		// #1 한글자씩 받아오기
 		File file = new File("c:\\storage", "m2.txt");
-		
-		FileReader fr = null;	 // *1 reader, writer 입출력 메서드는 모두 exception 처리가 필요하다
+		FileReader fr = null;	
 		try {
-			// (1) 파일 생성
 			fr = new FileReader(file);
-			// *2 만약 file객체에 등록된 파일이 없으면, filenotfound 오류가 발생한다
-			// => reader이기 때문에, 출력과는 다른 오류가 발생(출력은 파일을 자동으로 만들어준다-*1)
+			// * filewriter 생성자 파라미티에 file객체를 넣으면 파일을 생성해주지만,
+			// 읽는 입장에서는 파일이 없으면 오류가 발생한다
 			
-			// (2) 입력데이터 **
+			// * 입력데이터 **
 			// {1} 한글자 	: int
-			// {2} 여러글자	: char[], (* filereader에서 String[]은 안됨)
+			// {2} 여러글자	: char[], (* filereader에서는 String[]은 안됨)
 			
 		// 2) 출력	 ***
 			// (1) read 메서드
 			// => 읽은 문자 전체를 하나의 문자열로 반환
 			// => 모두 읽어서 읽은 문자가 없으면 -1 반환
-		
-			// => 한글자를 저장한 변수
-			
+	
 			// # 받은 데이터를 String str에 파일 내용 저장하기
 			
-	
 			StringBuilder sb = new StringBuilder();	// * string + 연산은 효율이 좋지 않기 때문에, builder을 사용한다 **
-			int c; // *입력데이터, 한글자씩 반환할떄는 int
+			int c; 
 			while((c = fr.read()) != -1) {
 				sb.append((char)c); // * true 무한루프 대신 쓰는것
 			}
@@ -69,7 +64,7 @@ public class Main {
 	
 	public static void m2() {
 		
-		// #2 여러글자 받아오기
+		// 3) 여러글자 받아오기
 		File file = new File("c:\\storage", "m3.txt");
 		FileReader fr = null;
 		
@@ -96,6 +91,7 @@ public class Main {
 			// => 읽은 글자가 없으면 -1 반환
 			while(true) {
 				int readCnt = fr.read(cbuf); // * 글자수를 readCnt에 반환
+				System.out.println(readCnt);
 			// ex) 나는 아이 => cbuf 배열에 들어가고, 5가 반환되어 readCnt에 저장
 				if( readCnt == -1) {	// * 반환할 글자가 없으면 while문 멈춤
 					break;
@@ -230,11 +226,11 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		//m1();
-		//m2();
+		m1();
+		m2();
 		//m3();
-		m4();
-		m5();
+		//m4();
+		//m5();
 	}
 
 }

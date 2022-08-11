@@ -10,8 +10,20 @@ public class Main {
 	
 	public static void m1() {
 		
-		// 1. file 클래스
-		// 1) 위치 : file.io
+		// & 17일차 : IO
+		// => input(입력) + output(출력) 을 줄여서 io라 한다
+	
+		
+		// [1] file 클래스
+		// 1. 기능
+		// =>폴더, 파일 생성, 삭제, 리스트화
+		
+		// 2. 생성방법
+		// => ne
+		
+		
+		
+		
 		// 2) 기능 : 파일 및 디렉터리를 관리
 		// 3) 생성방법
 		// (1) new file(경로, 파일)
