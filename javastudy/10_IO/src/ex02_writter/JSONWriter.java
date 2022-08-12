@@ -15,36 +15,18 @@ public class JSONWriter {
 	
 	public static void m1() {
 		
-		// 1. JSON ( * 매우중요)
-		// => 자바스크립트 객체 표기법
-		// => 객체는 {}, 배열은 [], 숫자와 텍스트는 자바와 동일
-		// ex) "name" : "100"
+		// & 정리 json 
+		// => 자바스크립트 객체 표기법, 객체는 {}, 배열은 []로 표기
 		
-		// 1) JSON-JAVA 라이브러리
+		// 1. 라이브러리
 		// (1) JSONObject	: 객체(Map기반)
-		// => map과 동일한 메서드를 사용 가능해짐
 		// (2) JSONArray	: 배열(List기반,arrayList와 사용이 거의 같음)
+		// .getobject(i) 메서드 : 배열의 인덱스값에 저장된 객체값울 호출
 		
 	
-		// 2. jsonobject객체에 데이터 저장
-		
-		JSONObject obj = new JSONObject();	// => 생성시 map을 전달하면, json으로 변화시켜줌
-		obj.put("name", "가나다");	
-		obj.put("age", "15");
-		obj.put("man", "true");
-		obj.put("height", "180.5");
-		System.out.println(obj);
-		System.out.println(obj.toString());
-		
-		// 결과 : {"name":"가나다","man":"true","age":"15","height":"180.5"}
-		// => map의 출력과 유사, 객체라 {}
-	}
-	
-	public static void m2() {
-		
-		// 3. jsonobject 객체를 jsonarray에 저장
-		// => jsonarray는 list 기반이기 때문에, collection 소속인 set과 list를 생성자에 불러올 수 있다
-		JSONObject obj1 = new JSONObject();
+		// 2. 실습
+		// 1) json객체 생성과 json배열에 저장 후 문자열 타입으로 변환
+		JSONObject obj1 = new JSONObject();	// * 객체()에는 map 객체 들어갈 수 있음
 		obj1.put("name", "제임스");
 		obj1.put("age", 30);
 
@@ -52,47 +34,44 @@ public class JSONWriter {
 		obj2.put("name", "에밀리");
 		obj2.put("age", 40);
 		
-		// ** 두 object 객체를 arr 배열에 입력
-		JSONArray arr = new JSONArray();	// * collection소속 set와 list를 불러올수있음
+		JSONArray arr = new JSONArray();	// * 객체()에 list, set 타입 들어갈 수 있음
 		arr.put(obj1);
 		arr.put(obj2);
 		
 		System.out.println(arr);
 		System.out.println(arr.toString());
+		// => string 타입으로 바꿔줌(출력시 내용은 차이없음) *
 		
 		// 결과 : [{"name":"제임스","age":30},{"name":"에밀리","age":40}]
-		// => [] 배열로 변환되었기 때문에 대괄호 등장
-		
+	
 		}
 	
-	public static void m3() {
+	public static void m2() {
 		
-		// 4. jsonobject로 각 타입별로 데이터를 나눠서 출력
-		
+		// 2) 문자열을 jsonobject으로 변환, 소속된 각종 메서드로 타입별 데이터 출력시키기
 		String str = "{\"name\":\"가나다\",\"man\":\"true\",\"age\":\"15\",\"height\":\"180.5\"}";
-		
-		JSONObject obj = new JSONObject(str);	// * map이라 생각
+		JSONObject obj = new JSONObject(str);
+	
 		String name = obj.getString("name");
 		boolean man = obj.getBoolean("man");
 		int age = obj.getInt("age");
 		double height = obj.getDouble("height");
-		// * jsonobject를 통해 get 메서드로 타입별로 데이터를 나눠서 저장할 수 있다
-		
+	
 		System.out.println(name);
 		System.out.println(man);
 		System.out.println(age);
 		System.out.println(height);
 		
-		// 결과 : * 배열값을 각 데이터로 나눠서 출력
+		// 결과 :
 		// 가나다
 		// true
 		// 15
 		// 180.5
 	}
 		
-	public static void m4() {
+	public static void m3() {
 		
-		// 5. 복수의 데이터를 배열에 저장하여 원하는 데이터값만 출력
+		// 3. 복수의 데이터를 배열에 저장하여 원하는 데이터값만 출력
 		
 		String str = "[{\"name\":\"제임스\",\"age\":30},{\"name\":\"에밀리\",\"age\":40}]";
 		// => 두개의 데이터
@@ -100,12 +79,9 @@ public class JSONWriter {
 		JSONArray arr = new JSONArray(str);
 		System.out.println(arr);
 		
-		// * 일반 for문으로 순회
-		
 		for(int i = 0, length = arr.length(); i < length; i++) {
-
 			JSONObject obj = arr.getJSONObject(i); 
-			// => 객체선언
+			
 			String name = obj.getString("name");
 			int age = obj.getInt("age");
 			System.out.println(name + "," + age);
@@ -132,13 +108,14 @@ public class JSONWriter {
 		m1();
 		m2();
 		m3();
-		m4();
 		
 		// 6.
 		
 		List<String> product1 = Arrays.asList("100", "새우깡", "1500");
 		List<String> product2 = Arrays.asList("101", "양파링", "2000");
 		List<String> product3 = Arrays.asList("102", "홈런볼", "3000");
+//		product1.add("50"); // aslist는 배열의 길이가 고정되기 떄문에 오류발생
+//		System.out.println(product1);
 		List<List<String>> list = Arrays.asList(product1, product2, product3);
 		
 		// # list를 json string으로 만들고 c:\\storage\\product.json 파일에 write
