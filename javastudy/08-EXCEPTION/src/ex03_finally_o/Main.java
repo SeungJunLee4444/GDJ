@@ -21,7 +21,7 @@ public class Main {
 		} catch (Exception e) {
 			System.out.println("예외발생");
 		} finally {
-			sc.close();
+		
 			System.out.println("finally 블록 실행");
 		}
 		// #1 sc.close 위치문제

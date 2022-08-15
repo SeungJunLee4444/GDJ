@@ -35,8 +35,10 @@ public class Main {
 		// 1. 문자열을 배열로 나눠 저장하고 인트배열로 변환하기			?
 		try {
 			String input = "20, 21, 22, 23, 24, 25";
-//			input.trim().split(input);
+
+
 			String[] inputs = input.split(",");		// & split(",") 안에 들어간 기호를 기준으로 배열로 나눔
+		
 			int[] ages = new int[inputs.length];	
 			for(int i = 0; i < inputs.length; i++) {
 				ages[i] = Integer.parseInt(inputs[i]);
@@ -112,8 +114,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//m1();
-		//m2();
-		m3();
+		m2();
+		//m3();
 		//m4();
 		
 	}
