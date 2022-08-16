@@ -43,7 +43,7 @@ public class Main {
 		
 		// (2) 폴더가 존재하지 않으면 만들겠다
 		if(dir.exists() == false) {	//if(!dir.exist()) 같은 코드
-			//dir.mkdir();		// => 폴더 하나 생성
+		
 			dir.mkdirs();		// * 폴더 하나, 다중 생성(폴더 아래 폴더) 자주사용
 		} 
 		// (3) 존재하면 삭제하겠다
@@ -129,7 +129,10 @@ public class Main {
 			System.out.println(list[i].getName());
 		}
 		
+	
+		
 	}
+
 	
 	public static void q1() {
 		
@@ -164,7 +167,7 @@ public class Main {
 		System.out.println(fileCnt + "개 파일" + new DecimalFormat("#,##0").format(totalSize) + "바이트");
 		
 			System.out.println();
-		}
+		} 
 
 		
 		// * ishidden
@@ -213,10 +216,10 @@ public class Main {
 	public static void main(String[] args) {
 		//m1();
 		//m2();
-		//m3();
+		m3();
 		//m4();
 		//m5();
-		q1();
+		//q1();
 		//q2();
 	}
 

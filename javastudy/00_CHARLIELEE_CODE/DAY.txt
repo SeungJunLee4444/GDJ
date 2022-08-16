@@ -1,0 +1,12 @@
+8/16일
+
+1. 진도
+=> api 
+=> socket 통신
+2. 복습	
+=> create,deletenewfile			o
+=> 
+3. 야간
+=> 스레드강의
+=> 인코딩
+=> socket

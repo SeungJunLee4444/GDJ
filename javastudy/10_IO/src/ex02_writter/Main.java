@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 // * ctrl + shift + o : import 정리, 필요한 내용 만들어주고, 필요없는 내용 가져와줌
 
@@ -161,18 +162,57 @@ public class Main {
 					e.printStackTrace();
 				}
 			}
+			
+	
 		
+			
+		}
+		
+		public static void m6() {
+			
+		// 7. printwriter 클래스										// * writer은 텍스트파일 출력에 사용된다
+		// => print(), println(), 메소드를 지원한다 
+		// => ** 특히 println(자동줄바꿈)를 쓰기 위해서 printwriter를 쓴다
+			
+			File file = new File("c://storage", "m6.txt");
+			PrintWriter out = null;
+			
+			try {
+				out = new PrintWriter(file);
+				
+				// *1 write 메서드는 줄바꿈을 "\n"으로 처리한다
+				out.write("안녕하세요\n");
+				
+				// *2 println메서드는 자동으로 줄바꿈을 삽입하여 출력된다
+				out.println("반갑습니다");
+				out.println("처음뵙겠습니다");
+					
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+				if(out != null) {
+					out.close(); 
+				}
+			} catch (Exception e) {	// => *3 printwriter이 최근에 나온 클래스라, ioe가 아닌 exception으로 처리
+				e.printStackTrace();
+			}
+			}
+			
+			
+			
 			
 		}
 		
 
 	public static void main(String[] args) {
 		
-		m1();
-		m2();
+		//m1();
+		//m2();
 		//m3();
 		//m4();
 		//m5();
+		m6();
 		
 		
 

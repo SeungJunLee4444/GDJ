@@ -15,7 +15,10 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		// p1: 웹 정보를 입출력으로 데이터 저장후 출력
+		// & 정리
+		// * 서버 => client (input, reader) client => 파일 (output, 출력)
+		
+		// p1: url을 이용해 데이터를 input하기 
 		
 		try {
 		// 1) 접속
@@ -23,29 +26,32 @@ public class Main {
 		URL url = new URL(apiURL);
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
 		
-		// +) 접속확인코드
+		// 2) 접속상태 확인
 		if(con.getResponseCode() != HttpURLConnection.HTTP_OK) {
 			System.out.println("api 접속 실패");
 			return;
 		}
 		
-		// 2) 바이트 입력 스트립 -> 문자 스트림 -> 버퍼추가
-//		InputStream in = con.getInputStream();
+		// 3) 바이트 입력 스트립 -> 문자 스트림 -> 버퍼추가
+
 		InputStreamReader reader = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		// *1 getinputstream은 입력을 받기위한 빨때꼳기 메서드, httpurlconnection 소속
+		// *2 inputstreamreader을 통해 char타입 문자스트림으로 변환해 저장되었다 -> writer
 		
-		// 3) 출력스트림
+		// * 현재 데이터는 모두 br에 저장되있다
+		
+		// 4) 출력스트림
 		File file = new File("c:\\storage", "sfc_web_map.xml");
 		FileWriter fw = null;
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 		// * bufferedreader 은 readline(한줄씩읽기) 지원
 		
 		// 4) readline() 으로 입출력
-		String line = null;	// * string 타입의 데이터니
+		String line = null;	// * string 타입은 더이상 읽을 데이터가 없을 때 null 반환
 		while((line = br.readLine()) != null) {
 			bw.write(line + "\n");
 		
-		fw.close();
 		bw.close();
 		con.disconnect();
 		}
