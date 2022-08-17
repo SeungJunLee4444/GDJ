@@ -1,6 +1,9 @@
 package ex02_api;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -8,6 +11,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class Main {
 	
@@ -112,22 +123,74 @@ public class Main {
 			System.out.println("API 응답실패");	// => inputstream
 		}
 		
+		// * 나중에 파일 생성과 xml 분석은 안쓰게됨
+		// => 자바만 사용하고있기 때문, 다른 도구로 해결가능
+		
+		
+		// * response는 api로부터 전달받은 xml 데이터
 		String response = sb.toString();
-		System.out.println(response);
-
+		
+		// file 생성 및 데이터 저장된 파일 생성
+		File file = new File("c:\\storage", "api.xml");
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			bw.write(response);
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// * xml 태그별로 하나씩 분석해보기
+		
+		try {
+		
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(file);
+			
+			Element root = doc.getDocumentElement();   // <response> (최상위 태그)
+			System.out.println(root.getNodeName());
+			
+			NodeList nodeList = root.getChildNodes();  // <response>의 자식 태그(<header>, <body>)
+			for(int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);          // <header>와 <body>
+				System.out.println("  " + node.getNodeName());
+				NodeList nodeList2 = node.getChildNodes();        // <header>의 자식 태그(<resultCode>, <resultMsg>), <body>의 자식 태그(<items>, <numOfRows>, <pageNo>, <totalCount>)
+				for(int j = 0; j < nodeList2.getLength(); j++) {
+					Node node2 = nodeList2.item(j);
+					System.out.println("    " + node2.getNodeName());
+					if(node2.getNodeName().equals("items")) {     // <items> 태그 대상
+						NodeList items = node2.getChildNodes();   // <items>의 자식 태그(<item>)
+						for(int k = 0; k < items.getLength(); k++) {
+							Node item = items.item(k);
+							System.out.println("      " + item.getNodeName());
+							NodeList itemChildren = item.getChildNodes();        // <item>의 자식 태그
+							for(int l = 0; l < itemChildren.getLength(); l++) {
+								Node itemChild = itemChildren.item(l);
+								System.out.println("        " + itemChild.getNodeName() + ":" + itemChild.getTextContent());
+							}
+						}
+					}
+				}
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+			// * document, emelemnt면 전부 w3c.dom 소속
+	
 		con.disconnect();
 		
 	}
 	
-	public static void m2() {
-			
-	}
+
 
 
 	public static void main(String[] args) {
 
 		m1();
-		//m2();
+		
 		
 		
 		
