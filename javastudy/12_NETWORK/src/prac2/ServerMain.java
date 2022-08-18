@@ -17,9 +17,9 @@ public class ServerMain {
 	// # 모든 서버에 메시지 전송
 	public static void sendMessage(String message) throws IOException {
 	
-		for(Server server : servers) {
-			server.sendMessage(message);
-		}
+//		for(Server server : servers) {
+//			server.sendMessage(message);
+//		}
 	}
 	
 	public static void main(String[] args) {

@@ -1,6 +1,9 @@
 package network;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -8,6 +11,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class PulbicApi_o {
 
@@ -26,6 +37,8 @@ public class PulbicApi_o {
 			// * 디코딩된 상태로 저장
 			
 			// 3) 요청을 위한 파라미터 샘플 작성
+			// * request(요청메시지)  : 클라이언트가 서버로 보내줄 데이터, 파라미터)
+			// * response(응답메시지) : 서버가 클라이언트한테 보내주는 메시지
 			apiURL += "?pageNo=" + URLEncoder.encode("0", "UTF-8");
 			apiURL += "&numOfRows=" + URLEncoder.encode("100", "UTF-8");
 			apiURL += "&type=" + URLEncoder.encode("xml", "UTF-8");
@@ -56,11 +69,13 @@ public class PulbicApi_o {
 //			}
 			con.setRequestMethod("GET");
 			// => url 요청을 위한 메서드(get, post 등)
-			// (기본값은 get)
+			// (기본값은 get) => get방식이면 생략가능
+			// * 보안이 필요한 방식은 post, 아니면 get방식
 		
 			con.setRequestProperty("Content-Type", "application/xml; charset=UTF8");
 			// => key, value 쌍의 일반요청 속성 설정
 			// => 어떤 데이터 타입을 요청하는지 작성하는데 사용
+			// => utf8은 생략가능
 			
 		} catch (MalformedURLException e) {
 			System.out.println("api 주소 오류");
@@ -85,31 +100,76 @@ public class PulbicApi_o {
 			}
 			reader.close();
 			
-			String response = sb.toString();
-			System.out.println(response);
 			con.disconnect();
 			
 		} catch (IOException e) {
 			System.out.println("API 응답실패");
 		} 
-	
+		
+		String response = sb.toString();
+
+		
+		// 4. 파일 생성
+		
+		File dir = new File("c:\\charlie1");
+		if(dir.exists() == false) {
+			dir.mkdir();
+		}
+		File file = new File("c:\\charlie1", "ch1.xml");
 		
 		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			bw.write(response);
+			bw.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// 5. xml 문서구조 분석
+		
+		// => 노가다로 xml 분석 뜯어보기
+		// * getnodename 메서드를 이용
+		
+		try {
+		
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(file);
+			
+			Element root = doc.getDocumentElement();	// <response>
+			System.out.println(root);  
+			
+			NodeList nodeList = root.getChildNodes();	// <head>, <body>
+			for(int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				System.out.println(node.getNodeName());
+				NodeList nodeList2 = node.getChildNodes(); // 각각 head의 자식, 바디의 자식들
+				for(int j = 0; j < nodeList2.getLength(); j++) {
+					Node node2 = nodeList2.item(j);			// head의 자식, 바디의 자식들 결과
+					System.out.println(node2.getNodeName());
+					if(node2.getNodeName().equals("items")) {
+						NodeList items = node2.getChildNodes();	// items 태그의 자식태그들
+						for(int k = 0; k < items.getLength(); k++) {
+							Node item = items.item(k);
+							System.out.println(item.getNodeName());
+							NodeList itemChildren = item.getChildNodes();
+							for(int l = 0; l < itemChildren.getLength(); l++) {
+								Node itemChild = itemChildren.item(l);
+								System.out.println(itemChild.getNodeName());
+							}
+						}
+						
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+		}
+		con.disconnect();
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
 
 	}
 

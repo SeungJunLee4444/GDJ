@@ -25,7 +25,6 @@ public class Main {
 		// 2) 인덱스 지정도 가능
 		list.add(0, "일");					// 일, 월, 화
 
-		
 		// 3. 요소 제거
 		// 1) 문자열 제거
 		boolean result = list.remove("일");	// 월, 화

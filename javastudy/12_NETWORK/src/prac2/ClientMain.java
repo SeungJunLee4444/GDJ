@@ -26,22 +26,21 @@ public class ClientMain {
 		socket = new Socket();
 		socket.connect(new InetSocketAddress("localhost", 9090));
 		
-		sc = new Scanner(System.in);
-		out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		// * 서버와 연결된 socket
 		
 		Client client = new Client(socket);
 		client.start();
 		// 스레드
 
+		sc = new Scanner(System.in);
+		out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+		// * 서버와 연결된 socket
 		
 		while(true) {
 			// 1. 출력
-			System.out.println(">>>");
 			String message = sc.nextLine();
-			if(message.equalsIgnoreCase("exit")) {
-				break;
-			}
+//			if(message.equalsIgnoreCase("exit")) {
+//				break;
+//			}
 			out.write(message);
 			out.flush();
 			
