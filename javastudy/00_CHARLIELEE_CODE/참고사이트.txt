@@ -1,0 +1,10 @@
+
+
+
+
+* 8~9월 까지 일정
+관계형 db
+=> oracle	: 2주	db, jdbc, / 					/ web(html, css, javascript, jquery)
+=> ms-sql	: 
+=> mysql(mariadb)
+(oracle, ms-sql은 시험범위, orcale은 학원범위) 

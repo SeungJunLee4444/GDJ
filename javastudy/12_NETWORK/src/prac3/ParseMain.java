@@ -43,6 +43,8 @@ public class ParseMain {
 				String audiAcc = boxOffice.getElementsByTagName("audiAcc").item(0).getTextContent();
 				// * 위 값들이 숫자여도 다 텍스트로 처리
 				
+				// * body에 데이터를 넣어서 보내는것을 post 방식이라 한다
+				
 				Movie movie = Movie.builder()
 						.movieCd(movieCd)
 						.movieNm(movieNm)

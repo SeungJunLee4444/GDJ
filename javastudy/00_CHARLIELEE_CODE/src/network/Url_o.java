@@ -9,7 +9,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-public class UrlData_o {
+public class Url_o {
 	
 	public static void m1() {
 		

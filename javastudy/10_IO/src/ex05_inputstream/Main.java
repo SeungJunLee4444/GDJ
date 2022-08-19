@@ -16,9 +16,9 @@ public class Main {
 	public static void m1() {
 		
 		// & 정리
-		// inputstreamreader은 filereader의 상위 클래스다
-		
-		// inputstreamreader과 datainputstream 둘다 byte타입의 값을 문자열로 변환할 수 있다
+		// * inputstreareader 	: byte 타입의 데이터를 문자열로 변환해주는 보조스트림
+		// * datainputstream 	: byte 타입의 데이터를 타입별로 입력받을 수 있으며,
+		// 특히 문자열 저장이 가능해진다
 		
 
 		// 1. 
@@ -135,7 +135,6 @@ public class Main {
 		
 		try {
 			dis = new DataInputStream(new FileInputStream(file));
-			
 			String name = dis.readUTF();  // * writeutf와 쌍이되는 메서드
 			int age = dis.readInt();
 			double height = dis.readDouble();
@@ -218,8 +217,8 @@ public class Main {
 		//m2();
 		//sissis();
 		m3();
-		m4();
-		m5();
+		//m4();
+		//m5();
 	}
 
 }

@@ -68,7 +68,7 @@ public class Main {
 		FileOutputStream fos = null;
 		
 		try {
-			
+
 			fos = new FileOutputStream(file);
 			// * FileOutputStream: byte 기반 출력 클래스(writter은 문자 기반)
 			
@@ -80,7 +80,7 @@ public class Main {
 			String str = "pple Mango 맛있다.";		// * String은 getbyte 메서드를 가지고있음 ^*^
 													// => String값을 매개변수로 받아와 byte[]로 만들어주는 메서드	
 			byte[] b = str.getBytes(StandardCharsets.UTF_8);	// = str.getBytes("UTF-8")
-					// * str에 한글이 있으니 문자 인코딩 ^*^
+					// * 문자열을 fileoutput스트림으로 보내야하니 바이트로 변경하는 메서드
 					
 			// * 결과 Apple Mango 맛있다(22바이트)
 			// => c에 담긴 값과 str에 담긴 데이터 2개를 출력해야하니, 여러 데이터를 출력할 수 있는 byte[]을 사용 -----?
@@ -178,7 +178,7 @@ public class Main {
 		
 		// 4. 객체를 그대로 출력하는 objectoutputstream
 		// => 보조스트림
-		// * outputstream (클래스) - wirteobject( 메서드)
+		// * outputstream (클래스) - wirteobject( 메서드)----------------------*
 		
 		File file = new File("c:\\storage", "b4.dat");
 		FileOutputStream fos = null;

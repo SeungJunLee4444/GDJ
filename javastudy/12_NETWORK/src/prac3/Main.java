@@ -41,17 +41,23 @@ public class Main {
 		
 		String apiURL = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml?key=" + key + "&targetDt=" + targetDt;
 		
+		// * api 연결, 입력받기까지 전부 메서드 하나로 압축
+		
 		String response = getResponse(apiURL);
 		System.out.println(response);
+		
+		// * 파일 생성 메서드
 		
 		createFile(response);
 	
 	}
 	
 	public static String getResponse(String apiURL) {
-		// * static 메서드를 사용하는 클래스는 stati
+		// * 반환해야할 response가 string타입이니 string타입 메서드생성
 		
 		HttpURLConnection con = getConnection(apiURL);
+		// * getconnection은 url클래스 연결작업
+		// apiurl을 전해주면, (캐스팅)url객체.openconnection을 반환
 		try {
 		if(con.getResponseCode() == HttpURLConnection.HTTP_OK) {
 			return readBody(con.getInputStream());
@@ -67,6 +73,7 @@ public class Main {
 	}
 	
 	public static HttpURLConnection getConnection(String apiURL) {
+		// * 반환타입이 httpurlconnection이니 동일하게 생성
 		
 		try {
 		URL url = new URL(apiURL);
@@ -79,6 +86,8 @@ public class Main {
 	}
 	
 	public static String readBody(InputStream in) {
+		// * 매개변수 inpustream과 메서드 안의 con.getinputstream 동일한지?
+		// * readbody는 입력메서드 
 		
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
 			StringBuilder sb = new StringBuilder();
@@ -95,6 +104,7 @@ public class Main {
 	}
 	
 	public static void createFile(String response) {
+		// * 파일을 생성하고 반환할 필요가 없으니 void 타입
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter("c:\\storage\\boxoffice.xml"))) {
 			// * file 없이 경로(스트림)를 적어도된다

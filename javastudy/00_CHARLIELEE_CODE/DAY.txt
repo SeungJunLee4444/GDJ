@@ -51,13 +51,33 @@
 
 // -------------------------------------------
 
+* 이번주 과제(8/19 금~ 8/21 일)
+1. 공공 api 데이터로 파일 만들기 + 메서드 던지기
+2. xml 분석
+3. json 분석
+4. file 복습
+5. sqld 강의
+
+// filereader,writer
+
++ 강의
+1) 매서드와 매개변수, 반환값타입
+
++ 기타
+1) 참고사이트 저장
+(1) 공공데이터 : https://www.data.go.kr/iim/api/selectAPIAcountView.do
+(2) json 공공데이터 api 완성 : https://www.postman.com/
+(3) json jar : https://github.com/stleary/JSON-java
+(4) 자바 라이브러리 : https://docs.oracle.com/en/java/javase/11/docs/api/index.html
+(5) git 다운사이트 : https://git-scm.com/download/win
+(6) 깃 이그노어 : https://www.toptal.com/developers/gitignore/
+(7) java 11 다운로드 : https://www.oracle.com/kr/java/technologies/javase/jdk11-archive-downloads.html
+
+
+
 8/19 금
-1. 진도
 
-2. 복습
-=> file output, input 복습
 
-3. 야간
 
 
 

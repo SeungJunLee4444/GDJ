@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class Main {
+public class Main1_XML {
 
 	public static void m1() {
 
@@ -347,8 +347,8 @@ public class Main {
 			urlBuilder.append("?serviceKey=").append(URLEncoder.encode(serviceKey, "UTF-8"));
 			urlBuilder.append("&numOfRows=10");
 			urlBuilder.append("&pageNo=1");
-			urlBuilder.append("&base_data=20210628");
-			urlBuilder.append("&base_time=0600");
+			urlBuilder.append("&base_date=20220818");
+			urlBuilder.append("&base_time=1500");
 			urlBuilder.append("&nx=55");
 			urlBuilder.append("&ny=127");
 
@@ -431,12 +431,13 @@ public class Main {
 			Document doc = builder.parse(file);
 
 			Element root = doc.getDocumentElement();
+			// node라 하면 items의 getElementsByTagName가 호출되지않음
 
 			// * node는 태그이자, 줄바꿈이며, 태그보다 상위개념이다
 			// => 이러한 이유로 node가 확실히 태그로 쓰이지않으면 getelementbytagname을 호출x
 
 			NodeList items = root.getElementsByTagName("item"); // item태그들
-			for (int i = 0; i < items.getLength(); i++) {
+			for (int i = 0; i < items.getLength(); i++) {		// 동일한 item태그 5개
 				Element item = (Element) items.item(i);
 //				NodeList categories = item.getElementsByTagName("category");
 				Node category = item.getElementsByTagName("category").item(0);
@@ -653,8 +654,9 @@ public class Main {
 		// m1();
 		// m2();
 		//m3();
-		// m4();
-		// m6();
+		 m4();
+		
+		 //m6();
 		// m7();
 		 m8();
 		// m9();
