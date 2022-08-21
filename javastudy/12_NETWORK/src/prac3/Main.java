@@ -21,7 +21,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		String key = "f0ff9ed325466d9b5e6bcb33348e7096";
-		StringBuilder urlBuilder = new StringBuilder();
+//		StringBuilder urlBuilder = new StringBuilder();
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("날짜(yyyymmdd) >>> ");
@@ -43,12 +43,12 @@ public class Main {
 		
 		// * api 연결, 입력받기까지 전부 메서드 하나로 압축
 		
-		String response = getResponse(apiURL);
-		System.out.println(response);
+		String response = getResponse(apiURL);	// * 
+		System.out.println(response);			// => 변수명을 따서 메서드 이름짓기
 		
 		// * 파일 생성 메서드
 		
-		createFile(response);
+		createFile(response);					// *
 	
 	}
 	

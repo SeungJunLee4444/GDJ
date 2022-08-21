@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
-public class CSVWriter {
+public class CSVWriter_o {
 	
 	public static void main(String[] args) {
 		
@@ -41,11 +41,13 @@ public class CSVWriter {
 	FileWriter fw = null;
 	BufferedWriter bw = null;
 	
+	// 해석 : list 이중 배열문을 출력하기 위해 2중 for문을 사용
+	// * list배열 line을 만든 이유: list 배열들이 이름이 각기 다리기 때문 *
+	
 	try {
-		fw = new FileWriter(file, StandardCharsets.UTF_8); // * 
-		bw = new BufferedWriter(fw);
+		bw = new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8));
 		for(int i = 0, length = list.size(); i < length; i++) {
-			List<String> line = (list.get(i));
+			List<String> line = (list.get(i));	// list 배열내 list 배열의 변수들을 line 하나의 이름으로 통합
 			for(int j = 0, size = line.size(); j < size; j++) {
 				if(j == size - 1) {
 					bw.write(line.get(j) + "\n");	// * 마지막이 아니면 줄바꿈
@@ -53,6 +55,15 @@ public class CSVWriter {
 					bw.write(line.get(j) + ",");	// * 마지막 요소는 ,
 				}
 			}
+			// * 결과
+//				제품번호, 제품명, 가격
+//				100, 새우깡, 1500
+//				101, 양파링, 2000
+//				102, 홈런볼", 3000
+			
+			
+			
+			
 		}
 	} catch (IOException e) {
 		e.printStackTrace();

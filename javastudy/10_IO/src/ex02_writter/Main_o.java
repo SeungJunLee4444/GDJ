@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 
 // * ctrl + shift + o : import 정리, 필요한 내용 만들어주고, 필요없는 내용 가져와줌
 
-public class Main {
+public class Main_o {
 	
 	public static void m1() {
 		
@@ -19,46 +19,41 @@ public class Main {
 			dir.mkdir();
 		} 
 		File file = new File(dir, "m1.txt");
-		// * 경로 외에도 폴더의 객체명을 사용해도된다
+		// * 폴더의 경로는 (1) 직접입력, (2) 폴더 객체명 둘다 가능
 		
-	
+	// -----------------------------------------------------------
+		
 		// 2. 스트림으로 파일만들기
+		// => filewriter은 문자열 타입 데이터를 출력하는데 사용된다
 	
 		FileWriter fw = null;
 		try {
-			fw = new FileWriter(file);	// = new FileWritter(c:\\storage\\m1.txt) *1 위와 동일
+			fw = new FileWriter(file);	
 			
-		// & 기타 -----------------------?
-		// 코드
-		// 코드  => 예외가 발생하면 아래의 예외사항이 실행되지않는다
-		// 코드	 => 공통된 예외는 언제나 멀티플하게 사용할것 *
-			
-			// *4 fw resource leak 오류
-			// => fw.close를 작성해주면된다
-		} catch (IOException e) {
+		} catch (IOException e) {	// * 입출력에서는 언제나 ioe 예외발생
 			e.printStackTrace();	
 		} finally {			
 			try {
 				if(fw != null) {	
-					fw.close();	 // * close를 작성하지않으면 resource leak 경고가 뜬다(생략가능)
+					fw.close();	 // * close 없으면, resource leak 경고(생략가능)
 				}
-				// * trycatch에서 null값이 메서드로 던져지면 null 오류가 발생한다
-				// => if문을 사용해 해결
+				// * fw가 null일 수 있는 예외사항이 발생할 수 있음
+				// => trycatch에서 null값이 메서드로 던져지면 null 오류가 발생한다
+				// => 입출력에서 왜 finally에 다시 예외처리를 하는지
 				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			}
-		
-		
-		
-		
+			}	
 	}
+	
+	// -----------------------------------------------------------
 		
 	public static void m2() {
 		
-		// 3. 데이터를 파일에 작성하기
-		// * 데이터 저장시, 한글자씩 읽을때는 int, 여러글자를 한번에 읽을때는 char[], string을 쓴다
+		// 3. 문자타입 데이터 출력
+		// * 데이터 저장시, 문자 하나씩 읽을때는 int, 
+		// 				여러 문자를 읽을때는 char[], string을 쓴다
 		// * 데이터작성은 filewriter과 write() 메서드
 		
 		File file = new File("c:\\storage", "m2.txt");
@@ -66,12 +61,13 @@ public class Main {
 		try {
 			fw = new FileWriter(file);
 			
+			// # 입력할 데이터들(임의)
 			int c = 'i';
 			char[] cbuf = {' ', 'a', 'm'};
 			String str = " IronMan";
 			// * 데이터는 빈공간도 1byte 취급한다
 			
-			// 3) 출력스트림으로 문서에 데이터를 작성
+			// # write 메서드로 데이터 출력
 			fw.write(c);
 			fw.write(cbuf);
 			fw.write(str);
@@ -92,6 +88,8 @@ public class Main {
 			
 		}
 	
+	// -----------------------------------------------------------
+	
 	public static void m3() {
 		
 		// 4. try-catch-resources 문
@@ -99,10 +97,6 @@ public class Main {
 		// * 스트림의 종료(close)를 자동으로 처리하는 try-catch문을 의미한다
 		
 		// 1) 형태
-		// (기존)
-		try {} catch (Exception e) {e.printStackTrace();}
-		// * finally의 존재이유는 오직 close를 넣기 위해서다
-		// (변화)
 		//try (스트림 생성자) {} 
 		// => close를 자동으로 진행해주는 try문이 t-c-r문이다
 		
@@ -116,12 +110,13 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	
+	// -----------------------------------------------------------
 		
 		// 5. 일부내용만 파일에 저장하기
 	
 		public static void m4() {
 			File file = new File("c:\\storage", "m4.txt");
-		
 		
 		try(FileWriter fw = new FileWriter(file)) {
 			char[] cbuf = {'a', 'b', 'c', 'd'}; 
@@ -209,10 +204,10 @@ public class Main {
 		
 		//m1();
 		//m2();
-		//m3();
+		m3();
 		//m4();
 		//m5();
-		m6();
+		//m6();
 		
 		
 

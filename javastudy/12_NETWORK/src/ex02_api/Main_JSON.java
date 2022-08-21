@@ -99,7 +99,7 @@ public class Main_JSON {
 
 		// 4. 파일에 저장
 	
-		File file = new File("c:\\storage", "api1.json");
+		File file = new File("c:\\charlie1", "ch3.json");
 
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -121,7 +121,7 @@ public class Main_JSON {
 		// jsonobject 클래스 	: {}, 객체를 의미
 		// jsonarray 클래스 	: [], 배열을 의미
 		
-		File file = new File("c:\\storage", "api1.json");
+		File file = new File("c:\\charlie1", "ch1.json");
 		
 		StringBuilder sb = new StringBuilder();
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -133,13 +133,14 @@ public class Main_JSON {
 			e.printStackTrace();
 		}
 		
-		JSONObject obj = new JSONObject(sb.toString());
+		JSONObject obj = new JSONObject(file);
 		// * xml과 달리 json은 파일을 직접 내려받지 못함
 		// => string은 받을 수 있기 때문에, string타입으로 파일을 변환해야한다
 		
 		JSONObject obj2 = obj.getJSONObject("response");	// header 이하 프로퍼티
 		JSONObject obj3 = obj2.getJSONObject("header");	// header 이해 프로퍼티
 		String resultCode = obj3.getString("resultCode");	// 
+		
 		String resultMsg = obj3.getString("resultMsg");	// 
 		
 		System.out.println(resultCode + "" + resultMsg);
@@ -161,8 +162,8 @@ public class Main_JSON {
 			urlBuilder.append("&numOfRows=10");
 			urlBuilder.append("&pageNo=1");
 			urlBuilder.append("&dataType=JSON");
-			urlBuilder.append("&base_date=20220819");	// 최근 1일간의 데이터만 가능
-			urlBuilder.append("&base_time=0600");
+			urlBuilder.append("&base_date=20220821");	// 최근 1일간의 데이터만 가능
+			urlBuilder.append("&base_time=1500");
 			urlBuilder.append("&nx=55");
 			urlBuilder.append("&ny=127");
 
@@ -215,32 +216,35 @@ public class Main_JSON {
 
 		// 4. 파일에 저장
 
-		File file = new File("c:\\storage", "api2.json");
-		BufferedWriter bf = null;
-
-		try {
-
-			bf = new BufferedWriter(new FileWriter(file));
-			bf.write(response);
-			bf.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		File file = new File("c:\\charlie1", "ch2.json");
+//		BufferedWriter bf = null;
+//
+//		try {
+//
+//			bf = new BufferedWriter(new FileWriter(file));
+//			bf.write(response);
+//			bf.close();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		return response;
-		// * string 타입의 반환값을 가진다는 의미
-
-		
+//		// * string 타입의 반환값을 가진다는 의미
+//
+//		
 	}
 	
 	public static void m4() {
 //		String response = ;		// m3의 string response 반환값이 string response에 저장
 		
-		JSONObject obj = new JSONObject(m3());	// response 
+		JSONObject obj = new JSONObject(m3());	
+		System.out.println(obj);
 		JSONObject response = obj.getJSONObject("response");		//header, body	
 		JSONObject body = response.getJSONObject("body");
+		System.out.println(body);
 		JSONObject items = body.getJSONObject("items"); //body의 items 오브젝트 호출
 		JSONArray item = items.getJSONArray("item");  // item은 복수개있으니 배열for문
+		System.out.println(item);
 		// * []는 배열
 		// => item 배열은 items의 "item"인 제이슨 어레이를 갖는다
 		for(int i = 0; i < item.length(); i++) {
@@ -312,7 +316,7 @@ public class Main_JSON {
 
 		// 4. 파일에 저장
 
-		File file = new File("c:\\storage", "api3.json");
+		File file = new File("c:\\charlie1", "ch3.json");
 		BufferedWriter bf = null;
 
 		try {
@@ -429,7 +433,7 @@ public class Main_JSON {
 
 			// 4. 파일에 출력
 
-			File file = new File("c:\\storage", "api4.json");
+			File file = new File("c:\\charlie1", "ch5.json");
 
 			BufferedWriter bw = null;
 
@@ -480,12 +484,12 @@ public class Main_JSON {
 	
 	public static void main(String[] args) {
 		//m1();
-		//m2();
+	//m2();
 		//m3();
 		//m4();
 		//m5();
 		//m6();
-		//m7();
+		m7();
 		m8();
 	}
 

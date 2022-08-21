@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-public class CreateDeleteFile {
+public class CreateDeleteFile_o {
 	
 	public static void m1() {
 		

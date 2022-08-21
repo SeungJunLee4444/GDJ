@@ -9,28 +9,23 @@ public class Main_o {
 	
 	
 	public static void m1() {
-		
-		// & 문자타입 스트링 : filewriter, filereader
-		// & 바이트 타입 스트링 : inputstream, outputstream
-		// * 바이트 타입을 문자타입으로 변환해 읽기 : inputstreamreader
-		
-		// -------------------------------------------------------------------------------------------------------------------------
-		
-		
-		// & filereader 정리
-		// * 문자타입 reader
-		
-		// 1) 파일 호출
+	
+		// 1. filereader 
+		// => 문자열 데이터를 읽어내 변수에 저장하는 클래스
+
+		// 1) 파일 생성
 		File file = new File("c:\\storage", "m2.txt");
+		// * file클래스 + 스트림이 형성되면 파일이 자동 생성된다
+		
 		// 2) 파일리더 생성 
 		FileReader fr = null;
-		// 2-1) bufferedreader 속도향상 보조스트림
 		BufferedReader br = null;	
+		StringBuilder sb = new StringBuilder();
+		
 		try {
 			br = new BufferedReader(new FileReader(file));
 			
 		// 3) 스트링빌더 생성
-			StringBuilder sb = new StringBuilder();
 			// => filereader은 string[]이 불가능하기 때문에, stringbuilder을 사용한다
 			
 		// 4) 파일의 문자를 전부 읽을 때까지 스트링빌더에 문서의 유니코드값을 받고 이를 char타입으로 캐스팅
@@ -49,14 +44,10 @@ public class Main_o {
 			while((readCnt = fr.read(cbuf)) != -1) {
 				sb.append(cbuf, 0, readCnt);
 			} 
-			// * read 메서드는 1바이트씩 글자를 읽고, 읽은 문자의 수를 반환한다
-			// => 배열의 길이인 5만큼 읽고 다시 1로 돌아감
-			// if 마지막 글자가 3글자라면 3글자까지만 읽고 마치도록 만든다 *	
+			// * 배열의 길이가 맞지 5가 안되는 경우가 발생할 수 있으니 readcnt 만큼 추가로 해결
+
 			
-			// * cbuf.length 대신 readCnt를 쓰는 이유
-			// => read메서드는 엔터도 문자로 카운트하기 때문에, 배열의 길이로 제대로 파악할 수 없다
-			
-		// 4-2) budderedreader 스트림을 사용했을 때
+		// 4-2) bufferedreader 스트림을 사용했을 때
 			// => readline(한줄씩읽기)를 사용 가능하다
 			// * 이때 readline은 줄바꿈이 포함되있지 않아 별도로 추가해줘야한다
 			// * 읽을 내용이 없으면 null반환(문자 타입이기 때문)

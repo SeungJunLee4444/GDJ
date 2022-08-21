@@ -71,23 +71,28 @@ public class Main {
 
 			fos = new FileOutputStream(file);
 			// * FileOutputStream: byte 기반 출력 클래스(writter은 문자 기반)
-			
-																// * 문자 인코딩 utf-8
+												
 			// # fileoutput의 출력할 데이터 타입 ^*^
-			// 1개 		: int
-			// 여러개 	: byte[]	(byte기반인데 여러개니까) 
-			int c = 'A';
-			String str = "pple Mango 맛있다.";		// * String은 getbyte 메서드를 가지고있음 ^*^
-													// => String값을 매개변수로 받아와 byte[]로 만들어주는 메서드	
-			byte[] b = str.getBytes(StandardCharsets.UTF_8);	// = str.getBytes("UTF-8")
-					// * 문자열을 fileoutput스트림으로 보내야하니 바이트로 변경하는 메서드
-					
-			// * 결과 Apple Mango 맛있다(22바이트)
-			// => c에 담긴 값과 str에 담긴 데이터 2개를 출력해야하니, 여러 데이터를 출력할 수 있는 byte[]을 사용 -----?
+			// 1byte
+			// 2byte이상	: byte[]	(byte기반인데 여러개니까) 
+			// => 영문, 숫자는 1byte, 한글은 2~3byte기 떄문에 그대로 출력하면 오류가발생
+			// => outputstreamwriter의 사용 이유
 			
+			// # 출력할 데이터들
+			int c = 'A';
+			String str = "pple Mango 맛있다.";		
+					
+			// # 출력
+			// => String값을 매개변수로 받아와 byte[]로 만들어주는 메서드	
+			byte[] b = str.getBytes(StandardCharsets.UTF_8);	
+			// * string의 getbyte 메서드 : 문자열을 바이트 타입으로 변환해준다 *
+			// => outputstream은 데이터를 byte타입으로 출력하기때문
+				
+			// => 결과 Apple Mango 맛있다.(22바이트)
+
 			
 			// # 출력
-			fos.write(c);
+			fos.write(c);	// * 문자 하나는 바로 write를 사용해 출력
 			fos.write(b);
 
 		} catch (IOException e) {
@@ -151,7 +156,7 @@ public class Main {
 			int age = 30;
 			double height = 165.5;
 			
-			// # 출력 ^*^
+			// # 출력
 			dos.writeUTF(name); // * 문자 보내는 메서드
 			dos.writeInt(age);
 			dos.writeDouble(height);
@@ -186,13 +191,13 @@ public class Main {
 		
 		try {
 		
-			// 1) user을 3개 저장한 arraylist 
+			// # list 데이터
 			List<User> users = Arrays.asList(
 					new User(1, "kim", 30),
 					new User(2, "lee", 40),
 					new User(3, "choi", 50));
 			
-		// 2) user 1개
+			// # user 데이터 
 			User user = new User(4, "min", 60);
 			
 			oos = new ObjectOutputStream(new FileOutputStream(file));
@@ -212,15 +217,12 @@ public class Main {
 				}
 			}
 		}
-		
-	
-	
 	
 	public static void main(String[] args) {
 		
-		m1();
-		m2();
-		m3();
+		//m1();
+		//m2();
+		//m3();
 		m4();
 		
 	}

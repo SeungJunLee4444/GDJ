@@ -1,0 +1,105 @@
+1. file 클래스 메서드
+	getname		: 파일명
+	getparent	: 경로
+	getpath		: 경로 + 파일명
+	isdirectory	: 폴더인지 확인(boolean)
+	isfile		: 파일인지 확인(boolean)
+	lastmodified: 마지막 수정날짜
+	listfile	: 해당 폴더 내 모든 파일 리스트 *
+	=> File[] file = dir.listFiles(); : 해당 폴더 내 파일을 file 배열에 저장
+	ishidden	: 숨김폴더, 파일인지 확인(boolean) *
+	length		: file의 용량(길이 아님) *
+	separator	: 작업환경마다 다른 구분자를 대신하는 공통 구분자 지원 **
+	File file = new File("C:" + File.separator + "storage" + File.separator + "my.txt");	
+
+2. io 스트림	* 스트림은 입출력을 위해 데이터와 데이터를 담을 위치를 연결하는 통로를 의미한다
+* outputstream -> fileoutputstream
+* inputstream -> fileinputstream
+* filewriter, filereader은 다른 클래스
+
+* 출력과 달리 입력은 한꺼번에 데이터를 입력받아야하기 때문에, stringbuilder을 사용한다 *
+(filereader, fileinputstream)
+
+
+1) filereader
+	=> 문자열 데이터를 읽어내 변수에 저장하는 스트림(클래스)
+	* filereader은 string[]이 불가능 **
+	=> stringbuilder을 이용해 char배열에 저장된 모든 문자를 합친 후 tostring으로 문자열 저장
+	
+	
+	) 보조스트림
+	) bufferedreader	: 속도향상, readline을 써서 한줄에 저장
+	
+	* filereader과 bufferedreader의 차이 **
+	=> 일단 filereader자체는 string[] 사용이 불가능하다
+	1) filereader은 int, char[]만 사용 가능, read의 반환값이 -1며, 반환하는 변수도 int타입
+	=> bufferedreader은 readline을 사용하며, 반환값이 null이기 때문에 반환하는 타입도 string에 저장해야한다
+		, readline은 줄바꿈이 없기 때문에 별도로 "\n"을 추가해줘야함
+		
+	2) filereader은 기본적으로 받아올숫자길이를 정할 char[]배열, 반환값을 저장할 int변수가 필요하고,
+		bufferedreader은 반환값을 저장할 string 타입 변수 하나면 된다
+
+
+
+2) filewriter
+	=> 변수에 저장한 문자열 데이터를 파일에 출력하는 스트림(클래스)
+	=> write 메서드로 데이터를 입력
+	=> 한글자씩 출력할 때는 int에, 여러 글자를 출력하고 싶을 때는 char[], String을 쓴다
+		int c = 'i';
+		char[] cbuf = {' ', 'a', 'm'};
+		String str = " IronMan";
+	// * writer 출력은 입력 시 필요한 반환타입이 필요하지 않다?
+	
+	* 보조 스트림
+	) bufferedwriter	: 출력소도 향상
+	) printwriter		: println 메서드를 통해, 줄바꿈을 포함한 출력이 가능해진다 *
+	ex) out.println("반갑습니다");
+	
+	
+3) fileoutputstream	
+	=> Byte 타입 데이터를 출력하는 스트림(클래스)
+	// * Byte와 기본타입 byte 혼동 주의 **
+
+	* 보조스트림
+	) bufferedoutputstream
+	) dataoutputstream		: 데이터의 타입 그대로 출력할 수 있음
+	// => outputstream은 문자열 타입을 Byte 타입으로 변환해야 했으나,
+	// data스트림을 통해 각 데이터를 타입별로 출력할 수 있다
+	
+	dos.writeUTF(name); // * 문자 보내는 메서드
+	dos.writeInt(age);
+	dos.writeDouble(height);
+	) objectoutputstream	: 데이터가 저장된 객체를 writeobject 메서드를 통해 
+							  그대로 보냄
+
+4) fileinputstream
+	=> byte 타입의 데이터를 변수에 입력하는 스트림(클래스)
+	
+	) bufferedreader	: readline 사용가능 (문자열스트림과 동일한 명칭)
+	) datainputstream	: 데이터를 타입별로 저장가능
+		String name = dis.readUTF();  
+		int age = dis.readInt();
+		double height = dis.readDouble();
+	) objectinputstream	: 스트림 객체를 readobject메서드로 그대로 변수에 저장가능
+		List<User> users = (List<User>)ois.readObject();	
+		User user = (User)ois.readObject();	
+
+
+3. try catch resource문
+	=> try ()안에 스트림 생성자를 넣으면, close를 생략가능하게 해주는 용도(더 안전)
+	File file = new File("c:\\storage", "m3.txt");
+			try(FileWriter fw = new FileWriter(file)) {
+
+
+// =====================================================================
+
+
+& 기타
+1. simpledateformat
+	=> 날짜를 특정 형식으로 출력하게 만들어주는 클래스
+	SimpleDateFormat sdf = new SimpleDateFormat("a hh:mm yyyy-MM-dd");
+
+2. decimalformat
+	=> 숫자 단위별로 ,를 집어넣고 싶을 때 사용
+	new DecimalFormat("#,##0").format(totalSize)
+	=> 사용법은 simpledateformat과 같음

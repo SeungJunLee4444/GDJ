@@ -1,0 +1,16 @@
+1. 클래스의 인스턴스에 저장된 필드값을 list 배열에 저장할 수 있는가?
+List<Product> products = new ArrayList<Product>();
+			String line = null;
+			while((line = br.readLine()) != null) {
+				String[] arr = line.split(",");		// 데이터를 string배열에 저장
+				Product product = new Product();	// 
+				product.setNumber(arr[0]);
+				product.setName(arr[1]);
+				product.setPrice(Integer.parseInt(arr[2]));	// produce의 필드값에 저장
+				products.add(product);	// 필드값이 저장된 product 인스턴스를 products에 저장
+				
+			?	System.out.println(product); ?
+			}
+
+			=> 일단 클래스에 저장된 필드값이 배열에 저장되면 알아서 배열에 맞게 저장된다고
+			생각하는데 맞을듯

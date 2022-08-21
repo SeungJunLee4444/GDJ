@@ -132,7 +132,7 @@ public class Main1_XML {
 		String response = sb.toString();
 
 		// file 생성 및 데이터 저장된 파일 생성
-		File file = new File("c:\\storage", "api.xml");
+		File file = new File("c:\\charlie1", "ch3.xml");
 
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -536,7 +536,7 @@ public class Main1_XML {
 
 		// 4. 파일에 출력
 
-		File file = new File("c:\\storage", "api4.xml");
+		File file = new File("c:\\charlie1", "ch4.xml");
 
 		BufferedWriter bw = null;
 
@@ -651,14 +651,14 @@ public class Main1_XML {
 
 	public static void main(String[] args) {
 
-		// m1();
+		 m1();
 		// m2();
 		//m3();
-		 m4();
+		// m4();
 		
 		 //m6();
 		// m7();
-		 m8();
+		// m8();
 		// m9();
 		// m10();
 
