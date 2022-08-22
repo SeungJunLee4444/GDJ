@@ -45,7 +45,7 @@ public class BankAccount {
 	public void transfer(BankAccount other, long money) {
 		//long bankaccountmoney = withdraw(money);// 타입이 달라서 저장x
 		
-		other.deposit(withdraw(money)));	// * boolean타입과 충돌해서 사용불가
+//		other.deposit(withdraw(money));	// * boolean타입과 충돌해서 사용불가
 		
 //		if(this.withdraw(money)) {	// # 이 필드의 출금이 이루어지면
 //			other.deposit(money);	// # 다른 계좌주인에게 입금해라

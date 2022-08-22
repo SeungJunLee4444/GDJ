@@ -24,7 +24,8 @@ public class CSVReader_o {
 			while((line = br.readLine()) != null) {
 				String[] arr = line.split(",");		// 데이터를 string배열에 저장
 				Product product = new Product();	// 
-				product.setNumber(arr[0]);
+				product.setNumber(line.split();
+				
 				product.setName(arr[1]);
 				product.setPrice(Integer.parseInt(arr[2]));	// produce의 필드값에 저장
 				products.add(product);	// 필드값이 저장된 product 인스턴스를 products에 저장

@@ -44,8 +44,8 @@ public class Main_JSON {
 			apiURL += "?pageNo=" + URLEncoder.encode("0", "UTF-8");
 			apiURL += "&numOfRows=" + URLEncoder.encode("100", "UTF-8");
 			apiURL += "&type=" + URLEncoder.encode("json", "UTF-8");
-			apiURL += "&CTPRVN_NM=" + URLEncoder.encode("서울특별시", "UTF-8");
-			apiURL += "&SIGNGU_NM=" + URLEncoder.encode("금천구", "UTF-8");
+			apiURL += "&CTPRVN_NM=" + URLEncoder.encode("인천광역시", "UTF-8");
+			apiURL += "&SIGNGU_NM=" + URLEncoder.encode("계양구", "UTF-8");
 			apiURL += "&WEIGHTED_ENVLP_TYPE=" + URLEncoder.encode("규격봉투", "UTF-8");
 			apiURL += "&WEIGHTED_ENVLP_MTHD=" + URLEncoder.encode("소각용", "UTF-8");
 			apiURL += "&WEIGHTED_ENVLP_PRPOS=" + URLEncoder.encode("생활쓰레기", "UTF-8");
@@ -99,7 +99,7 @@ public class Main_JSON {
 
 		// 4. 파일에 저장
 	
-		File file = new File("c:\\charlie1", "ch3.json");
+		File file = new File("c:\\charlie1", "ch1.json");
 
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -264,8 +264,8 @@ public class Main_JSON {
 
 			urlBuilder.append("http://apis.data.go.kr/B553077/api/open/sdsc2/storeZoneOne");
 			urlBuilder.append("?serviceKey=").append(URLEncoder.encode(serviceKey, "UTF-8"));
-			urlBuilder.append("&key=9940");	// * 지역번호
-			urlBuilder.append("&numOfRows=10");
+			urlBuilder.append("&key=9734");	// * 지역번호
+			urlBuilder.append("&numOfRows=29");
 			urlBuilder.append("&type=json");
 		
 		} catch (UnsupportedEncodingException e) {
@@ -452,30 +452,32 @@ public class Main_JSON {
 		}
 		
 		public static void m8() {
-			
-//			String response = m7();
-//			System.out.println(response);
-			JSONObject obj = XML.toJSONObject(m7());
-			// * xml.문서를 json문서로 바꾸는 메서드
-			System.out.println(obj.toString());
-			
-			// * 기상청 문서는 처음부터 xml문서만 받을수있었다
-			
-			JSONArray dataList = obj.getJSONObject("rss")
-					.getJSONObject("channel")
-					.getJSONObject("item")
-					.getJSONObject("description")
-					.getJSONObject("body")
-					.getJSONArray("data");
-			// * data 배열들 전체를 의미
-			
-			for(int i = 0; i < dataList.length(); i++) {
-				JSONObject weather = dataList.getJSONObject(i);// * 출력문을 깔끔하게 작성하기 위해
-				System.out.println(weather.getInt("hour") + "시," + weather.getInt("temp") + "도," + weather.getString("wfKor"));
-			}
-			
-			
 		}
+		
+			
+////			String response = m7();
+////			System.out.println(response);
+//			JSONObject obj = XML.toJSONObject(m7());
+//			// * xml.문서를 json문서로 바꾸는 메서드
+//			System.out.println(obj.toString());
+//			
+//			// * 기상청 문서는 처음부터 xml문서만 받을수있었다
+//			
+//			JSONArray dataList = obj.getJSONObject("rss")
+//					.getJSONObject("channel")
+//					.getJSONObject("item")
+//					.getJSONObject("description")
+//					.getJSONObject("body")
+//					.getJSONArray("data");
+//			// * data 배열들 전체를 의미
+//			
+//			for(int i = 0; i < dataList.length(); i++) {
+//				JSONObject weather = dataList.getJSONObject(i);// * 출력문을 깔끔하게 작성하기 위해
+//				System.out.println(weather.getInt("hour") + "시," + weather.getInt("temp") + "도," + weather.getString("wfKor"));
+//			}
+//			
+//			
+//		}
 
 
 		
@@ -483,14 +485,14 @@ public class Main_JSON {
 	
 	
 	public static void main(String[] args) {
-		//m1();
+		m1();
 	//m2();
 		//m3();
 		//m4();
 		//m5();
 		//m6();
-		m7();
-		m8();
+		//m7();
+		//m8();
 	}
 
 }

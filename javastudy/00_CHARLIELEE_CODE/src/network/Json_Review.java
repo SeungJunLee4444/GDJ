@@ -130,54 +130,55 @@ public class Json_Review {
 		
 	}
 	
-	public static String m4() {
+//	public static String m4() {
 		
 		
-	}
+	//}
 	
-	public static void m5() {
+
 		
-		// 3. hashmap에 json 데이터 저장하기------------------------------?
-		
-		String Json = "[{\"Product\" : \"Mouse\", \"Maker\":\"Samsung\", \"Price\":23000},"  
-			+ "{\"Product\" : \"KeyBoard\", \"Maker\":\"LG\", \"Price\":12000},"            
-		    + "{\"Product\":\"HDD\", \"Maker\":\"Western Digital\", \"Price\":156000}]";
-		
-		JSONObject obj = new JSONObject(m6());
-		JSONObject header = obj.getJSONObject("header");		// * {} 면 객체타입
-		JSONArray columns = header.getJSONArray("columns");		// * [] 면 배열타입
-		for(int i = 0; i < columns.length(); i++) {
-//			System.out.println(columns.getString(i));
-		}
-		
-		JSONObject body = obj.getJSONObject("body");
-		JSONArray items = body.getJSONArray("items");
-		JSONObject item = items.getJSONObject(0);	// items배열의 첫번째 중괄호값들?
-//		System.out.println(item.toString());
-		System.out.println(item);
-		
-		// * key값은 string으로, value값은 object(문자열, 숫자 등 모든값이 저장될 수 있도록)
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("상권번호", item.getInt("trarNo"));
-		map.put("상권명", item.getString("mainTrarNm"));
-		// * column에 있는 각 key값의 한글문자열과 key값의 value값을 저장 **
-		
-		String[] p = {"trarNo", "mainTrarNm", "ctprvnCd", "ctprvnNm", "signguCd", "signguNm", "trarArea", "coordNum", "coords", "stdrDt"};
-		// k
-		
-		for(int i = 0; i < columns.length(); i++) {
-		map.put(columns.getString(i), item.get(p[i]));	// * 순서대로 나오지는 않는다
-		// * column의 한글문자열값과, item 
-		
-		// * 아마 컬럼에는 데이터타입의 실제 한글명이 배열에 저장되어있을 것이고(column)
-		// * items
-	
-			
-		}
-		
-		System.out.println(map);
-	}
+//		// 3. hashmap에 json 데이터 저장하기------------------------------?
+//		
+//		String Json = "[{\"Product\" : \"Mouse\", \"Maker\":\"Samsung\", \"Price\":23000},"  
+//			+ "{\"Product\" : \"KeyBoard\", \"Maker\":\"LG\", \"Price\":12000},"            
+//		    + "{\"Product\":\"HDD\", \"Maker\":\"Western Digital\", \"Price\":156000}]";
+//		
+//		JSONObject obj = new JSONObject(m6());
+//		JSONObject header = obj.getJSONObject("header");		// * header 의모든 데이터
+//		JSONArray columns = header.getJSONArray("columns");		// * colummns의 배열데이터
+//		for(int i = 0; i < columns.length(); i++) {
+////			System.out.println(columns.getString(i));
+//		}
+		// => 배열이니 0부터 배열의 길이까지 
+//		
+//		JSONObject body = obj.getJSONObject("body");
+//		JSONArray items = body.getJSONArray("items");	// * items 배열의 값
+//		JSONObject item = items.getJSONObject(0);	// items 배열의 값 {}은 하나뿐이기 때문에 0 **
+////		System.out.println(item.toString());
+//		System.out.println(item);
+//		
+//		// * key값은 string으로, value값은 object(문자열, 숫자 등 모든값이 저장될 수 있도록)
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("상권번호", item.getInt("trarNo"));
+//		map.put("상권명", item.getString("mainTrarNm"));
+//		// * column에 있는 각 key값의 한글문자열과 key값의 value값을 저장 **
+//		
+//		String[] p = {"trarNo", "mainTrarNm", "ctprvnCd", "ctprvnNm", "signguCd", "signguNm", "trarArea", "coordNum", "coords", "stdrDt"};
+//		// k
+//		
+//		for(int i = 0; i < columns.length(); i++) {
+//		map.put(columns.getString(i), item.get(p[i]));	// * 순서대로 나오지는 않는다
+//		// * column의 한글문자열값과, item 
+//		
+//		// * 아마 컬럼에는 데이터타입의 실제 한글명이 배열에 저장되어있을 것이고(column)
+//		// * items
+//	
+//			
+//		}
+//		
+//		System.out.println(map);
+//	}
 		
 	
 		public static String m6 () {
@@ -188,9 +189,8 @@ public class Json_Review {
 			try {
 
 				urlBuilder.append("http://apis.data.go.kr/B553077/api/open/sdsc2/storeZoneOne");
-				urlBuilder.append("?serviceKey=").append(URLEncoder.encode(serviceKey, "UTF-8"));
-				urlBuilder.append("&key=9940");	// * 지역번호
-				urlBuilder.append("&numOfRows=10");
+				urlBuilder.append("?servicekey=").append(URLEncoder.encode(serviceKey, "UTF-8"));
+				urlBuilder.append("&key=9734");	// * 지역번호
 				urlBuilder.append("&type=json");
 			
 			} catch (UnsupportedEncodingException e) {
@@ -228,11 +228,10 @@ public class Json_Review {
 
 				String line = null;
 				while ((line = reader.readLine()) != null) {
-					sb.append(line + "\n");
+					sb.append(line);
 				}
 
 				reader.close();
-				con.disconnect();
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -241,7 +240,7 @@ public class Json_Review {
 
 			// 4. 파일에 저장
 
-			File file = new File("c:\\charlie1", "ch3.json");
+			File file = new File("c:\\charlie1", "ch6.json");
 			BufferedWriter bf = null;
 
 			try {
@@ -250,6 +249,7 @@ public class Json_Review {
 				bf.write(response);
 				bf.close();
 
+				con.disconnect();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -369,7 +369,7 @@ public class Json_Review {
 	
 	public static void main(String[] args) {
 		
-		m5();
+		m6();
 		//m3();
 		//m7();
 		

@@ -43,7 +43,7 @@ public class Bank2 {
 		// # 내 계좌에서 출금, 상대계좌에 입금
 //		long withdrawlMoney = withdrawl(money); // # 출금 메서드 호출
 //		other.deposit(withdrawlMoney); // 다른 객체에게 그만큼 입금해라
-		other.deposit(withdrawl(money)); 
+//		other.deposit(withdrawl(money)); 
 		// * 한번에 입력하는법
 		// * 위 입금,출금의 코드를 재활용
 		// 메서드() : 괄호안은 매개변수 => 매개변수에 따라 메서드를 실행 시킴*

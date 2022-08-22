@@ -1,6 +1,6 @@
 package prac01;
 
-import quiz03_bank.BankAccount;
+
 
 public class Ex09 {
 
@@ -15,15 +15,15 @@ public class Ex09 {
 		me.withdraw(5000);
 		me.withdraw(100);
 		
-		me.inquiry();
-		
-		mon.transfer(me, 50000);
-		mon.transfer(me, -100);
-		mon.transfer(me, 1000000000);
-		
-		mom.inquiry();
-		mom.inquiry();
-		
+//		me.inquiry();
+//		
+//		mon.transfer(me, 50000);
+//		mon.transfer(me, -100);
+//		mon.transfer(me, 1000000000);
+//		
+//		mom.inquiry();
+//		mom.inquiry();
+//		
 		
 	}
 

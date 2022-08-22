@@ -1,10 +1,4 @@
-
-
-
-
-* 8~9월 까지 일정
-관계형 db
-=> oracle	: 2주	db, jdbc, / 					/ web(html, css, javascript, jquery)
-=> ms-sql	: 
-=> mysql(mariadb)
-(oracle, ms-sql은 시험범위, orcale은 학원범위) 
+(1) db 다운로드 사이트	: https://www.oracle.com/database/technologies/xe-prior-release-downloads.html
+						(개발자용 light버전)
+(2) sql developer 다운로드 : https://www.oracle.com/tools/downloads/sqldev-downloads-2041.html
+					

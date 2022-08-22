@@ -212,7 +212,7 @@ public class Main_o {
 //			}
 //		}
 //	
-	public static void m4() {
+	public static void m4() {}
 //		
 //		// 4. 
 //		// => filereader은 느리기 때문에, bufferedReader를 추가해서 속도를 향상시킨다
@@ -251,7 +251,7 @@ public class Main_o {
 //		
 //	}
 	
-	public static void m5() {
+	public static void m5() {}
 		
 //		// 5. m4번을 try catch resource타입으로 만들기
 //		// => "내려받는 코드"라 생각하고 외우기
