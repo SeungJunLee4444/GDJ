@@ -12,23 +12,30 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 public class Xml {
 
 	public static void main(String[] args) {
 		
 		// * 기상청 단기예보(xml, json 둘다 가능)
 		
-		String serviceKey = "";
+		String serviceKey = "g1fjdlcJOfuhukMnsmo79qYkfOFBB5ocbWKYcImwfNqEb/Hja8k8hffCsEV2/sIPC/eylWm9hcE+F709h2AEAg==";
 		StringBuilder urlBuilder = new StringBuilder();
 		
 		try {
 			
-			urlBuilder.append("http://apis.data.go.kr/1360000/VilageFcsInfoService_2.0/getUltraSrtNcst");
+			urlBuilder.append("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst");
 			urlBuilder.append("?serviceKey=").append(URLEncoder.encode(serviceKey, "UTF-8"));
 			urlBuilder.append("&numOfRows=10");
 			urlBuilder.append("&pageNo=1");
-			urlBuilder.append("&base_data=20210628");
-			urlBuilder.append("&base_time=0600");
+			urlBuilder.append("&base_date=20220823");
+			urlBuilder.append("&base_time=1500");
 			urlBuilder.append("&nx=55");
 			urlBuilder.append("&ny=127");
 			
@@ -84,24 +91,26 @@ public class Xml {
 			e.printStackTrace();
 		}
 		
-		System.out.println(response);
 		
-//		try {
-//			
+		
+		try {
+			
 //			File file = new File(response); // * string에 저장된 데이터로 file의 매개변수로 가능하다
-//			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//			DocumentBuilder builder = factory.newDocumentBuilder();
-//			Document doc = builder.parse(file);
-//			System.out.println(doc);
-//			
-//			Element root = doc.getDocumentElement();
-//			System.out.println(root);
-//			
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(new File("c:\\charlie1", "ch8.xml"));
+			
+			Element root = doc.getDocumentElement();
+			System.out.println(root.getNodeName());	// response
+			
+			Element root = (Element)root.getChildNodes();
+			NodeList 
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 
 		
 

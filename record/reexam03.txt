@@ -1,0 +1,49 @@
+{	// obj
+  "rss":{		// jsonobject rss = obj.getjsonobject("rss")
+    "channel":{		// jsonobject channel = rss.getjsonobject("channel")
+      "item":{		// jsonobject item = channel.getjsonobject("item")
+        "author":"기상청",	// string author = item.getjsonobject("author");
+        "link":"http://www.kma.go.kr/weather/forecast/timeseries.jsp?searchType=INTEREST&dongCode=1154551000",		// string link = item.getstring("link")
+        "guid":"http://www.kma.go.kr/weather/forecast/timeseries.jsp?searchType=INTEREST&dongCode=1154551000",
+        "description":{ 			// jsonobject description = item.getJsonobject("item");
+          "header":{
+            "x":58,
+            "tm":202208231700,
+            "y":125,
+            "ts":5
+          	},
+          "body":{				// jsonobject body = item.getJsonobject("description");
+            "data":[				// jsonarray datalist = body.getjsonarray("data);	// 반복되는 data 배열에 임의의 이름 datalist를 붙임 ***
+             	 {"sky":1		// int sky = data.getInt("sky")
+		,"temp":25,	// int temp = data.getInt("temp")
+		"wfKor":"맑음",	// String wfKor = data.getInt("wfKor")
+		"wd":7,		// int wd = data.getInt("wd")			
+		"hour":21,			.
+		"pty":0,				.
+		"reh":60,				.
+		"s12":0,
+		"s06":0,
+		"r06":0,
+		"wdKor":"북서"
+		},	// datalist.getjsonobject(0)
+              {"sky":1,"temp":25,"wfKor":"맑음","wd":7,"hour":21,"pty":0,"reh":60,"s12":0,"s06":0,"r06":0,"wdKor":"북서"},	// datalist.getjsonobject(1)
+              {"sky":1,"temp":25,"wfKor":"맑음","wd":7,"hour":21,"pty":0,"reh":60,"s12":0,"s06":0,"r06":0,"wdKor":"북서"},	// datalist.getjsonobject(2)
+              {"sky":1,"temp":25,"wfKor":"맑음","wd":7,"hour":21,"pty":0,"reh":60,"s12":0,"s06":0,"r06":0,"wdKor":"북서"},	// datalist.getjsonobject(3)
+              {"sky":1,"temp":25,"wfKor":"맑음","wd":7,"hour":21,"pty":0,"reh":60,"s12":0,"s06":0,"r06":0,"wdKor":"북서"}	// datalist.getjsonobject(4)	* 배열안 같은 위치의 {}가 반복되니 인덱스값이 반복
+            ]
+          }
+        },
+        "category":"서울특별시 금천구 가산동",	// string category = item.getstring("category");
+        "title":"동네예보(도표) : 서울특별시 금천구 가산동 [x=58,Y=125]"	// string title = item.getstring("title");			// * getstring : 타입별로 value값 호출가능
+
+      },						// * 모두 channel의 자식태그들
+      "link":"http://www.kma.go.kr/weather/main.jsp",	// String link = channel.getString("link")
+      "description":"동네예보 웹서비스",			// String description = channel.getString("description")
+      "generator":"동네예보",				// String generator = channel.getString("generator")
+      "language":"ko",				// String generator = channel.getString("language")
+      "title":"기상청 동네예보 웹서비스 - 서울특별시 금천구 가산동 도표예보", // String title= channel.getString("title")
+      "pubDate":"2022년 08월 23일 (화)요일 17:00" 	// String pubDate = channel.getString("pubDate")
+    },
+    "version":2
+  }
+}
