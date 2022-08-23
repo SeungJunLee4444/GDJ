@@ -76,7 +76,7 @@ public class Xml_Review {
 			Document doc = builder.parse(file);
 			
 			Element root = doc.getDocumentElement();
-			NodeList items = root.getElementsByTagName("item");
+			NodeList items = root.getElementsByTagName("item"); // 바로갈수있음
 			// * 배열리스트는 메서드로 태그이름을 호출할 수 없다
 			
 			StringBuilder sb = new StringBuilder();
@@ -129,6 +129,11 @@ public class Xml_Review {
 //				NodeList categories = item.getElementsByTagName("category");
 				Node category = item.getElementsByTagName("category").item(0);
 				Node obsrValue = item.getElementsByTagName("obsrVaule").item(0);
+				
+				// <category>나난나나나나나</category>
+				// <category>156156</category>
+				// <category>나난나나나나나</category>
+				
 				
 				// * 위의 item(i)과 아래의 item(0)가 다른 이유
 				// => 위의 item태그는 반복되는 것들이고, 아래의 item에 있는 태그들은 하나뿐인 태그들이다?

@@ -33,6 +33,7 @@ public class ApiMain {
 		StringBuilder urlBuilder = new StringBuilder();
 		
 		try {
+			// * 요청메시지 예시보고 파라미터 작성
 			urlBuilder.append("http://apis.data.go.kr/B552061/AccidentDeath/getRestTrafficAccidentDeath");
 			urlBuilder.append("?ServiceKey=g1fjdlcJOfuhukMnsmo79qYkfOFBB5ocbWKYcImwfNqEb%2FHja8k8hffCsEV2%2FsIPC%2FeylWm9hcE%2BF709h2AEAg%3D%3D");
 			urlBuilder.append("&searchYear=2019");
@@ -40,35 +41,35 @@ public class ApiMain {
 			urlBuilder.append("&guGun=1125");
 			urlBuilder.append("&numOfRows=10");
 			urlBuilder.append("&pageNo=1");
-			urlBuilder.append("&resultCode=0000");
-			urlBuilder.append("&resultMsg=Success");
-			urlBuilder.append("&acc_year=2019");
-			urlBuilder.append("&occrrnc_dt=2019011622");
-			urlBuilder.append("&dght_cd=2");
-			urlBuilder.append("&occrrnc_day_cd=4");
-			urlBuilder.append("&dth_dnv_cnt=0");
-			urlBuilder.append("&injpsn_cnt=1");
-			urlBuilder.append("&se_dnv_cnt=1");
-			urlBuilder.append("&sl_dnv_cnt=0");
-			urlBuilder.append("&wnd_dnv_cnt=0");
-			urlBuilder.append("&occrrnc_lc_sido_cd=").append(URLEncoder.encode("1100", "UTF-8"));
-			urlBuilder.append("&occrrnc_lc_sgg_cd=").append(URLEncoder.encode("1117", "UTF-8"));
-			urlBuilder.append("&acc_ty_lclas_cd=").append(URLEncoder.encode("02", "UTF-8"));
-			urlBuilder.append("&acc_ty_mlsfc_cd=").append(URLEncoder.encode("23", "UTF-8"));
-			urlBuilder.append("&acc_ty_cd=").append(URLEncoder.encode("23", "UTF-8"));
-			urlBuilder.append("&aslt_vtr_cd=").append(URLEncoder.encode("01", "UTF-8"));
-			urlBuilder.append("&road_frm_lclas_cd=").append(URLEncoder.encode("01", "UTF-8"));
-			urlBuilder.append("&road_frm_cd=").append(URLEncoder.encode("04", "UTF-8"));
-			urlBuilder.append("&wrngdo_isrty_vhcty_lclas_cd=").append(URLEncoder.encode("01", "UTF-8"));
-			urlBuilder.append("&dmge_isrty_vhcty_lclas_cd=").append(URLEncoder.encode("01", "UTF-8"));
-			urlBuilder.append("&occrrnc_lc_x_crd=").append(URLEncoder.encode("943817", "UTF-8"));
-			urlBuilder.append("&occrrnc_lc_y_crd=").append(URLEncoder.encode("1945678", "UTF-8"));
-			urlBuilder.append("&lo_crd=").append(URLEncoder.encode("128.45275545", "UTF-8"));
-			urlBuilder.append("&la_crd=").append(URLEncoder.encode("35.94815032", "UTF-8"));
-			urlBuilder.append("&totalCount=19");
-			urlBuilder.append("&numOfRows=10");
-			urlBuilder.append("&pageNo=01");
-			
+//			urlBuilder.append("&resultCode=0000");
+//			urlBuilder.append("&resultMsg=Success");
+//			urlBuilder.append("&acc_year=2019");
+//			urlBuilder.append("&occrrnc_dt=2019011622");
+//			urlBuilder.append("&dght_cd=2");
+//			urlBuilder.append("&occrrnc_day_cd=4");
+//			urlBuilder.append("&dth_dnv_cnt=0");
+//			urlBuilder.append("&injpsn_cnt=1");
+//			urlBuilder.append("&se_dnv_cnt=1");
+//			urlBuilder.append("&sl_dnv_cnt=0");
+//			urlBuilder.append("&wnd_dnv_cnt=0");
+//			urlBuilder.append("&occrrnc_lc_sido_cd=").append(URLEncoder.encode("1100", "UTF-8"));
+//			urlBuilder.append("&occrrnc_lc_sgg_cd=").append(URLEncoder.encode("1117", "UTF-8"));
+//			urlBuilder.append("&acc_ty_lclas_cd=").append(URLEncoder.encode("02", "UTF-8"));
+//			urlBuilder.append("&acc_ty_mlsfc_cd=").append(URLEncoder.encode("23", "UTF-8"));
+//			urlBuilder.append("&acc_ty_cd=").append(URLEncoder.encode("23", "UTF-8"));
+//			urlBuilder.append("&aslt_vtr_cd=").append(URLEncoder.encode("01", "UTF-8"));
+//			urlBuilder.append("&road_frm_lclas_cd=").append(URLEncoder.encode("01", "UTF-8"));
+//			urlBuilder.append("&road_frm_cd=").append(URLEncoder.encode("04", "UTF-8"));
+//			urlBuilder.append("&wrngdo_isrty_vhcty_lclas_cd=").append(URLEncoder.encode("01", "UTF-8"));
+//			urlBuilder.append("&dmge_isrty_vhcty_lclas_cd=").append(URLEncoder.encode("01", "UTF-8"));
+//			urlBuilder.append("&occrrnc_lc_x_crd=").append(URLEncoder.encode("943817", "UTF-8"));
+//			urlBuilder.append("&occrrnc_lc_y_crd=").append(URLEncoder.encode("1945678", "UTF-8"));
+//			urlBuilder.append("&lo_crd=").append(URLEncoder.encode("128.45275545", "UTF-8"));
+//			urlBuilder.append("&la_crd=").append(URLEncoder.encode("35.94815032", "UTF-8"));
+//			urlBuilder.append("&totalCount=19");
+//			urlBuilder.append("&numOfRows=10");
+//			urlBuilder.append("&pageNo=01");
+//			
 			String apiURL = urlBuilder.toString();
 			
 			String response = getResponse(apiURL);

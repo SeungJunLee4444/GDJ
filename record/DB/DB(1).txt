@@ -1,0 +1,89 @@
+& db
+
+1. 데이터베이스	
+=> 개념 : 여러 사람에 의해 '공유'되어 사용될 목적으로 '통합, 구조화'하여 '저장, 관리'되는 데이터의 집합
+=> 데이터베이스를 통해 여러사람이 동시에 한가지 데이터를 수정할 수 있게된다
+
+2. DBMS(데이터베이스 관리시스템)
+=> 데이터베이스를 저장, 관리하기 위한 프로그램
+1) 종류
+(1) no-sql (document)	: json 타입, mongo db
+(2) relation db		: 관계형 데이터베이스, oracle, mysql, ms-sql등의 프로그램이 해당
+
+3. cmd
+* C:\Users\GDJ54>sqlplus
+=> 해당 위치에 sqlplus.exe 파일이 없는데도 실행되는 이유는?
+=> 환경변수에 저장되있기 때문, 설치시 오라클에서 자동으로 변수생성 *
+
+* 환경변수
+C:\oraclexe\app\oracle\product\11.2.0\server\bin
+%JAVA_HOME%\bin해당 경로의 bin 폴더 안의 파일은 어디서든 실행시킬 수 있다 * 
+
+* 환경변수 추가하기
+(1) PATH에 %JAVA_HOME%, %ORA_HOME%\bin 추가
+(2) 시스템 변수로 %JAVA_HOME%, %ORA_HOME% + 경로를 변수값으로 작성    
+* bin은 대체로 실행파일을 보관하는 폴더  
+
+4. 실행, 접속, 생성, 권한, 삭제 쿼리문
+(1) 실행
+=> run sql, 또는 cmd에서 sqlplus 입력 후 실행
+(2) 접속
+{1} sys 계정
+/as sysdba : 시스템 관리하는 사람(oper보다 더 윗등급 권한을 지님)
+/as sysoper: 시스템 사용하는 사람
+{2} system 계정
+conn system
+conn system/비밀번호
+
+(3) 생성
+create user user1 identified by 2222
+=> user1 계정을 만들고 2222라 비밀번호를 생성
+
+(4) 권한
+grant connect, resource, to scott
+=> scott 유저에게 connect, resource 권한을 줘라(접속, 자원사용권한)
+(5) 취소
+revoke connect, resource from scott
+=> scott 유저의 connect, resource 권한을 취소
+(6) 삭제
+drop user user1; 
+=> user1을 삭제해라( * 만약 user1이 권한을 지니고 있으면 삭제안됨)
+drop user user1 cascade;
+=> user1이 가진 권한이 있든말든 계정삭제해라
+
+* 쿼리문은 기본적으로 대문자를 사용
+* 아이디는 대소문자 안가리고, 비밀번호는 대소문자를 가린다
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
