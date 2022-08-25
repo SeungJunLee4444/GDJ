@@ -139,7 +139,9 @@ CHAR		: 자바의 string과 같음(char x)
 => 데이터베이스 객체 추가, 수정, 삭제(사용자, 테이블) * 작업취소 불가능
 => 추가 : create user, create table
 => 수정 : alter user, alter table
-=> 삭제 : drop user, drop table     
+=> 삭제 : drop user, drop table   
+
+* create, alter, drop을 ddl이라한다  
 
 -----------------------------------------------------------------
 

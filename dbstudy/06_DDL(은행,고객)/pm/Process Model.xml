@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="00E7BADE-38B1-5087-2EB9-1F471AB7D03D">
+<createdBy>GDJ54</createdBy>
+<createdTime>2022-08-24 05:18:06 UTC</createdTime>
+<ownerDesignName>06_DDL(은행,고객)</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</ProcessModel>

@@ -109,7 +109,7 @@ public class ApiMain2 {
 			accidents.add(accident);
 		}
 		
-		File file = new File("c:\\charlie1\\accident.txt");
+		File file = new File("accident.txt");
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
 			bw.write(result.toString());
@@ -119,17 +119,7 @@ public class ApiMain2 {
 			e.printStackTrace();
 		}
 		
-			
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
 	
 	
 	

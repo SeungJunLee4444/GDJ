@@ -16,6 +16,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		// * json은 바로 위 부모의 객체가 있어야 자식 태그를 제대로 호출할 수 있다(여러칸을 띄어서 호출은 불가능)
+		
 		// * postman에는 servicekey값을 인코딩값으로 넣어야한다
 		// => 컴파일 도중에는 컴퓨터가 인식해야하니 디코딩 상태로 이용
 		// * rss 주소는 별도의 인코딩이 필요하지않다
@@ -56,7 +58,7 @@ public class Main {
 			while((line = reader.readLine()) != null) {
 				sb.append(line);
 			}
-			
+//			System.out.println(sb.toString());
 			// * 단계별로 하위 태그로 갈때는 롬복의 빌터 패턴을 이용할 것
 			
 			// # 파싱결과를 전달할 파일
@@ -67,6 +69,7 @@ public class Main {
 			// # stringbuilder에 저장된 xml 데이터를 json으로 변경
 			JSONObject obj = XML.toJSONObject(sb.toString());
 			JSONObject rss = obj.getJSONObject("rss");
+			System.out.println(rss);
 			JSONObject channel = rss.getJSONObject("channel");
 			String link = channel.getString("link");	// item이 아닌 상위 태그여도 가능하다
 			String description = channel.getString("description");
@@ -83,7 +86,7 @@ public class Main {
 			String title2 = item.getString("title");
 			JSONObject description2 = item.getJSONObject("description");
 			JSONObject body = description2.getJSONObject("body");
-			JSONArray dataList = item.getJSONArray("data");
+			JSONArray dataList = body.getJSONArray("data");					// json 부모의 바로 자식 태그만 호출 가능하다
 			for(int i = 0; i < dataList.length(); i++) {
 				JSONObject data = dataList.getJSONObject(i);
 				String wfKor = data.getString("wfKor");
