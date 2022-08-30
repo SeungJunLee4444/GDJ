@@ -35,11 +35,13 @@
 -- USER_CONSTRAINTS 테이블의 구조를 확인
 DESCRIBE SYS.USER_CONSTRAINTS
 -- (SYS는 생략가능)
--- * 출력하기 : 실행할 문을 블록잡고 ctrl + 엔터(커서만 둬도 된다)
 
---USER_CONSTRAINTS 테이블의 CONSTRAINTS_NAME 칼럼 확인법 : TABLE에서 CONSTRAINT(제약사항) 확인하는법
+
+
+--USER_CONSTRAINTS 테이블의 CONSTRAINTS_NAME 칼럼 확인하기 : 조회문실습
 SELECT CONSTRAINT_NAME FROM USER_CONSTRAINTS;
---> USER 유저의 제약사항으로부터 제약사항 이름을 가져오라?
+
+
 
 -- 1. 제약조건 이름 없이 테이블 만들기
 DROP TABLE USER_TBL;    --TABLE 삭제 * 테이블은 한번 돌리면 수정이 불가하나, DROP까지 블록잡고 돌리면 수정할 수 있다
