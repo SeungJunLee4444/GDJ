@@ -109,7 +109,7 @@ VALUES
 INSERT INTO 
     EMPLOYEE
 VALUES 
-    (EMPLOYEE_SEQ.NEXTVAL , '신현준', 3, '대리사원', 'M', '98-12-01', 3500000);
+    (EMPLOYEE_SEQ.NEXTVAL , '신현준', 5, '대리사원', 'M', '98-12-01', 3500000);
     
  -- 부서번호 5번이 없어 실패
  -- INSERT에 실패했으나 시퀀스의 번호는 사용한 것

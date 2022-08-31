@@ -4,17 +4,18 @@ DROP TABLE PROJECT CASCADE CONSTRAINTS;
 DROP TABLE DEPARTMENT CASCADE CONSTRAINTS;
 -- * CASCADE CONSTRAINTS는 순서, 제약조건 관계 상관없이 DROP이 가능해진다
 
+/* 참고사항
 -- * 외래키 이름은 현재 테이블-참조해온 테이블 명으로 작성한다
 -- * NUMBER의 크기가 지정되지 않을때는 그냥 NUMBER만 써도 된다
-
 -- * 컬럼명을 더블클릭하면 같은 값을 지닌 칼럼을 색으로 표시해준다
+*/
 
 --부서 - 직원 일대다 관계
 --프로젝트 - 직원은 다대다 관계 -> 중간에 새로운 테이블 형성
 
--- * TRYBCATE TABLE 테이블이름;
+-- * TRUNBCATE TABLE 테이블이름;
 -- => 테이블의 구조만을 남김(열은 남기고, 행은 없어짐)
-
+TRUNCATE TABLE DEPARTMENT;
 
 CREATE TABLE DEPARTMENT(
     DEPT_NO VARCHAR2(15 BYTE)       NOT NULL,
