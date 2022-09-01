@@ -279,6 +279,7 @@ SELECT E.EMP_NO, E.NAME, E.DEPART, D.DEPT_NAME
 
 
 ----------------------------------------------------------------------------- 
+
 -- * 서브쿼리 종류 정리
 --  1) WHERE절(단일, 다중), 2) SELECT절, 3) FROM절(다중)
 
@@ -286,7 +287,7 @@ SELECT E.EMP_NO, E.NAME, E.DEPART, D.DEPT_NAME
 
 -- 4. FROM 절의 서브쿼리 : 인라인뷰 (다중)
 /*
-    * 인라인뷰
+    * 인라인뷰( * 뷰는 테이블과 동의어라 생각)
     - FROM절에서 사용하는 서브쿼리를 의미
     - 인라인뷰는 주로 테이블 형식
     - 인라인뷰에 별명을 주고 사용함
@@ -300,7 +301,253 @@ SELECT A.EMP_NO, A.NAME, A.POSITION     -- * (2) 따라서 메인 쿼리에도 �
   FROM (SELECT EMP_NO, NAME, POSITION   -- * (1) 인라인 뷰가 조회한 칼럼만 작성가능
           FROM EMPLOYEE
          WHERE DEPART = 1) A;           -- * 인라인 뷰의 별명이 A로 지음
+         
+/*
+    * 가상칼럼
+    
+    5. PSEUDO(수도, 가상칼럼)
+    - 존재하나 저장되어 있지 않은 칼럼을 수도칼럼이라 부른다
+    - 사용할 수 있으나 일부 제약이 있음
+    - 종류
+        (1) ROWID : 행의 아이디, 어떤 행의 물리적 저장 위치
+        (2) ROWNUM : 행의 NUMBER, 어떤 행의 번호
+        
+        -- * 정리
+        1) 수도칼럼 : 존재하나 저장되지 않은 칼럼
+            종류  (1) ROWID     : 행의 아이디  
+                  (2) ROWNUM    : 행의 비밀번호
+        
+        2) ROWNUM : 기본적으로 1을 포함하는 범위에만 사용가능
+        3) 1외의 범위에도 사용하는법 : ROWNUM에 별명을 지정하고 사용하면됨
+        => 이를 위해 인라인뷰 서브쿼리 사용
+        
+
+*/
+
+-- 1) ROWID(행의 아이디, 저장위치), ROWNUM(행의 번호)
+SELECT ROWID, ROWNUM, EMP_NO, NAME
+  FROM EMPLOYEE
+ WHERE ROWID = 'AAAFEOAABAAALDBAAC'; 
+-- => ROWID 값을 알고 조회하는건 가장 빠른 데이터 조회법]
+-- => 다만 ROWID를 직접 사용하는 것은 어렵기 때문에, '인덱스'라는 개념을 도입
+
+-- 2) ROWNUM 사용법
+-- => ROWNUM은 1을 포함하는 범위만 조건으로 사용할 수 있다(무조건 1 포함된 범위만 *)
+SELECT EMP_NO, NAME
+  FROM EMPLOYEE
+ WHERE ROWNUM BETWEEN 1 AND 2;  -- => 성공
+ 
+SELECT EMP_NO, NAME
+  FROM EMPLOYEE
+ WHERE ROWNUM = 2;              -- => 오류(1이 포함되지 않았기 때문)
+
+-- 3) ROWNUM을 1 이외의 범위를 조건으로 사용하는 방법
+-- ROWNUM에 별명을 지정하고 해당 별명을 사용하면 됨
+-- * SELECT 실행순서극복
+-- 3 : SELECT
+-- 1 : FROM(인라인뷰): ROWNUM의 별명 지정하기
+-- 2 : WHERE         : ROWNUM의 별명 사용하기
+
+-- (1) 오답
+SELECT R.ROWNUM, R.EMP_NO, R.NAME
+  FROM (SELECT ROWNUM, EMP_NO, NAME
+          FROM EMPLOYEE
+         WHERE ROWNUM BETWEEN 2 AND 3) R; 
+
+-- (2) 성공
+SELECT ROW_NUM, A.EMP_NO, A.NAME
+  FROM (SELECT ROWNUM AS ROW_NUM, EMP_NO, NAME
+          FROM EMPLOYEE) A
+ WHERE A.ROW_NUM = 2; 
+ 
+--------------------------------------------------------------------------------
+
+-- 문제 1. 연봉 기준으로 가장 높은 연봉을 받는 사원 조회하기 
+-- 1) 서브쿼리
+SELECT EMP_NO, NAME, SALARY
+  FROM EMPLOYEE
+ WHERE SALARY = (SELECT MAX(SALARY)
+                    FROM EMPLOYEE);
+                                                -- * ALIAS(AS)는 SELECT에서만 사용가능?
+
+-- 2) 정렬과 ROWNUM 이용
+    --(1) 연봉의 내림차순 정렬(가장높은 연봉이 위에)
+    --(2) 정렬 결과에 ROWNUM 이 1인 행을 조회
+    --(정렬을 먼저하는 방법은 인라인뷰)
+SELECT ROWNUM, A.EMP_NO, A.NAME, A.SALARY
+  FROM (SELECT EMP_NO, NAME, SALARY     --3
+          FROM EMPLOYEE                 --1
+         ORDER BY SALARY DESC) A        --2   
+ WHERE ROWNUM = 1;
+ 
+
+--------------------------------------------------------------------------------
+
+-- 문제2. 2번째로 높은 연봉을 받는 사원 조회하기
+-- 1) ROWNUM 칼럼(오리지널)
+-- 정렬(ORDERBY), 행번호 붙이기(ROWNUM), 열람(WHERE)
+SELECT B.EMP_NO, B.NAME, B.SALARY
+  FROM (SELECT ROWNUM AS ROW_NUM, A.EMP_NO, A.NAME, A.SALARY                    --*
+          FROM (SELECT EMP_NO, NAME, SALARY
+                  FROM EMPLOYEE
+                 ORDER BY SALARY DESC) A ) B
+ WHERE B.ROW_NUM BETWEEN 2 AND 10;                                              -- 목록 *
+ -- 인라인뷰 A : 연봉으로 정렬한 테이블
+ -- 인라인뷰 B : 정렬이 끝난 A 테이블에 별명을 붙인 테이블
+ 
+ -- (1) ROWNUM은 1외의 숫자를 쓰려면 별도의 별명을 지정하고, 사용해야만 가능  
+ -- (2) SELECT에 별명을 붙이고, WHERE보다 먼저 사용하기 위해 서브쿼리 사용
+ -- * WHERE 조건에서 1,2를 사용하기 위해 그 이전에 별명이 지정되어야함
+ 
+ 
+ 
+ -- 2) ROW_NUMBER(함수) 사용( 1) 번을 간편히)
+ -- => 정렬과 행번호 추가를 한번에 해줌, 열람
+SELECT A.EMP_NO, A.NAME, A.SALARY
+  FROM (SELECT ROW_NUMBER() OVER(ORDER BY SALARY DESC) AS ROW_NUM, EMP_NO, NAME, SALARY  -- 정렬과 행번호 붙이기를 동시에
+          FROM EMPLOYEE) A
+ WHERE A.ROW_NUM BETWEEN 2 AND 10;         
+ 
+ -- * ROW_NUMBER과 RANK는 해당 단어를 제외하면 형태가 같다(ROW_NUMBER 사용할것)
+
+ -- 3) RANK함수(목록에 사용하기에는 부적절, 동점자도 중복해서 처리하기 때문에 목록의 수가 매번 달라짐)
+SELECT A.EMP_NO, A.NAME, A.SALARY
+  FROM (SELECT RANK() OVER(ORDER BY SALARY DESC) AS 순위, EMP_NO, NAME, SALARY
+          FROM EMPLOYEE) A
+ WHERE A.순위 BETWEEN 2 AND 10;         
+
+--------------------------------------------------------------------------------
+
+-- 문제 3. 3~4번째로 입사한 사원 조회하기
+SELECT A.EMP_NO, A.NAME, A.SALARY
+  FROM (SELECT ROW_NUMBER() OVER(ORDER BY HIRE_DATE) AS 순위, EMP_NO, NAME, SALARY
+          FROM EMPLOYEE) A
+ WHERE A.순위 BETWEEN 3 AND 4; 
+ 
+
+SELECT B.EMP_NO, B.NAME, B.SALARY
+  FROM (SELECT ROWNUM AS ROW_NUM, A.EMP_NO, A.NAME, A.SALARY
+          FROM (SELECT EMP_NO, NAME, SALARY
+                  FROM EMPLOYEE
+                 ORDER BY HIRE_DATE) A ) B 
+ WHERE B.ROW_NUM BETWEEN 3 AND 4;                
+
+
+--------------------------------------------------------------------------------
+
+
+-- 6. 기타 서브쿼리 : CREATE, UPDATE, DELETE에서 활용
+
+-- 1. CREATE와 서브쿼리
+--  1) 용도 : 새로운 테이블에 기존의 테이블 값들을 복사
+--  2) NOT NULL을 제외하면 제약조건은 복사되지 않는다
+--  3) 사용법 : CREATE TABLE 테이블명 AS (서브쿼리)
+
+
+-- 문제1. EMPLOYEE 테이블 복사하기
+DROP TABLE EMPLOYEE2;
+CREATE TABLE EMPLOYEE2 
+    AS (SELECT EMP_NO, NAME, DEPART, GENDER, POSITION, HIRE_DATE, SALARY
+          FROM EMPLOYEE);
+-- => NOT NULL을 제외한 모든 제약조건이 삭제
           
+----------------------------          
+-- 2)번 점검작업          
+-- USER_CONSTRAINTS : USER 사용자가 사용가능한 모든 제약조건이 담겨있음
+DESC USER_CONSTRAINTS;
+
+SELECT CONSTRAINT_NAME FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'EMPLOYEE2';
+-- => 값 : NOT NULL들(EMPLOYEE2에 복사된 제약조건은 오직 NOTNULL 뿐이기 때문)
+----------------------------
+
+-- 4) 별도의 제약조건을 추가
+-- ex) EMPLOYEE2 테이블에 PK 제약조건을 추가하고 싶다면?
+ALTER TABLE EMPLOYEE2
+    ADD CONSTRAINT PK_EMPLOYEE2 PRIMARY KEY(EMP_NO);
+-- 해결 : ALTER 추가문 작성
+
+
+--------------------------------------------------------------------------------
+
+-- 문제2. DEPARTMENT 테이블의 구조만 복사하기(모든 행을 제외하고 복사하기)
+
+CREATE TABLE DEPARTMENT2
+    AS (SELECT DEPT_NO, DEPT_NAME, LOCATION
+          FROM DEPARTMENT
+--         WHERE DEPT_NO = 1); -- (1: 부서번호 1번만 복사, 0: 안들어감) 
+           WHERE 1 = 2);       -- 절대 만족하지 않을조건
+      
+-- 2) 행 제외하고 복제되었는지 확인           
+SELECT DEPT_NO, DEPT_NAME, LOCATION FROM DEPARTMENT2;
+-- 빈값
+
+--------------------------------------------------------------------------------
+
+-- 2. INSERT와 서브쿼리
+--  1) VALUES 절 대신 서브쿼리를 이용
+--  2) 서브쿼리의 결과가 INSERT됨
+--  형태 : INSERT INTO 테이블_이름(칼럼1, 칼럼2) (서브쿼리)
+
+--  문제3. DEPARTMENT 테이블의 모든 행(ROW)을 DEPARTMENT2 테이블에 삽입
+INSERT INTO DEPARTMENT2(DEPT_NO, DEPT_NAME, LOCATION) 
+    (SELECT DEPT_NO, DEPT_NAME, LOCATION
+       FROM DEPARTMENT);
+       
+SELECT DEPT_NO, DEPT_NAME, LOCATION FROM DEPARTMENT2;  
+
+--------------------------------------------------------------------------------
+
+-- 3. UPDATE 서브쿼리
+--  1) SET, WHERE절에서 서브쿼리 활용
+
+-- (1) 일반수정
+UPDATE EMPLOYEE2 
+    SET NAME = '이승준'        -- 한개를 하든 두개를 하든 이렇게 수정
+       ,GENDER = 'M'
+ WHERE EMP_NO = 1001; 
+ 
+ 
+-- (2) 서브쿼리로 데이터 수정
+--UPDATE EMPLOYEE2 
+--    SET (NAME,GENDER) = (서브쿼리)       
+-- WHERE EMP_NO = 1001;
+--
+---- ex) 1004번의 직원의 이름과 성별을 EMPLOYEE2의 1001번 직원정보에 저장
+--UPDATE EMPLOYEE2 
+--    SET NAME = (SELECT NAME FROM EMPLOYEE WHERE EMP_NO = 1004)      
+--       ,GENDER = (SELECT GENDER FROM EMPLOYEE WHERE EMP_NO = 1004)
+-- WHERE EMP_NO = 1001;
+ 
+
+-- 서브쿼리 수정 최종형 
+UPDATE EMPLOYEE2
+    SET(NAME, GENDER) = (SELECT NAME, GENDER
+                          FROM EMPLOYEE
+                         WHERE EMP_NO = 1003)
+   WHERE EMP_NO = 1001;                      
+
+
+
+SELECT EMP_NO, NAME, GENDER FROM EMPLOYEE2;
+
+
+-- 4. DELETE와 서브쿼리
+--  1) WHERE절에서 주로 사용
+
+DELETE 
+  FROM EMPLOYEE2
+ WHERE DEPART IN (SELECT DEPT_NO
+                     FROM DEPARTMENT2
+                    WHERE DEPT_NAME = '영업부');
+COMMIT;
+
+SELECT E.EMP_NO, D.DEPT_NAME
+  FROM DEPARTMENT2 D INNER JOIN EMPLOYEE2 E
+    ON D.DEPT_NO = E.DEPART;
+-- 영업부의 부서번호는 PK가 아님, 둘 이상일 수 있기 때문에 다중행 서브쿼리
+
+
+-- 6. 인덱스
 
 
 

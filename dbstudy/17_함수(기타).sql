@@ -25,12 +25,13 @@ SELECT
        
 --------------------------------------------------------------------------------       
        
--- 2. 그룹화 : 비슷한 값끼리 모아서 출력(중복O)
+-- 2. 그룹화 : 비슷한 값끼리 모아서 출력(중복O)                                     * 헷갈리던 쿼리문
 --  1) OVER(PARTITION BY 그룹화칼럼)와 집계함수
 --  그룹화 작업을 수행하므로 집계함수(그룹함수)와 함께 사용이 가능함
 -- 해석 : 그루핑한 부서번호의 개수와 맞게 집계함수들의 값을 배치
-SELECT 
-       DISTINCT DEPARTMENT_ID       -- * 그저 같은값 중복제거 처리(있든 없든 아래 값에 변화X)
+SELECT      
+       DEPARTMENT_ID
+        -- * 그저 같은값 중복제거 처리(있든 없든 아래 값에 변화X)
       ,SUM(SALARY) OVER(PARTITION BY DEPARTMENT_ID) AS 부서별연봉합계  -- * 동일한 부서번호를 지닌 SALARY들의 합계 구함 
       ,FLOOR(AVG(SALARY) OVER(PARTITION BY DEPARTMENT_ID)) AS 부서별연봉평균  -- * 정수내림        
       ,MAX(SALARY) OVER(PARTITION BY DEPARTMENT_ID) AS 부서별최대연봉
@@ -43,12 +44,13 @@ SELECT
         
 --  2) RANK()함수와 PARTITION BY을 함께 사용해 그룹내 순위 구하기 ***
 SELECT 
-       RANK() OVER(PARTITION BY DEPARTMENT_ID ORDER BY SALARY DESC) AS 부서내연봉순위
+       RANK() OVER(PARTITION BY DEPARTMENT_ID ORDER BY SALARY DESC) AS 부서내연봉순위  -- 부서별로 연봉 높은순위
       ,EMPLOYEE_ID
       ,FIRST_NAME
       ,LAST_NAME
       ,SALARY
       ,DEPARTMENT_ID
+     
  FROM
        EMPLOYEES
  ORDER BY 
