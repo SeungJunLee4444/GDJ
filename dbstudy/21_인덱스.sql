@@ -29,11 +29,12 @@
             
 */
 
+
 -- 인덱스 조회
 -- => 사용자가 작성한 인덱스는 USER_INDEXES 데이터 사전에서 확인
 DESC USER_INDEXES;
-SELECT INDEX_NAME, TABLE_NAME FROM USER_INDEXES;
-
+SELECT INDEX_NAME, TABLE_NAME FROM USER_INDEXES
+WHERE TABLE_NAME = 'STUDENT';
 -- 인덱스 칼럼 조회
 -- => 사용자가 작성한 인덱스가 동작하는 칼럼 확인 USER_IDN_COLUMNS 데이터 사전
 

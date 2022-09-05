@@ -1,0 +1,385 @@
+[19] JOIN
+1. 개념 
+=> 두개 이상의 테이블 조회
+=> 조회할 테이블들은 관계를 가지고 줄수 있어야함
+
+2. 형태
+SELECT 칼럼
+   FROM 테이블1 JOIN 테이블2
+      ON 조인조건( 주로 PK = PK)
+
+* JOIN 조건은 대체로 PK칼럼, 행이 적은 칼럼을 드라이브, 아닌 테이블을 드리븐 테이블로 정하나,
+이는 성능상 고려부분이지, 필수사항은 아니다
+
+* 드라이브테이블과 드리븐 테이블
+(1) 드라이브 테이블
+=> 대체로 PK를 지님
+=> 대체로 행수가 적음
+
+(2) 드리븐 테이블
+=> 대체로 FK를 지님
+=> 대체로 행수가 ㅁ낳음
+
+3. 종류
+1) 크로스 조인(카데전 곱)
+=> 조인 조건이 없을 때 발생
+
+
+2) INNER JOIN(내부조인)
+=> 각 테이블에 일치하는 행을 조인
+ex)
+SELECT E.EMP_NO, E.NAME, D.DEPT_NAME
+  FROM DEPARTMENT D INNER JOIN EMPLOYEE E
+    ON D.DEPT_NO = E.DEPART;
+
+3) OUTER JOIN(외부조인)
+=> 한 테이블에 일치한느 행을 조인
+* 서로 일치하는 행이 없어도 특정 테이블의 행을 모두 조회
+
+(1) LEFT OUTER JOIN
+=> 왼쪽 테이블의 행을 모두 조회
+ex) 
+SELECT E.EMP_NO, E.NAME, D.DEPT_NAME 
+  FROM EMPLOYEE E LEFT OUTER JOIN DEPARTMENT D 
+    ON E.DEPART = D.DEPT_NO;
+
+
+(2) RIGHT OUTER JOIN
+=> 오른쪽 테이블의 행을 모두 조회
+ex)
+SELECT E.EMP_NO, E.NAME, D.DEPT_NAME 
+  FROM DEPARTMENT D RIGHT OUTER JOIN EMPLOYEE E  
+    ON D.DEPT_NO = E.DEPART; 
+
+(3) FULL OUTER JOIN
+=> 양쪽의 테이블 행을 모두
+
+4) 셀프조인
+=> 한테이블 안에 참조관계를 지님
+=> 한 테이블 안 특정칼럼과 다른 특정칼럼과 관계
+
+4. INNERJOIN 실습
+* 조인에서 조건에 = 연산자를 사용하는 경우를 EQUL JOIN, 그 외에는 전부 NON EQUL JOIN이다
+
+1) 조인의 형태
+(1) JOIN을 사용
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME    -- (두개 이상의 테이블에서 조회할 때 JOIN을 사용)
+  FROM DEPARTMENTS D INNER JOIN EMPLOYEES E
+    ON D.DEPARTMENT_ID = E.EMPLOYEE_ID
+ WHERE LOCATION_ID = 1700; 
+
+
+(2) , 사용
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME    -- (두개 이상의 테이블에서 조회할 때 JOIN을 사용)
+  FROM DEPARTMENTS D , EMPLOYEES E
+ WHERE D.DEPARTMENT_ID = E.EMPLOYEE_ID
+   AND LOCATION_ID = 1700; 
+
+=> JOIN의 자리에 ,(콤마)가 들어갔을 뿐 형태의 차이는 없음
+
+2) 복수의 조인(테이블 횟수 -1 = 조인횟수)						*
+ex) 3개의 조인
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY
+  FROM DEPARTMENTS D INNER JOIN EMPLOYEES E              (1) DEPARTMENTS와 EMPLOYEES의 조인
+    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID INNER JOIN LOCATIONS L
+    ON L.LOCATION_ID = D.LOCATION_ID                            (2) CITY 테이블을 추가 조인
+ WHERE L.CITY LIKE 'S%';
+
+=> 조인하는 순서는 상관없음(어자피 테이블마다 별명을 붙여서 칼럼 호출)
+=> 3번째 테이블 조인을  ON PK조건절에 붙이는 것이 특징 	
+
+ex) 4개의 조인
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY, C.COUNTRY_NAME
+  FROM COUNTRIES C,LOCATIONS L, DEPARTMENTS D, EMPLOYEES E
+ WHERE C.COUNTRY_ID = L.COUNTRY_ID 
+   AND L.LOCATION_ID = D.LOCATION_ID 
+   AND D.DEPARTMENT_ID = E.DEPARTMENT_ID; 	= NULL 제외
+ [WHERE D.DEPARTMENT_ID IS NOT NULL;]
+
+=> INNER JOIN은 일치하는 데이터만 조인되는데,
+만약 한 테이블에 NULL이 없고, 다른 테이블에 NULL이 있으면,
+NULL값은 생략되서 나온다
+즉, NULL값을 제외한 값을 구하라는 질문에 별도의 추가적 행위가 필요없다는 뜻
+
+5. OUTER JOIN 실습
+1) LEFT JOIN, 근무하는 사원이 없는 부서도 조회
+SELECT D.DEPARTMENT_ID, D.DEPARTMENT_NAME, COUNT(E.DEPARTMENT_ID) AS 사원수
+  FROM DEPARTMENTS D LEFT OUTER JOIN EMPLOYEES E                    
+    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID 
+ GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME
+ ORDER BY D.DEPARTMENT_ID;
+=> 
+
+2) RIGHT JOIN 부서번호가 없는 사원도 조회
+(1) JOIN 사용
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, NVL(D.DEPARTMENT_NAME, 'None')
+  FROM DEPARTMENTS D RIGHT OUTER JOIN EMPLOYEES E
+    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+ ORDER BY E.EMPLOYEE_ID;  
+=> 
+
+(2) , 사용
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, NVL(D.DEPARTMENT_NAME, 'None')
+  FROM DEPARTMENTS D, EMPLOYEES E
+ WHERE D.DEPARTMENT_ID(+) = E.DEPARTMENT_ID         -- RIGHT면 왼쪽에 (+)를 넣어줘야함(OUTER JOIN)
+ ORDER BY E.EMPLOYEE_ID;
+=> OUTER JOIN은 ,(콤마)를 사용시 드리븐 테이블에 (+)를 사용한다 
+
+
+6. SELF JOIN 실습									*
+ex) EMPLOYEE 테이블에서 EMPLOYEE와 MANAGER 칼럼으로 직원과 매니저
+SELECT E.EMPLOYEE_ID, E.LAST_NAME, E.HIRE_DATE, M.LAST_NAME, M.HIRE_DATE
+  FROM EMPLOYEES E INNER JOIN EMPLOYEES M
+    ON E.MANAGER_ID = M.EMPLOYEE_ID
+ WHERE TO_DATE(E.HIRE_DATE) < TO_DATE(M.HIRE_DATE);
+
+=> 셀프테이블 1(PK : EMPLOYEE_ID), 셀프테이블2(PK: MANAGER_ID)인 EMPLYEES테이블이 두개 조인
+
+* 날짜가 크다(최근이다)
+
+* SELECT * FROM USER_CONSTRAINTS;
+=> 사용자가 만들어낸 모든 제약조건 확인가능
+(오라클에서는 이름없는 제약조건도 전부 임의의 이름을 부여함, 이는 삭제시 요구됨)								*
+
+------------------------------------------------------------------------------------------------------------
+
+[20]
+
+------------------------------------------------------------------------------------------------------------
+
+[21]
+
+------------------------------------------------------------------------------------------------------------
+
+[22]
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+[23] PL/SQL
+
+1. 개념
+=> 오라클의 프로그래밍 처리가 가능한 SQL
+=> 서버메시지 출력을 위해서 SERVEROUTPUT 설정을 ON 해줘야한다
+
+1) 형식
+=> 기초데이터 + SET SERVEROUTPUT ON + 프로그래밍 형식;
+
+(1) 기초데이터 작성
+(2) 서버메시지 출력 ON 	(한번만 써주면 됨)
+=> SET SERVEROUTPUT ON;
+
+(3) 변수선언
+DECLARE				* 대입연산자 : 	:=
+	변수명1 변수타입; 
+	변수명2 변수타입;
+	
+BEGIN
+	수행할 쿼리문
+
+(4) 서버메시지 출력
+=> DBMS_OUTPUT.PUT_LINE(출력문);
+
+END;
+
+------------------------------------------------------------------------------------------------------------
+
+2. 변수선언 종류
+1) 스칼라변수 선언
+=> 직접 타입을 명시하는 변수
+ex)
+DECLARE 
+	NAME VARCHAR(20 BYTE);
+	AGE NUMBER(3);
+BEGIN
+	NAME := '가나다'
+	AGE := 27;
+	DBMS_OUTPUT.PUT_LINE(~);
+END;
+
+------------------------------------------------------------------------------------------------------------
+
+3. 참조변수 선언
+=> 정의 : 특정 칼럼의 타입을 그대로 사용하는 변수
+=> 형태 : 테이블명.칼럼명%TYPE
+
+DECLARE
+	NAME EMPLOYEES.FIRST_NAME%TYPE;		* EMPLOYEES 테이블의 FIRST_NAME 칼럼의 타입을 가져온다
+BEGIN
+	NAME := '가나다';
+
+
+
+4. 참조변수 활용
+=> 테이블의 데이터를 읽어 참조변수에 저장
+=> SELECT 칼럼 INTO 변수 FROM 테이블 WHERE 조건식					*
+
+ex)
+DECLARE
+	FNAME EMPLOYEES.FIRST_NAME%TYPE;
+	LNAME EMPLOYEES.LAST_NAME%TYPE;
+	VSALARY EMPLOYEES.SALARY%TYPE;
+BEGIN
+	SELECT
+		FIRST_NAME, LAST_NAME, SALARY INTO FNAME, LNAME, VSALARY
+	  FROM EMPLOYEES
+	WHERE EMPLOYEE_ID = 100;
+	DBMS_OUTPUT.PUT_LINE(FNAME || LNAME || VSALARY)
+END;
+=> EMPLOYEES 테이블의 FIRST이름, LAST이름, 연봉 칼럼을 선언한 참조변수들을 INTO 저장
+=> 조건 : 직원아이디가 100인 경우
+
+------------------------------------------------------------------------------------------------------------
+
+5. 레코드 변수 선언(레코드변수 타입정의, 선언, 참조변수 선언, 활용)
+=> 레코드 : 필드(변수)의 모임, DB에서 레코드는 행(=튜플)
+=> 레코드 변수 : 여러 칼럼을 동시에 저장하는 변수, 즉 행을 저장한다
+=> 순서 : 레코드 변수 정의와 선언과정
+
+ex)
+
+DECLARE	
+	1) 레코드 변수 타입정의, 참조변수 선언
+	TYPE MY_TYPE IS RECORD(							*
+		FNAME EMPLOYEES.FIRST_NAME%TYPE;
+		LNAME EMPLOYEES.LAST_NAME%TYPE;
+		SALARY EMPLOYEES.SALARY%TYPE;
+	)
+	2) 레코드 변수 선언(V_ROW는 위에 선언한 참조변수 3개를 합친 레코드변수)
+	V_ROW MY_TYPE;								*
+	(1) 1)에서는 레코드 TYPE 지정
+	(2) 2)에서는 레코드 변수명 지정 
+BEGIN 
+	SELECT
+		FIRST_NAME, LAST_NAME, SALARY
+	   INTO V_ROW				
+	  FROM EMPLOYEES
+             WHERE EMPLOYEE_ID = 100; 
+	DBMS_OUTPUT.PUT_LINE(~);
+END;  	
+
+=> INTO V_ROW에 EMPLOYEES의 세개의 칼럼값을 저장하였으며, 레코드 변수의 타입은
+	EMPLYEES 세개의 변수의 타입을 참조한다
+
+------------------------------------------------------------------------------------------------------------
+
+6. 행 변수 
+=> 행(ROW 전체를 저장할 수 있는 타입)	* 행 전체의 타입을 가져옴
+=> 사용법 : V_ROW EMPLOYEES%ROWTYPE 
+
+* 행 단위 저장: ROW (일부 : RECORD)
+* 열 단위 저장: 
+
+ex)
+DECLARE 
+	V_ROW EMPLOYEES%ROWTYPE
+BEGIN 
+	SELECT 
+	       *
+	INTO V_ROW
+	FROM EMPLOYEES
+           WHERE EMPLOYEE_ID = 100;
+	DBMS_OUTPUT.PUT_LINE(~~~~~)		
+=> EMPLOYEES 테이블의 모든 칼럼을 V_ROW에 저장
+=> 조건 : EMPLOYEE_ID = 100인 경우
+END;
+
+------------------------------------------------------------------------------------------------------------
+
+7. IF
+1) 형태
+DECLARE
+	변수명
+	RESULT변수(상황에 맞게 필요)
+
+IF 조건식 THEN		* IF 조건의 비교연산자(=, >=), 변수대입연산자 (:=)		*	
+	실행문
+ELSIF 조건식 THEN
+	실행문
+ELSE	
+	실행문
+END IF;
+
+
+
+ex) SELECT문을 같이 쓰는 이유: 특정 테이블의 칼럼의 값을 참조하여 IF문을 사용할 때
+DECLARE
+    SAL EMPLOYEES.SALARY%TYPE;
+    RES VARCHAR2(20 BYTE);
+BEGIN
+     SELECT SALARY
+     INTO SAL
+     FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = 150;
+    IF SAL >= 15000 THEN
+        RES := '고연봉';
+    ELSIF SAL >= 10000 THEN
+        RES := '중연봉';
+    ELSE
+        RES := '저연봉'; 
+    END IF;  
+     DBMS_OUTPUT.PUT_LINE(SAL || '는' || RES || '입니다');
+END; 
+
+------------------------------------------------------------------------------------------------------------
+
+8. CASE문
+1) 형태
+CASE 
+	WHEN 조건식 THEN
+		실행문
+	WHEN 조건식2 THEN
+		실행문2
+	ELSE 	
+		실행문
+END CASE;
+
+ex) 주민번호를 이용해 성별 조회
+DECLARE
+    SNO VARCHAR2(14 BYTE);              -- NUM에 저장할 숫자
+    GENDER_NUM CHAR(1 BYTE);          -- SUBSTR(SNO, 8, 1) 앞에서 8번째의 한글자
+    GENDER VARCHAR2(1 BYTE);           -- SUBSTR(SNO, -7, 1) 뒤에서 7번째의 한글자(뒤에서부터 순서는 - 붙이기)
+BEGIN 
+    SNO := '901010-1234567';
+    SELECT SUBSTR(SNO, 8, 1)
+      INTO GENDER_NUM
+      FROM DUAL;
+    CASE 
+        WHEN GENDER_NUM = '1' THEN    -- 같은말 CASE GENDER_NUM WHEN 1 THEN 
+            GENDER := 'M';
+        WHEN GENDER_NUM = '2' THEN
+            GENDER := 'W';
+    END CASE;
+    DBMS_OUTPUT.PUT_LINE('성별은' || GENDER || '입니다');
+END;  
+
+ 
+
+
+
+
+
+
+
+
+
+프로시저
+=> 한번에 수행할 쿼리문이 여러개인 경우
+
+함수
+=> 사용자가 필요한 기능을 함수로 정의
+
+트리거
+=> 행(ROW) 삽입/수정/삭제(DML)시 자동으로 처리되는 기능 정의 
+
+
+
+
+
+
+
+
+
+SELECT A INTO B 
+A데이터를 B에 저장후 조회

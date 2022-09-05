@@ -280,15 +280,14 @@ SELECT E.EMPLOYEE_ID, E.LAST_NAME, JH.JOB_ID
 --------------------------------------------------------------------------------
  
 
--- 4. 부서별로 사원수와 평균연봉을 DEPARTMENT_NAME과 함께 조회하시오.                -- * 집계함수를 조회하니 그룹핑
---    평균연봉은 정수로 절사하고, 사원수의 오름차순 정렬하시오.                      -- * TRUNC 정수 절사
+-- 4. 부서별로 사원수와 평균연봉을 DEPARTMENT_NAME과 함께 조회하시오.               -- * 집계함수를 조회하니 그룹핑
+--    평균연봉은 정수로 절사하고, 사원수의 오름차순 정렬하시오.                     -- * TRUNC 정수 절사
 
 
 SELECT D.DEPARTMENT_NAME AS 부서명, COUNT(*) AS 사원수, TRUNC(AVG(E.SALARY)) AS 평균연봉
   FROM DEPARTMENTS D INNER JOIN EMPLOYEES E
     ON D.DEPARTMENT_ID = E.DEPARTMENT_ID             
- GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME                                       -- * 조인에 그룹핑 사용시 PK값도 같이 써주기       
- -- * 그룹핑시 -- PK,FK 키값도 같이 써주는것이 안정적인 쿼리문)--?                   (PK는 NULL이 없기 때문에, NAME이 NULL인 경우 
+ GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME                                     -- * 조인에 그룹핑 사용시 PK값도 같이 써주기---?
  
  ORDER BY 사원수;  
 
@@ -327,21 +326,13 @@ SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY
 
 -- 6. 모든 사원들의 EMPLOYEE_ID, LAST_NAME, DEPARTMENT_NAME, CITY, COUNTRY_NAME을 조회하시오.
 --    단, DEPARTMENT_ID가 없는 사원은 조회하지 마시오.
-SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY, C.COUNTRY_NAME
-  FROM DEPARTMENTS D INNER JOIN EMPLOYEES E
-    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID INNER JOIN LOCATIONS L
-    ON L.LOCATION_ID = D.LOCATION_ID INNER JOIN COUNTRIES C
-    ON C.COUNTRY_ID = L.COUNTRY_ID
- WHERE D.DEPARTMENT_ID IS NOT NULL; 
- 
- -- * 최상위 테이블부터, 행수가 적은것부터
- 
+
 SELECT E.EMPLOYEE_ID, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY, C.COUNTRY_NAME
  FROM COUNTRIES C INNER JOIN LOCATIONS L
    ON C.COUNTRY_ID = L.COUNTRY_ID INNER JOIN DEPARTMENTS D
    ON L.LOCATION_ID = D.LOCATION_ID INNER JOIN EMPLOYEES E
-   ON D.DEPARTMENT_ID = E.DEPARTMENT_ID;                 -- 애초에 NULL값이 DEPARTMENT 테이블의 DEPARTMENT_ID에는 없기 때문에, NOT NULL쓸필요가없음
---   WHERE D.DEPARTMENT_ID IS NOT NULL;
+   ON D.DEPARTMENT_ID = E.DEPARTMENT_ID;                -- 부서테이블엔 NULL없음 , 사원 테이블엔 NULL있음
+--   WHERE D.DEPARTMENT_ID IS NOT NULL;                 => INNERJOIN이기 때문에 애초에 같은 값만 조건으로서 기능(NULL 제외됨)
       
    -- * 테이블 관계를 앞에서 하든 뒤에서 하든 어느 방향이든 상관없음
 
@@ -391,7 +382,7 @@ SELECT E.EMPLOYEE_ID, E.LAST_NAME, NVL(D.DEPARTMENT_NAME, 'None')
 SELECT D.DEPARTMENT_ID, D.DEPARTMENT_NAME, COUNT(E.DEPARTMENT_ID) AS 사원수
   FROM DEPARTMENTS D LEFT OUTER JOIN EMPLOYEES E                    -- 빈부서도 조회하기 위해 DEPARTMENT 기준 조인
     ON D.DEPARTMENT_ID = E.DEPARTMENT_ID 
- GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME---?
+ GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME
  ORDER BY D.DEPARTMENT_ID;      
 
 
@@ -426,9 +417,7 @@ SELECT E.EMPLOYEE_ID, E.LAST_NAME, E.HIRE_DATE, M.LAST_NAME, M.HIRE_DATE
   FROM EMPLOYEES E INNER JOIN EMPLOYEES M
     ON E.MANAGER_ID = M.EMPLOYEE_ID
  WHERE TO_DATE(E.HIRE_DATE) < TO_DATE(M.HIRE_DATE);    -- TO DATE를 쓰면 날짜타입이라도 더 안전히 비교가능(날짜타입은 숫자비교가능)
-
-
-
+ 
 
 
 -- 10. 같은 부서의 사원들 중에서 나보다 늦게 입사하였으나 연봉을 더 많이 받는 사원이 있는 사원들의

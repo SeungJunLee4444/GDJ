@@ -30,6 +30,13 @@ ALTER TABLE EMPLOYEE
     ADD CONSTRAINT FK_EMPLOYEE_DEPARTMENT FOREIGN KEY(DEPART) 
         REFERENCES DEPARTMENT(DEPT_NO)
             ON DELETE SET NULL;
+            
+            
+SELECT DEPARTMENT_NAME
+	  FROM DEPARTMENTS 
+	WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
+			  FROM EMPLOYEES
+			WHERE MAX(SALARY));
 
 
 -- 부서 테이블에서 사용할 부서_시퀀스
@@ -278,6 +285,8 @@ SELECT E.EMP_NO, E.NAME, E.DEPART, D.DEPT_NAME
        
 
 
+
+
 ----------------------------------------------------------------------------- 
 
 -- * 서브쿼리 종류 정리
@@ -481,6 +490,9 @@ CREATE TABLE DEPARTMENT2
 SELECT DEPT_NO, DEPT_NAME, LOCATION FROM DEPARTMENT2;
 -- 빈값
 
+-- & AS 서브쿼리 는 전체 복사, 그중에서 1과 2는 같지않음을 이용해
+-- 데이터만 누락시킴
+
 --------------------------------------------------------------------------------
 
 -- 2. INSERT와 서브쿼리
@@ -549,7 +561,11 @@ SELECT E.EMP_NO, D.DEPT_NAME
 
 -- 6. 인덱스
 
-
+ SELECT DEPARTMENT_NAME
+	  FROM DEPARTMENTS 
+	WHERE DEPARTMENT_ID = (SELECT EMPLOYEE_ID
+			  FROM EMPLOYEES
+			WHERE MAX(SALARY));
 
 
 

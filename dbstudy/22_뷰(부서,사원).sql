@@ -21,6 +21,9 @@ CREATE VIEW VIEW_EMP
           FROM DEPARTMENT D INNER JOIN EMPLOYEE E
             ON D.DEPT_NO = E.DEPART); 
             
+-- 두개의 테이블을 뷰로 생성한 경우
+-- => 한개의 테이블로도 만들 수 있음
+            
 GRANT DBA TO SCOTT;            
             
             
@@ -35,6 +38,9 @@ DROP VIEW VIEW_EMP;
 DESC USER_VIEWS;
 SELECT VIEW_NAME, TEXT
   FROM USER_VIEWS;
+  
+  
+-- INDEXT, VIEW 전부 문법이 CREATE AS형태
 
 
 

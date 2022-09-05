@@ -288,7 +288,7 @@ SELECT D.DEPARTMENT_NAME AS 부서명, COUNT(*) AS 사원수, TRUNC(AVG(E.SALARY
   FROM DEPARTMENTS D INNER JOIN EMPLOYEES E
     ON D.DEPARTMENT_ID = E.DEPARTMENT_ID             
  GROUP BY D.DEPARTMENT_ID, D.DEPARTMENT_NAME                                       -- * 조인에 그룹핑 사용시 PK값도 같이 써주기       
- -- * 그룹핑시 -- PK,FK 키값도 같이 써주는것이 안정적인 쿼리문)--?                   (PK는 NULL이 없기 때문에, NAME이 NULL인 경우 
+ -- * 그룹핑시 -- PK,FK 키값도 같이 써주는것이 안정적인 쿼리문)--?
  
  ORDER BY 사원수;  
 
@@ -426,9 +426,7 @@ SELECT E.EMPLOYEE_ID, E.LAST_NAME, E.HIRE_DATE, M.LAST_NAME, M.HIRE_DATE
   FROM EMPLOYEES E INNER JOIN EMPLOYEES M
     ON E.MANAGER_ID = M.EMPLOYEE_ID
  WHERE TO_DATE(E.HIRE_DATE) < TO_DATE(M.HIRE_DATE);    -- TO DATE를 쓰면 날짜타입이라도 더 안전히 비교가능(날짜타입은 숫자비교가능)
-
-
-
+ 
 
 
 -- 10. 같은 부서의 사원들 중에서 나보다 늦게 입사하였으나 연봉을 더 많이 받는 사원이 있는 사원들의
@@ -439,6 +437,7 @@ SELECT 나.DEPARTMENT_ID, 나.LAST_NAME, 나.SALARY, 나.HIRE_DATE, 너.LAST_NAM
     ON 나.DEPARTMENT_ID = 너.DEPARTMENT_ID
  WHERE 나.HIRE_DATE < 너.HIRE_DATE            -- 날짜가 크다-> 숫자비교(최근이다)**
    AND 나.SALARY < 너.SALARY;
+
 
 
 
