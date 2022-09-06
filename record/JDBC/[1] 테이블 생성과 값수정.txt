@@ -1,0 +1,193 @@
+[27] JDBC 
+- 자바와 DB를 연결해주는 것을 말한다
+- DB마다 자바와 연결해주는 파일을 제공해주며 이는 DB, 오라클마다 다르다					& url 차이
+
+1. JDBC문 사용 인터페이스와 클래스들
+1) OracleDriver(db연결)
+=> 오라클 DB에서 제공, DB와의 연결에 사용
+* 사용하려면 ORA_HOME jdbc 폴더 내 ojdbc6.jar 파일을 buildpath 해야한다
+ex) Class.forName("oracle.jdbc.OracleDriver");	
+=> 괄호 안은 클래스의 패키지내 위치
+=> Class.forName은 괄호 안의 클래스 이름에 맞춰 해당 클래스를 실행시킨다						& Class.forName
+
+------------------위는 db, 나머지 아래는 자바에서 제공하는 클래스-----------------------------
+2) DriveManager(db접속)
+=> 자바 sql의 클래스로 DB 연결을 생성한다
+=> getConnection 메서드를 통해 url, user, password 값을 받아 DB에 연결
+
+3) Connection(db접속)
+* connection은 용도가 크게 두가지
+(1) DB접속에 사용되며, DriverManager의 getConnection 메서드가 반환하는 connection값을 저장하는데 사용
+(2) PrepareStatement(sql) 메서드를 생성하여 PreparedStatement에 저장할 때 사용					& 
+
+
+4) PreparedStatement(쿼리문 실행)
+=> 작성된 쿼리문을 실행시키는데 사용되는 클래스
+(1) 저장 	: 테이블 생성시 Connection의 객체의 prepareStatement(sql)의 값을 저장받는다				&
+(2) 추가(?): setInt(1, board.getBoard_no());	/ setString
+(2) 실행 	: 테이블 생성시 execute, dml문 사용시 executeUpdate 메서드를 사용한다
+
+* PreparedStatement를 사용하면 SQL Injection을 방지할 수 있다
+=> PreparedStatement는 사전에 쿼리문을 미리 컴파일한 뒤 ?로 처리되는 부분만 나중에 변수값을 '문자열'로 넣어 처리함
+(?는 쿼리문으로 인식되지않음)
+
+-----------------------------------------------------------------------------------
+* DTO와 DAO
+=> DTO : Data Transfer Object, 데이터 전송객체
+	(데이터 베이스로 전송할 데이터는 하나로 모아서 처리하는게 기본)
+	(이 때, 클래스를 이용해 객체로 만들어 하나로 전달하는 것을 DTO)
+	=> 데이터 저장을 담당하는 영역으로 도메인(domain) 패키지로 처리
+=> DAO : DataBase Access Object, 데이터베이스 접근 객체, 쿼리문을 실행하는
+모든 메소드 처리하는 클래스, Singleton 패턴, DB 저장소를 처리하는 영역으로 레파지토리라 부름(repository)
+
+
+
+
+-----------------------------------------------------------------------------------
+
+2. 형태
+
+
+3. 실습
+* JDBC가 성공하면 해당 계정의 DB에 코드결과가 반영된다
+1) 테이블 생성문
+* CREATE 뿐 아니라 DROP도 가능
+
+
+
+
+2) 시퀸스 생성
+
+
+
+
+
+3) INSERT문
+* DML 3개의 문은 기본적으로 코드가 같으며, 각 쿼리문의 차이만 주의하면 된다
+INSERT 	: INSERT INTO 테이블명(칼럼1, 칼럼2) VALUES(값1, 값2); 
+UPDATE 	: UPDATE 테이블명 SET 칼럼1 = 값1, 칼럼2 = 값2;
+DELETE 	: DELETE FROM 테이블명 WHERE 칼럼1 = 값1;
+
+
+4) UPDATE문
+
+5) DELETE문
+
+* DML 테이블 선언 안함(애초에 값을 지정하는문이기 때문)
+INSERT 	: INSERT INTO 테이블명(칼럼명) VALUES(값)
+UPDATE	: UPDATE 테이블명 SET 칼럼명 = '값'
+DELETE 	: DELEFT FROM 테이블명 WHERE 칼럼명 = 값;
+
+
+1. JDBC 사용 클래스, 인터페이스
+1) OracleDriver
+=> ojdbc6.jar 파일의 클래스
+=> 파일위치 : ORA_HOME jdbc 폴더 안
+=> 패키지 경로 : oracle.jdbc.OracleDriver / oracle.jdbc.driver.OracleDriver
+
+2) DriverManager
+=> DB접속시, 사용되는 클래스
+=> 자바의 기본 클래스
+=> getConnection()메서드를 사용 가능하며, connection 반환
+
+3) Connection 	: DB 접속
+4) PreparedStatement : 쿼리문 실행
+5) ResultSet 	: SELECT문 실행 결과를 처리	
+
+(1) url		: DB주소(로컬일 경우 localhost, 또는 127.0.0.1 / 오라클 XE(oracle.jdbc.OracleDriver)
+(2) user		: 사용자(스키마)
+(3) password	: 비밀번호
+
+2) DriverManager	: DB접속(커넥션) 생성(아래 3가지로 DB 접속을 해주는 애) 
+=> url 	: DB주소(로컬(PC)에 설치한 DB, localhost 또는 127.0.0.1(아이피주소) 부름)				& 로컬주소 키워드 2개
+=> user  : 사용자(스키마)
+=> password : 비밀번호
+* DriverManager은 getConnection() 메소드를 지원(connection 반환)
+
+
+2. 테이블 생성
+
+3. INSERT 문
+* INSERT, UPDATE, DELETE
+(1) 셋은 JDBC 코드가 동일하다(즉, executeUpdate 메서드 사용, 반환타입이 int)
+(2) Auto commit이 동작
+
+
+4. UPDATE 문
+
+5. DELETE 문
+
+2. 클래스호출-연결-종료
+
+(1) 클래스 호출(try-catch)										& Class
+Class.forName("oracle.jdbc.OracleDriver");
+=> Class.forName() : 클래스 경로명을 입력하면 해당 클래스를 import					& 클래스명 메서드
+=> 안에 들어가는건 패키지-클래스 경로
+=> ClassNotFoundException 예외발생  : 해당 클래스를 찾지 못함
+
+(2) Connection 받아오기(try-catch)									& Connection
+
+Connection con = null(try-catch문 밖)				=> (3)에서 커넥션 종료를 위함
+----------------------------------------
+String url = "jdbc:oracle:thin:@localhost:1521:xe"		=> URL은 DB마다, 오라클마다 다름(구글링으로 확인가능)	
+String user = "scott"					
+String password = "TIGER"					=> 변수선언으로 간편하게 connection 정보 입력
+con = DriverManager.getConnection(url, user, password)		=> 
+
+=> Connection는 인터페이스 선택
+
+(3) Connection 종료(try-catch)									& Connection
+
+	---------------------------------------------------DB에서 지원---------------------------------------
+	(1) OracleDriver 	: 
+	=> ojdbc6.jar 파일 안에 클래스로 존재(파일위치: ORA_HOME JDBC 폴더)
+	=> 클래스 위치: oracle.jdbc.OracleDriver
+	*  jar 파일을 buildpath 등록할것
+
+	----------------------------------------------------아래 나머지는 자바에서 지원----------------------
+	(2) DriverManager	: DB접속(커넥션) 생성(아래 3가지로 DB 접속을 해주는 애) 
+	=> url 	: DB주소(로컬(PC)에 설치한 DB, localhost 또는 127.0.0.1(아이피주소) 부름)			& 로컬주소 키워드 2개
+	=> user  : 사용자(스키마)
+	=> password : 비밀번호
+	* DriverManager은 getConnection() 메소드를 지원(connection 반환)
+	
+	(3) Connection 	: DB 접속
+	(4) PreparedStatement : 쿼리문 실행
+	(5) ResultSet 	: SELECT문 실행 결과를 처리	
+	
+	* DML의 실행결과는 INT타입이기(0,1) 때문에 별도의 클래스가 필요하지 않다
+
+2. SQL Injection
+=> 특정 쿼리문을 삽입하여 원하는 정보를 탈취하는 방법
+=> 로그인 상황
+	1) SELECT * FROM 회원 WHERE 아이디 = 변수1 AND 비밀번호 = 변수2
+	2) "SELECT * FROM 회원 WHERE 아이디 ='" + 변수1 + "AND 비밀번호='" + 변수2 + "''";
+	3) 변수
+		(1) id : min
+		(2) pw : 'OR 1=1 --
+	4) 쿼리에 변수값 대입
+		SELECT * FROM WHERE 아이디 = 'min' AND 비밀번호=''OR 1=1 --'
+
+1) SQL Injection을 방지하려면 PreparedStatement를 사용하면 된다(이것만 사용할것)
+=> "SELECT * FROM 회원 WHERE 아이디 =? AND 비밀번호는=?"(PreparedStatement에서 ?를 사용)  
+=> 변수
+	(1) id : min
+	(2) pw : 'OR 1=1 --
+	
+=> SELECT * FROM 회원 WHERE 아이디 = 'min AND 비밀번호=" OR 1=1 --'
+=> 
+
+
+
+// properties 파일
+
+
+
+
+
+
+
+
+
+
+	

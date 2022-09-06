@@ -135,7 +135,7 @@ DECLARE
         V_ROW MY_TYPE;              -- * V_ROW는 위의 변수3개가 모인것
 BEGIN
     SELECT
-            FIRST_NAME, LAST_NAME, SALARY
+            FIRST_NAME, LAST_NAME, SALARY, DEPARTMENT_ID                        -- 선언된 변수와 칼럼수가 안맞으면 오류
       INTO  V_ROW
       FROM  EMPLOYEES
      WHERE  EMPLOYEE_ID = 100;

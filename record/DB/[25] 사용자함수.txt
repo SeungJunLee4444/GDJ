@@ -2,9 +2,19 @@
 * 사용자가 만든 함수
 * 어떤 값을 반환할 때 사용하며, 값을 반환할 때 RETURN사용
 => 즉 출력 파라미터(X)										& RETURN
-* 입력파라미터만 사용가능
-* SELECT문과 같은 쿼리문에서 값을 확인가능								&
-* 입력과 출력(RETURN)을 동시에									& 입출력
+* 입력파라미터 + RETURN 사용
+* SELECT문과 같은 쿼리문에서 값을 확인가능								
+* 입력과 출력(RETURN)을 동시에
+
+* 특징
+(1) 출력에 RETURN 함수 사용,
+(2) RETURN할 반환타입 선언해야함 
+(3) 입력에는 IN을 사용하지 않음 
+(4) SELECT문에서 사용								
+
+* 프로시저와 사용자 함수
+공통점 : IS,BEGIN,EXCEPTION 구조
+차이점 : 사용자함수는 반환시 출력파라미터 대신 RETURN이 있음						& 사용자함수, 프로시저 차이
 
 1) 형태
 CREATE [OR REPLACE] FUNCTION 함수이름](매개변수)]
@@ -16,9 +26,12 @@ BEGIN
 [EXCEPTION]
 	예외사항
 END[함수이름명시]
-* 프로시저와 사용자 함수의 차이									& 사용자함수, 프로시저 차이
-=> 프로시저	: 입력IN, 출력OUT		/ 전체 구조는 동일	
-=> 사용자함수	: RETURN타입보유(출력)	/ 사용자함수는 IN OUT 표현X	
+
+경우의 수
+(1) 매개변수 없이 값 반환
+(2) 매개변수를 받고 값 반환
+(3) 매개변수를 받아 특정조건(IF문)을 통과하면 값 반환
+
 
 
 2) 실습
@@ -36,7 +49,7 @@ SELECT FUNC1() FROM DUAL;
 (2) 
 예시 1. 사원번호를 전달하면 해당 사원의 FULL_NAME이 반환
 CREATE OR REPLACE FUNCTION FUNC2(EMP_ID EMPLOYEES.EMPLOYEE_ID%TYPE)
-RETURN 
+RETURN VARCHAR2
 IS
 	FNAME EMPLOYEES.FIRST_NAME%TYPE;
 	LNAME EMPLOYEES.LAST_NAME%TYPE;
@@ -82,8 +95,8 @@ SELECT CEIL(1.123)		=> 정수로 올림
 	,MY_CEIL(1.123,2)	=> 소수 2자리로 올림
 	,MY_CEIL(1.123,1)	=> 소수 한자리로 올림
 	,MY_CEIL(1.123,0)	=> 정수로 올림
-	,MY_CEIL(1.123,-1)	=> 일의자리 올림
-	,MY_CEIL(1.123,-2) => 십의자리 올림
+	,MY_CEIL(1.123,-1)	=> 일의자리에서 올림
+	,MY_CEIL(1.123,-2) => 십의자리에서 올림
 	FROM DUAL;
 
 CREATE OR REPLACE FUNCTION MY_CEIL (N NUMBER, DIGHT NUMBER)

@@ -1,7 +1,7 @@
 [24] 프로시저
-* 여러개의 쿼리문을 한번에 실행
-* 매개변수를 받아, EXECUTE로 실행(메서드와 같은 기능)
-* IS로 변수선언, EXECUTE로 실행, PLSQL문에서 호출						& 프로시저만의 특징
+* 여러개의 쿼리문을 한번에 실행										& 프로시저 용도
+* 입출력 파라미터를 보유
+* IS로 변수선언, 매개변수를 받아 입력, EXECUTE로 실행, PLSQL문에서 호출						& 프로시저, 사용자함수의 특징
 
 1) 형식
 
@@ -110,16 +110,16 @@ DECLARE
 BEGIN
 	PROC6(100, FNAME); 
 
-(6) 실전연습
+(6) 실전연습	***********************************************************************************************************
 예시 6. 
-1) 구매 프로시저 만들기	: BUY_PROC(고객번호, 제품코드, 구매수량)
+1) 구매내역 프로시저 만들기	: BUY_PROC(고객번호, 제품코드, 구매수량)
 2) 번호로 부여할 시퀸스 만들기
 3) 구매 테이블에 구매내역을 INSERT
 4) 고객 테이블에 고객 포인트를 UPDATE(총 구매액의 10%)
 5) 제품 테이블의 재고를 UPDATE
 
 -----------------------------------------------------
-1)
+1) 구매 프로시저 생성
 CREATE OR REPLACE PROCEDURE BUY_PROC(
 	C_NO IN CUSTOMER.CUST_NO%TYPE;
 	P_CODE IN PRODUCT.PROD_CODE%TYPE;
@@ -127,7 +127,7 @@ CREATE OR REPLACE PROCEDURE BUY_PROC(
 )
 -----------------------------------------------------
 
-2) 
+2) 시퀸스 생성 
 DROP SEQUENCE BUY_SEQ;
 CREATE SEQUENCE BUY_SEQ NOCACHE;									& 시퀸스
 
@@ -136,15 +136,15 @@ CREATE SEQUENCE BUY_SEQ NOCACHE;									& 시퀸스
 3) 구매테이블에 입력된(매개변수) 값, 구매내역을 구매테이블에 저장
 IS 
 BEGIN
-INSERT INTO BUY(BUY_NO, CUST_NO, PROD_CODE, BUY_AMOUT)
-VALUES(BUY_SEQ.NEXTVAL, C_NO, P_CODE, BUY_AMT);
+INSERT INTO BUY(BUY_NO, CUST_NO, PROD_CODE, BUY_AMOUT)	=> 구매 테이블 BUY의 칼럼들
+VALUES(BUY_SEQ.NEXTVAL, C_NO, P_CODE, BUY_AMT);		=> BUY테이블에 입력할 구매내역 프로시저의 값
 
 -----------------------------------------------------
 4) 
 UPDATE CUSTOMER 
      SET CUST_POINT = CUST_POINT + CEIL((SELECT PROD_PRICE 
 				    FROM PRODUCT
-				   WHERE PROD_CODE = P_CODE) * BUY_AMT * 0.1)	
+				   WHERE PROD_CODE = P_CODE) * BUY_AMT * 0.1)				& PK : PROD_CODE
 				* 구매가격의 10퍼센트의 고객포인트를 제공
 		=> 기존의 포인트 + 올림(입력된 코드와 테이블 코드가 같을 때의 상품가격 * 구매한 상품의 양 * 0.1)	& 포인트
  WHERE CUST_NO = C_NO; ( 고객번호와 입력한 고객의 번호가 같을때만)
@@ -175,7 +175,7 @@ EXECUTE BUY_PROC(1, 1000, 10);	(구매프로시저에 매개변수값 입력)
 -------------------------------------------------------------------
 
 * 참고할 테이블
- DROP TABLE BUY;
+DROP TABLE BUY;
 DROP TABLE CUSTOMER;
 DROP TABLE PRODUCT;
 
