@@ -13,6 +13,7 @@ public class Board {
 	private int board_no; 
 	private String title;
 	private String content;
+
 	private int hit;
 	private Date create_date;	// 오라클의 _를 자바에서는 사용x
 	// sql의 date사용
@@ -70,6 +71,11 @@ public class Board {
 		this.create_date = create_date;
 	}
 	
+	@Override
+	public String toString() {
+		return "Board [board_no=" + board_no + ", title=" + title + ", content=" + content + ", hit=" + hit
+				+ ", create_date=" + create_date + "]";
+	}
 	
 	
 	

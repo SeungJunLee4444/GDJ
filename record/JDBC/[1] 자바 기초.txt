@@ -1,0 +1,41 @@
+[1] JDBC 기초
+- 자바와 DB를 연결해주는 작업
+
+1. 사용 인터페이스와 클래스들
+1) OracleDriver
+=> 용도 : DB 연결
+=> 오라클(DB)에서 제공(경로 : ORA_HOME, jdbc 폴더 내의 ojdbc6.jar 파일)
+* 서로 다른 프로그램을 연결해주는 도구를 드라이버라 하며, DB, 오라클 버전마다 다르다
+
+2) DriverManager(DB접속)
+=> 자바 SQL의 클래스
+=> getConnection 메서드는 url, user, password을 매개변수로 받아 connection을 반환한다
+=> 이를 Connection 인터페이스에 저장하여 DB접속 완료
+
+3) Connection(DB접속)
+(용도1) 연결 		: DriverManager의 getConnection메서드의 반환된 connection값을 저장하는 용도
+(용도2) 쿼리문 사전실행	: Connection이 지닌 prepareStatement 메서드로 preparedStatement 객체를 생성하는 용도
+
+4) PreparedStatement(쿼리문 사전실행)
+=> connection의 preparestatement메서드를 반환받아 객체 생성
+
+* PreparedStatement를 사용하면, SQL INJECTION을 방지할 수 있음					& preparedStatement 사용 이유
+=> sql문의 ?를 변수로 저장하여 쿼리문을 완성하는 statement방식은 보안에 취약하기 때문에,
+사전에 컴파일을 하고, 이후 ?부분에 변수값을 대입하는 preparedStatement방식은 안전하다
+
+5) ResultSet
+=> SELECT문 실행결과를 처리
+
+* DTO와 DAO										
+(1) DTO : 
+=> Data Transfer Object 
+=> 데이터 베이스로 전송하는 데이터는 하나로 모아서 처리하는 것이 기본이다
+=> 이런 데이터 처리를 위해 저장과 전달역할만 하는 클래스를 BEAN, VO, DTO 등으로 부른다
+=> 데이터 저장을 담당하는 클래스의 패키지를 domain이라 부름(DB에서 속성의 값, 타입, 제약사항을 정의하는것) & 도메인
+
+(2) DAO : 										?
+=> DataBase Access Object 
+=> 데이터 베이스 접근 객체
+=> 쿼리문을 실행하는 모든 메서드를 처리하는 클래스
+=> Singleton 패턴
+=> db 저장소를 처리하는 영역으로 레파지토리라 부름
