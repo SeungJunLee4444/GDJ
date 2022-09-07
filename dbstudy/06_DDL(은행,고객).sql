@@ -55,7 +55,6 @@ ALTER TABLE CUSTOMER
 -- 테이블 변경하기(ALTER TABLE)
 -- 1) 칼럼추가 : ALTER TABLE 테이블명 ADD 칼럼명 데이터타입 (제약조건);
 -- 2) 칼럼수정 : ALTER TABLE 테이블명 MODIFY 칼럼명 데이터타입 (제약조건);
--- * MODIFY는 데이터타입과 제약조건을 RENAME COLUMN은 칼럼명을
     
     -- * 삭제와 이름변경은 COLUMN을 적어줘야한다
 -- 3) 칼럼삭제 ALTER TABLE 테이블명 DROP 'COLUMN' 칼럼명 (이후생략);

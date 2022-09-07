@@ -27,14 +27,13 @@
 => SELECT문 실행결과를 처리
 
 * DTO와 DAO										
-(1) DTO : 
-=> Data Transfer Object 
+(1) DTO(Data Transfer Object) 
 => 데이터 베이스로 전송하는 데이터는 하나로 모아서 처리하는 것이 기본이다
 => 이런 데이터 처리를 위해 저장과 전달역할만 하는 클래스를 BEAN, VO, DTO 등으로 부른다
 => 데이터 저장을 담당하는 클래스의 패키지를 domain이라 부름(DB에서 속성의 값, 타입, 제약사항을 정의하는것) & 도메인
 
-(2) DAO : 										?
-=> DataBase Access Object 
+(2) DAO(DataBase Access Object)	
+=> DTO를 들고 직접 DB에 접근하는 객체							& DAO 개념									? 
 => 데이터 베이스 접근 객체
 => 쿼리문을 실행하는 모든 메서드를 처리하는 클래스
 => Singleton 패턴

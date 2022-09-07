@@ -33,9 +33,13 @@ CONSTRAINT 제약명 FOREIGN KEY(칼럼2) REFERENCE 참조테이블명(참조칼
 
 2. 제약조건 종류
 1) PK
-2) FK
+2) FK(NULL, 중복 둘다 가능)
 => 칼럼명 타입 NOT NULL REFERENCE 참조하는 테이블명(참조하는 칼럼명)			
 3) CHECK(조건 범위)
-=> CHECK(USER_AGE BETWEEN 0 AND 100),  
-4) UNIQUE(중복X)
+
+=> CHECK(칼럼명 BETWEEN 0 AND 100),  => 칼럼은 두 숫자의 사이의 범위를 값으로 지닌다
+=> CHECK(칼럼명 IN('값1', '값2', '값3'));  => 칼럼은 셋중 하나의 값을 가진다			& CHECK
+
+4) UNIQUE(중복X)				 (NOT NULL은 가능)
 5) NULL/ NOTNULL(PK라도 NOTNULL 써줘야함)
+
