@@ -112,67 +112,49 @@ ALTER TABLE ORDERS
 -- 9        김연아  올림픽 챔피언    13000    14/07/09
 -- 8        장미란  올림픽 챔피언    26000    14/07/08
 
--- 1) 칼럼명의 위치부터 하나하나 파악하기
--- 구매번호(ORDER), 구매자(CUSTOMER), 주문번호(
-
--- 2) 코드작성
----------------------------------------------------------------------------------------------------------------
+-- ANSI
 SELECT O.ORDER_ID AS 구매번호
-      ,C.CUSTOMER_NAME AS 구매자
-      ,B.BOOK_NAME AS 책이름
-      ,B.PRICE * O.AMOUNT AS 판매가격
-      ,O.ORDER_DATE AS 주문일자
+     , C.CUSTOMER_NAME AS 구매자
+     , B.BOOK_NAME AS 책이름
+     , B.PRICE * O.AMOUNT AS 판매가격
+     , O.ORDER_DATE AS 주문일자
   FROM CUSTOMER C INNER JOIN ORDERS O
     ON C.CUSTOMER_ID = O.CUSTOMER_ID INNER JOIN BOOK B
     ON B.BOOK_ID = O.BOOK_ID
- WHERE O.ORDER_DATE NOT BETWEEN '14/07/04' AND '14/07/07' ; --원래 날짜형태와 상관없이 비교가능  
- 
- WHERE TO_DATE(O.ORDER_DATE) NOT BETWEEN TO_DATE('14/07/04', 'YY/MM/DD') AND TO_DATE('14/07/07', 'YY/MM/DD');     --정석방법
+ WHERE O.ORDER_DATE NOT BETWEEN '14/07/04' AND '14/07/07';
 
----------------------------------------------------------------------------------------------------------------
+-- WHERE TO_DATE(O.ORDER_DATE) NOT BETWEEN TO_DATE('14/07/04', 'YY/MM/DD') AND TO_DATE('14/07/07', 'YY/MM/DD')
 
--- ORACLE 표기법
-
+-- ORACLE
 SELECT O.ORDER_ID AS 구매번호
-      ,C.CUSTOMER_NAME AS 구매자
-      ,B.BOOK_NAME AS 책이름
-      ,B.PRICE * O.AMOUNT AS 판매가격
-      ,O.ORDER_DATE AS 주문일자
-  FROM CUSTOMER C,ORDERS O, BOOK B
- WHERE C.CUSTOMER_ID = O.CUSTOMER_ID
+     , C.CUSTOMER_NAME AS 구매자
+     , B.BOOK_NAME AS 책이름
+     , B.PRICE * O.AMOUNT AS 판매가격
+     , O.ORDER_DATE AS 주문일자
+  FROM CUSTOMER C, ORDERS O, BOOK B
+ WHERE C.CUSTOMER_ID = O.CUSTOMER_ID 
    AND B.BOOK_ID = O.BOOK_ID
-   AND O.ORDER_DATE NOT BETWEEN '14/07/04' AND '14/07/07' ;
-
-
-
+   AND O.ORDER_DATE NOT BETWEEN '14/07/04' AND '14/07/07';
 
 
 -- 5. 모든 구매 고객의 이름과 총구매액(PRICE * AMOUNT)을 조회하시오.
--- 구매 이력이 있는 고객만 조회하시오.                                     -- INNER JOIN(PK, FK 다 있는값만)
+-- 구매 이력이 있는 고객만 조회하시오.(주문내역에 있고, 고객에 있는 데이터 = 내부 조인)
 -- 고객명  총구매액
--- 박지성  116000                                                          (GROUP BY-중복제거, 이름만말고 UNIQUE한 ID로 정하기)
+-- 박지성  116000
 -- 추신수  86000
 -- 장미란  62000
 -- 김연아  19000
 
--- 고객이름: CUSTOMER, CUSTOMER_NAME  ,   
---  PRICE  : BOOK PRICE
---  AMOUNT : ORDER AMOUNT
-
-SELECT C.CUSTOMER_NAME AS 고객명, SUM(B.PRICE * O.AMOUNT) AS 총구매액
+SELECT C.CUSTOMER_NAME AS 고객명
+     , SUM(B.PRICE * O.AMOUNT) AS 총구매액
   FROM CUSTOMER C INNER JOIN ORDERS O
     ON C.CUSTOMER_ID = O.CUSTOMER_ID INNER JOIN BOOK B
     ON B.BOOK_ID = O.BOOK_ID
- GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME;                                       -- * GROUP BY
-                                                                                    -- 이름같은 중복가능성이 높은 칼럼은 그룹핑에 적합하지 않다 
-                                                                                    -- 중복성이 없는 PK값, ID를 같이 그룹핑한다
-                                                                                    -- 중복성이 있는 칼럼을 그룹핑하고 싶을때는, 중복성이 없는 칼럼을 같이 그룹핑한다 ***
-                                                                                    -- 동명이인도 카운트 될수도있음
-                                                                                    -- 집계함수는 값이 하나로 출력되기 때문에, GROUB BY를 사용해야한다
+ GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME;
 
- 
+
 -- 6. 모든 구매 고객의 이름과 총구매액(PRICE * AMOUNT)과 구매횟수를 조회하시오.
--- 구매 이력이 없는 고객은 총구매액과 구매횟수를 0으로 조회하시오.                 -- 고객은 모두 조회, 주문내역은 있는 자료만 조회) - 왼쪽외부조인 / NVL로 NULL을 0처리
+-- 구매 이력이 없는 고객은 총구매액과 구매횟수를 0으로 조회하시오. (고객은 모두 조회, 주문내역은 있는 자료만 조회 = 왼쪽 외부 조인)
 -- 고객번호순으로 오름차순 정렬하여 조회하시오.
 -- 고객명  총구매액  구매횟수
 -- 박지성  116000     3
@@ -182,128 +164,96 @@ SELECT C.CUSTOMER_NAME AS 고객명, SUM(B.PRICE * O.AMOUNT) AS 총구매액
 -- 박세리  0          0
 
 SELECT C.CUSTOMER_NAME AS 고객명
-      ,NVL(SUM(B.PRICE * O.AMOUNT), 0) AS 총구매액
-      ,COUNT(O.ORDER_ID) AS 구매횟수                                                  -- COUNT에는 주문정보O, 고객정보가 들어가면 안됨(왼쪽 외부조인으로 인해 주문정보가 없는 값도 포함)
-    
+     , NVL(SUM(B.PRICE * O.AMOUNT), 0) AS 총구매액
+     , COUNT(O.ORDER_ID) AS 구매횟수  -- COUNT에는 고객정보가 포함되면 안 됨
   FROM CUSTOMER C LEFT OUTER JOIN ORDERS O
     ON C.CUSTOMER_ID = O.CUSTOMER_ID LEFT OUTER JOIN BOOK B
-    ON B.BOOK_ID = O.BOOK_ID  
+    ON B.BOOK_ID = O.BOOK_ID
  GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME
  ORDER BY C.CUSTOMER_ID ASC;
-
 
 
 -- 7. '김연아'가 구매한 도서개수를 조회하시오.
 -- 고객명  구매도서수
 -- 김연아  2
-
--- 고객 CUSTOMER , 구매도서수 ORDER
-
 SELECT C.CUSTOMER_NAME AS 고객명
-       , COUNT(*) AS 구매도서수
+     , COUNT(*) AS 구매도서수
   FROM CUSTOMER C INNER JOIN ORDERS O
     ON C.CUSTOMER_ID = O.CUSTOMER_ID
- WHERE C.CUSTOMER_NAME = '김연아';
- GROUP BY CUSTOMER_ID, CUSTOMER_NAME;           -- 해당 행의 값이 여러개라면
+ WHERE C.CUSTOMER_NAME = '김연아'
+ GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME;
 
 
 -- 8. '박지성'이 구매한 도서를 발간한 출판사(PUBLISHER) 개수를 조회하시오.
 -- 고객명  출판사수
 -- 박지성  3
 
-SELECT C.CUSTOMER_NAME AS 고객명, COUNT(DISTINCT B.PUBLISHER) AS 출판사           -- DISTINCT는 특정 칼럼 앞에 들어가는것
-  FROM CUSTOMER C INNER JOIN ORDERS O                                            -- 이 문제에서 박지성이 구매한 책 3권이 전부 다른 출판사를 지녔지만,
-    ON C.CUSTOMER_ID = O.CUSTOMER_ID INNER JOIN BOOK B                           -- 만약 같은 출판사일 경우도 있을 수 있기 때문에 DISTINCT 처리
+SELECT C.CUSTOMER_NAME AS 고객명
+     , COUNT(DISTINCT B.PUBLISHER) AS 출판사수
+  FROM CUSTOMER C INNER JOIN ORDERS O
+    ON C.CUSTOMER_ID = O.CUSTOMER_ID INNER JOIN BOOK B
     ON B.BOOK_ID = O.BOOK_ID
- WHERE CUSTOMER_NAME = '박지성'                                                  -- not a single-group group function : 그룹바이 필요 오류
- GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME;                                         
+ WHERE C.CUSTOMER_NAME = '박지성'
+ GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME;
+ 
 
 -- 9. 주문한 이력이 없는 고객의 이름을 조회하시오.
 -- 고객명
 -- 박세리
-
--- OUTER JOIN
--- 고객이름(CUSTOMER), 주문이력(ORDER)
-
 SELECT C.CUSTOMER_NAME AS 고객명
-       ,COUNT(O.ORDER_ID)                                                        -- 집계함수 조건은 HAVING절
   FROM CUSTOMER C LEFT OUTER JOIN ORDERS O
     ON C.CUSTOMER_ID = O.CUSTOMER_ID
- WHERE O.ORDER_ID IS NULL   
- GROUP BY C.CUSTOMER_ID, CUSTOMER_NAME;
- 
-SELECT C.CUSTOMER_NAME AS 고객명
-       ,COUNT(O.ORDER_ID)                                                        -- 집계함수 조건은 HAVING절
-  FROM CUSTOMER C LEFT OUTER JOIN ORDERS O
-    ON C.CUSTOMER_ID = O.CUSTOMER_ID  
- GROUP BY C.CUSTOMER_ID, CUSTOMER_NAME
-HAVING COUNT(O.ORDER_ID) = 0; 
+ GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME
+HAVING COUNT(O.ORDER_ID) = 0;
 
-     
+SELECT C.CUSTOMER_NAME AS 고객명
+  FROM CUSTOMER C LEFT OUTER JOIN ORDERS O
+    ON C.CUSTOMER_ID = O.CUSTOMER_ID
+ WHERE O.ORDER_ID IS NULL
+ GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME;
 
 
 -- 10. 가장 최근에 구매한 고객의 이름과 구매내역(책이름, 주문일자)을 조회하시오.
 -- 고객명  책이름            주문일자
 -- 장미란  역도 단계별 기술  14/07/10
-
--- CUSTOMER, BOOK, ORDER
--- ORDER_DATE MAX
-
 SELECT C.CUSTOMER_NAME AS 고객명
-       , B.BOOK_NAME AS 책이름
-       , O.ORDER_DATE AS 주문일자
+     , B.BOOK_NAME AS 책이름
+     , O.ORDER_DATE AS 주문일자
   FROM CUSTOMER C INNER JOIN ORDERS O
     ON C.CUSTOMER_ID = O.CUSTOMER_ID INNER JOIN BOOK B
-    ON O.BOOK_ID = B.BOOK_ID
- WHERE O.ORDER_DATE = (SELECT MAX(ORDER_DATE)       -- 전체 테이블을 참고하는거니 AS필요없음
-                         FROM ORDERS);              -- 집계함수의 결과는 행 한개니 =으로 비교
-    
+    ON B.BOOK_ID = O.BOOK_ID
+ WHERE O.ORDER_DATE = (SELECT MAX(ORDER_DATE)
+                         FROM ORDERS);
 
 
 -- 11. 현존하는 모든 서적 중에서 가장 비싼 서적을 구매한 고객의 이름과 구매내역(책이름, 가격)을 조회하시오.
--- 구매한 고객이 없다면 고객 이름은 NULL로 처리하시오.                                                  -- OUTER 조인하면 애초에 NULL값임
+-- 구매한 고객이 없다면 고객 이름은 NULL로 처리하시오.(책 LEFT OUTER JOIN 주문 ...)
 -- 고객명  책이름       책가격
 -- NULL    골프 바이블  35000
-
--- 3개 조인, 
--- 책이 안팔렸어도 이름을 보여줘야함, 책을 기준으로 책 LEFT OUTER JOIN 주문
-
 SELECT C.CUSTOMER_NAME AS 고객명
-        , B.BOOK_NAME AS 책이름
-        , B.PRICE AS 책가격
+     , B.BOOK_NAME AS 책이름
+     , B.PRICE AS 책가격
   FROM BOOK B LEFT OUTER JOIN ORDERS O
     ON B.BOOK_ID = O.BOOK_ID LEFT OUTER JOIN CUSTOMER C
     ON C.CUSTOMER_ID = O.CUSTOMER_ID
- WHERE B.PRICE = (SELECT MAX(PRICE) 
-                   FROM BOOK);
+ WHERE B.PRICE = (SELECT MAX(PRICE)
+                    FROM BOOK);
 
 
--- 12. 총구매액이 2~3위인 고객의 이름와 총구매액을 조회하시오.         --(쿼리문 문제)
+-- 12. 총구매액이 2~3위인 고객의 이름와 총구매액을 조회하시오.
 -- ROWNUM PSEUDO-COLUMN을 이용하시오.
 -- 고객명  총구매액
 -- 추신수  86000
 -- 장미란  62000
-
--- * ROWNUM : 행번호붙이기
 SELECT B.고객명
-      ,B.총구매액
+     , B.총구매액
   FROM (SELECT ROWNUM AS ROW_NUM
-              , A.고객명
-              , A.총구매액
+             , A.고객명
+             , A.총구매액
           FROM (SELECT C.CUSTOMER_NAME AS 고객명
-                       ,SUM(B.PRICE * O.AMOUNT) AS 총구매액
+                     , SUM(B.PRICE * O.AMOUNT) AS 총구매액
                   FROM CUSTOMER C INNER JOIN ORDERS O
                     ON C.CUSTOMER_ID = O.CUSTOMER_ID INNER JOIN BOOK B
                     ON B.BOOK_ID = O.BOOK_ID
                  GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME) A) B
- WHERE B.ROW_NUM BETWEEN 2 AND 3;      
- 
- -- 과정 : 전체 조회 함 A, 행번호 붙이기(ROWNUM) B, 2등에서 3등 조회
-
-                                     -- * GROUP BY
-                                                   
-
-
-
-
-
+ WHERE B.ROW_NUM BETWEEN 2 AND 3;

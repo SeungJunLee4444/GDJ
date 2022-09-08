@@ -24,14 +24,17 @@ public class SelectOneMain2 {
 			String password = "TIGER";
 			con = DriverManager.getConnection(url, user, password);
 			
-			String sql = "SELECT COUNT(*) AS 총개수 FROM BOARD";	// * as지정을 꼭 안해도 count(*)를 대입해도 문제없음
+			String sql = "SELECT COUNT(*) AS 총개수 FROM BOARD";	
+			
+			// & COUNT는 NULL값을 포함한 테이블 전체의 행의 개수를 구한다
+	
 			
 			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();			// select 문 실행
+			rs = ps.executeQuery();			// select 문 실행( 칼럼 : 총개수, 값 3)
 			
-			if(rs.next()) {	// 총개수 3 <= rs.next() 호출로 인해 현재 rs 포인터의 위치
+			if(rs.next()) { // -> ( 칼럼 : 총개수, 값 3)
 				
-				// 방법 1: rs.getInt("총개수")
+				// 방법 1: rs.getInt("총개수")												& 
 				// 방법 2: rs.getInt(1)
 				int count = rs.getInt("총개수");
 				System.out.println(count);

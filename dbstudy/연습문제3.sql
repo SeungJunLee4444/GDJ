@@ -1,4 +1,4 @@
--- 다음 쿼리문을 이용해서 사용자 테이블, 제품 테이블, 구매 테이블을 작성하시오.
+-- 다음 쿼리문을 이용해서 사용자 테이블과 구매 테이블을 작성하시오.
 
 -- 테이블 삭제
 DROP TABLE BUYS;
@@ -103,65 +103,53 @@ COMMIT;
 /****************************** 문 제 ****************************************/
 
 
--- 1. 제품 테이블에서 제품명이 '책'인 제품의 카테고리를 '서적'으로 수정하시오.    // BUY PRODUCT USER
-
--- 테이블, 칼럼의 수정은 DDL : CREATE, DROP , ADD , RENAME, MODIFY 등
--- 행, 값의 수정은 DML : INSERT UPDATE DELETE
-
-UPDATE PRODUCTS 
-    SET PROD_NAME = '서적' 
-  WHERE(PROD_CODE = 3);
-
-
+-- 1. 제품 테이블에서 제품명이 '책'인 제품의 카테고리를 '서적'으로 수정하시오.
+UPDATE PRODUCTS
+   SET PROD_CATEGORY = '서적'
+ WHERE PROD_NAME = '책';
 
 
 -- 2. 연락처1이 '011'인 사용자의 연락처1을 모두 '010'으로 수정하시오.
-
 UPDATE USERS
    SET USER_MOBILE1 = '010'
- WHERE USER_MOBILE1 = '011'; 
+ WHERE USER_MOBILE1 = '011';
 
-COMMIT;
+
 -- 3. 사용자 테이블에서 사용자번호가 5인 사용자를 삭제하시오.
---    사용자번호가 5인 사용자의 구매 내역을 먼저 삭제한 뒤 진행하시오.                 -- FK(BUY)쪽 값을 먼저 지우고, PK값을 지운다?
-5/ KJD 7
-
-DELETE FROM BUYS WHERE(USER_ID = 'KJD');                                            -- 되도록 변하지 않는 값인 PK값을 이용해 지우는게 좋을듯?
-DELETE FROM BUYS WHERE(BUY_NO = 7);                                                 -- 둘다 가능하긴함
-ROLLBACK;
-
-
-DELETE FROM USERS WHERE(USER_NO = 5);                                               -- PK가 있는 USER테이블의 값을 먼저 지우려하면 오류발생(참조무결성 위반)
-
-
+--    사용자번호가 5인 사용자의 구매 내역을 먼저 삭제한 뒤 진행하시오.
+DELETE
+  FROM BUYS B
+ WHERE B.USER_ID = (SELECT U.USER_ID
+                      FROM USERS U
+                     WHERE U.USER_NO = 5);
+DELETE
+  FROM USERS
+ WHERE USER_NO = 5;
 
 
 -- 4. 연락처1이 없는 사용자의 사용자번호, 아이디, 연락처1, 연락처2를 조회하시오.
 SELECT USER_NO, USER_ID, USER_MOBILE1, USER_MOBILE2
   FROM USERS
- WHERE USER_MOBILE1 IS NULL; 
-    
+ WHERE USER_MOBILE1 IS NULL;
+
 
 -- 5. 연락처2가 '5'로 시작하는 사용자의 사용자번호, 아이디, 연락처1, 연락처2를 조회하시오.
-
 SELECT USER_NO, USER_ID, USER_MOBILE1, USER_MOBILE2
   FROM USERS
- WHERE USER_MOBILE2 LIKE '5%';                                                      -- LIKE는 =이 필요없음
+ WHERE USER_MOBILE2 LIKE '5%';
 
 
-
--- 6. 제품을 구매한 사용자의 아이디별 구매횟수를 조회하시오.                        --? 
+-- 6. 제품을 구매한 사용자의 아이디별 구매횟수를 조회하시오.
 -- 아이디  구매횟수
 -- KHD     3
 -- PSH     3
 -- KYM     1
 -- LHJ     2
 
-
-SELECT USER_ID AS 아이디, COUNT(USER_ID) AS 구매횟수                               -- COUNT는 NULL을 제외한 값의 갯수를 세어줌
+SELECT USER_ID AS 아이디
+     , COUNT(*) AS 구매횟수
   FROM BUYS
  GROUP BY USER_ID;
-
 
 
 -- 7. 제품을 구매한 이력이 있는 고객의 아이디, 고객명, 구매횟수, 총구매액을 조회하시오.
@@ -171,11 +159,14 @@ SELECT USER_ID AS 아이디, COUNT(USER_ID) AS 구매횟수                     
 -- KHD     강호동  3         1210
 -- PSH     박수홍  3         1860
 
-SELECT U.USER_ID AS 아이디, U.USER_NAME AS 고객명, COUNT(B.USER_ID) AS 구매횟수, SUM(P.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액 
-    FROM USERS U INNER JOIN BUYS B INNER JOIN PRODUCTS P
-      ON U.USER_ID = B.USER_ID
-      ON B.PROD_CODE = P.PROD_CODE
-   GROUP BY U.USER_ID, U.USER_NAME;  
+SELECT U.USER_ID AS 아이디
+     , U.USER_NAME AS 고객명
+     , COUNT(*) AS 구매횟수
+     , SUM(P.PROD_PRICE * B.BUY_AMOUNT) AS 총구매액
+  FROM USERS U INNER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID INNER JOIN PRODUCTS P
+    ON B.PROD_CODE = P.PROD_CODE
+ GROUP BY U.USER_ID, U.USER_NAME;
 
 
 -- 8. 구매 이력과 상관 없이 고객별 구매횟수를 조회하시오.
@@ -192,12 +183,13 @@ SELECT U.USER_ID AS 아이디, U.USER_NAME AS 고객명, COUNT(B.USER_ID) AS 구
 -- SDY     신동엽  0
 -- YJS     유재석  0
 
-SELECT USER_ID AS 아이디, USER_NAME AS 고객명, COUNT(*) AS 구매횟수
-  FROM USER,BUYS
- WHERE USER_ID INNER JOIN USER_ID
-    AND NVL(USER_ID, 0)
- ORDER BY USER_ID;
-
+SELECT U.USER_ID AS 아이디
+     , U.USER_NAME AS 고객명
+     , COUNT(B.BUY_NO) AS 구매횟수
+  FROM USERS U LEFT OUTER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ GROUP BY U.USER_ID, U.USER_NAME
+ ORDER BY U.USER_ID ASC;
 
 
 -- 9. 카테고리가 '전자'인 제품을 구매한 고객의 고객명, 제품명, 구매액을 조회하시오.
@@ -207,6 +199,13 @@ SELECT USER_ID AS 아이디, USER_NAME AS 고객명, COUNT(*) AS 구매횟수
 -- 박수홍  메모리  800
 -- 박수홍  모니터  1000
 
+SELECT U.USER_NAME AS 고객명
+     , P.PROD_NAME AS 제품명
+     , P.PROD_PRICE * B.BUY_AMOUNT AS 구매액
+  FROM USERS U INNER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID INNER JOIN PRODUCTS P
+    ON B.PROD_CODE = P.PROD_CODE
+ WHERE P.PROD_CATEGORY = '전자';
 
 
 -- 10. 구매횟수가 2회 이상인 고객명과 구매횟수를 조회하시오.
@@ -215,6 +214,12 @@ SELECT USER_ID AS 아이디, USER_NAME AS 고객명, COUNT(*) AS 구매횟수
 -- 이휘재  2
 -- 강호동  3
 
+SELECT U.USER_NAME AS 고객명
+     , COUNT(*) AS 구매횟수
+  FROM USERS U INNER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ GROUP BY U.USER_NAME, U.USER_ID
+HAVING COUNT(*) >= 2;
 
 
 -- 11. 모든 제품의 제품명과 판매횟수를 조회하시오.
@@ -228,6 +233,11 @@ SELECT USER_ID AS 아이디, USER_NAME AS 고객명, COUNT(*) AS 구매횟수
 -- 청바지  2
 -- 노트북  1
 
+SELECT P.PROD_NAME AS 제품명
+     , COUNT(B.BUY_NO) AS 판매횟수
+  FROM PRODUCTS P LEFT OUTER JOIN BUYS B
+    ON P.PROD_CODE = B.PROD_CODE
+ GROUP BY P.PROD_CODE, P.PROD_NAME;
 
 
 -- 12. 어떤 고객이 어떤 제품을 구매했는지 조회하시오.
@@ -247,3 +257,11 @@ SELECT USER_ID AS 아이디, USER_NAME AS 고객명, COUNT(*) AS 구매횟수
 -- 박수홍   메모리
 -- 신동엽   NULL
 -- 유재석   NULL
+
+SELECT U.USER_NAME AS 고객명
+     , (SELECT P.PROD_NAME
+         FROM PRODUCTS P
+        WHERE P.PROD_CODE = B.PROD_CODE) AS 구매제품
+  FROM USERS U LEFT OUTER JOIN BUYS B
+    ON U.USER_ID = B.USER_ID
+ ORDER BY U.USER_ID ASC;

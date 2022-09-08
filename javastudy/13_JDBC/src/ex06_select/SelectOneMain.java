@@ -34,7 +34,7 @@ public class SelectOneMain {
 			// 	(1) WHERE절에서 PK 또는 UNIQUE 칼럼과 동등비교(=)를 수행
 			// 	(2) 집계함수
 			
-			String sql = "SELECT BOARD_NO, TITLE, CONTENT, HIT, CREATE_DATE FROM BOARD WHERE BOARD_NO = 1";
+			String sql = "SELECT BOARD_NO, TITLE, CONTENT, HIT, CREATE_DATE FROM BOARD WHERE BOARD_NO = 2";
 			// * 조회결과가 1개인 경우
 			
 			// 3) 쿼리문 사전생성

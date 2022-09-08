@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 // 롬복으로 추가된 여부 확인 : windows - showview - 'outline'
 
-public class ContaceDTO {
+public class ContactDTO {
 	
 	private int contact_no;
 	private String name;

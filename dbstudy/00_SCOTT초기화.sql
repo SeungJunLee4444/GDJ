@@ -18,3 +18,8 @@ GRANT CONNECT, RESOURCE TO SCOTT;
 -- * SYS로 접속해 기존 계정의 테이블을 리셋시키는 용도로 사용할 것
 
 GRANT DBA TO SCOTT; -- 이러면 SCOTT로 못하는 작업이없음
+
+
+
+
+
