@@ -1,4 +1,4 @@
-1. vscode 설치 및 세팅(windows 64비트)
+1. vscode 설치 및 세팅(windows 64비트)	o
 -> 참고
 
 2. vscode 복습
