@@ -1,0 +1,7 @@
+1. vscode 설치 및 세팅(windows 64비트)
+-> 참고
+
+2. vscode 복습
+
+3. images 폴더 설치
+-> 깃허브에 있음
