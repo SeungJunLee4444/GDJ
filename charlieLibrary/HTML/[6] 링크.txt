@@ -63,10 +63,38 @@ ex)
 => p 태그에 id 속성을 사용해, 고유한 명칭을 부여
 => a 링크태그로 #id속성명을 붙이면, 해당 페이지의 위치로 이동 
 
+(6) 이미지 맵
+- 이미지의 일부분(ex 버튼)에 링크를 생성
+- <img> 태그와 <map> 태그를 사용
+* img를 만들고, map에서 정해진 범위를 클릭하면, 링크주소를 통해 이동		& 일부 이미지
+=> 이미지를 생성하고, map이라는 기능이 담긴 이미지를 투영하는 느낌?		& map
+* 사용방법 
+<img src="이미지경로" usemap="
+<map name="맵이름>
+	<area shape="모양" href="이동할 링크주소" coords="좌표">
+	(1) shape	: rect(사각형), circle(원형)
+	(2) coords : 참고할 이미지의 범위
+		- 사각형	: <area shape="rect" coods="왼쪽상단x, 왼쪽상단y, 오른쪽하단x, 오른쪽하단y>
+		- 원	: <area shape="circle" coods="원중심x, 원중심y, 반지름>
 
 
+ex)									& 일부 이미지 주의사항
+(1)
+<img usemap="#domino_event" src="../../images/dominopizza.jpg">
+    <map name="domino_event">   
+        <area shape="rect" href="https://web.dominos.co.kr/goods/list?dsp_ctgr=C0101" coords="300, 2015, 900, 2170">
+        <area shape="circle" href="https://web.dominos.co.kr/goods/list?dsp_ctgr=C0101" coords="820, 640, 70">
+</map>
+   
+(2)     
+<img usemap="#domino_event2" src="../../images/dominopizza.jpg">
+    <map name="domino_event2">
+        <area shape="circle" href="https://web.dominos.co.kr/goods/list?dsp_ctgr=C0101" coords="820, 640, 70">
+</map>
 
-
+=> 동일한 이미지로 img, map을 두번 생성하면, 동일한 이미지가 두번 출력된다
+=> 한 이미지에 여러 기능을 넣고 싶을 때 : (1)번처럼 사용
+=> 다른 이미지끼리 다른 기능을 넣고싶을 때 : (1), (2) 처럼 나눠서 적용
 
 
 
