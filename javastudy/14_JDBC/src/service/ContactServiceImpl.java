@@ -115,7 +115,7 @@ public class ContactServiceImpl implements ContactService {
 			// & newline = write("\n") 동일개념
 			
 			for(ContactDTO contact : contacts) {
-				bw.write(contact.getContact_no() + ",");
+				bw.write(contact.getContact_no()
 				bw.write(contact.getName() + ",");
 				bw.write(contact.getTel() + ",");
 				bw.write(contact.getEmail() + ",");
