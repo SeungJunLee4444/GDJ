@@ -31,13 +31,25 @@
     -->
         
     
-    <!-- 1) <input> 태그 -->
-    <input type="text" placeholder="텍스트"><br>
-    <input type="password" placeholder="비밀번호"><br>
-    <input type="number" placeholder="숫자" min="0" max="100"><br>
-    <input type="email" placeholder="이메일"><br>
-    <input type="url" placeholder="url"><br>
-    <input type="file"><br>
+    <!-- 1) <input> 태그 + 기타 input 속성-->
+    <form>
+        <input type="text"      placeholder="텍스트" maxlength="4" size="4"><br>
+        <input type="text"      value="텍스트" readonly>
+        <input type="password"  placeholder="비밀번호" required><br>
+        <input type="number"    placeholder="숫자" min="0" max="100"><br>
+        <input type="email"     placeholder="이메일"><br>
+        <input type="url"       placeholder="url"><br>
+        <input type="file"><br>
+    </form>
+
+    <!-- * 기타 input 속성들
+        maxlength   : 글자수 지정, size : 텍스트창 크기 지정
+        value       : 이미 입력이 된 텍스트, readonly : 읽기전용(수정x)
+        required    : 필수
+        checked     : 기본값으로 체크해놓기(3번에 예시)    - input radio 속성
+        selected    : 특정값을 기본선택을 설정(6번에 예시) - select 태그
+
+     -->
 
     <hr>
 
@@ -70,8 +82,8 @@
         <fieldset>
             <legend>성별</legend>
             <input type="radio" name="gender" value="1">남&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="gender" value="2">여&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="gender" value="3">선택안함&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="gender" value="1">여&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="gender" value="3" checked>선택안함&nbsp;&nbsp;&nbsp;
             <button>전송</button>
         </fieldset>
 
@@ -123,7 +135,7 @@
     <form>
         <select name="tel">
             <option value="">선택안함</option>
-            <option value="010">010</option>
+            <option value="010" selected>010</option>
             <option value="02">02</option>
             <option value="031">031</option>
             <option value="032">032</option>
@@ -209,7 +221,7 @@
             <input type="radio" id="female"  name="gender" value="2">
             <label for="female">여</label>
             &nbsp;&nbsp;&nbsp;
-            <input type="radio" id="bibe"  name="gender" value="3">
+            <input type="radio" id="none"  name="gender" value="3">
             <label for="none">선택안함</label>
             &nbsp;&nbsp;&nbsp;
             <button>전송</button>
