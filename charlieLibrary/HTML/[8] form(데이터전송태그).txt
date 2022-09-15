@@ -1,0 +1,160 @@
+[8] form 태그
+- 사용자가 입력/선택한 데이터를 서버 측으로 한번에 전송하는 태그
+
+* 용어
+- 서브밋(submit) : <form>에 담긴 모든 요소를 서버측으로 보낸다는 뜻
+- action : 서버의 경로
+- method : 보내는 방법
+
+1. form의 하위태그
+1) <input>
+- 사용자 입력(단일행 입력)
+
+2) <textarea>								& textarea
+- 사용자 입력(다중행 입력)
+- 텍스트 창을 만드는 태그
+* 속성으로 텍스트창의 크기조절 가능
+(1) rows 속성 : 행의 개수, 행의 개수만큼 텍스트창의 길이 조절
+(2) cols  속성 : 텍스트의 개수, 한 행에 들어갈 텍스트의 개수를 정함
+=> 두 속성에 따라 텍스트 창의 크기가 변화한다
+
+3) <select>
+- 사용자 선택
+- 목록창을 생성하며, 각 목록은 <option> 태그로 작성
+* 각 <option> 태그들은 value 속성을 지정해 서버에 value 속성값을 전달해야, 서버 측에서 인식할 수 있다
+
+* 속성											& select 속성
+- selected	 : 선택 초기값
+- disabled : 해당 선택값을 고르지 못하게 만듬
+
+4) <button>
+- 버튼 생성
+* 종류
+(1) <button>		: 서브밋 버튼
+(2) <input type="submit">	: 서브밋버튼 (1) 과 동일
+(3) <input type="reset">	: 리셋버튼
+(4) <input type="button">	:아무런 기능없는 버튼, 직접 기능부여
+
+
+5) <fieldset>
+- 입력/선택 요소들을 그룹화하는 태그							& fieldset
+* form 태그 안에서 정보의 종류에 따라 구분하는 태그이며, 얇은 구분선을 만든다
+* legend : fieldset 태그에 이름을 붙일 때 사용된다					& legend
+
+
+2. form 태그의 속성
+1) action
+- 데이터를 전송할 서버의 내부경로
+2) method
+- 데이터를 전달하는 방식
+(1) get	: 전송데이터가 url에 노출, 빠른 전송과 취약한 보안(디폴트) 
+(2) post 	: 전송데이터가 본문에 위치, 높은 보안과 느린 전송
+3) enctype									& enctype 필수 사항
+- 파일 전송 시 사용하는 속성
+* 파일 첨부가 필요한 form 태그 
+<form method="post" enctype="multipart/form-data"> 무조건 사용		
+
+4) hidden
+- 검색시, 눈에 보이진 않지만, 서버로 전송할 때 생기는 파라미터들의 type을 hidden이라 한다
+ex)
+(1) 네이버 검색
+https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EB%82%A0%EC%94%A8
+
+-경로
+<form action="https://search.naver.com/search.naver" >
+
+- 히든(파라미터와 값을 name과 value에 추가)
+<input type="hidden" name="where" value="nexearch">
+<input type="hidden" name="sm" value="top_sug">
+<input type="hidden" name="fbm" value="0">
+<input type="hidden" name="ie" value="utf8">
+
+- 검색
+ <input type="text" name="query">
+
+* 세 과정을 통해 검색
+
+
+(2) 다음 검색
+https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&sq=&o=&q=%EB%82%A0%EC%94%A8
+
+-경로
+<form action="https://search.daum.net/search"
+
+- 히든(파라미터와 값을 name과 value에 추가)
+<input type="hidden" name="w" value="to">
+<input type="hidden" name="DA" value="YZR">
+<input type="hidden" name="t__nil_searchbox" value="btn">
+
+- 검색
+<input type="text" name="query">
+
+
+
+
+3. name 속성
+- input 태그의 속성으로, 서버에 데이터 전송을 위한 속성(서브밋)
+- 특징 : 서버 측에서 인식하는 파라미터 이름과 동일, 네이밍을 camel case로 작성해야함
+- 동일한 name이 여러개 있으면 배열, 다르면 각각의 변수로 인식
+
+4. 단일선택과 다중선택
+1) 단일선택
+- 형태 : <input type="radio">
+- 특징 
+(1) 한가지만 선택가능
+(2) radio는 선택지 전부 name 속성이 같아야 서버에서 변수로 인식				& radio 특성 ?
+* 선택지 중 하나만 선택 가능하기 때문에, 당연히 name이 전부 같아야한다	?
+(3) 모든 선택요소에는 value 속성이 지정되어야 하며, 서버측에 value 속성을 전달
+
+
+2) 다중선택
+- 형태 : <input type="checkbox">
+- 특징
+(1) 원하는 만큼 선택가능, 아무것도 선택 안해도 o
+(2) name 속성명이 동일해도, 달라도 상관없음
+(name 속성이 동일하면 서버측에서는 배열로, name 속성이 다르면 각각의 변수로 인식)
+* 선택요소가 전부 다르기 때문에, 변수명이 다른경우가 많다
+(3) 모든 선택요소에는 value 속성이 지정, 서버측에 value 속성 전달
+
+
+5. 콤보
+- 선택을 위한 <datalist> 태그와 입력을 위한 <input> 태그를 같이 사용
+* input 태그의 list 속성과 datalist 태그의 id 속성연결
+
+ex)
+<input type="text" list="domains" name="domains">
+<datalist id=domains">
+	<option value="naver.com"></option>
+            <option value="gmail.com"></option>
+            <option value="kakao.com"></option>
+</datalist>
+
+* select와 datalist의 차이								& select datalist 차이점		
+=> <select>는 지정된 값만 선택할 수 있지만, datalist는 지정된 값 외에도 직접 입력해 선택할 수 있다
+* <datalist> 는 단독으로는 사용할 수 없으며, 반드시 <input> 태그의 list 속성과 함께 사용해야 한다
+
+6. 파일 첨부
+* 반드시 <form method="post", enctype="multipart/form-data">를 써줘야함
+* 다중 첨부가 필요한 경우 : multiple 속성부여
+
+* image/* : 모든 이미지(확장자를 가리지 않음)						& 모든 이미지
+
+7. <label> 
+- 특정 입력요소를 편하게 누를 수 있도록 만듬
+- input 태그와 함께 사용
+* input의 id와 label의 for 연결							& label 연결
+
+
+ex)
+<input type="radio" id="male" name="gender" value="1">
+<label for="male">남</label>
+
+
+
+
+
+
+
+
+
+
