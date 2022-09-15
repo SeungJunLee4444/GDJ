@@ -9,6 +9,7 @@
 <body>
     <!-- 1. <form> 태그
      - 사용자 입력/ 선택을 서버 측으로 전송하는 태그     
+     - 태그 안에 입력된 데이터를 한번에 처리하기 위한 것이 form 태그
      * 서브밋(submit) : 
         - <form>의 모든 요소를 서버 측으로 보낸다는 뜻
         - 서버의 경로를 action이라 하고, 보내는 방법을 method 라고 한다
@@ -24,8 +25,9 @@
             (1) action : 데이터를 전송할 서버의 내부경로   
             (2) method : 데이터를 전달하는 방식
                 - get 방식 : 디폴트(생략가능), 전송하는 데이터가 주소(url)에 노출, 빠른전송가능하지만 보안에 취약
+               (주소창에 보내는 파라미터가 노출되면 get타입)
                 - post방식 : 전송하는 데이터를 본문에 포함시킴(노출시키지않음), 느린 전송속도
-            (3) enctype: 파일을 첨부할 때 사용하는 속성, 
+            (3) enctype: 파일을 첨부할 때 사용하는 속성 
                 * 파일첨부가 필요한 <form> 태그  
                   => method를 "post"방식, enctype를 "multipart/form-data"를 사용해야만한다
     -->
@@ -47,18 +49,22 @@
         value       : 이미 입력이 된 텍스트, readonly : 읽기전용(수정x)
         required    : 필수
         checked     : 기본값으로 체크해놓기(3번에 예시)    - input radio 속성
+        multiple    : 파일 복수선택 가능
+
+        * select 속성
         selected    : 특정값을 기본선택을 설정(6번에 예시) - select 태그
+        
 
      -->
 
     <hr>
 
     <!-- 2) name 속성 (데이터전송을 위한 속성)
-     => 서버 측에서 인식하는 파라미터의 이름 
+     => 서버 측에서 인식하는 파라미터의 이름                             *
      => 동일한 name이 여러개 있으면 서버 측에서는 배열로 인식
      => 동일한 이름이 없는 경우 서버 측에서는 변수로 인식
-     => 서브밋(sumbit) 할 때 사용
-     => 자바에서 곧바로 인식하기 때문에 자바 네이밍에(camel case)로 작성
+     => 서브밋(sumbit) 할 때 사용                                        *
+     => 자바에서 곧바로 인식하기 때문에 자바 네이밍에(camel case)로 작성 *
     -->
     <form>
         <input type="text" placeholder="성" name="LastName"><br>
@@ -75,6 +81,8 @@
                 (2) 동일한 항목을 작성하는 경우, 동일한 name 속성을 사용해야한다
                     * radio는 name 속성이 같아야 서버에서 변수로 인식한다
                 (3) 모든 선택요소에는 value 속성이 지정되어야 서버측에서 value 속성을 확인가능
+
+                * 선택지중 하나만 골라서 데이터를 전송하기 때문에 이름이 같아야한다
 
     -->
 
@@ -97,7 +105,9 @@
                       다만 다른 name 속성을 사용 -> 서버측에서 변수로 인식
                       * checkbox는 name이 같든, 아니든 데이터 전송이 가능하다
                 (3) 모든 선택요소에는 value 속성이 지정되어야 서버측에서 value 속성을 확인가능
-                (4) 
+                
+
+                * 여러가지를 선택해 전송해야하기 때문에, 각 변수의 이름이 달라야한다
 
     -->  
 
@@ -113,10 +123,11 @@
         
      
     <!-- 5) textarea 
+          - 텍스트창을 만드는 태그
           - 형태 : <textarea></textarea> 태그는 사용자 입력이 여러 줄 가능
           * 속성
-            - rows 속성 : textarea에 입력할 행의 개수
-            - cols 속성 : 열의 개수
+            - rows 속성 : textarea에 입력할 행의 개수, 텍스트창의 가로길이 조절
+            - cols 속성 : 열의 개수, 텍스트창의 세로길이 조절
     -->
 
     <form>
@@ -228,7 +239,44 @@
         </fieldset>
 
     </form>
+
+
+https://www.daum.net/
+
+    <!-- 네이버 검색창  -->
+    <!-- https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=0&acr=2&acq=%EB%82%A0%EC%94%A8&qdt=0&ie=utf8&query=%EB%82%A0%EC%94%A8 -->
+    https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EA%B9%8C%ED%8E%98
+    <form action="https://search.naver.com/search.naver" 
+        method="get">
+
+        <!-- hidden 
+         - 눈에는 보이지않는데, 서버로 전송할때 생기는 파라미터들의 type 속성   -->
+        <input type="hidden" name="where" value="nexearch">
+        <input type="hidden" name="sm" value="top_sug">
+        <input type="hidden" name="fbm" value="0">
+        <input type="hidden" name="ie" value="utf8">
         
+        <!-- 검색창 -->
+        <input type="text" name="query">
+        <button>검색</button>
+    </form>
+
+    <!-- 다음 검색창 -->
+    <!-- https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&sq=&o=&q=%EB%82%A0%EC%94%A8 -->
+    <form action="https://search.daum.net/search"
+        method="get">
+
+    <!-- hidden -->
+    
+    <input type="hidden" name="w" value="to">
+    <input type="hidden" name="DA" value="YZR">
+    <input type="hidden" name="t__nil_searchbox" value="btn">
+    
+    <!-- 검색창 -->
+    <input type="text" name="q">
+    <button>검색</button>
+
+    </form>        
     
 
 
