@@ -60,7 +60,7 @@ ex)
 (1) 네이버 검색
 https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EB%82%A0%EC%94%A8
 
--경로
+-경로(? 앞부분 까지를)
 <form action="https://search.naver.com/search.naver" >
 
 - 히든(파라미터와 값을 name과 value에 추가)
@@ -119,7 +119,7 @@ https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&sq=&
 
 5. 콤보
 - 선택을 위한 <datalist> 태그와 입력을 위한 <input> 태그를 같이 사용
-* input 태그의 list 속성과 datalist 태그의 id 속성연결
+* input 태그의 list 속성을 사용해 datalist 태그의 id 속성연결
 
 ex)
 <input type="text" list="domains" name="domains">

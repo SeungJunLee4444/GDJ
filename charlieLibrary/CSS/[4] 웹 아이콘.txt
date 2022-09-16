@@ -20,6 +20,7 @@ cdnjs를 통해 cdn주소를 얻을 수 있다
 link 태그 : <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 2. 실습
+1) link 태그 사용하기
 1) 아이콘 넣기
 ex)
 <p>트위터<i class="fa-brands fa-twitter"></i></p>
@@ -50,6 +51,22 @@ ex)
 <i class="fa-solid fa-house fa-10x"></i>
 => 숫자가 커질수록 아이콘의 크기도 커지며, 최대 10배까지 가능
 
+2) css @import 사용하는법
+=> cdn의 url주소를 @import하는법
+
+(1-1) css 파일 생성
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css)
+
+(1-2) html 내부에서 생성할 때 
+<style>
+	@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css)
+</style>
+
+(2) css 파일 연결
+ <link rel="stylesheet" href="06.css">
+
+(3) 사용
+ <p>트위터<i class="fa-brands fa-twitter"></i></p>
 
 
 

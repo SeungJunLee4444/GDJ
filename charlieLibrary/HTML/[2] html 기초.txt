@@ -10,13 +10,13 @@
 1) 블록레벨
 - 적용범위가 해당 블록, 라인 전체를 차지
 * 줄바꿈을 내포
-<h1~6>, <p>, <pre>, <div>, <ul>, <li>, <ol>, <dl>, <dt>, <dd>, <table>
+<h1~6>, <p>, <pre>, <div>, <ul>, <li>, <ol>, <dl>, <dt>, <dd>, <table>, <div>
 => 주로 구조와 관련
 
 2) 인라인 레벨
 - 적용범위가 해당 태그, 라인의 일부만을 차지
 * 줄바꿈x(줄바꿈시 <br> 태그 필수)
-<br>, <img>, <strong>, <em>, <ins>, <sup>, <sub>
+<br>, <img>, <a>, <span>, <strong>, <em>, <ins>, <sup>, <sub>
 => 주로 글자와 관련
 
 

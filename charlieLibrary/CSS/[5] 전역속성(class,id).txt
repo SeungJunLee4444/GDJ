@@ -16,7 +16,7 @@ ex)
 
 (2) 하나의 요소에 여러개의 class 속성값을 지정할 수 있음
 - class의 속성들은 띄어쓰기(공백)으로 구분
-ex)
+ex) 
 <div class="primary first">1구역</div>
 <div class="primary second">2구역</div>
 <div class="primary third">3구역</div>
