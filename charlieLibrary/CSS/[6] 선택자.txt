@@ -96,6 +96,25 @@ ex)
 => h4 + ol > li:nth-of-type(2)
 (h4의 형제태그 ol의 자식태그 li의 2번째 태그)
 
+* nth-of-type(n)								& nth-of-type(n)
+=> 0번째부터 순서대로 모든 열에 동일한 속성을 지정
+
+=> 응용법	
+ex)
+.box1 > table td:nth-of-type(n) {
+            width: 100px;
+}
+.box1 > table td:nth-of-type(2) {
+            width:200px;
+}
+=> 모든 열에 100px를 지정하고 2번째 열에만 200px를 지정한다
+
+
+
+(1) nth-of-type(2n +1)	: 홀수 열에만 지정
+(2) nth-of-type(2n)		: 짝수 열에만 지정
+
+
 -------------------------------------------------------------------------
 
 8. 속성 선택자

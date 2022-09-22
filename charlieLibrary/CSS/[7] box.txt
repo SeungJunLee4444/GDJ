@@ -63,4 +63,26 @@ box-sizing: content-box;    /* 디폴트값 */
 margin: 0 auto;
 => 부모 사이즈(홈페이지)의 크기에 따라 알아서 크기를 조절하며, 가운데 정렬
 
+6) 텍스트 세로 정렬법 2가지
+
+(1) padding 이용하기
+=> 상하 padding 여백을 동일하게 지정하기
+ex)
+text-align: center;
+(테이블, 텍스트 전부 가로정렬은 동일하게 사용)
+padding-top: 10px;
+padding-bottom: 10px;
+
+
+(2) line-height 사용하기
+=> 박스의 높이인 height와 텍스트의 높이인 line-height를 동일하게 지정하기
+=> 한줄 짜리 텍스트에서만 사용가능						& 정렬
+ex)
+height: 50px;
+line-height: 50px;
+
+* 주의 : 텍스트가 두줄 이상일 경우 사용불가능
+
+
+
 

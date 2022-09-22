@@ -116,6 +116,9 @@ https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&sq=&
 * 선택요소가 전부 다르기 때문에, 변수명이 다른경우가 많다
 (3) 모든 선택요소에는 value 속성이 지정, 서버측에 value 속성 전달
 
+* cursor : pointer 
+=> 커서를 클릭하는 모양으로 만듬
+
 
 5. 콤보
 - 선택을 위한 <datalist> 태그와 입력을 위한 <input> 태그를 같이 사용
