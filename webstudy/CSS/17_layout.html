@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        /* 1. 수평 레이아웃 (1)
+        => 홈페이지에 수평으로 정렬된 블록을 만들려면 필요하다 
+        - 부모 요소에 display=flex를 지정하면 자식 요소들이 수평 레이아웃을 가짐
+        - 부모 요소만 작업하면 됨
+        * 부모 요소에 들어갈 flex 속성들
+            1) display : flex;                          (수평레이아웃선언)
+            2) flex-direction(row,coulum,reverse)       (정렬방향)
+            3) flex-wrap                                (부모범위를 벗어나면 줄바꿈)
+            4) justify-content(space-around, between)   (자식요소간 배치)
+        */
+        .container1 {
+            display: flex;
+        }
+
+        .container1 > div {
+            width: 100px;
+            height: 50px;
+            border: 1px solid gray;
+        }
+
+        
+
+        /* 2. 수평레이아웃 (2) 
+        - 부모 요소에 overflow : hidden, 자식 요소에 float: left
+        -> 위와 같은 방식을 one true layout이라고 하며,
+        자식 요소들이 수평 레이아웃이 된다
+        */
+
+        .container2 {
+            overflow: hidden;
+        }
+
+        .container2 > div {
+            width: 100px;
+            height: 50px;
+            border: 1px solid gray;
+            float: left;
+        }
+
+        
+    </style>
+
+    <div class="container1">
+        <div>BOX1</div>
+        <div>BOX2</div>
+        <div>BOX3</div>
+    </div>
+
+    <hr>
+
+    <div class="container2">
+        <div>BOX1</div>
+        <div>BOX2</div>
+        <div>BOX3</div>
+    </div>
+    
+</body>
+</html>

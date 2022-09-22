@@ -57,6 +57,71 @@
         <label for="location">위치기반서비스 이용약관 동의</label><br>
 
     </div>
+
+    <hr>
     
+
+    <style>
+        /* 2. 블록을 인라인으로 바꾸기 */
+        .box3 {
+            display: inline;
+            /* * 인라인레벨에서는 적용되지 않는 css 속성 
+            => 너비, 높이, 가운데정렬 
+            */
+            width: 400px;
+            height: 500px;
+            text-align: center;
+
+        }
+    </style>
+
+    <div class="box3">
+        BOX3
+    </div>
+
+    <hr>
+
+
+    <style>
+        .box4 {
+            display: block;
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            border: 1px solid red;
+        }
+
+
+    </style>
+    <span class="box4">BOX4</span>
+
+    <hr>
+
+    <style>
+        /* 3. 블록과 인라인요소를 모두 사용하기
+        - inline 요소: 동일 블록에 함께 배치
+        - block 요소 : 너비, 높이, 가운데 정렬 적용
+        
+        */
+
+        /* 복수적용 */
+        .box5, .box6 {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            border: 1px solid red;
+
+        }
+    </style>
+
+
+    <span class="box5">BOX5</span>
+
+    <span class="box6">BOX6</span>
+
+    
+
+
 </body>
 </html>

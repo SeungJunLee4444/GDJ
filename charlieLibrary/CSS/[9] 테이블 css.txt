@@ -45,7 +45,7 @@
 * vertical-align : 테이블 전용 세로정렬
 * text-align : 테이블, 텍스트 공통 가로정렬
 * padding top = bottom	: 텍스트 세로정렬(1) 
-* height = line-height 	: 텍스트 세로정렬(2), (텍스트가 2줄 이상일 경우 x)
+* height = line-height 	: 텍스트 세로정렬(2), (텍스트가 2줄 이상일 경우 x, height가 있는 경우)
 
 4. 셀별 길이 조절하기
 => 구조선택자를 이용해 해당 셀을 지정하여 속성부여

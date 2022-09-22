@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        .box1 {
+            width: 200px;
+            height: 50px;
+            border: 1px solid gray;
+            overflow: scroll;
+            /* 1. overflow: scroll; 
+            => 스크롤 생성
+            */
+        }
+
+        .box2 {
+            width: 200px;
+            height: 50px;
+            border: 1px solid gray;
+            overflow-x: scroll;
+            /* 2.1 가로바 생성(가로, 세로 둘다 생성) */
+            overflow-y: scroll;
+            /* 2.2 세로바 생성(세로만 생성) */
+
+        }
+
+        .box3 {
+            width: 200px;
+            height: 50px;
+            border: 1px solid gray;
+            overflow: hidden;
+            /* 3. overflow : hidden
+            => 영역을 벗어난 텍스트 지우기 */
+
+        }
+    </style>
+
+    <div class="box1">
+        Vestibulum ut elementum odio, et euismod odio. Mauris tellus erat, scelerisque fermentum bibendum vel, interdum ac diam. Nulla porttitor imperdiet commodo. Nam viverra iaculis leo ornare consequat. Nunc eu lectus suscipit turpis condimentum convallis. Morbi pellentesque interdum venenatis. Donec volutpat eros vitae magna iaculis, nec maximus risus volutpat. Duis sed cursus erat, sit amet congue lectus. Vivamus rutrum in dolor et tincidunt. Suspendisse vestibulum mauris quis vestibulum tincidunt. Nullam lacinia, orci in lacinia molestie, mi est bibendum mi, in imperdiet orci quam sit amet metus.
+    </div>
+
+    <hr>
+
+    <div class="box2">
+        Vestibulum ut elementum odio, et euismod odio. Mauris tellus erat, scelerisque fermentum bibendum vel, interdum ac diam. Nulla porttitor imperdiet commodo. Nam viverra iaculis leo ornare consequat. Nunc eu lectus suscipit turpis condimentum convallis. Morbi pellentesque interdum venenatis. Donec volutpat eros vitae magna iaculis, nec maximus risus volutpat. Duis sed cursus erat, sit amet congue lectus. Vivamus rutrum in dolor et tincidunt. Suspendisse vestibulum mauris quis vestibulum tincidunt. Nullam lacinia, orci in lacinia molestie, mi est bibendum mi, in imperdiet orci quam sit amet metus.
+    </div>
+
+    <hr>
+
+    <div class="box3">
+        Vestibulum ut elementum odio, et euismod odio. Mauris tellus erat, scelerisque fermentum bibendum vel, interdum ac diam. Nulla porttitor imperdiet commodo. Nam viverra iaculis leo ornare consequat. Nunc eu lectus suscipit turpis condimentum convallis. Morbi pellentesque interdum venenatis. Donec volutpat eros vitae magna iaculis, nec maximus risus volutpat. Duis sed cursus erat, sit amet congue lectus. Vivamus rutrum in dolor et tincidunt. Suspendisse vestibulum mauris quis vestibulum tincidunt. Nullam lacinia, orci in lacinia molestie, mi est bibendum mi, in imperdiet orci quam sit amet metus.
+    </div>
+
+    <hr>
+
+    <style>
+        .box4 {
+            width: 200px;
+            height: 50px;
+            border: 1px solid gray;
+            /* 4. overflow : hidden
+            => 영역을 벗어난 박스들도 지울 수 이음
+            */
+            overflow: hidden;
+        }
+
+        .box4 > div {
+            width: 150px;
+            height: 40px;
+            border: 1px solid red;
+        }
+
+    </style>
+
+    <div class="box4">
+        <div>BOX1</div>
+        <div>BOX1</div>
+        <div>BOX1</div>
+    </div>
+    
+</body>
+</html>
