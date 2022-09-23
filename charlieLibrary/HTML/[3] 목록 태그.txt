@@ -1,18 +1,11 @@
 [3] list 태그
-* 전부 블록태그
-* li 태그는 기본적으로 줄바꿈을 지니고 있다			
+- list 태그는 전부 block레벨(자동줄바꿈o)			
 
-1. 순서가 없는 목록
-- 블록레벨
-* 속성에 따라 앞에 붙는 기호가 달라짐
-	- <ul type="disc">    	: ● (디폴트, type 속성을 사용안하면 적용)
-        	- <ul type="circle">   	: ○  
-        	- <ul type="square">  	: ■ 
-
-<ul>
-	<li></li>
-	<li></li>
-</ul>
+1. ul 태그
+- 순서없는 목록태그로, 속성에 따라 앞에 기호가 붙는다
+1) ul type="disc"		: ● (디폴트값)
+2) ul type="circle"		: ○
+3) ul type="square"	: ■
 
 ex)
  <ul type="square">
@@ -25,17 +18,14 @@ ex)
 
 * 단축키 : ul>li*5
 
-2. 순서가 있는 목록
-- 블록 레벨
-* 각 목록을 특정한 번호로 나타냄
-        1) <ol type="1"> : 1,2,3 .... (디폴트)
-        2) <ol type="A"> : A,B,C ....
-        3) <ol type="a"> : a,b,c ....
-        4) <ol type="I"> : I,II,III ....
-        5) <ol type="i"> : i,ii,iii ....
-    -->
+2. ol 태그
+- 순서가 있는 목록, 속성에 따라 앞에 번호나 기호가 붙음
+1) ol type="1"	: 1, 2, 3 (디폴트값)
+2) ol type="A"	: A, B, C
+3) ol type="a"	: a, b, c
+4) ol type="l"	: l, ll, lll
+5) ol type="i"	: i, ii, iii
 
-* 단축키 : ol>li*5
 
 ex)
  <h1>SELECT문은 어느 언어에 속하는가?</h1>
@@ -47,12 +37,12 @@ ex)
         <li>TCL</li>
     </ol>
 
-3. 개요목록
-- 블록레벨
-- 한 개요는 용어(단어)와 설명(개요)로 구성
-* 구성
+3. dl 태그 
+- 개요목록으로, dl, dt, dd로 구성
+- 형태
 1) 전체개요 : <dl>
 2) 용어는 <dt>, 설명은 <dd>로 구성
+(블록레벨이기 때문에 자동 줄바꿈)
 
 ex)
    <h1>오징어 게임</h1>

@@ -1,53 +1,51 @@
 [6] 링크(anchor)
+- 웹 상에 클릭 시 이동할 수 있는 링크를 생성하는 인라인 태그다
 
-1. 링크 만들기
-- 인라인 레벨
-- 형태 : <a></a>
+1. 형태
+- <a></a> 
 
-1) 속성
-(1) href : 링크의 경로작성
-(2) title : 풍선 도움말(마우스를 대면 나타나는 메시지)
-(3) target : 어떤 창으로 해당 경로로 이동할 것인지?				& 열리는 창
-	- _self : 현재 창에서 이동(디폴트)
-	- _blank : 새 창에서 이동
+2. 속성
+1) href	: 링크 경로
+2) title	: 도움말 메시지(마우스를 대면 나타나는 메시지)
+3) target	: 어떤 창으로 해당 경로로 이동할지 결정
+(1) _self	: 현재 창에서 해당 경로로 이동
+(2) _blank: 새로운 창에서 해당 경로로 이동
+
+3. 종류
+1) 비어있는 링크
+(1) <a href="#"></a>
+=> 클릭시 누른 흔적 남음
+(2) <a href="javascript:void(0)"></a>
+=> 완전히 반응x
+
+2) 웹 링크
+ex) <a href="https://www.google.com/" target="_self">구글</a>
+=> 구글을 누르면 구글 링크로 이동
+
+3) 이미지 링크
+- 이미지를 클릭하면 해당 링크로 이동
+* img 태그를 a(링크)태그로 감싸주는것이 핵심
+ex)
+<a href="https://www.naver.com/">
+        <img src="../../images/naver.png" width="200px">     
+</a>
+=> 너비 200px의 네이버 이미지를 클릭시, 현재 페이지에서 네이버 홈페이지로 이동
+
+4) 파일링크
+- href에 파일 경로를 입력해, 파일을 실행
+ex) <a href="01_overview.html" target="_blank">오버뷰</a>
+=> 오버뷰를 클릭하면 01_html파일을 실행
+
+5) 동일 문서 안에서 이동하기(#id경로)
+- 각 태그의 id 속성을 경로로 삼아, 해당 웹 상에서 빠르게 위치로 이동
+- 형태: href 경로에 #id속성명을 붙인다
 
 ex)
-(1) 비어있는 링크
-<a href="#">비어있는 링크</a>
-=> 누르면 보라색으로 변화, 클릭헀다는 표시는 뜸, 그외에는 변화x
-
-<a href="javascript:void(0)">비어있는 링크2</a>					& 빈창
-=> 눌렀다는 흔적도 없음, 완전변화x
-
-(2) 웹링크
-
-<a href="https://www.google.com/" target="_self">구글</a>
-=> 누르면 구글로 이동, 현재 창에서 이동
-
-<a href="https://www.naver.com/" target="_blank">네이버</a>
-=> 누르면 네이버로 이동, 새 창으로 이동
-
-(3) 이미지링크 : 이미지를 누르면 해당 사이트로 이동				& 이미지 누르면 사이트 이동
- <a href="https://www.naver.com/">
-        <img src="../../images/naver.png" width="200px">     
- </a>
-=> 링크 태그 안에 이미지 태그를 생성,	
-현재 창에서 이동(디폴트)
-=> 이미지 경로는 상대경로, 넓이는 200px
-
-(4) 파일 링크
-<a href="01_overview.html" target="_blank">오버뷰</a>
-=> 오버뷰 html 파일을 실행, 새창에서 열기
-
-
-(5) 동일 문서 안에서 이동					& 동일문서
-=>  id속성을 통해 태그에 고유명칭을 붙이고, 이 속성명을 #경로로 사용	& 동일문서
-
 <p>
         <a href="#image">이미지</a><br>
         <a href="#content">내용</a><br>
         <a href="#description">세부사항</a><br>
-    </p>
+</p>
     <p id="image">
         <img src="../../images/apple.jpg" width="1000px">
     </p>
@@ -62,48 +60,38 @@ ex)
             원산지 : 청송 사과 <br>
    </p>
 </p>
+=> 해설 : 이미지를 누르면 image 속성명을 가진 p태그로, 내용을 누르면 content 속성명을 가진 p 태그로
+세부사항을 누르면 description 속성명을 가진 p 태그로 바로 이동한다
 
-=> p 태그에 id 속성을 사용해, 고유한 명칭을 부여
-=> a 링크태그로 #id속성명을 붙이면, 해당 페이지의 위치로 이동 
+6) 이미지 맵
+- 이미지의 일부분에 링크를 생성
+- 방법 : img 태그 + map 태그
+- img 태그 위에 map이라는 경로를 담은 종이를 덧씌우는 느낌					& map
+- 형태
+(1) img 태그 생성, 속성으로 사용할 맵 이름 지정
+<img src=이미지경로 usemap=맵이름>
 
-(6) 이미지 맵(이미지의 일부에 링크를 생성)					& 이미지의 일부에 링크 생성
-- 이미지의 일부분(ex 버튼)에 링크를 생성
-- <img> 태그와 <map> 태그를 사용
-* img를 만들고, map에서 정해진 범위를 클릭하면, 링크주소를 통해 이동		& 이미지의 일부에 링크 생성 원리
-=> 이미지를 생성하고, map이라는 기능이 담긴 이미지를 투영하는 느낌?		& map
-* 사용방법 
-<img src="이미지경로" usemap="맵이름">
-<map name="맵이름>
-	<area shape="모양" href="이동할 링크주소" coords="좌표">
-	(1) shape	: rect(사각형), circle(원형)
-	(2) coords : 참고할 이미지의 범위
-		- 사각형	: <area shape="rect" coords="왼쪽상단x, 왼쪽상단y, 오른쪽하단x, 오른쪽하단y>
-		- 원	: <area shape="circle" coords="원중심x, 원중심y, 반지름>
-</map>
+(2) map 태그 생성, name 속성에 img와 동일한 명칭 사용(img와 map의 연결)
+<map name=맵이름>
 
-=> coords의 좌표는 해당 이미지를 그림판에서 확인할 수 있음 			& 좌표
+(3)
+<map name=맵이름>
+	<area shape=모양 href=이동할 링크주소 coords=좌표>
+	(1) shape : 범위의 모양, rect(사각형), circle(원형)
+	(2) coords: 이미지 일부의 범위
+
+	- 원형일 경우	: <area shape="circle" coords="원의 중심x, 원의중심y, 반지름">
+	- 직사각형일 경우	: <area shape="rect" coords="왼쪽상단x, 왼쪽상단y, 오른쪽하단x, 오른쪽하단y">
 
 
-ex)									& 일부 이미지 주의사항
+ex)								
 (1)
 <img usemap="#domino_event" src="../../images/dominopizza.jpg">
     <map name="domino_event">   
         <area shape="rect" href="https://web.dominos.co.kr/goods/list?dsp_ctgr=C0101" coords="300, 2015, 900, 2170">
         <area shape="circle" href="https://web.dominos.co.kr/goods/list?dsp_ctgr=C0101" coords="820, 640, 70">
 </map>
-   
-(2)     
-<img usemap="#domino_event2" src="../../images/dominopizza.jpg">
-    <map name="domino_event2">
-        <area shape="circle" href="https://web.dominos.co.kr/goods/list?dsp_ctgr=C0101" coords="820, 640, 70">
-</map>
-
-=> 동일한 이미지로 img, map을 두번 생성하면, 동일한 이미지가 두번 출력된다
-=> 한 이미지에 여러 기능을 넣고 싶을 때 : (1)번처럼 사용
-=> 다른 이미지끼리 다른 기능을 넣고싶을 때 : (1), (2) 처럼 나눠서 적용
-
-
-
+=> 한 이미지 안에 두개의 경로 집어넣기
 
 
 		

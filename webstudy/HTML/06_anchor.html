@@ -27,7 +27,7 @@
     <hr>
 
     <!-- 3. 웹 링크 -->
-    <a href="https://www.google.com/" target="_self">구글</a>
+    <a href="https://www.google.com/" title="a" target="_self">구글</a>
     <br>
     <a href="https://www.naver.com/" target="_blank">네이버</a>
 
@@ -135,6 +135,13 @@
     <!-- 같은 이미지로 img, map를 두개 사용하면, 동일한 이미지가 두개 출력되며 
     map의 기능도 각각 따로 구현된다
     해결 : 그냥 한꺼번에 써라-->
+
+    <img src="../../images/dominopizza.jpg" usemap="#domino">
+    <map name="domino">
+        <area shape="rect"
+    </map>
+
+    
 
     <img usemap="#domino_event" src="../../images/dominopizza.jpg">
     <map name="domino_event">   
