@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // [연산자]
+        /*
+        1. 산술연산자
+            1) 덧셈         : +
+            2) 뺄셈         : -
+            3) 곱셈         : *
+            4) 나누기       : /
+            5) 나머지       : % 
+            6) 몫(함수사용) : parseInt(5/2) == 2, / math.floor(5/2) ==2
+
+            & 함수
+            (1) math.ceil : 올림
+            (2) math.floor: 내림
+            (3) math.round: 반올림
+            (4) math.sqrt : 제곱근
+
+            7) 증감         : ++, --
+            8) 제곱         : **
+
+            & 자바에서는 제곱을 위한 연산자가 없고 대신 math.pow라는 함수가 있음
+
+        2. 복합연산자
+            1)  +=
+            2)  -=
+            3)  *=
+            4)  /=
+            5)  %=
+
+        3. 관계 연산자
+            1) 초과 : >
+            2) 미만 : <
+            3) 이상 : >=
+            4) 이하 : <=
+            5) 같다
+                (1) ==  : 값이 동일하다('1'과 1은 같다)
+                (2) === : 값과 타입이 동일하다('1'과 1은 다르다)
+            6) 같지않다
+                (1) !=  : 값만 비교 
+                (2) !== : 값과 타입도 비교
+            & 비교시 var result = true/false 가 나온다
+
+        4. 논리 연산자
+                1) 논리 and : &&
+                2) 논리 or  : ||
+                3) 논리 not : !
+
+        5. 조건연산자
+                (조건식) ? true인 경우 : false인경우
+                => 자바와 완전 동일
+
+        6. 문자열 연산자
+                1) +   : 문자열 연결(문자열이 하나라도 포함되면 연결처리)
+                2) + 이외의 산술연산자는(-,*,/ 등) 문자열이 포함되더라도 산술연산을 수행
+        
+        */
+    var a = 5 == 5.5;
+    console.log(a, typeof a)
+    // 결과 : false 'boolean'
+
+    var a = '5';
+    var b = 3;
+    console.log(a + b, typeof (a+b));
+
+    // 결과 : 11, string
+    // & 문자열이 하나라도 들어가면 +연산은 문자열로 변환된다
+    // & 이 때 문자열 타입을 확인하려면 변수의 합을 넣어야한다
+
+    console.log(a -b, typeof (a-b));
+
+    // 결과 : 2 'number'
+    // + 외의 모든 연산에서 문자열이 포함되도 전부 숫자타입으로 변환된다
+
+    // & 문자열과 숫자를 더해서 숫자값을 얻어야하는 경우
+    // => 문자열을 숫자타입으로 변환하면 된다
+    var a = '5';
+    var b = 3;
+    console.log(Number(a) + b, typeof(Number(a)+b));
+
+    // 결과 : 8 'number'
+
+    console.log(parseInt(a / b));
+    console.log(math.floor(a/b));
+
+    // 왜 안될까?
+
+    </script>
+
+    <!-- 연습문제 
+    - 최저시급 9160원, 8시간 근무, 8시간 초과 근무시 시급 1.5배
+    - 10시간을 근무하면 일급은 얼마?
+    -->
+    <script>
+        var payPerHour = 9160;
+        var workHour = 10;
+        var regularPay = payPerHour * workHour;
+        var extraPay = (workHour - 8 <= 0) ? 0 : (workHour - 8) * 9160 * 0.5;
+        console.log(regular + extraPay);
+
+        // var pay = 9160;
+        // var hour = 8;
+        // var regularPay = pay * hour;
+        // var extraPay = pay * 1.5;
+        // var extraHour = (hour - 8 <=0) ? 0 : (hour - 8);
+        // console.log(regularPay + extraPay)
+
+        // & 자바로 계산할 때는 최대한 문제상 주워진 키워드를 바탕으로 
+        // 계산해야한다
+
+
+
+    </script>
+    
+</body>
+</html>

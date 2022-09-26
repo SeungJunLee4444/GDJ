@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- [자바 스크립트]
+         - 정의 : html의 구성요소를 프로그래밍 처리할 수 있는 언어 
+         - 주석 : // 또는 /* */
+         - 위치 : script 태그는 head, body 둘다 가능
+
+         & ecmascript(es)와 javascript(js)의 차이
+         - ecmascript는 스크립트 언어고, javascript는 ecmascript의 사양을 준수하는
+         스크립트 언어이다(동일하다 볼것)
+    -->
+
+    <!-- 1. 기본 자료형
+         & 자바 스크립트에서 변수에 저장할 수 있는 값의 형태를 자료형이라 한다
+
+         1) number(숫자형) 
+         (1) 정수, 실수 구분이 없음  
+         (2) NaN        : 숫자이긴한데 실제 숫자값을 확인할 수 없음(ex 루트 -25)
+         (3) +Infinity  : +0으로 나눴을 때
+         (4) -Infinity  : -0으로 나눴을 때
+         * (2~4)는 별로 중요한 개념이 아니다
+
+         & 
+
+         2) string(문자형)
+         - 문자, 문자열 구분없이 모두 string
+         - 작은 따음표(''), 큰 따음표("") 모두 혼용가능
+
+         3) boolean 
+         - true, false 값 도출----?
+
+         & 어떻게 도출하는지?
+         - == 또는 === 비교 후 값으로 도출됨
+
+         4) null
+         - 의도적으로 값을 비운상태
+         - 타입도 null, 값의 표기도 null
+
+         5) undefined
+         - 값이 저장된 적이 없는 상태(초기화 안한 변수)
+         & 값은 null과 동일하지만, 타입은 다르다
+
+         & null과 undefined의 차이
+         - null은 변수를 선언하고 빈 값을 할당한 상태, 
+         undefined는 변수를 선언하고, 값을 할당하지 않은 상태
+         - 값은 같으나   : null == undefined     // true
+         - 타입이 다르다 : null === undefined    // false
+
+         2. 변수
+          - 자료형같은 값을 저장할 변수
+
+          - 특징
+          (1) 동적타입(느슨한 타입)
+          & 느슨한 타입 : 타입없이 변수를 선언할 수 있다
+          & 동적 언어   : 모든 타입의 값을 할당 가능하다?
+          
+          (2) 변수의 값이 저장될 때 자료형(타입)이 결정
+          (3) 이미 저장된 값의 자료형(타입)을 바꿔서 다시저장 가능
+          (4) 변수선언이 없는 상태에서도 변수 사용가능
+          (es6버전에서는 반드시 변수를 선언해야하는 변수가 존재
+          => & class, template tag, arrow function)
+
+          3. 변수선언 키워드
+          1) var 
+           - 스코프(범위) : 함수레벨, 지역변수
+           & 함수 내에서만 작동하는 변수
+           - 변수 선언 생략         : 가능
+           - 같은 변수명으로 재선언 : 가능
+           - 초기화 생략            : 가능(undefined값)
+           - 저장된 값의 수정       : 가능
+
+         2) let(es6 표준)   - 지역변수
+           - 스코프(범위)           : 블록 {}
+           - 변수 선언 생략         : 불가능
+           - 같은 변수명으로 재선언 : 불가능
+           - 초기화 생략            : 가능, 메모리에 변수가 안만들어진 상태
+           - 저장된 값의 수정       : 가능
+
+          3) const(es6 표준) - 상수(항상)
+           - 스코프(범위)           : 블록 {}
+           - 변수 선언 생략         : 불가능 
+           - 같은 변수명으로 재선언 : 불가능
+           - 초기화 생략            : 불가능, 자바와 final처럼 값도 못바꾸고, 초기화도 해줘야함
+           - 저장된 값의 수정       : 불가능(상수기 때문에)
+
+           & 스코프(범위)
+           (1) 지역 변수 : 함수 괄호 내에서만 작동하는 변수
+           (2) 전역 변수 : 어느곳에서든 사용 가능한 변수
+
+           & var : 함수레벨 스코프
+           & let, const는 블록레벨 스코프
+           & 둘의 차이는?   변수,. 함수의 유효범위                                    ?
+         
+         4. 호이스팅
+         - hoisting
+         - 코드가 처리되는 순서는 정해져있음(무조건 위에서 아래로 진행되는게x)
+         - 정의 : 해당 함수 안에 선언된 변수의 선언, 함수의 정의를 해당 함수 
+                  최상단에서 우선적으로 읽게되는 것을 말한다
+         - 대상 : var, let, const, function, class
+
+         5. 자바스크립트 출력방식
+         (1) alert(출력메시지);             : 세미콜론(;) 생략가능
+         (2) document.write(출력메시지);    : 출력메시지에 html 구성요소 표현가능
+         (3) console.log(출력메시지);       : console(f12 - 개발자도구의 console탭)에서 확인가능
+         
+         6. 자료형 변환
+         - 특정 함수를 이용해 문자열을 숫자로, 숫자를 문자열타입으로 변환
+         1) 문자열에서 상수로
+         (1) Number('100')  : 100
+         (2) parseInt('100'): 100
+
+         2) 문자열에서 실수로
+         (1) Number('1.5')  : 1.5
+         (2) parseFloat('1.5'): 1.5
+
+         & Number 함수는 해당 문자가 정수/실수 상관없이 모든 문자열을 숫자로 변환
+
+         3) 정수/실수에서 문자열로
+         (1) String(100)    : '100'
+         (2) String(1.5)    : '1.5'
+
+         & String은 정수/실수 상관없이 전부 문자열로 변환
+
+     -->
+
+     <script>
+        // 1. number(숫자형)
+        // - 정수, 실수를 구분하지 않는다
+        var a = 10;
+        var b = 1.5;
+
+        // 2. string(문자형)
+        // - 문자든 문자열이든 구분하지 않는다
+        var a = 'a';
+        var b = 'aa';
+        var c = "a";
+        var d = "aa";
+        console.log(a, typeof(a), b, typeof(b), c, typeof(c), d, typeof(d));
+        // 결과 : 전부 string타입
+
+        // 3. 호이스팅
+
+        e = 3;
+        // var 생략가능
+        console.log(e);
+
+        console.log(b);
+        var b;
+        // => 호이스팅 : 변수의 선언, 함수의 정의가 해당 범위에서 최우선으로 읽혀짐
+        // 값 : undefined
+
+        // 4. 값의 저장
+        var c = 10;
+        console.log(c, typeof c);
+        // var은 재선언이 가능, 타입의 변환도 가능
+
+        // 5. 
+        var c = Math.sqrt(-25);
+        console.log(c, typeof c);
+
+        var c = 10 / +0
+
+        var a = '100';
+        var b = Number(a);
+        var b = parseInt(a);
+        console.log(b, typeof b);   // 100, number
+
+        var a = "1.5";
+        var b = Number(a);
+        var b = parseFloat(a);
+        console.log(b, typeof b);   // 1.5, number
+
+        var e = 100;
+        console.log(String(e), typeof e);     // '100' , number
+        
+        // (자바처럼 별도의 변수선언없이 체이싱 가능)
+
+        // & 콘솔에서 문자는 검정, 숫자는 파랑으로 출력
+
+        
+        
+     </script>
+    
+</body>
+</html>
