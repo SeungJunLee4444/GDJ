@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            [함수] : function, 클래스 외부에 독립적으로 존재            ***
+            메소드 : 클래스 내부에 포함된 함수
+
+            1. 선언적 함수
+            - 이름이 있는 함수
+            - 함수 정의 + 함수 호출(만들어 두고) + 함수 호출(실행한다)
+            - 형태
+                function 함수명(매개변수) {
+                    본문
+                }
+                => 자바와 달리 접근권한(public)이 없고, 반환은 하지만 반환타입을 명시하지는 않는다
+            
+            - 함수호출 형식
+                함수명(인수)
+        */
+            func1();
+            // 1. 함수 정의
+            function func1() {
+                console.log('Hello World');
+            }
+            // => 호이스팅 : 변수의 선언이나, 함수의 정의를 최우선적으로 읽어내는것을 말한다
+    </script>
+    <script>
+            /*
+                2. 익명함수
+                    - 함수의 이름이 없거나 아에 function도 생략하고 =>로 대체함
+                    1) 이름이 없는 함수
+                    2) 변수에 익명 함수를 저장해서 사용하거나 이벤트 처리용으로 사용
+                    3) 호이스팅 되지않는 함수
+                    4) 종류
+                        (1) 일반 익명함수
+                         - function(매개변수) {
+                                본문
+                         }
+                         (2) 화살표(arrow) 함수 {
+                            (매개변수) => {
+                                본문
+                            }
+                         }
+                         (3) 함수 호출방식
+                            (1) 변수에 저장하는 경우에는 변수를 함수이름처럼 사용
+                            (2) 이벤트 동작시 자동으로 호출
+            */
+        //  1) 함수정의
+           var func2 = function() {
+            console.log('Hello World');
+           }
+
+        //  2) 함수호출
+        func2();
+
+        // 1) 함수 정의(화살표 함수)
+        var func3 = () => {
+            console.log('Hello World');
+        }
+        // 2) 함수 호출
+        func3();
+
+
+        /* 3. 자기호출 함수
+            1) 함수를 정의하면 곧바로 호출되는 함수 
+            2) 한번만 사용하면 되는 기능에서 주로 활용(기본적으로 익명함수 형태)
+            3) 함수 정의 및 형태
+                (function(매개변수) {
+
+            })(인수)
+        */
+       (function() {
+        console.log('Hello World');
+       })();
+
+       ( () => {
+        console.log('Hello World');
+       })();
+
+       /* 4. 인수와 매개변수 
+            1) 매개변수 선언시 선언 키워드(var, let, const) 를 사용하지 않음            ***** 이건 확실히 기억
+                => 매개변수에 변수의 이름만 부여한다
+            2) 전개연산자
+                - 모든 인수를 저장하는 하나의 매개변수(매개변수가 한개인데 인수는 여러개)
+                - 형식 : ...매개변수
+                - 전개 연산자를 사용한 매개변수는 '배열'이 사용됨
+
+                - 정리 : 여러 인수를 담을 수 있는 '하나의 매개변수'
+
+                & 인수는 전달하는 값, 매개변수는 전달할 인수를 저장하는 전달되는 값
+            3) 디폴트
+                - 전달하는 인수와 이를 저장하는 매개변수의 개수가 다를 수 있음
+                - 인수가 전달되지 않는 경우 기본적으로 사용하는 매개변수의 값을 디폴트라한다
+            
+            4) arguments 객체 
+                - 매개변수가 없어도 전달된 인수는 arguments 객체에 저장됨
+                - arguments 객체는 내장된 객체로 유사배열의 형태를 가짐
+
+            
+
+       */
+       // 매개변수
+       // 1) 함수정의
+       function func4(name, age) {
+            console.log(name, age);
+       }
+       // 2) 함수호출
+       func4('가나다', 45)  // 함수로 전달하는 인수 2개
+
+       // 전개연산자
+       // 1) 함수정의
+       function func5(...params) {
+        if(params[0] == undefined) {            //?
+            console.log('전달된 인수 없음');
+        }
+        console.log(params[0], params[1], params[2]);
+       }
+
+       // 2) 함수 호출
+       func5();
+       func5('민경태', 45);
+
+
+        // 함수 정의(디폴트)(1)
+        // function func6(name, greet) {
+        //     // 1) undefined를 활용한 디폴트
+        //     if(greet == undefined) {
+        //         greet = '안녕';
+        //     }
+        //     console.log(greet, name);
+
+        // }  
+
+        // // 함수 호출
+        // func6('가나다');            // 안녕 민경태(기본인사로 안녕이 사용됨)
+        // func6('가나다', 'hello')    // hello 민경태(전달된 인사 hello가 사용됨)
+        
+        // undefined는 boolean 관점에서 봤을 때 false로 처리된다
+
+        // 논리 or 연산의 short circuit evaluation(2)
+        // greet에 값이 전달되었으면 greet는 udefined 가 아니므로
+
+        greet || (greet = '안녕')
+        console.log(greet, name) 
+
+
+        // 함수 정의(arguments 객체)
+        function func7() {
+            console.log(arguments[0]);
+        }
+        // => 내부에서 arguments함수가 매개변수없이도 전달된 인수를 저장해준다
+
+        // 함수 호출
+        func7('민경태');
+
+    </script>
+
+    <script>
+        /*
+            5. 콜백함수
+                - & 함수를 전달하는 함수, 매개변수에 함수를 저장해 전달
+                - 어떤 함수를 다른 함수에 전달할 수 있음 
+                - 함수를 인수로 전달하면 매개변수는 함수를 저장
+                - 매개변수에 저장된 함수가 콜백함수
+                - 선언적 함수, 익명 함수 모두 콜백함수로 사용가능
+                
+                & 콜백의 대부분은 익명이다
+
+        */
+        // 1) 콜백함수(선언적 함수)
+        function info(name, age) {
+            console.log('이름' + name + '나이' + age + '살');
+        }
+        function introduce(name, age, func) {
+            func(name, age);
+            // => 여기서 func는 콜백함수의 매개변수다(임의의 명칭)
+        } 
+        introduce('가나다', 25, info)
+        // 호출 : name으로 가나다, age로 25, 콜백함수로 info를 인수로 전달
+
+        // 2) 콜백함수(익명함수)
+        function introduce(name, age, func) {
+            func(name, age);
+        }
+        introduce('가나다', 25, function(name, age){
+            console.log('이름' + name + '나이' + age + '살');
+        });
+        // => 호출 : 익명함수 전달이기 떄문에 변수의 이름이 없음
+        // 구조 (1) name과, age, 콜백함수가 매개변수로 introduce 함수에 전달됨
+            //  (2) name과 age가 전달된 콜백함수의 매개변수로 재전달
+            //  (3) introduce 호출문으로 와서 출력
+
+
+        // ex) howMany 함수 만들기(임의의 익명함수 만들기)
+        // 첫번째 인수 : 수행할 횟수, 두번째 인수 : 수행할 함수
+        // => 익명함수를 3번 진행
+
+        // 정의
+        function howMany(count, func) {
+            for(let n = 0; n < count; n++) {
+                func();
+            }
+        }
+        // 호출
+        howMany(3, function() {console.log('Hello World')
+            
+        });
+
+
+    </script>
+</body>
+</html>

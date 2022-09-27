@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // [dialog]
+        // - 자바스크립트의 경고, 확인, 검색창을 띄우는 요소를 말한다
+
+        // 1. 경고창
+        // alert('회원가입되었습니다')
+
+        // // 2. 확인창(확인, 취소창)
+        // var a = confirm('진행할까요?');
+        // alert(a);
+        // // 결과 : 확인누르면 true, 취소누르면 false
+        // // if와 찰떡궁합
+
+        // // 3. 입력창(거의 사용안함)
+        // var a = prompt('무엇이든 입력하면 문자열로 저장한다')
+        // alert(a + ',', typeof a);
+
+
+        // 1. 경고창
+        // alert('야')
+
+        // 결과 : 무조건 해당 텍스트의 경고창을 띄운다
+
+        // 2. 확인창
+
+        var a = confirm('야?');
+        alert(a);
+
+        !confirm('예아니오')
+        // & !를 사용하면 확인과 취소의 위치를 반대로 할 수 있다
+        alert(a);
+
+        // 결과 : 확인을 누르면 true, 아니면 false, !confirm은 반대의 값을 창에 띄운다
+
+        // 3. 입력창
+
+        var a =prompt('야야')
+        alert(a);
+        // 결과 : 입력한 값을 창에 띄운다
+
+    </script>
+    
+</body>
+</html>
