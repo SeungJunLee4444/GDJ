@@ -116,7 +116,7 @@
         /* 사라진 체크박스 대신 새로운 체크박스 만들기
         (1) 평소 체크박스
         */
-        .uio_check_box > input {
+        .check_style {
             position: absolute;
             top: 0;
             left: 0;
@@ -161,6 +161,7 @@
                 <label for="chk_secure" class="uio_check_box">
                     <input type="checkbox" name="chk_secure" id="chk_secure" value="secure">
                     <span class="check_style">
+                        <!-- check_style은 새롭게 만들어진 체크박스 -->
                         <i></i>
                     </span>
                     보안접속
