@@ -10,21 +10,28 @@
     <div id ="box1"></div>
     <script>
 
-        // [자바스크립트로 부모자식 태그(반복성) 생성하기]  ****
-
-    // 연습 1 : 1 2 3 4 5
-        // var n = 1;
-        // while(n <=5) {
-        //     document.getElementById('box1').innerHTML += n + '<br>';
-        //     n++;
-        // }
-        // & innerHTML을 통해 태그값도 추가할 수 있다
-
-        var n = 1;
-        while(n <= 5) {
-            document.getElementById('box1').innerHTML += n + '<br>';
-            n++;
+function Korean(name) {
+            this.name = name;
+            // 내부에서 prototype 추가하는 방법
+            this.__proto__.country = "Korea";
+            this.__proto__.slogan = function(){
+                console.log('8282');
+            }
         }
+
+        // 외부에서 prototype 추가하는 방법
+        Korean.prototype.country = 'china';
+        Korean.prototype.slogan = function(){
+            console.log('4141');
+        }
+
+        // 객체 생성(생성자 함수 호출)
+        var k1 = new Korean('kim');
+        var k2 = new Korean('Lee');
+
+        // 확인
+        console.log(k1, k2);
+        k1.slogan();
     </script>
 
 </body>

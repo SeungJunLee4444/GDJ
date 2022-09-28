@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            [json]
+             - javascript object notation
+             - 클라이언트-서버 간 데이터 교환 표준 형식 중 하나
+             - 실제 데이터 교환
+                (1) 클라이언트(front) - 서버(back)
+                (2) 문자열 json ('{}') <-> 인스턴스(자바객체), map, List
+        
+        */
+    </script>
+
+    <script>
+        // 1. 객체 생성(json 생성)
+        var person = {
+            'name' : '가나다',
+            'age' : 45
+        }
+
+        // 2. 객체 -> 문자열로 변환
+        var strPerson = JSON.stringify(person);
+        // 자바 스크립트 내부에 등록된 기능
+        console.log(strPerson, typeof strPerson);
+        // 결과 : 문자열타입
+
+        // 3. 문자열 형식 json -> 객체로
+        // - 서버가 클라이언트 쪽으로 결과를 주는 것
+        var objPerson = JSON.parse(strPerson);
+        console.log(objPerson, typeof objPerson);
+        // 결과 : 객체타입(object)
+
+    </script>
+    
+</body>
+</html>

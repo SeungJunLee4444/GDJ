@@ -1,6 +1,7 @@
 control : branch(if/switch), loop(while/for)
 function : 자바 메소드
 object(객체), array(배열), json
+built-in(Date, String, ...)
 form, regular expression
 event
 ajax, promise
