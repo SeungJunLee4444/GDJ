@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         .box1 > img {
+            /* img는 인라인레벨 */
+            width:320px;
+        }
+        .box1 > img:nth-of-type(2) {
+            visibility: hidden;
+        }
+
+        /* 1. visibility : hidden 
+        => hidden은 본래 차지하던 공간은 남긴채 이미지 내용물을 화면에서 지움
+        visible(보임), 
+        
+        */
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <img alt="꽃" src="../../images/flower1.jpg">
+        <img alt="꽃" src="../../images/flower2.jpg">
+        <img alt="꽃" src="../../images/flower3.jpg">
+    </div>
+    
+</body>
+</html>

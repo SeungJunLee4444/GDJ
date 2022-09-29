@@ -7,6 +7,37 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- & 정리
+        (1) 태그선택자          : 태그명
+        (2) class 선택자        : .클래스명
+        (3) id 선택자           : #아이디명
+        (4) 자식 선택자         : 부모 > 자식
+        (5) 후손 선택자         : 할아버지 자식(한칸 공백)
+        (6) 모든 형제 선택자    : 태그1 ~ 태그2         => 태그1과 형제인 태그2 전부(태그1제외)
+        (7) 인접 형제 선택자    : 태그1 + 태그2         => 태그1의 인접형제인 태그2  
+        & 인접형제는 태그의 종류는 전혀 상관이 없다(태그종류 상관없이 그냥 옆에서부터 순서)
+        (8) 구조선택자          : 태그:first-of-type(해당 태그의 첫번째 태그)
+                                : 태그:last-of-type(해당 태그의 마지막태그) 
+                                : 태그:nth-of-type(n)(해당 태그의 n번째 태그)
+
+        (9) 속성선택자          : 요소[속성명]  / 요소[속성명=속성값]
+        (10) 마우스 반응 선택자 : :hover(마우스를 고르고 있는 동안), active(마우스를 누르고 있는 동안)
+        (11) 상태 선택자        : 텍스트창, 또는 체크박스에서 사용된다
+                                : :checked(체크박스를 체크했을때), :focus(택스트창을 선택했을때)
+
+        & 인접형제(+)는 태그의 종류가 상관없다
+        & :nth-child(n)은 태그의 종류가 상관없으며, 인접형제(+와 동일하게 기능한다)
+        & 구조선택자 태그는 태그의 종류가 동일한 경우에 사용된다
+
+        & 자식태그(종류 상관없이 전부) : div > *(이거 사용해도되나?)
+        & 인접형제의형제의형제              : div + span + div + p  => div의 형제에, span의 형제에, div의 형제인 p태그
+
+    
+    
+    
+    -->
+
+
     <style>
             /* 1. 태그 선택자 */
             h1 {
@@ -45,7 +76,7 @@
                 color: orange;
             }
             /* 2) ul의 후손 a */
-            ul > li > a {
+            ul  a {
                 color: red;
                 text-decoration: none;
             }
@@ -102,14 +133,19 @@
     <style>
         /* 7. 인접형제 */
         /* ex) h3와 인접한 div(영국)만 해당 */
-        .europe > h3 + div {
+        .europe > h3 + div + h3 + div {
             color: tomato;
+        }
+
+        .europe > h3:nth-child(3) {
+            color:pink;
         }
     </style>
 
     <div class="europe">
         <h3>유럽</h3>
         <div>영국</div>
+        <h3>중국</h3>
         <div>프랑스</div>
         <div>독일</div>
     </div>
@@ -127,6 +163,13 @@
         h4 + ol > li:nth-of-type(2) {
             color: skyblue;
             font-weight: 900;
+        }
+        ol > li:first-of-type {
+            color:red;
+        }
+
+        ol > li:last-of-type {
+            color:red;
         }
         
     </style>
@@ -193,13 +236,23 @@
         */
         
         #c:focus {
-            background-color: red;
+            /* background-color: red; */
+            border: 3px solid yellow;
+            /* border-collapse: none; */
+            outline: none;
+            /* & 텍스트창 선택시 강조되는 검은줄 삭제*/
             
         }
-        .register > div > input[name=gender]:checked + label {
+        /* .register > div > input[name=gender]:checked + label {
             font-weight: 900;
 
+        } */
+
+
+        .register input[name="gender"]:checked + label {
+            font-weight: 900;
         }
+        /* 현재로는 css접근에서 부모 선택자는 존재하지않는다 */
 
     </style>
 
@@ -209,8 +262,10 @@
             <input type="text" id="c">
         </div>
         <div>
-            <input type="radio" id="a" name="gender" value="1">
-            <label for="a">남자</label>
+            <label for="a">
+                <input type="radio" id="a" name="gender" value="1">
+                남자
+            </label>
             <input type="radio" id="b" name="gender" value="2">
             <label for="b">여자</label>
         </div>

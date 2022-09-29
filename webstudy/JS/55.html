@@ -7,32 +7,26 @@
     <title>Document</title>
 </head>
 <body>
-    <div id ="box1"></div>
-    <script>
 
-function Korean(name) {
-            this.name = name;
-            // 내부에서 prototype 추가하는 방법
-            this.__proto__.country = "Korea";
-            this.__proto__.slogan = function(){
-                console.log('8282');
-            }
+    <style>
+        div {
+            display : inline-block;
+            background-color: green;
+            width: 400px;
+            height: 300px;
+            line-height: 300px;
+
         }
-
-        // 외부에서 prototype 추가하는 방법
-        Korean.prototype.country = 'china';
-        Korean.prototype.slogan = function(){
-            console.log('4141');
+        div > span {
+            background-color: red;
+            /* vertical-align: middle; */
         }
-
-        // 객체 생성(생성자 함수 호출)
-        var k1 = new Korean('kim');
-        var k2 = new Korean('Lee');
-
-        // 확인
-        console.log(k1, k2);
-        k1.slogan();
-    </script>
+    </style>
+    <div>
+        <span>가나다라</span>
+        <span>가나다라</span>
+        <span>가나다라</span>
+    </div>
 
 </body>
 </html>
