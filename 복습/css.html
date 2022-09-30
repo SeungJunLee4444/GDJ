@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 시멘틱 실습 -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+    * {
+        
+        font-family: 'Noto Sans KR', sans-serif;
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+        /* columns: #000; */
+        text-decoration: none;
+    }
+
+    body {
+        /* & 특정 웹사이트를 가운데 정렬한 상태로 좁게 표현하고싶을때
+        ex) 네이버 회원가입창
+        (1) 최소너비와 최대 너비를 설정한다
+        (2) margin 0 auto를 설정
+        (3) padding 0 좌우배율 설정
+        
+        */
+        min-width: 290px;
+        max-width: 460px;
+        margin : 0 auto;
+        padding: 0 4.35%;
+        background-color: springgreen;
+    }
+
+    header {
+        background-color: aquamarine;
+        padding : 30px;
+        text-align: center;
+        /* width: 300px */
+        /* & px로 고정하지 않는 한 웹은 기본적으로 반응형으로 움직인다? */
+    }
+
+    .gnb {
+        background-color: yellowgreen;
+        height: 40px;
+        display: flex;
+        /* & 가운데 정렬은 부모요소에 */
+        list-style-type: none;
+
+
+    }
+
+    .gnb > li {
+        width: 100px;   
+        
+    }
+
+    .gnb > li > a {
+        display : block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 40px;
+        color: rebeccapurple;
+    }
+
+    .gnb > li > a:hover {
+        background-color: green;
+
+    }
+
+    .main_section {
+        display: flex;
+    }
+
+
+    /* & 
+        좌우영역을 3:1로 만들기(일정비율로 나누기)
+        * (필수)부모요소에 display flex 사용후,
+        1) & 사용
+        - main 섹션을 3:1로 나눔
+        - 퍼센트를 사용하기에, 반응형웹
+
+        2) flex 사용
+        - 자식요소1 : flex 3 
+        - 자식요소2 : flex 1
+        => 부모요소를 기준으로 3:1 비율로 사이즈가 나눠짐
+    
+    */
+    /* flex
+        flex: 3 : 부모크기의 3
+        flex: 1
+    */
+
+    /* & 아래의 경우 main에 별도의 사이즈를 선언하지 않았기 때문에, 
+    body 즉 페이지 전체를 기준으로 나누게 된다 */
+    .left_section {
+        border: 1px solid gray;
+        /* flex: 3; */
+        width: 75%;
+        margin-right: 20px;
+        /* & left-section의 외부여백 오른쪽을 밈 */
+        
+
+    }
+
+    .right_section {
+        border: 1px solid gray;
+        /* flex: 1; */
+        width: 25%;
+
+    }
+
+    article {
+        border: 1px solid red;
+        margin: 10px 5px 0;
+        padding: 10px;
+        background-color: #fff;
+
+    }
+
+    .img {
+        width: 50px;
+        height: 40px;
+        background-image: url(../images/animal1.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        padding: 10px;
+    }
+
+    footer {
+        border: 1px solid red;
+        height: 150px;
+        border-top: 1px solid black;
+        /* border-collapse: collapse; */
+        margin-top: 10px;
+        padding: 50px;
+        background-color: #fff;
+    }
+
+    footer > p {
+
+        text-align: center;
+
+        /* padding: 50px */
+
+
+    }
+
+
+
+
+    </style>
+
+    <header>
+        <h1>웹사이트</h1>
+    </header>
+    <nav>
+        <ul class="gnb">
+            <li><a href="javascript:void(0)">menu1</a></li>
+            <li><a href="javascript:void(0)">menu2</a></li>
+            <li><a href="javascript:void(0)">menu3</a></li>
+            <li><a href="javascript:void(0)">menu4</a></li>
+            <li><a href="javascript:void(0)">menu5</a></li>
+        </ul>
+    </nav>
+    <section class="main_section">
+        <section class="left_section">
+            <article>
+                <h2>title1</h2>
+                <p>description1</p>
+                <div class="img"></div>
+                <p>content1</p>
+            </article>
+            <article>
+                <h2>title2</h2>
+                <p>description2</p>
+                <div class="img"></div>
+                <p>content2</p>
+            </article>
+        </section>
+        <section class="right_section">
+            <article>
+                <h2>title3</h2>
+                <div class="img"></div>
+                <p>content3</p>
+            </article>
+            <article>
+                <h2>title4</h2>
+                <div class="img"></div>
+                <div class="img"></div>
+                <div class="img"></div>
+            </article>
+            <article>
+                <h2>title5</h2>
+                <p>description5</p>
+                <p>content5</p>
+            </article>
+        </section>
+    </section>
+    <footer>
+        <p>footer area</p>
+    </footer> 
+    
+</body>
+</html>

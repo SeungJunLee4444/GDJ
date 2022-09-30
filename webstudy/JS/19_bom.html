@@ -33,6 +33,8 @@
     - 홈페이지에서 뒤로가기 앞으로가기 버튼 생성시 사용
     -->
     <button id="btn1">뒤로</button>
+    <button id="btn2">뒤로</button>
+
     <script>
         /* 
             history.back()      : 뒤로가기
@@ -91,9 +93,31 @@
             3. 창
                 1) window.open();
                 2) window.close();
+        */
+
+        /* 
+            window.open(url, name, features) 
+            1) url         : 열어줄 파일의 경로
+            2) name        : 창 이름
+            3) features    : 창 특징
+                (1) width/height            : 창의 너비/높이
+                (2) top/bottom/left/right   : 창의 위치
             
         
+        
         */
+
+        // <button id="">뒤로</button>
+
+        // 10_popup.html 열기
+        document.getElementById('btn2').onclick = function(event) {
+            var features = 'width=640,height=1028+40+16px,top=100px,1eft=100px';
+            window.open('19_popup.html', '팝업', features);
+
+        }
+
+
+
     </script>
 
 

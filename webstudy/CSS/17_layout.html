@@ -20,7 +20,16 @@
             4) justify-content(space-around, between)   (자식요소간 배치)
         */
         .container1 {
+            width: 300px;
+            height: 100px;
+            background-color: red;
             display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: right;
+            /* justify-content: space-between; */
+            /* justify-content: space-between; */
+            
         }
 
         .container1 > div {
@@ -28,6 +37,21 @@
             height: 50px;
             border: 1px solid gray;
         }
+
+        /* & display-flex 
+        (1) 부모 요소에선언하면, 블록레벨인 자식요소들을 수평으로 정렬되게 해줌, 즉 인라인 요소를 가지게 만든다
+        => 인라인 요소 특징인 수평정렬
+        (2) flex-direction : 정렬될 자식요소들의 정렬 방향과 순서를 정함
+        (3) flex-wrap : 부모 태그의 범위를 넘어서면 줄바꿈을 시행
+        (4) justify-content: 양쪽 정렬(space-between, space-around, right, left)
+    
+        */
+        /* 
+            & 수평 레이아웃 하는법
+            (1) display: flex 방식      : 부모요소에 display-flex 사용
+            (2) one true layout 방식    : 부모요소에 overflow: hidden, 자식요소에 float:left 사용
+
+        */
 
         
 

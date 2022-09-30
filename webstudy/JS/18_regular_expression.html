@@ -169,11 +169,23 @@
         var btn = document.getElementById('btn');
         var msgEmail = document.getElementById('msg_email');
         btn.onclick = function(event) {
-            var regEmail = /^[0-9a-zA-Z-_]+@[0-9a-zA-Z]{2,}(\.[a-zA-Z]{2,6}){1,2}$/;
+            var regEmail = /^[0-9a-zA-Z-_]+@[0-9a-zA-Z]{2,}([.a-zA-Z]{2,6}){1,2}$/;
             // +                    : [0-9A-Za-z-_]인 글자가 한개 이상
             // (\.[a-zA-Z]){1,2}    : .co, .kr
+            // & \.을 쓴 이유 : [.]을 써도되긴하다(같은의미)
 
-            // () : 조건식
+            /* 
+                & (\.[a-zA-Z]{2,6}){1,2} 해석
+                - 예시 : naver.com, google.co.kr의 .com과 .co.kr의 조건 / ()는 조건을 의미
+                - 해석 : (\.[a-zA-Z]{2,6})에 해당하는 조건을 준수하고, {1,2} => 해당 조건은 1번이상 2번 이하 작성되어야한다
+                (.com은 1번, .co.kr은 2번)
+
+                & {}는 (1)글자수, 또는 (2)조건에 해당하는 단어수
+
+
+            */
+
+            // & () : 조건식
             if(regEmail.test(email.value)) {
                 msgEmail.textContent = '올바른 이메일 형식입니다';
             } else {
