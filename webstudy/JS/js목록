@@ -2,7 +2,9 @@ control : branch(if/switch), loop(while/for)
 function : 자바 메소드
 object(객체), array(배열), json
 built-in(Date, String, ...)
-form, regular expression
+form, 
+regular expression  : 각종 입력을 검사하는 도구(아이디, 이메일, 비밀번호 등)
 event
+bom
 ajax, promise
 jquery
