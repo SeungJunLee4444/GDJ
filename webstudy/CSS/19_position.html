@@ -34,9 +34,30 @@
         
         */
 
-        .box {
+        /* & position
+            - 특정 블록을 웹 상에 원하는 위치로 배치하는 속성
+            (1) static      : 기본(기본흐름대로 왼쪽상단기준 배치)
+            (2) relative    : html 기본 흐름대로 배치(왼쪽상단), 상대적위치조정가능, 원래 자신의 위치가 기준
+            (3) absolute    : html 문서의 기본흐름을 꺰, 기준은 부모 요소, 부모요소를 relative,  자식요소에 absolute를 만듬, 상대적 위치조정가능
+            & 부모 요소의 블록 안에서 맘대로 위치조정 가능
+            
+            (4) fixed       : html 문서의 특정 위치에 고정시킴(항상 보임), 상대적 위치조정 가능, 브라우저 화면 전체가 기준(부모필요x)
+
+            1) 상대적 위치 조정
+            - top , bottom, right, left로 위치조정 가능
+
+            & 웹 상 가운데에 위치시키기(js에서 배움) => 추후에 보강
+            (1) 웹 사이트 전체 사이즈확인
+            (2) 블록 사이즈를 뺀 
+
+            2)
+
+
+        */
+
+        .box1 {
             position: static;
-            border: 1px solid gray;
+            border: 1px solid black;
             top: 100px; left : 100px; /* static이라 적용안됨 */
         }
             
@@ -52,7 +73,18 @@
             position: relative;
             border: 1px solid gray;
             top: 100px; left : 100px;   /* 적용됨 */
-            /* relative는 조정된 위치에 만들어짐 */
+            /* relative는 원래 자신의 위치를 기준으로 조정된다 */
+
+            /* 
+                &
+                백그라운드이미지의 위치조정 : - 를 붙여줘야함
+                포지션의 위치조정           : + 를 붙여줘야함
+                
+                & 백그라운드의 위치조정 기본단위는 -다(무조건 어느방향이든)
+
+                
+
+            */
         }
     </style>
 
