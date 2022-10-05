@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리+ajax</title>
+</head>
+<body>
+    <div id="box1">
+        <button id="btn1">클릭</button>
+    </div>
+    <script>
+        $('#btn1').on('click', function(event) {
+            $.ajax({
+                'type' : 'get',     // 요청 메서드
+                'url' : 'data.txt', // 요청 서버경로
+                'async' : true,     // 통신방식(비동기통신true가 디폴트), 생략가능 
+                dataType : 'text',  // 응답 데이터 타입
+                'success' : function(data) {   // 매개변수 data로 응답 데이터가 전달됨
+                    $('#box1').append($('<div>').text(data));
+                },
+                'error' : function()
+            })
+        })
+    </script>
+</body>
+</html>

@@ -8,8 +8,11 @@
 </head>
 <body>
     <!-- [제이쿼리 사용준비] -->
+
+    <!-- & 제이쿼리 : 자바스크립트를 간편하게 쓸수있도록 만들어줌 -->
+    
     <!-- 1. jquery 사용을 위한 방법 2가지-->
-    <!--1) 다운받은 jquery 라이브러리 포함하기-->
+    <!--1) 다운받은 jquery 라이브러리 script로 호출-->
     <script src="jquery-3.6.1.min.js"></script>
 
     <!-- 2) jquery cdn 포함하기 -->
@@ -40,7 +43,11 @@
         /* 
             3. jquery 주요 메서드
             jquery                  js
+
+        & 태그의 텍스트메서드
         1)  text()                  dom.textContent
+
+
             text('안녕')            dom.textContent = '안녕'
         2)  html()                  dom.innerHTML
             html('<a href=""></a>)  dom.innerHTML = '<a href=""'></a>
@@ -50,6 +57,8 @@
             prop('src', '#')        dom.src= '#'
         5)  css()                   dom.style?
             css()
+
+            //& 부
         5)  append(a)               dom += a
             append(a).append(b)     dom += a + b
         
@@ -169,6 +178,8 @@
             // 2) 자식
             console.log($('#box6').children());             // 자식 하나                : [ul]
             console.log($('#box6').children().children());  // 자식의 자식              : [li] 5개
+
+            // & 이걸 사용할것
             console.log($('#box6').find('a'))               // 자식 중 a태그들
 
             // 3) 형제
@@ -263,7 +274,113 @@
             $('#menu').before('<h1>오늘의 식단</h1>');
             $('#menu').after($('<a>').text('메뉴추가하기').attr('href', 'javascript:void(0)'));
         </script>
+    
+        <div id="box9">
+            <ul id="movies">
+                <li id="alien">에일리언</li>
+                <li id="terminator">터미네이터</li>
+                <li id="avatar">아바타</li>
+            </ul>
+        </div>
+        <script>
+            // 3. 제거
+            // 1) 특정 요소 제거
+            $('#alien').remove();
 
+            // 2) 전체 제거
+            $('#movies').empty();   
+            // => #movies의 내부가 비워짐. movies 자체는 남음
+        </script>
+
+            
+
+        <div id="box10">
+            hello world
+        </div>
+        <style>
+            .bold_text {
+                font-weight: bold;
+            }
+            .red_text {
+                color : red;
+            }
+        </style>
+        <script>
+
+            // 4. class 속성 
+
+            // 1) class 속성 추가
+            // $('#box10').addClass('bold_text');
+            // $('#box10').addClass('red_text');
+            // $('#box10').addClass('bold_text').addClass('red_text');
+
+            // & 마지막 방법을 사용할 것
+            $('#box10').addClass('bold_text red_text');
+
+            // 2) class 속성 제거
+            $('#box10').removeClass('red_text');
+
+            // 3) class 속성 토글(줬다 뺏다 한번씩 반복하는걸 말함)
+            $('#box10').toggleClass('bold_text');   // 없어짐
+            $('#box10').toggleClass('bold_text');   // 다시 생김
+            $('#box10').toggleClass('red_text');    // 생김
+            $('#box10').toggleClass('red_text');    // 없어짐
+            // & toggle만 이용해도 생성과 삭제를 둘다 할 수 있다
+
+        </script>
+
+
+        <!-- 이벤트 -->
+        <div id="box11">
+            <button id="btn1">버튼1</button>
+        </div>
+        <script>
+            /* 
+                1. jquery 이벤트
+                1) 예전 이벤트(예전에 사용한이벤트, 알아만 두기)
+                    (1) bind()
+                    (2) live()
+                    (3) delegate()
+
+                2) 요즘 이벤트
+                    (1) on()
+                        - 여러 이벤트 타입을 한번에 등록
+                        - 동적으로 생성된 요소에 이벤트 등록 가능
+                        - 형식
+                            (1) $(부모).on('이벤트타입', '이벤트대상', '이벤트리스너');
+                            (2) $(이벤트대상).on('이벤트타입', '이벤트리스너')
+                            & 1번을 동적인 경우에 자주사용
+                    (2) one()   
+                        - 한번만 동작하는 이벤트를 등록
+                        - 형식
+                            (1) $(이벤트대상).one('이벤트타입', '이벤트리스너')
+                    (3) off()    
+                        - 기존 이벤트 제거
+                        - $(이벤트대상).one('이벤트타입')
+            */
+        </script>
+        <script>
+            // 1) 정적 요소에 이벤트 추가(key, value 형태)
+            // (1) on() 메서드 이용
+            $('#btn1').on('click', function(event) {
+                alert('클리익')
+            })
+            // (2) 단축방식 : 이벤트타입을 메서드로 이용
+            $('#btn1').click(function(event) {
+                alert('click');
+            }) 
+
+
+            // 2) 동적 요소 추가
+            $('#box11').append($('<button>').text('버튼2').attr('id', 'btn2'));
+
+            // 3) 동적 요소에 이벤트 추가
+            $('#box11').on('click', '#btn2', function(event) {
+                alert('클릭');
+            });
+
+        </script>
+        <!-- 이 위까지가 주요 문법 -->
         
 </body>
 

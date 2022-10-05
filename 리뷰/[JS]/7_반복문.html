@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문</title>
+</head>
+<body>
+    <!-- [반복문] -->
+    <!-- 1. while 
+    - 반복문을 이용해 반복되는 태그를 추가 할 수 있다
+    -->
+
+    <!-- 실습 -->
+    <!--  1) 콘솔창에 '1 2 3 4 5' 띄우기 -->
+
+    <div id="box1"></div>
+    <script>
+        var n = 1;
+        while(n <= 5) {
+            document.getElementById('box1').innerHTML += (n + '&nbsp&nbsp');
+            n++;
+        }
+    </script>
+
+
+    <!--  2) 1,2,3,4,5 거꾸로 목록만들기 -->
+    
+        <div id="box2"></div>
+        <script>
+            /*
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            */
+            var n = 5;
+            var ul = '<ul>';
+            while(n >= 1) {
+                ul += ('<li>' + n + '</li>');
+                n--
+            }
+            ul += '</ul>';
+            document.getElementById('box2').innerHTML = ul;
+            // => 반복문을 이용해 반복성 태그를 새롭게 추가할 수 있다
+        </script>
+
+    <!-- ------------------------------------------------------------ -->
+
+    <!-- 2. for -->
+    <!-- 1) 일반 for문 -->
+
+        <div id="box3"></div>
+        <!-- 3. select문 구현하기
+        /*
+            <select name="month">
+                <option value="1">1월</option>
+                ...
+                <option value="12">12월</option>
+            </select>
+        */ -->
+        <script>
+            var select = '<select name="month">';
+            for(let m = 1; m <= 12; m++) {
+                select += ('<option value="' + m + '">' + m + '월</option>');
+            }
+            select += '</select>';
+            document.getElementById('box3').innerHTML = select;
+        </script>
+
+        <!-- & select에는 name, option에는 value 속성을 꼭 사용
+             & option의 목록값은 value값과 별도다
+        -->
+
+    <!-- 2) 이미지 나열하기
+        // animal1.jpg ~ animal10.jpg
+        // width=100px 화면에 출력하기-->
+
+        <div id="box4"></div>
+        <script>
+            var images = '';
+            for(let n = 1; n <= 10; n++) {
+                images += '<img src="../../images/animal' + n + '.jpg" width="100px">';
+            }
+            document.getElementById('box4').innerHTML = images;
+        </script>
+
+
+
+
+
+
+</body>
+</html>
