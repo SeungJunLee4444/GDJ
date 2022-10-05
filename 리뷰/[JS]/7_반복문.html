@@ -40,12 +40,16 @@
             */
             var n = 5;
             var ul = '<ul>';
-            while(n >= 1) {
-                ul += ('<li>' + n + '</li>');
-                n--
+            for(let i = 5; i >=1; i--) {
+                 ul += ('<li>' + i + '</li>');
             }
+            // while(n >= 1) {
+            //     ul += ('<li>' + n + '</li>');
+            //     n--
+            // }
             ul += '</ul>';
             document.getElementById('box2').innerHTML = ul;
+
             // => 반복문을 이용해 반복성 태그를 새롭게 추가할 수 있다
         </script>
 
@@ -88,6 +92,54 @@
             }
             document.getElementById('box4').innerHTML = images;
         </script>
+    
+    <!-- 3) 테이블  
+    /*
+            테이블 이용
+                    col=1  col=2   col=3
+            row=1   1      2       3
+            row=2   4      5       6
+            row=3   7      8       9
+            row=4   *      0       #
+            -----------------------------
+            1~9 : (row - 1) * 3 + col
+    */   
+    
+    -->
+    <div id="box5"></div>
+    <script>
+        var table = '<table border="1"><tbody>';
+        for(let row = 1; row <= 4; row++) {
+            table += '<tr>';
+            for(let col = 1; col <= 3; col++) {
+                var data = (row - 1) * 3 + col;
+                // ??????????????????????????????????????????????????
+                switch(data) {
+                case 10: table += '<td>*</td>'; break;
+                case 11: table += '<td>0</td>'; break;
+                case 12: table += '<td>#</td>'; break;
+                // & += 복합연산자인 이유
+                // => 처음부터 숫자를 변수에 저장하고 태그를 만들고 있기 때문
+                default: table += '<td>' + data + '</td>';
+                }
+            }
+            table += '</tr>';
+        }
+        table += '</tbody></table>';
+        document.getElementById('box5').innerHTML = table
+        // => 해석
+        /* 
+        (1) 1부터 12의 숫자를 얻어야하며, 10,11,12는 다른 숫자, 기호를 입력해야한다
+        (2) switch문을 이용해 10,11,12에는 별도의 값을, 나머지는 디폴트값을 얻게만든다
+
+        
+        */
+
+        // & 반복문을 통해 태그를 생성할 때, 여러개의 변수가 필요하지 않다
+        // => 한개의 변수에 계속 중첩
+
+
+    </script>
 
 
 
