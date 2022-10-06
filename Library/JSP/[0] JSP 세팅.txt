@@ -1,0 +1,83 @@
+[JSP 세팅]
+1. 이클립스 세팅
+1) 이클립스 workspace gdj/jspstudy
+2) perspective가 javaEE인지 확인
+- 이클립스 오른쪽 상단 아이콘에서 확인가능
+=> 이클립스를 웹개발용으로 다운받았으면 javaEE가 디폴트값으로 적용된다
+3) 기본 preferences 설정
+	1) theme
+	2) textfont
+	3) text file encoding 
+	4) syntax coloring
+4) 추가 preference 설정(웹개발용)
+	1) web - css files - encoding : iso 10646 / unicode(utf-8)
+	2) web - html files - encoding : iso 10646 / unicode(utf-8)
+	3) web - jsp files - encoding : iso 10646 / unicode(utf-8)
+5) 기본 브라우저 설정
+	window - web browser - chrome 선택
+
+--------------------------------------------------------------------
+
+& 자바 프로그래밍 언어 플랫폼
+- 모든 자바 플랫폼은 JVM과 API로 구성되있다
+- JVM은 코드의 실행, API는 개발에 필요한 함수의 모음이다
+- 종류 : java se, ee, me, fe 4가지 
+
+1) JAVA SE
+- 정의 : 표준 자바 플랫폼
+- 기초적인 타입, xml 파싱, 네트워킹 등
+=> java.lang, java.io, java.util 등이 해당
+
+2) JAVA EE
+- 정의 : JAVA SE + 웹 프로그래밍에 필요한 기능 포함
+
+--------------------------------------------------------------------
+
+& servelt
+- 클라이언트의 요청(request)에 따라 서비스를 제공하는 자바 클래스
+- main 없이도 실행, 
+웹 요소들은 jvm이 아닌 jsp/servlet 컨테이너(톰캣)에서 실행된다
+(일반 코드들은 main 메서드 안의 내용을 jvm으로 실행시킨다)
+
+1) 동작과정
+클라이언트 -(요청,응답)> 웹서버 -(위임,결과)> 웹 에플리케이션서버(was),톰캣 -(호출,결과)> 서블릿 -(실행)<-
+
+2) 톰캣 설치 및 연결(was 연결)
+(1) 사이트에서 8.5버전 다운
+https://tomcat.apache.org/
+(2) 폴더 압축풀고 이름변경(tomcat 8.5)
+(3) c드라이브 programfiles에 폴더를 옮기기(자바와 같은 곳에 두고싶어서)
+(4) 환경변수 설정
+	(1) CATALINA_HOME 환경변수 생성
+	(2) path에 등록(%CATALINA_HOME%\bin)
+(5) 이클립스 server 탭에 등록
+(6) 톰캣 실행, 종료 확인(bin 폴더 내 start.bat, shutdown.bat)
+(6) 포트번호 변경
+- 이유 : 오라클과 동일한 포트번호 8080이라 충돌
+- 해결 : conf의 server.xml 파일을 메모장으로 켜서 connect 포트번호를 8080에서 9090으로 변경
+- 확인 : 
+(1) server 폴더 server.xml 63번째줄
+(2) server 탭 더블클릭 
+
+3) 톰캣 삭제
+& 1,2 둘다 수행
+(1) server 탭에서 삭제(완전히 삭제된게 아님)
+(2) preference - server -runtime enviroment(완전히 삭제)
+
+(2) 만 실시하면 server 폴더 내 파일이 사라지지않는다
+(1) (1)만 실시하면 폴더 내 파일은 사라지지만 완전히 삭제된게 아님
+
+
+--------------------------------------------------------------------
+
+& httpservlet
+- jsp/servlet container 즉, 톰캣이 있어야 사용 가능한 클래스
+
+
+
+
+
+
+
+
+
