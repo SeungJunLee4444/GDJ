@@ -1,0 +1,37 @@
+[백엔드에서 사이트 이동하는법]
+- 프론트에서 사이트 이동하기 : (1) a태그 (2) location
+- ex) 게시글 작성후 새로고침을 할지 안할지를 다루는법
+
+(1) insert, update, delete 요청 : 생성, 수정, 삽입 요청
+(2) select 요청 : 해당결과를 다시 조회하기 위한 요청
+
+1. Redirect
+- 2번의 요청과 응답과정을 겪는다 
+- db 수정작업에 사용
+
+- 코드 : response.setRedirect("이동할경로")
+
+- 기존 request를 유지하지 않는 이동방식이다
+=> 
+
+2. Forward
+- 1번의 요청, 서버간에 전달, 1번의 응답
+- 서버와 서버간에 전달하는 과정을 forward라한다
+- db변경이 없거나 단순 이동일 경우 forward
+* forward는 기존의 request를 전달하기 때문에, 데이터를 실어서 이동가능
+
+- 코드 : 
+(1)
+RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ForwardServlet2");
+(2)
+requestDispatcher.forward(request, response);
+
+& forward와 redirect의 차이
+(1) forward는 두번째 요청이 없이 서버 내에서 전달이 이루어진다
+=> 즉 기존의 요청시 파라미터가 client에게 돌아온다
+(2) redirect는 기존의 요청을 client에 주지않고 응답하기 때문에,
+(2) a태그와 location은 redirect 방식이다
+
+3. redirect
+
+

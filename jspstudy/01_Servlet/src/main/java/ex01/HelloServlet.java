@@ -10,44 +10,63 @@ import javax.servlet.http.HttpServletResponse;
 
 /* 
  * [servlet]
- * - Á¤ÀÇ : À¥ È­¸éÀ» ¸¸µå´Â ÀÚ¹Ù Å¬·¡½º
- * - jsp/servlet container(tomcat)¿¡ ÀÇÇØ ½ÇÇà
- * - ¼­ºí¸´À» ½ÇÇàÇÏ¸é À¥ ºê¶ó¿ìÀú°¡ ½ÇÇàµÈ´Ù
+ * - ë™ì ì›¹í˜ì´ì§€ë¥¼ ë§Œë“¤ë•Œ ì‚¬ìš©ë˜ëŠ” ìë°” ê¸°ë°˜ ì›¹ ì—í”Œë¦¬ì¼€ì´ì…˜ í”„ë¡œê·¸ë˜ë° ê¸°ìˆ 
+ * - ì›¹ ìš”ì²­ê³¼ ì‘ë‹µì„ ë©”ì„œë“œ í˜¸ì¶œë¡œ ë‹¤ë£°ìˆ˜ ìˆê²Œ ë§Œë“¬
+ * - ìë°” í´ë˜ìŠ¤
+ * - ì›¹ ì„œë²„ ì•ˆì˜ ì›¹ ì»¨í…Œì´ë„ˆì— ì˜í•´ ì‹¤í–‰
+ * 
+ * 
+ * - ì›¹ í™”ë©´ì„ ë§Œë“œëŠ” ìë°” í´ë˜ìŠ¤
+ * - jsp / servlet containerì— ì˜í•´ì„œ ì‹¤í–‰(jvmì´ ì•„ë‹˜)
+ * - ì„œë¸”ë¦¿ì„ ì‹¤í–‰í•˜ë©´ ì›¹ ë¸Œë¼ìš°ì €ê°€ ì‹¤í–‰ë¨
+ * 
+ * - ì„œë¸”ë¦¿ ì»¨í…Œì´ë„ˆ : 
+ * - ì„œë¸”ë¦¿ë“¤ì˜ ìƒì„±, ì‹¤í–‰, íŒŒê´´ë¥¼ ë‹´ë‹¹
+ * - ì„œë¸”ë¦¿ì„ ì‘ë™ì‹œí‚¤ëŠ” ì—­í• (+ê´€ë¦¬) ex í†°ìº£
+ * 
+ * & wasëŠ” servletì„ í¬í•¨í•˜ëŠ” ê°œë…
+ * - wasëŠ” ì›¹ ì„œë²„ + ì›¹ ì»¨í…Œì´ë„ˆë¡œ êµ¬ì„±ë˜ìˆìœ¼ë©°, ì›¹ì„œë²„ë¡œ ì •ì  ì½˜í…ì¸ ë¥¼, ì›¹ ì»¨í…Œì´ë„ˆë¥¼ ì´ìš©í•´
+ * ë‚´ë¶€ ë¡œì§ì„ ê±°ì³ ë™ì  í˜ì´ì§€ë¥¼ ë³´ì—¬ì¤€ë‹¤
+ * - ìë°”ëŠ” ì›¹ êµ¬í˜„ ê¸°ìˆ ë¡œ ì„œë¸”ë¦¿(java eeì˜ í´ë˜ìŠ¤)ë¥¼ ì‚¬ìš©í•˜ë©°, servletë¥¼ ê´€ë¦¬í•˜ê³  jspíŒŒì¼ì„
+ * ì‹¤í–‰í•  ìˆ˜ ìˆê²Œ ë§Œë“¤ì–´ì£¼ëŠ” ê²ƒì´ ì„œë¸”ë¦¿ ì»¨í…Œì´ë„ˆë‹¤
+ * 
+ * 
+
  * - url
- * 		- ÇüÅÂ : ÇÁ·ÎÅäÄİ://È£½ºÆ®:Æ÷Æ®¹øÈ£/ÄÁÅØ½ºÆ®ÆĞ½º/URLmAPPING(¼­ºí¸´)
- * 		(1) ÄÁÅØ½ºÆ®ÆĞ½º: ÇÁ·ÎÁ§Æ® ÀÌ¸§
- * 		(2) URLMapping	: ¼­ºí¸´ ÀÌ¸§
+ * 		- í˜•íƒœ : í”„ë¡œí† ì½œ://í˜¸ìŠ¤íŠ¸:í¬íŠ¸ë²ˆí˜¸/ì»¨í…ìŠ¤íŠ¸íŒ¨ìŠ¤/URLmAPPING(ì„œë¸”ë¦¿)
+ * 		(1) ì»¨í…ìŠ¤íŠ¸íŒ¨ìŠ¤: í”„ë¡œì íŠ¸ ì´ë¦„
+ * 		(2) URLMapping	: ì„œë¸”ë¦¿ ì´ë¦„
  * 		http://localhost:9090/01_Servlet/HelloServlet
  * 
- * 		& ÄÁÅØ½ºÆ®ÆĞ½º(context path(root))
- * 		- was(ÅèÄ¹)¿¡¼­ À¥ ¿¡ÇÃ¸®ÄÉÀÌ¼ÇÀ» ±¸ºĞÇÏ±â À§ÇÑ path
+ * 		& ì»¨í…ìŠ¤íŠ¸íŒ¨ìŠ¤(context path(root))
+ * 		- was(í†°ìº£)ì—ì„œ ì›¹ ì—í”Œë¦¬ì¼€ì´ì…˜ì„ êµ¬ë¶„í•˜ê¸° ìœ„í•œ path
  * 		& URLMapping
  * 
  * 1) HttpServlet
- * - ¸ğµç servlet Å¬·¡½º´Â httpservletÀÇ »ó¼ÓÀ» ¹Ş´Â´Ù
+ * - ëª¨ë“  servlet í´ë˜ìŠ¤ëŠ” httpservletì˜ ìƒì†ì„ ë°›ëŠ”ë‹¤
  * */
 
 
-@WebServlet("/HelloServlet")	// URLMapping°ª
+@WebServlet("/HelloServlet")	// URLMappingê°’
 
-public class HelloServlet extends HttpServlet {	// Servlet Å¬·¡½º´Â HttpServlet¸¦ »ó¼Ó¹ŞÀ¸¸é µÈ´Ù
+public class HelloServlet extends HttpServlet {	// Servlet í´ë˜ìŠ¤ëŠ” HttpServletë¥¼ ìƒì†ë°›ìœ¼ë©´ ëœë‹¤
 	/* 
-	 * 1. »ı¼ºÀÚ(HelloServlet()
-	 * 	- °¡Àå ¸ÕÀú ½ÇÇàµÈ´Ù
-	 * 	- »ı¼ºÀÚ È£Ãâ µÚ init() ¸Ş¼­µå°¡ È£Ãâ			*1
+	 * 1. ìƒì„±ì(HelloServlet()
+	 * 	- ê°€ì¥ ë¨¼ì € ì‹¤í–‰ëœë‹¤
+	 * 	- ìƒì„±ì í˜¸ì¶œ ë’¤ init() ë©”ì„œë“œê°€ í˜¸ì¶œ			*1
 	 * */
     public HelloServlet() {
         super();
-        System.out.println("»ı¼ºÀÚ");
+        System.out.println("ìƒì„±ì");
         // TODO Auto-generated constructor stub
     }
     
     /* 
-     * 2. ÃÊ±âÈ­(init)
-     * 	- °¢Á¾ ÃÊ±âÈ­ Á¤º¸ ½ÇÇà
-     *  - ¼­ºí¸´ È¯°æ¼³Á¤ Ã³¸®
-     *  - init() ¸Ş¼­µå È£Ãâ µÚ service() ¸Ş¼­µå È£Ãâ	*2
-     * 	- conf(config) Å°¿öµå´Â ÃÊ±âÈ­¸¦ ÀÇ¹Ì 
+     * 2. ì´ˆê¸°í™”(init)
+     * 	- ê°ì¢… ì´ˆê¸°í™” ì •ë³´ ì‹¤í–‰
+     *  - ì„œë¸”ë¦¿ í™˜ê²½ì„¤ì • ì²˜ë¦¬
+     *  - init() ë©”ì„œë“œ í˜¸ì¶œ ë’¤ service() ë©”ì„œë“œ í˜¸ì¶œ	*2
+     * 	- conf(config) í‚¤ì›Œë“œëŠ” ì´ˆê¸°í™”ë¥¼ ì˜ë¯¸ 
 	*/
 	/**
 	 * @see Servlet#init(ServletConfig)
@@ -58,31 +77,31 @@ public class HelloServlet extends HttpServlet {	// Servlet Å¬·¡½º´Â HttpServlet¸
 	}
 	
 	/* 
-	 *	3. ¼­ºñ½º(service) 
-	 * - Å¬¶óÀÌ¾ğÆ®ÀÇ ¿äÃ»¸¶´Ù ¸Å¹ø È£Ãâ
-	 * - Ã³¸® ¹æ½ÄÀº (1) Á÷Á¢ÇØ°áÇÏ°Å³ª, (2) doGET, doPOST¸¦ »ç¿ëÇØ Ã³¸®
-	 * => ´ëÃ³·Î (2)À» »ç¿ëÇÑ´Ù
+	 *	3. ì„œë¹„ìŠ¤(service) 
+	 * - í´ë¼ì´ì–¸íŠ¸ì˜ ìš”ì²­ë§ˆë‹¤ ë§¤ë²ˆ í˜¸ì¶œ
+	 * - ì²˜ë¦¬ ë°©ì‹ì€ (1) ì§ì ‘í•´ê²°í•˜ê±°ë‚˜, (2) doGET, doPOSTë¥¼ ì‚¬ìš©í•´ ì²˜ë¦¬
+	 * => ëŒ€ì²˜ë¡œ (2)ì„ ì‚¬ìš©í•œë‹¤
 	 * 
-	 * (1) GET ¹æ½Ä : doGET() ¸Ş¼­µå È£Ãâ
-	 * (2) POST ¹æ½Ä : doPOST() ¸Ş¼­µå È£Ãâ
+	 * (1) GET ë°©ì‹ : doGET() ë©”ì„œë“œ í˜¸ì¶œ
+	 * (2) POST ë°©ì‹ : doPOST() ë©”ì„œë“œ í˜¸ì¶œ
 	*/
 
-	/**		// /** ÀÚ¹Ùµ¶ : ÁÖ¼®¾Æ´Ô?
+	/**		// /** ìë°”ë… : ì£¼ì„ì•„ë‹˜?
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("service");
 		
-		// * service ÀÛ¾÷Àº ¿Ü¿ïÇÊ¿ä¾ø´Ù(¾øÀ¸¸é ¾Ë¾Æ¼­ Ã³¸®µÊ)
+		// * service ì‘ì—…ì€ ì™¸ìš¸í•„ìš”ì—†ë‹¤(ì—†ìœ¼ë©´ ì•Œì•„ì„œ ì²˜ë¦¬ë¨)
 		
-		// service ¸Ş¼­µå¸¸ Á¸ÀçÇÏ´Â °æ¿ì dGET(), doPOST() °¡ ÀÚµ¿À¸·Î È£ÃâµÇÁö ¾Ê±â ¶§¹®¿¡
-		// ÄÚµå¸¦ Á÷Á¢ ÀÛ¼º
+		// service ë©”ì„œë“œë§Œ ì¡´ì¬í•˜ëŠ” ê²½ìš° dGET(), doPOST() ê°€ ìë™ìœ¼ë¡œ í˜¸ì¶œë˜ì§€ ì•Šê¸° ë•Œë¬¸ì—
+		// ì½”ë“œë¥¼ ì§ì ‘ ì‘ì„±
 
-		// ¿äÃ» ¸Ş¼­µå È®ÀÎ : request.getMethod()
+		// ìš”ì²­ ë©”ì„œë“œ í™•ì¸ : request.getMethod()
 		switch(request.getMethod()) {
 		case "GET" : 
-			doGet(request, response); break;	// ¸Å°³º¯¼ö request, response¸¦ ¹Ş¾Æ doGet¸Ş¼­µåÀÇ ¸Å°³º¯¼ö¿¡ ´øÁü
+			doGet(request, response); break;	// ë§¤ê°œë³€ìˆ˜ request, responseë¥¼ ë°›ì•„ doGetë©”ì„œë“œì˜ ë§¤ê°œë³€ìˆ˜ì— ë˜ì§
 		case "POST" :
 			doPost(request, response); break;
 		}
@@ -90,17 +109,17 @@ public class HelloServlet extends HttpServlet {	// Servlet Å¬·¡½º´Â HttpServlet¸
 	
 	/* 
 	 * 4. doGet
-	 * 	- GET ¹æ½ÄÀÇ ¿äÃ»À» Ã³¸®
-	 *  - & ÁÖ¼ÒÃ¢À» Á÷Á¢ ÀÌ¿ëÇØ¼­ ÀÌµ¿ÇÏ´Â ¹æ½ÄÀ» get ¹æ½ÄÀÌ¶ó ÇÑ´Ù
+	 * 	- GET ë°©ì‹ì˜ ìš”ì²­ì„ ì²˜ë¦¬
+	 *  - & ì£¼ì†Œì°½ì„ ì§ì ‘ ì´ìš©í•´ì„œ ì´ë™í•˜ëŠ” ë°©ì‹ì„ get ë°©ì‹ì´ë¼ í•œë‹¤
 	 *  	(1) ajax
 	 *  	$.ajax({
 	 *  		'type' : 'GET';
 	 *  		'URL' : '01_Servlet/HelloServlet'
 	 *  	})
-	 *  	(2) ¸µÅ© 
-	 *  	<a href="http://localhost:9090/01_Servlet/HelloServlet">¸µÅ©</a>
-	 *  	(3) Æû
-	 *  	<form method="GET" action="http://localhost:9090/01_Servlet/HelloServlet""> ¶Ç´Â <form> (µğÆúÆ®°¡ get)
+	 *  	(2) ë§í¬ 
+	 *  	<a href="http://localhost:9090/01_Servlet/HelloServlet">ë§í¬</a>
+	 *  	(3) í¼
+	 *  	<form method="GET" action="http://localhost:9090/01_Servlet/HelloServlet""> ë˜ëŠ” <form> (ë””í´íŠ¸ê°€ get)
 	 *  	(4) js : location.href='http://localhost:9090/01_Servlet/HelloServlet'	?
 	 * 		(5) js : open('http://localhost:9090/01_Servlet/HelloServlet')			?
 	 * */
@@ -108,31 +127,31 @@ public class HelloServlet extends HttpServlet {	// Servlet Å¬·¡½º´Â HttpServlet¸
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		// response : »ç¿ëÀÚ¿¡°Ô Àü´ŞÇÏ°Ú´Ù
+		// response : ì‚¬ìš©ìì—ê²Œ ì „ë‹¬í•˜ê² ë‹¤
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		// => ÀÀ´äÇÏ´Â ¸Ş¼­µå		
+		// => ì‘ë‹µí•˜ëŠ” ë©”ì„œë“œ		
 	}
 
 	/* 
 	 * 5. doPost
-	 *  - POST ¹æ½ÄÀÇ ¿äÃ»À» Ã³¸®
-	 *  - ¿äÃ» ¸Ş¼­µå°¡ postÀÎ °æ¿ì
+	 *  - POST ë°©ì‹ì˜ ìš”ì²­ì„ ì²˜ë¦¬
+	 *  - ìš”ì²­ ë©”ì„œë“œê°€ postì¸ ê²½ìš°
 	 *  	(1) $.ajax({
 	 *  		'type' : 'post'
 	 *  		'URL' : '01_Servlet/HelloServlet'
 	 *  })
-	 *  	(2) Æû
-	 *  	<form method="post" action="http://localhost:9090/01_Servlet/HelloServlet""> ¶Ç´Â <form> (µğÆúÆ®°¡ get)
+	 *  	(2) í¼
+	 *  	<form method="post" action="http://localhost:9090/01_Servlet/HelloServlet""> ë˜ëŠ” <form> (ë””í´íŠ¸ê°€ get)
 	 
-	 * 	& http://localhost:9090/01_Servlet/HelloServlet¸¦ À¥ÁÖ¼Ò¿¡ Á÷Á¢ ÀÔ·ÂÇÏ¸é ½ÇÇàµÉ ¼ö ÀÖ³ª?
-	 * - ÅèÄ¹ÀÌ ÄÑÁ®ÀÖÀ¸¸é ½ÇÇà°¡´É, ¾Æ´Ï¸é ºÒ°¡´É
+	 * 	& http://localhost:9090/01_Servlet/HelloServletë¥¼ ì›¹ì£¼ì†Œì— ì§ì ‘ ì…ë ¥í•˜ë©´ ì‹¤í–‰ë  ìˆ˜ ìˆë‚˜?
+	 * - í†°ìº£ì´ ì¼œì ¸ìˆìœ¼ë©´ ì‹¤í–‰ê°€ëŠ¥, ì•„ë‹ˆë©´ ë¶ˆê°€ëŠ¥
 	 * 
 	 * 
 	 * */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		// ¿äÃ»°ú ÀÀ´äÁ¤º¸¸¦ doGet()·Î ³Ñ±è(½ÇÁ¦ ¾÷¹«Ã³¸®¸¦ doGet()
+		// ìš”ì²­ê³¼ ì‘ë‹µì •ë³´ë¥¼ doGet()ë¡œ ë„˜ê¹€(ì‹¤ì œ ì—…ë¬´ì²˜ë¦¬ë¥¼ doGet()
 		doGet(request, response);
 	}
 

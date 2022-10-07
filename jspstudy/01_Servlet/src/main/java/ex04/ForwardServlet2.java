@@ -1,4 +1,4 @@
-package ex03;
+package ex04;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,31 +10,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/LocationServlet")
-public class LocationServlet extends HttpServlet {
+@WebServlet("/ForwardServlet2")
+public class ForwardServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-
-
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("utf-8");
-		String param = request.getParameter("param");
-				
-		
-		
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.println("<h1>hello world</h1>");
-		out.println("<h1>�ȳ��ϼ���" + param + "��</h1>");
-		out.close();
 	
+		// 요청 파라미터 a
+		String a = request.getParameter("a");
+		
+		// 응답
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.println("<h1>파라미터 a" + a + "</h1>");
+		
+		
+		
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		doGet(request, response);
 	}
 

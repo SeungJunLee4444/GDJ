@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /* 
- * http://localhost:9090/01_Servlet/now ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¸é,
- * ÇöÀç ³¯Â¥¿Í ½Ã°£À» º¸¿©ÁÖ±â
- * => ¿äÃ»ÇÏ´Â ÆÄ¶ó¹ÌÅÍ°¡ ¾øÀ¸´Ï ¿äÃ»Àº ÇÊ¿ä¾øÀ½
- * => ÀÀ´äÀ¸·Î ½Ã°£À» out.print()ÇÏ¸é µÈ´Ù
+ * http://localhost:9090/01_Servlet/now ï¿½Ö¼Ò¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¸ï¿½,
+ * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+ * => ï¿½ï¿½Ã»ï¿½Ï´ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½
+ * => ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ out.print()ï¿½Ï¸ï¿½ ï¿½È´ï¿½
  * 
  * */
 
-@WebServlet("/now")		// urlmapping°ªÀ» now·Î º¯°æ
+@WebServlet("/now")		// urlmappingï¿½ï¿½ï¿½ï¿½ nowï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 public class prac01 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,23 +33,23 @@ public class prac01 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		// ÀÀ´ä µ¥ÀÌÅÍ Å¸ÀÔ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
 		response.setContentType("text/html; charset=utf-8");
 		
-		// ÀÀ´ä ½ºÆ®¸² »ý¼º
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		PrintWriter out = response.getWriter();
 		
-		// ÇöÀç³¯Â¥ ¸¸µé±â
+		// ï¿½ï¿½ï¿½ç³¯Â¥ ï¿½ï¿½ï¿½ï¿½ï¿½
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH + 1);	// calendarÀº ´ÞÀÌ ÇÏ³ª Àû°Ô ³ª¿È
+		int month = cal.get(Calendar.MONTH + 1);	// calendarï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int day = cal.get(Calendar.DATE);
 		int hour = cal.get(Calendar.HOUR);
 		int minute = cal.get(Calendar.MINUTE);
 		int second = cal.get(Calendar.SECOND);
 		
-		// ÀÀ´ä ¸¸µé±â
-		out.print("<h1>ÇöÀç ½Ã°£Àº" + year + "³â" + month + "¿ù" + day + "ÀÏ" + hour + "½Ã" + minute + "ºÐ" + second + "ÃÊÀÔ´Ï´Ù</h1>");
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+		out.print("<h1>ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½" + year + "ï¿½ï¿½" + month + "ï¿½ï¿½" + day + "ï¿½ï¿½" + hour + "ï¿½ï¿½" + minute + "ï¿½ï¿½" + second + "ï¿½ï¿½ï¿½Ô´Ï´ï¿½</h1>");
 		
 		out.flush();
 		out.close();
