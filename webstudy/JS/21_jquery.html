@@ -55,8 +55,9 @@
             attr('src', '#')        dom.getAttribute('src', '#')
         4)  prop('src')             dom.src
             prop('src', '#')        dom.src= '#'
-        5)  css()                   dom.style?
-            css()
+         5.  $().css('width')                DOM.style.width 또는 DOM.style['width']
+                $().css('width', '10px')        DOM.style.width = '10px' 또는 DOM.style['width'] = '10px'
+        // => 제이쿼리는 []접근법이 없음
 
             //& 부
         5)  append(a)               dom += a
@@ -141,6 +142,7 @@
             </ul>
         </div>
         <script>
+
             $.each($('#box5 ul li'), function(i, elem) {
             console.log('인덱스' + i + ',요소' + elem + ',요소 텍스트' + $(elem).text()); 
             console.log('인덱스' + i + ',요소' + elem + ',요소 텍스트' + elem.textContent); 
@@ -178,9 +180,10 @@
             // 2) 자식
             console.log($('#box6').children());             // 자식 하나                : [ul]
             console.log($('#box6').children().children());  // 자식의 자식              : [li] 5개
+            console.log($('#box6').children()[1]);          // 부모인덱스와 동일한 방식 : li전부
 
             // & 이걸 사용할것
-            console.log($('#box6').find('a'))               // 자식 중 a태그들
+            console.log($('#box6').find('a'))               // '자식' 중 a태그들
 
             // 3) 형제
             console.log($('#kakao').prev());                // 이전 형제                : [li#daum]
@@ -188,7 +191,7 @@
             console.log($('#kakao').next());                // 다음 형제                : [li#daum]
             console.log($('#kakao').nextAll());             // 다음 모든 형제           : [li#naver]
             console.log($('#kakao').siblings());            // 모든 형제(좌우다)                : [li#google,]
-            console.log($('#kakao').siblings('.aa'));
+            console.log($('#kakao').siblings('.aa'));       // aa의 좌우 모든 형제들
             
             // 4) 구조 찾기
             console.log($('#box6 ul li:first'));        // 첫번째 li
@@ -343,6 +346,7 @@
                     (3) delegate()
 
                 2) 요즘 이벤트
+                & 제이쿼리는 여러 이벤트 등록이 가능한가?(표준이벤트작성?)
                     (1) on()
                         - 여러 이벤트 타입을 한번에 등록
                         - 동적으로 생성된 요소에 이벤트 등록 가능
@@ -360,6 +364,16 @@
             */
         </script>
         <script>
+
+            // 1. 정적요소
+
+            /* 
+                & 정적과 동적의 차이
+                정적 : 원래있던 요소에 이벤트 부여
+                동적 : 이벤트 부여 후, 해당 이벤트 대상을 나중에 html함수로 생성
+                // => 기존에 없는 요소를 바로 만들어서 이벤트를 부여하는 것을 말하는것같다?
+            */
+
             // 1) 정적 요소에 이벤트 추가(key, value 형태)
             // (1) on() 메서드 이용
             $('#btn1').on('click', function(event) {
@@ -371,6 +385,7 @@
             }) 
 
 
+            // 2. 동적요소
             // 2) 동적 요소 추가
             $('#box11').append($('<button>').text('버튼2').attr('id', 'btn2'));
 

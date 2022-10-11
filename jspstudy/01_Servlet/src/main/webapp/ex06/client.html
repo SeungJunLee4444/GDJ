@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.1.min.js"></script>
+</head>
+<body>
+	<!-- [api] -->
+	<div>
+		<input type="text" id="query" name="query" placeholder="검색어 입력">
+		<select id="display">
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		
+		</select>
+		<input type="button" id="btn1" value="검색">	
+	</div>
+	<div>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>영화제목</td>
+					<td>부제]</td>
+					<td>이미지</td><!-- 이미지 클릭시 링크 열리기 -->
+					<td>제작년도</td>
+					<td>감독</td>
+					<td>출연배우</td>
+					<td>평점</td>
+				</tr>
+			</thead>
+			<tbody id="movies"></tbody>
+		</table>
+	</div>
+	<script>
+	$('#btn1').on('click', function() {
+		/* fn_getXML(); */
+		fn_getJSON();
+	});
+		function fn_getXML() {
+			$.ajax({
+				// 요청
+				type : 'get',
+				url : '/01_Servlet/MovieServlet',
+				data : 'query=' + $('#query').val() + '&display=' + $('#display').val(),	// => 사용자가 검색창에 입력한 값
+				
+				// 응답
+				dataType : 'xml',	// 웹상에는 xml, json 둘다 가능(선택)
+			
+				// 데이터를 담는 객체
+				// => 성공시에는 resData에, 실패시에는 jqXHR에 저장된다
+				success: function(resData){
+					$('#movies').empty();
+					$.each($(resData).find('item'), function(i, item){
+						var tr = $('<tr>');
+						tr.append($('<td>').html($(item).find('title').text()));
+						tr.append($('<td>').html($(item).find('subtitle').text()));
+						tr.append($('<td>').html($('<a>').attr('href', $(item).find('link').text()).html($('<img>').attr('width', '80px').attr('height', '120px').attr('src', $(item).find('image').text()))));
+						tr.append($('<td>').html($(item).find('pubDate').text()));
+						tr.append($('<td>').html($(item).find('director').text()));
+						tr.append($('<td>').html($(item).find('actor').text()));
+						tr.append($('<td>').html($(item).find('userRating').text()));
+						tr.appendTo('#movies');
+					});
+				},
+				error : function(jqXHR) {
+					console.log('status:' + jqXHR.status);
+					console.log('responseText:' + jqXHR.responseText)
+				}
+			});
+		}
+		
+		/* 접근법의 차이
+		json	: 태그의 속성으로 접근
+		xml		: 제이쿼리의 경우 find메서드를 사용해 태그접근
+		
+		*/
+		
+		function fn_getJSON () {
+			$.ajax({
+				// 요청
+				type : 'get',
+				url : '/01_Servlet/MovieServlet',
+				data : 'query=' + $('#query').val() + '&display=' + $('#display').val(),	// => 사용자가 검색창에 입력한 값
+				
+				// 응답
+				dataType : 'json',	// 웹상에는 xml, json 둘다 가능(선택)
+			
+				// 데이터를 담는 객체
+				// => 성공시에는 resData에, 실패시에는 jqXHR에 저장된다
+				success: function(resData){
+					$('#movies').empty();
+					$.each($(resData).find('item'), function(i, item){
+						var tr = $('<tr>');
+						tr.append($('<td>').html($(item).find('title').text()));
+						tr.append($('<td>').html($(item).find('subtitle').text()));
+						tr.append($('<td>').html($('<a>').attr('href', $(item).find('link').text()).html($('<img>').attr('width', '80px').attr('height', '120px').attr('src', $(item).find('image').text()))));
+						tr.append($('<td>').html($(item).find('pubDate').text()));
+						tr.append($('<td>').html($(item).find('director').text()));
+						tr.append($('<td>').html($(item).find('actor').text()));
+						tr.append($('<td>').html($(item).find('userRating').text()));
+						tr.appendTo('#movies');
+					});
+				},
+				error : function(jqXHR) {
+					console.log('status:' + jqXHR.status);
+					console.log('responseText:' + jqXHR.responseText)
+				}
+			});
+		}
+	</script>
+
+</body>
+</html>
