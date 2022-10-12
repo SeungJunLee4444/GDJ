@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리_ajax</title>
+    <script src="jquery-3.6.1.min.js"></script>
+</head>
+<body>
+    <div id="box1">
+        <button id="btn1">클릭</button>
+    </div>
+    <script>
+        $('#btn1').on('click', function(event) {
+            $.ajax({
+                type : 'GET',
+                url : 'data.txt',
+                async : true,
+                dataType : 'text',
+                success : function(data) {
+                    $('#box1').append($('<div>').text(data))    // 박스1 안에 div태그를 만들고 텍스트에 데이터를 넣는다
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    console.log('status', jqXHR.status);                // 응답코드 ex) 404
+                    console.log('statusText', jqXHR.statusText);        // 응답텍스트 ex) not found
+                    console.log('responseText', jqXHR.responseText);    // 서버(서블릿)측에서 보낸 예외메시지
+
+                }
+            })
+        });
+    </script>
+</body>
+</html>

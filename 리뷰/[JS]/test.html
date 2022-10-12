@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1. 
+    아이디의 조건은,
+    첫글자는 알파벳 소문자 한글자야 하며,
+    그 다음부터는 알파벳 소문자 또는 0에서 9의 임의의 숫자를 입력해야햐하고, 
+    글자수는 3글자 이상 19자 이하다
+    
+    -->
+    <div>
+        <h3>아이디 검사</h3>
+        <input type="text" id="user_id">
+        <span id="msg_id"></span>
+    </div>
+    <script>
+        document.getElementById('user_id').onblur = function(event) {
+            // 조건 : 5-20자, 소문자 & 숫자 & _ 
+            var regId = /^[a-z][a-z0-9]{3,19}$/;
+            if(regId.test(this.value)) {
+                alert('올바른 아이디');
+            } else {
+                alert('잘못된 아이디');
+                
+            }
+        }
+    </script>
+
+    <!-- & 정규식에서 [][] 대괄호는 각각의 조건에 해당한다(문장 전체에서 별도의 텍스트범위를 지님) -->
+    <!-- => [a-z]와 [a-z0-9]{3,19}는 별개다 *** -->
+
+    <!-- 2. 경고버튼 이벤트 모델별로 만들기 -->
+    <!-- 고전 -->
+    <button id="btn1">전송</button>
+    <script>
+        document.getElementById('btn1').onclick = function(event) {
+            alert('전송합니다.');
+        }
+    </script>
+
+    <!-- 표준 -->
+    <button id="btn2">전송</button>
+    <script>
+        document.getElementById('btn2').addEventListener('click', function(event) {
+            alert('전송합니다.');
+        })
+    </script>
+
+    <!-- 인라인 -->
+    <button id="btn3" onclick="alert('전송합니다')">전송</button>
+
+    <!-- 3. 버튼을 누르면 구글로 이동하는 이벤트 작성 -->
+    <button id="to_site">이동</button>
+    <script>
+        document.getElementById('to_site').onclick = function(event) {
+            location.href = "https://www.google.com";
+        }
+    </script>
+
+    <!-- 4. 네이버 검색 html과 자바스크립트 코드 : 왜 작동안하는지 이유를 설명하고 코드를 수정 -->
+    <form id="frm" action="https://search.naver.com/search.naver">
+        <input type="text" name="query" id="query">
+        <input type="button" value="네이버검색" id="btn">
+    </form>
+    <script>
+        var frm = document.getElementById('frm');
+        document.getElementById('btn').onclick = function(event) {
+            alert('검색어는' + document.getElementById('query').value + '입니다');
+            frm.submit();
+        }
+    </script>
+    <!-- 이유 : input type=button은 아무런 기능이 없는 버튼으로, 서브밋 기능이 없기 때문에, 
+    작동하지 않는 것이다
+    해결책은,
+    (1) input type="button"을 input type="submit"로 바꾸거나
+    (2) 자바스크립트 내에서 서브밋을 구현하면된다
+    -->
+
+    <!-- => 수정 -->
+    
+    
+
+</html>

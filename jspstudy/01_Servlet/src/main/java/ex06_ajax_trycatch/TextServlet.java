@@ -1,4 +1,4 @@
-package ex05_데이터_예외;
+package ex06_ajax_trycatch;
 
 import java.io.IOException;
 import java.io.PrintWriter;

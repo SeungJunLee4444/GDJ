@@ -1,4 +1,4 @@
-package ex05_데이터_예외;
+package ex06_ajax_trycatch;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,17 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
-import org.json.XML;
 
 
-@WebServlet("/XML_Servlet")
-public class XML_Servlet extends HttpServlet {
+@WebServlet("/Json_Servlet")
+public class Json_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		// [xml]
+		
 		// 요청
 		request.setCharacterEncoding("utf-8");
 		
@@ -33,27 +31,14 @@ public class XML_Servlet extends HttpServlet {
 		obj.put("name", name);
 		obj.put("age", age);
 		
-		
-		JSONObject person = new JSONObject();
-		person.put("person", obj);
-		
-		// + 응답할 json 객체를 xml로 변환하기
-		String responseXML = XML.toString(person);
-		// => 결과
-		// <person>
-		// 		<name>가나다</name>
-		// 		<age>44</age>
-		// </person>
-		
 		// 응답
 		// & json데이터 처리는 응답시 타입만 건드려주면된다(텍스트와 그외에는 동일)
-		response.setContentType("application/xml; charset=utf-8");		// json 데이터의 mine-type
-			
+		response.setContentType("application/json; charset=utf-8");		// json 데이터의 mine-type
+		// => 자바의 contenttype과 html의 datatype 맞추기
 		
 		PrintWriter out = response.getWriter();
-		out.println(responseXML);	// 응답데이터는 텍스트 처리된 json객체
+		out.println(obj.toString());	// 응답데이터는 텍스트 처리된 json객체
 		out.close();
-				
 		
 	}
 

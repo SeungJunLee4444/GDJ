@@ -1,4 +1,4 @@
-package ex03;
+package ex03_parameter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +23,7 @@ public class anchorservlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// ¿äÃ» ÆÄ¸®¹ÌÅÍ
+		// ï¿½ï¿½Ã» ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½
 		request.setCharacterEncoding("utf-8");
 		String stra = request.getParameter("a");
 		String strb = request.getParameter("b");
@@ -36,19 +36,19 @@ public class anchorservlet extends HttpServlet {
 			b = Integer.parseInt(strb);			
 		}
 		
-		System.out.println("°ª" + (a + b));
+		System.out.println("ï¿½ï¿½" + (a + b));
 		
-		// ÀÀ´ä ¸¸µé±â
-		// => ¿äÃ»Àº ´ÜÃàÀÌ¾øÀ½, ÀÀ´ä¸¸ setcontenttype°¡ ÀÖÀ½
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+		// => ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ä¸¸ setcontenttypeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		response.setContentType("text/html; charset=utf-8");
 	
 		PrintWriter out = response.getWriter();
-		// => getWriterÀÌ ¹ÝÈ¯ÇÏ´Â°Ç printwriter
+		// => getWriterï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ï´Â°ï¿½ printwriter
 		
 		
 		
-		// À¥»ó¿¡ Ãâ·Â
-		// => ÀÀ´ä½Ã html¹®¼­
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		// => ï¿½ï¿½ï¿½ï¿½ï¿½ htmlï¿½ï¿½ï¿½ï¿½
 		out.println("<h1>hello world</h1>");
 		out.println("<h1>" + a + "+" + b + "=" + (a+b) + "</h1>"); 
 		
