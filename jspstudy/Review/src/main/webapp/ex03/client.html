@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!--& 주소개념  -->
+
+
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 1. get 요청방식 1 : a태그
+	
+	-->
+	<!-- 정상링크 : 둘중 하나 사용 -->
+	<div>
+		<a href="http://localhost:9090/Review/AnchorServlet">정상링크1</a>
+	</div>
+	<div>
+		<a href="/Review/AnchorServlet">정상링크2</a>	<!-- => 애용 -->
+	</div>
+	
+	<!-- a링크 연습 : a태그로 1더하기 2는 3 응답받기 -->
+	<div>
+		<a href="/Review/AnchorServlet?a=1&b=2">더하기</a>
+	</div>
+	
+	<!--------------------------------------------------------------------------  -->
+	
+	
+	<!-- 2. get 요청방식 2 : <form> 태그를 이용한 서브밋 -->
+	<div>
+	<form id="frm" method="GET" action="/Review/FormServlet">
+			<!-- 변수 보내기 -->
+			<div>
+				<input type="text" id="id" name="id" placeholder="아이디">
+			</div>
+			<div>
+				<input type="password" id="pwd" name="pwd" placeholder="비밀번호">
+			</div>
+			<div>
+				<label for="male"><input type="radio" id="male" name="gender" value="남자">남자</label>
+				<label for="female"><input type="radio" id="female" name="gender" value="여자">여자</label>
+				<label for="none"><input type="radio" id="none" name="gender" value="">선택안함</label>
+			</div>
+			<div>
+				<select id="city" name="city">
+					<option value="">도시를 선택하세요</option>
+					<option value="incheon">인천</option>
+					<option value="seoul">서울</option>
+					<option value="busan">부산</option>
+				</select>
+			</div>
+			<!-- 배열 보내기 
+			& input text와 checkbox같이 복수의 값을 서브밋할때 name 파라미터가 동일할 경우 값은 배열로 저장된다 
+			-->
+			<div>
+				<input type="text" name="phone" size="3" maxlength="3">-
+				<input type="text" name="phone" size="4" maxlength="4">-
+				<input type="text" name="phone" size="4" maxlength="4">
+			</div>
+			<div>
+				<label for="terms"><input type="checkbox" id="terms" name="agree" value="terms">이용약관 동의</label>
+				<label for="service"><input type="checkbox" id="service" name="agree" value="service">서비스 동의</label>
+				<label for="marketing"><input type="checkbox" id="marketing" name="agree" value="marketing">마케팅 동의</label>
+			</div>
+			<div>
+			<button id="btn">전송</button>
+		</form>
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
