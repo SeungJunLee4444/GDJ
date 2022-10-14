@@ -62,7 +62,11 @@ public class FormServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		if(city.isEmpty()) {
 			city = "빈 도시";
-		}
+		}  
+		
+		
+		// & isempty() 	: 빈 문자열인지 확인, 주소값은 있음("")
+		// & null		: null 아무런 값도 할당되지않은 상태
 		
 		// & 동일한 파라미터가 2개 이상이면 배열로 요청
 		// 예외 : radio => 하나만 선택하기 때문

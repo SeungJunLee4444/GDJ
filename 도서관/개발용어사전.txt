@@ -1,8 +1,0 @@
-JSP
-
-DB(DBCP)
-
-MVC
-
-MODEL1
-=> JSP로 서블릿과 JSP 둘다 하는것
