@@ -11,9 +11,9 @@
 <body>
 	<% 
 		// 1. session에 저장된 cart 가져와서 화면 출력
-		List<Map<String, Object>> cart = (List<Map<String, Object>>)session.getAttribute("cart");
+		List<Map<String, Object>> cart = (List<Map<String, Object>>)session.getAttribute("cart");	// => add.jsp에서 set한것을 받아옴
 		StringBuilder sb = new StringBuilder();
-		if(cart == null) {
+		if(cart == null) {	// 빈값이 있을 수 없음?
 			sb.append("<div>장바구니가 비었습니다.</div>");
 		} else {
 		for(int i = 0; i < cart.size(); i++) {

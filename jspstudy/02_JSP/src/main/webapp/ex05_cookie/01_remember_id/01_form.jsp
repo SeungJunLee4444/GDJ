@@ -40,7 +40,7 @@
 				</div>
 				<div>
 					<label for="chk_remember_id">
-						<input type="checkbox" name="chk_remember_id" id="chk+remember_id" >
+						<input type="checkbox" name="chk_remember_id" id="chk_remember_id" >
 						아이디기억하기
 					</label>
 				</div>

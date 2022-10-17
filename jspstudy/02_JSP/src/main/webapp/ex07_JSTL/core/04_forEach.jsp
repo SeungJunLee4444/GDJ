@@ -43,6 +43,8 @@
 		String[] menu = {"튀김", "떡볶이", "순대"};
 		// => 자바변수는 el 사용이 안된다
 		pageContext.setAttribute("menu", menu);
+		// & pagecontext : jsp 기본객체 => 페이지 접근 
+		// & 속성을 만들어 접근
 	%>
 	<c:forEach var="food" items="${menu}" varStatus="vs">	
 	<%-- => 배열의 인덱스를 쓰고싶으면 varStatus의 정해진 객체들을 사용해야한다(vs는 임의의 이름, 변수명)
@@ -59,9 +61,11 @@
 		List<String> seasons = Arrays.asList("봄", "여름", "가을", "겨울");
 		pageContext.setAttribute("seasons", seasons);
 	%>
-	<C:forEach var="season" items="${seasons}" varStatus="ds">
-		인덱스 : ${ds.index}, 순번 : ${vs.count}, 배열요소: ${season}<br>
-	</C:forEach>
+	<c:forEach var="season" items="${seasons}" varStatus="ds">
+		인덱스 : ${ds.index}, 순번 : ${ds.count}, 배열요소: ${season}<br>
+	</c:forEach>
+	<%--  => 대문자 C는 오류발생 주의!--%>
+	
 	
 	<%-- 6. Map --%>
 	<%-- =>  map을 el에서 사용하는 방식 --%>

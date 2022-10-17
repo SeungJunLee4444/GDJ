@@ -11,6 +11,7 @@
 	int amount = Integer.parseInt(request.getParameter("amount"));
 	// null 처리는 안했음
 	
+	
 	// 2. 구매할 제품 + 구매수량 -> map에 저장(장바구니)
 	Map<String, Object> product = new HashMap<>();
 	// => 저장해야할 값이 string, int 복수의타입이니 object
@@ -44,3 +45,12 @@
 			location.href = '01_form.jsp'
 		}
 </script>
+
+
+
+
+
+
+
+
+
