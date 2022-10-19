@@ -1,0 +1,61 @@
+[MVC 5장] : MyBatis + Mvc 패턴
+
+& MyBatis : sqlsession을 사용하는것을 말한다
+sqlsession : JDBC의 connection, preparedstatement, resultset을 동시에 처리하는 클래스
+
+=>'즉 기존의 JDBC를 대체하는 역할'
+(JBDC 공부안해도됨)
+
+& sqlsession 호출방법
+
+* 형태
+SqlSession ss;
+ss.selectList();
+ss.selectOne();
+ss.insert();
+ss.update();
+ss.delete();
+
+-------------------------------------------------------------------------------
+
+1. 세팅
+1) 다운로드
+주소 : https://blog.mybatis.org/p/products.html
+선택 : mybatis-3.5.11.jar 만 필요
+용도 : 
+
+2) 사용
+- mybatis-config 파일 내에 xml 파일을 생성후,
+홈페이지의 xml문서 설정을 복붙한다 
+
+& 트랜잭션
+- 서비스가 복수의 DML(ex 은행이체서비스)을
+둘다 처리하던가, 둘다 안하던가 
+=> spring에서 배울꺼니 신경쓰지말것
+
+* 모든 jsp의 jar 파일은 web-inf의 lib 폴더 안에 저장한다
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DTO : database transfer object
+- 싱글턴패턴
+
+DAO : 

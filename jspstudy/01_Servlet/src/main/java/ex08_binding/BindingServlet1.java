@@ -14,9 +14,12 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/BindingServlet1")	
 // [바인딩서블릿1]
-// - & 웹 프로그램 실행시 서블릿 자원을 서블릿 관련 객체에 저장하는 방법
+	// & 서블릿 자원을 서블릿 관련 객체에 저장하는 것을 바인딩이라 한다
+	// 저장을 위해서는 서블릿 영역과 속성 접근메서드가 필요하다
+
+// - & 웹 프로그램 실행시 서블릿 자원을 서블릿 관련 객체에 저장하는 방법	& 요청에 데이터를 저장하는것을 바인딩이라한다
 // - 정의 : 속성의 정보를 저장하고, 사용하는것(데이터저장)
-// - 속성을 저장할 수 있는 3개의 영역
+// - 속성을 저장할 수 있는 3개의 영역(시간?)
 //		(1) servletcontext  	: 애플리케이션(프로젝트) 종료 전까지 가능, 	
 // 		=> ex) 방문자수
 //		(2) httpsession			: 브라우저 종료 전까지 접근해서 사용가능		&로그인 구현
@@ -48,18 +51,20 @@ public class BindingServlet1 extends HttpServlet {
 	
 		// 1. 각 메서드로 저장하는법
 		// ServletContext(방문자수 저장)
-		ServletContext ctx = getServletContext();	// 또는 request.getServletContext();
+		ServletContext ctx = getServletContext();	// & 또는 request.getServletContext();
 		// => generic 소속 메서드라 servletrequest
 		ctx.setAttribute("a", 1);
 		
 		// HttpSession(로그인 저장)
 		HttpSession session = request.getSession();
-		ctx.setAttribute("b", 2);
+		session.setAttribute("b", 2);
 		
 		// HttpServletRequest(요청응답저장)
 		request.setAttribute("c", 3);
 		// => 매개변수에 이미 선언되있어서 별도의 선언이 필요없음
 		// => 요청으로도 데이터를 저장할 수 있다
+		
+		// & 파라미터 추가하는거 아님, 요청에 값을 전달할때 바인딩 사용
 		
 
 		
@@ -81,14 +86,35 @@ public class BindingServlet1 extends HttpServlet {
 
 		
 		// & 한 페이지에서 다른페이지로 데이터를 전달할때 가장 흔히쓰는 패턴
-//		request.setAttribute("c", 3);
-//		request.getRequestDispatcher("/BindingServlet2").forward(request, response);
+		request.setAttribute("c", 3);
+		request.getRequestDispatcher("/BindingServlet2").forward(request, response);
 		
 		// 2. 리다이렉트
 		// - request를 전달하지않음(요청을 서버로 애초에 보내지않는다)
 		// - 클라이언트 -> 서버로 이동하므로 컨텍스트 패스를 전달해야함
 		
-		response.sendRedirect("/01_Servlet/BindingServlet2");
+		//-----------------------------------------------
+		// & 리다이렉트와 포워드의 차이 2
+		// (1) 리다이렉트	: 다른 서블릿으로 이동시 파라미터 상에는 최종적인 urlmapping이 입력된다
+		// (2) 포워드		: 다른 서블릿으로 이동해도 파라미터 상에 최초의 urlmapping이 입력된다
+		
+		// & 페이지 전환 주체에 따른 시각******************************
+		// 1. 페이지 전환주체가 클라이언트면 리다이렉트며, 이경우 페이지 전환을 위해서는 다른 url에 접속해야한다
+		// 즉, 리다이렉트를 사용하면 클라이언트가 요청한 최종적인 서블릿으로 이동하게 된다
+		// 2. 페이지 전환 주체가 서버면 포워드로, 이경우 페이지 전환을 위해서 다른 url을 쓸 필요가 없기 때문에
+		// 기존의 urlmapping을 유지하게된다
+		
+		// 리다이렉트 => 다른 url로 재접속하라고 명령, 회원가입같은 요청이 중복되면 안되는 경우에 사용(db에 저장되야하기 때문)
+		// 포워드 => 모든 처리를 서버 내에서 하기 때문에 클라이언트의 url이 변동되지 않는다(특정 url이 노출되면 안될때 사용)
+		
+		// & 요청정보에 따른 시각******************************
+		// 1. 리다이렉트는 요청한 페이지로 이동하면, 요청에 담긴 정보가 사라지기 때문에,
+		// => 데이터를 수정해야하는 회원가입, 글쓰기 등에 사용된다
+		// 2. 포워드는 요청한 페이지로 이동시, 기존의 요청정보가 그대로 전달되기 때문에,
+		// 새로고침을 해도 글쓰기가 계속 중복등록되는 경우가 발생한다
+		// => 글목록보기, 검색 등 데이터를 건드리지 않는 작업에 사용된다
+//		response.sendRedirect("/01_Servlet/BindingServlet2");
+		//-----------------------------------------------
 		
 	}
 	

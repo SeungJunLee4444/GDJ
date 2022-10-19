@@ -57,9 +57,9 @@
 				/* 3) 실패 */
 				// => 예외발생시 예외정보가 jqXHR에 전달됨
 				error : function(jqXHR) {			/* 예외 발생시 예외정보가 jqXHR객체에 전달됨 */
-					$('#box1').append('status : ' + jqXHR.status + '<br>');
-					$('#box1').append('statusText : ' + jqXHR.statusText + '<br>');
-					$('#box1').append(jqXHR.responseText);
+					$('#box1').append('status : ' + jqXHR.status + '<br>');				// status : 500
+					$('#box1').append('statusText : ' + jqXHR.statusText + '<br>');		// statustext: error
+					$('#box1').append(jqXHR.responseText);								// 상태코드 남색창
 				/* 결과 :   */
 				}
 			});
@@ -121,6 +121,9 @@
 			error: function(jqXHR) {
 				box3.append('status:' + jqXHR.status + '<br>');	// 상태코드
 				box3.append(responseText);	
+				
+				
+				// 찾고 사용하려는 주체는 제이쿼리를쓰지만, (대상)은 제이쿼리가 아니여도된다
 			}
 		});		
 	});

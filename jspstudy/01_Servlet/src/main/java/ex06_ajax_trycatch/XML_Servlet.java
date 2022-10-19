@@ -38,7 +38,7 @@ public class XML_Servlet extends HttpServlet {
 		person.put("person", obj);
 		
 		// + 응답할 json 객체를 xml로 변환하기
-		String responseXML = XML.toString(person);
+		String responseXML = XML.toString(person);	// xml을 문자열로 변환
 		// => 결과
 		// <person>
 		// 		<name>가나다</name>

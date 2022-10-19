@@ -101,7 +101,7 @@
 						tr.append($('<td>').html($(item).find('director').text()));
 						tr.append($('<td>').html($(item).find('actor').text()));
 						tr.append($('<td>').html($(item).find('userRating').text()));
-						tr.appendTo('#movies');
+						tr.appendTo('#movies');	// => appendto (대상에 업로드)
 					});
 				},
 				error : function(jqXHR) {
