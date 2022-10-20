@@ -1,8 +1,30 @@
 [서블릿]
 - servletcontext
 - httpsession
--httpservletrequest
-- 
+1) httpservletrequest
+- 클라이언트의 요청을 처리하는 클래스
+- 톰캣이 서블릿 요청을 받으면 httpservletrequest 객체가 생성된다
+-
+2) session
+- httpsession 클래스의 객체
+- 서버 메모리에 저장되는 정보
+- 유효시간을 지님
+- 주로 로그인 정보, 장바구니 등에 세션이 사용
+
+
+
+& 스코프 종류
+1. ServletContext : 동일한 애플리케이션에서 접근 가능(서버가 유지되는한 지속저장)
+2. HttpSession   : 동일한 브라우저에서 접근 가능(웹 사이트 안에서 유지)
+3. HttpServeletRequest : 하나의 요청/응답 사이클에서만 접근 가능(요청응답이 끝나면 사라짐)
+
+& servlet attribute
+- 서블릿 속성
+- 웹 프로그램 실행 시 데이터를 서블릿 관련 객체에 저장
+1) setattribute(string name object obj): 지정한 name 속성으로 obj저장
+2) getattribute(string name)		: 지정한 name 속성의 값을 반환
+3) removeattribute(String name)	: 지정한 name 속성 삭제
+
 
 --------------------------------
 & el을 이용한 절대경로
