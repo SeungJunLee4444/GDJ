@@ -26,6 +26,8 @@ public class ForwardServlet2 extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<h1>파라미터 a=" + a + "</h1>");
 		
+//		& 리다이렉트든 포워드든 처음1회에 파라미터를 전송할때는 상관없이 파라미터 전송이 가능하다
+		
 		
 		
 	}

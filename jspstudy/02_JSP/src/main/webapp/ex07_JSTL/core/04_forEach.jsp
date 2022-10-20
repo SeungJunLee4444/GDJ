@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="domain.Board"%>
+<%@page import="domain.Student"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Arrays"%>
@@ -40,11 +40,11 @@
 	
 	<%-- 4. 배열순회 --%>
 	<%
-		String[] menu = {"튀김", "떡볶이", "순대"};
-		// => 자바변수는 el 사용이 안된다
-		pageContext.setAttribute("menu", menu);
-		// & pagecontext : jsp 기본객체 => 페이지 접근 
-		// & 속성을 만들어 접근
+	String[] menu = {"튀김", "떡볶이", "순대"};
+			// => 자바변수는 el 사용이 안된다
+			pageContext.setAttribute("menu", menu);
+			// & pagecontext : jsp 기본객체 => 페이지 접근 
+			// & 속성을 만들어 접근
 	%>
 	<c:forEach var="food" items="${menu}" varStatus="vs">	
 	<%-- => 배열의 인덱스를 쓰고싶으면 varStatus의 정해진 객체들을 사용해야한다(vs는 임의의 이름, 변수명)
@@ -59,8 +59,8 @@
 	
 	<%
 		List<String> seasons = Arrays.asList("봄", "여름", "가을", "겨울");
-		pageContext.setAttribute("seasons", seasons);
-	%>
+				pageContext.setAttribute("seasons", seasons);
+		%>
 	<c:forEach var="season" items="${seasons}" varStatus="ds">
 		인덱스 : ${ds.index}, 순번 : ${ds.count}, 배열요소: ${season}<br>
 	</c:forEach>
@@ -70,11 +70,11 @@
 	<%-- 6. Map --%>
 	<%-- =>  map을 el에서 사용하는 방식 --%>
 	<%
-		Map<String, Integer> map = new HashMap<>();
-	// => 제네릭은 참조타입만 가능 : integer
-		map.put("begin", 1);
-		map.put("end", 10);
-		pageContext.setAttribute("map", map);
+	Map<String, Integer> map = new HashMap<>();
+		// => 제네릭은 참조타입만 가능 : integer
+			map.put("begin", 1);
+			map.put("end", 10);
+			pageContext.setAttribute("map", map);
 	%>
 	${map.begin} ~ ${map.end}
 	
@@ -82,11 +82,11 @@
 	
 	<%-- 7. 객체(반복이 필요한건 아님) --%>
 	<%
-		Board board = new Board();
-		board.setBoardNo(1);
-		board.setTitle("도데체 언제까지..");
-		board.setHit(100);
-		pageContext.setAttribute("board", board);
+	Student board = new Student();
+			board.setBoardNo(1);
+			board.setTitle("도데체 언제까지..");
+			board.setHit(100);
+			pageContext.setAttribute("board", board);
 	%>
 	${board.boardNo}, ${board.title}, ${board.hit}<br>
 	${board.getBoardNo()}, ${board.getTitle()}, ${board.getHit()}<br>

@@ -1,0 +1,33 @@
+[JSTL] 
+1. JSTL
+- 개념 : JSP에서 자바의 기능을 태그로 사용할 수 있다
+- 용도 : 변수생성(set), url 처리, 제어문(조건문, 반복문) 을 처리하는데 사용
+
+=> 사용을 위해서는 코어라이브러리가 필요하다
+=> 코어라이브러리가 가진 JSP 태그들
+(1) set : 변수선언 기능을 제공
+(2) fmt : 숫자,날짜, 시간을 포메딩하는 기능을 제공
+
+
+2. core 라이브러리 다운로드
+- 특징 : JSP 페이지에서 필요한 가장 기본적인 기능을 제공
+- 용도 : '변수선언'에 사용된다
+- 조건 :  사용하려면 톰켓에서 제공하는 jar파일을 사용해야한다
+- 다운로드 주소 : https://tomcat.apache.org/download-taglibs.cgi
+
+- 주소로 들어가서 Jar Files의 아래 목록에서 다운로드
+1) 다운로드할 두개의 jar 파일
+Impl:
+taglibs-standard-impl-1.2.5.jar (pgp, sha512)
+Spec:
+taglibs-standard-spec-1.2.5.jar (pgp, sha512)
+
+=> 1.0버전 이상은 아래 jar이 필요없음
+EL:
+taglibs-standard-jstlel-1.2.5.jar (pgp, sha512)
+Compat:
+taglibs-standard-compat-1.2.5.jar (pgp, sha512)
+
+
+보관경로 : (프로젝트별) webapp - lib에 저장
+

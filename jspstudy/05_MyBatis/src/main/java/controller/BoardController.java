@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import common.ActionForward;
 import service.BoardAddService;
 import service.BoardDetailService;
+import service.BoardEditService;
 import service.BoardListService;
+import service.BoardModifyService;
 import service.BoardRemoveService;
 import service.BoardService;
 
@@ -60,6 +62,13 @@ public class BoardController extends HttpServlet {
 		case "/board/remove.do" :	// 
 			service = new BoardRemoveService();
 			break;
+		case "/board/edit.do" :
+			service = new BoardEditService();
+			break;
+		case "/board/modify.do" :
+			service = new BoardModifyService();
+			break;
+		
 			// & .do와 요청에 따른 서비스처리
 			// => .do는 웹서블릿 하나로 여러 요청을 받기 위한 것
 			// => urlmapping은 파일에서 확장명을 땐 값

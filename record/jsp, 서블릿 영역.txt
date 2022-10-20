@@ -1,0 +1,45 @@
+[서블릿]
+- servletcontext
+- httpsession
+-httpservletrequest
+- 
+
+--------------------------------
+& el을 이용한 절대경로
+1) jstl
+${pageContext.request.contextPath }
+출처: https://heekim0719.tistory.com/122 [별토끼 DEVLOG:티스토리]
+2) 서블릿, jsp의 java 소스에서 처리
+request.getContextPath()
+
+
+=> 개발도중 컨텍스트path의변경으로 인한 오류를 방지하기 위해 기본path를 변수로 생성
+--------------------------------
+
+[jsp]
+1. 정의 : 웹 서버에서 객체 또는 변수가 생성된 후 유효할 수 있는 범위를 말한다
+
+2. 내장객체 종류(scope)
+& 내장객체들은 별도로 선언하지 않아도 참조하여 사용가능하다
+1) page: 페이지 영역에 저장한 값은 페이지를 벗어나면 사라짐.
+
+2) request: redirect 시 사라짐. forward는 값유지
+=> getparameter 메서드 사용가능
+
+3) session: 인증된 사람만 허락 ,, ex) 로그인 유지
+=> getwriter 메서드 사용가능
+
+4) application: 전체 영역
+
+5) pageContext : jsp 페이지 하나에 1:1로 연결된 객체
+(하나의 jsp 페이지에 하나의 pageContext객체가 생성)
+- 같은 페이지 내에서는 서로 값을 공유할 수 있으며,
+
+- 정의 : jsp페이지의 컨텍스트 텍스를 의미한다
+
+3. 공통함수
+- scope 객체에 key, value 형식으로 값을 할당한다
+1) setAttribute(String key, object value)
+2) getAttribute(key)
+
+4. pageContext

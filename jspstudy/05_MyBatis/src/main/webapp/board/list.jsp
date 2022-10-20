@@ -52,6 +52,18 @@
 	ul > li:hover {
 	background-color : orange;
 	}
+	
+	.btn_add {
+	background-color : teal;
+	margin: 40px auto 20px;
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+	font-weight: 900;
+	}
+	
 </style> 
     
 <meta charset="UTF-8">
@@ -69,7 +81,7 @@
 </head>
 <body>
 	<h1>게시글 목록 보기</h1>
-	<div id="btn_add">추가</div>
+	<div class="btn_add" id="btn_add">추가</div>
 	<ul>
 		<c:forEach items="${boards}" var="b">
 			<li>

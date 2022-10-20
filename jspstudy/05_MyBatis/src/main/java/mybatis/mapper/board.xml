@@ -61,6 +61,16 @@
  		   WHERE BOARD_No = #{boardNo}
  	</delete>
  	
+ 	<!-- 5. 게시글 수정 
+ 		1) parameterType : Board board
+ 		2) resultType 	: 작성하면안된다 => 성공시 0또는1 반환
+ 	-->
+ 	<update id="updateBoard" parameterType="Board">
+ 		UPDATE BOARD
+ 			SET TITLE = #{title}, CONTENT=#{content}
+ 			WHERE BOARD_NO = #{boardNo}
+ 	</update>
+ 	
  		
  		
  		

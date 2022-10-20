@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- 
+
+
 	<div>
 		<form method="get" action="02_parameter2.jsp">
 			<div>

@@ -43,7 +43,7 @@ public class BoardAddService implements BoardService {
 		
 		out.close();
 
-		return null;	// null을 반환한다는 것은 아무런 값도 반환하지 않겠다는뜻
+		return null;	// => 작동한다, 컨트롤러로 null을 반환, 컨트롤러는 redirect&포워드 모두 수행하지 않는다
 	}
 	
 	
