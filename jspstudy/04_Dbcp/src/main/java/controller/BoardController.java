@@ -57,14 +57,14 @@ public class BoardController extends HttpServlet {
 		case "board/modify.do":
 			service = new BoardModifyService();
 			break;
+		case "board/remove.do":
+			service = new BoardRemoveService();
+			break;
 		// 비즈니스 로직이 없는 경우(단순이동)
 		case "board/write.do":
 			af = new ActionForward();
 			af.setView("/board/write.jsp");
 			af.setRedirect(false);  // 단순이동은 forward
-			break;
-		case "board/remove.do" : 
-			service = new BoardRemoveService();
 			break;
 		}
 		

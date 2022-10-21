@@ -136,6 +136,40 @@ public class StudentDAO {
 		return result;
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////
+	// # 상세보기
+	
+	public Student selectStudentByNo (int stuNo) {
+		SqlSession ss = factory.openSession();									// db mapper에 연결
+		Student student = ss.selectOne(mapper + "selectStudentByNo", stuNo);	// => stuNo : 전달해줄 파라미터값(매개변수)
+		ss.close();
+		return student;
+	}
+	
+	
+	// # 수정
+	public int updateStudent(Student student) {
+		SqlSession ss = factory.openSession();
+		int result = ss.update(mapper + "updateStudent", student);
+		if(result > 0 ) {
+			ss.commit();
+		}
+		ss.close();
+		return result;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////
+	// # 스케줄러(TOP3) : 복수의 값을 반환하니 list
+	public List<Student> selectStudentTop3() {
+		SqlSession ss = factory.openSession();
+		List<Student> top3 = ss.selectList(mapper + "selectStudentTop3");
+		ss.close();
+		return top3;
+	}
+
+	
+	
+	
 	
 	
 	

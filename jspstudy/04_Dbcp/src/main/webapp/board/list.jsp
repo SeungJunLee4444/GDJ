@@ -20,12 +20,13 @@
 			location.href = '${contextPath}/board/write.do';
 		});
 		
-		$('#remove_link').click(function(event) {
-			if(!confirm('삭제할까요?')) {	// => 
-				alert('취소되었습니다');
-				event.preventDefault();	// => a태그의 이벤트는 링크이동으로, event.preventDefault(기본동작을 막기)로 인해 링크이동을 막는다
+		$('#remove_link').click(function(event){
+			if(!confirm('삭제할까요?')){  // if(confirm('삭제할까요?')==false){
+				alert('취소되었습니다.');
+				event.preventDefault();  // <a> 태그의 기본 이벤트는 링크 이동이므로 preventDefault()를 통해서 링크 이동이 막힘
+				return;
 			}
-		})
+		});
 		
 	});
 	

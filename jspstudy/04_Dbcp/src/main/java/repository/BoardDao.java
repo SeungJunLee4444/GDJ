@@ -21,12 +21,10 @@ public class BoardDao {
 	private ResultSet rs;
 	private String sql;
 	
-	// Connection Pool 관리(연결)
+	// Connection Pool 관리
 	private DataSource dataSource;
 	
 	// singleton - pattern
-	// 1. 클래스내에서 생성자 만들기, 2. 생성자는 private, 3. getInstance()메서드 return 클래스객체
-	
 	private static BoardDao dao = new BoardDao();
 	private BoardDao() {
 		try {
@@ -39,8 +37,6 @@ public class BoardDao {
 		} catch(NamingException e) {
 			e.printStackTrace();
 		}
-		
-		// & xml에 설정을 입력하여 사용하기 위한 정해진 코드*********************
 	}
 	public static BoardDao getInstance() {
 		return dao;
@@ -48,7 +44,7 @@ public class BoardDao {
 	
 	// method
 	
-	// 1. 접속/자원 해제(& 연결매서드를 임의로 만든것)
+	// 1. 접속/자원 해제
 	public void close(Connection con, PreparedStatement ps, ResultSet rs) {
 		try {
 			if(rs != null) { rs.close(); }
@@ -151,40 +147,16 @@ public class BoardDao {
 		int result = 0;
 		try {
 			con = dataSource.getConnection();
-			sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";	// ?값은 변수처리
-			ps = con.prepareStatement(sql);	// => 변수쿼리문처리
+			sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";
+			ps = con.prepareStatement(sql);
 			ps.setInt(1, board_no);
-			result = ps.executeUpdate();	// => 쿼리문 추가
+			result = ps.executeUpdate();  // DELETE문은 executeUpdate() 메소드 사용
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(con, ps, null);
 		}
-		
-		
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

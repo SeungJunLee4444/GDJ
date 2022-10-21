@@ -16,11 +16,11 @@
 			location.href = '${contextPath}/board/edit.do?board_no=${board.board_no}';
 		});
 		
-		$('#btn_remove').click(function(event) {
-			if(confirm('게시글을 삭제할까요?')) {
-				location.href= '${contextPath}/board/remove.do?board_no=${board.board_no}';
+		$('#btn_remove').click(function(event){
+			if(confirm('게시글을 삭제할까요?')){
+				location.href = '${contextPath}/board/remove.do?board_no=${board.board_no}';
 			} else {
-				alert('취소되었습니다');
+				alert('취소되었습니다.');
 			}
 		});
 		
