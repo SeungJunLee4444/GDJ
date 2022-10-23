@@ -1,7 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="959F3816-5976-2EDD-88B8-1C2FCD9F0106">
-<createdBy>GDJ54</createdBy>
-<createdTime>2022-08-24 05:18:06 UTC</createdTime>
-<ownerDesignName>06_DDL(은행,고객)</ownerDesignName>
-<shouldBeOpen>false</shouldBeOpen>
-</BusinessInfoDesign>

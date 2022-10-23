@@ -1,3 +1,0 @@
-네이버 api 이용
-
-주소 : https://developers.naver.com/apps/#/myapps/8DMw73fQdkYHHygxtkVX/overview
