@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Common.ActionForward;
+import Service.MyService;
+import Service.NowService;
+import Service.TodayService;
 
 // & 하나의 서블릿에서 복수의 요청 처리하는법
 // - 답 : 요청의 확장자를 일치시킨다
@@ -40,7 +43,7 @@ public class MyController extends HttpServlet {
 		
 		
 		// # myservice 선언(모든 서비스의 인터페이스)
-		Myservice myService = null;
+		MyService myService = null;
 		
 		// # actionForward 선언(경로)
 		ActionForward actionForward = null;
@@ -50,23 +53,30 @@ public class MyController extends HttpServlet {
 		
 		// # 요청에 따른 model '선택'	: today.do, now.do, adder.do
 		switch(command) {
-		case "today.do" :
+		//  1( today.do라는 요청이 들어오면(jsp), todayservice(java)라는 서비스를 실행한다
+		case "today.do" : 
 			myService = new TodayService();
-		
+			break;
+		case "now.do" :					
+			myService = new NowService();
+			break;
 		
 		// # 비즈니스 로직이 필요없는 단순이동	: input.do
 		
 		case "input.do" : 
 			actionForward = new ActionForward();
 			actionForward.setView("views/input.jsp");
-			// => views는 패키
+			break;
+			
 		}
 		
 		// # 선택한 model의 실행
-		if(myService != null) {	// null?
+		if(myService != null) {		// & null인경우는 단순이동, null이 아닌경우는 서비스요청
 			actionForward = myService.execute(request,response);
-			// => 각 서비스는 actionForward 타입 반환
-			// => 요청한 서비스마다 응답된 actionforward 결과를 변수에 저장?
+			// => 각 서비스는 actionForward(이동경로, 이동방법) 타입을 반환
+			
+			
+			// 1. input.do => 요청에 저장된 값을 가지고 result.jsp로 이동
 		}
 		
 		// # 이동(리다이렉트, 포워드)
