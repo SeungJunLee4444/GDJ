@@ -1,0 +1,23 @@
+
+ojdbc6
+이클립스에서 db 쿼리문(테이블생성 및 실행) 작성 및 연동(JDBC)
+
+mybatis-3.5.11
+이클립스에서 DML(SELECT, INSERT, UPDATE, DELETE)를 태그로 구현할 수 있다
+- 다운경로 : https://blog.mybatis.org/p/products.html
+
+롬복
+lombok-1.18.18
+
+제이슨
+json-20220320
+- 다운경로 : https://github.com/stleary/JSON-java
+
+cos.jar
+요청시 파일첨부 jar
+
+taglibs-standard-impl-1.2.5.
+코어 라이브러리(jstl)
+
+
+quartz 폴더 내 jar파일

@@ -1,0 +1,15 @@
+월, 화 ajax(api)
+수 	spring / mybatis crud 보충수업
+목	spring / mybatis crud 보충수업
+금	spring
+
+-------------------------------------------------
+spring
+- spring mvc project :(legacy) 세미(jsp) 	*.war
+- spring boot : 파이널(html + thymeleaf) 	* .jar
+
+수업기간 3주
+-------------------------------------------------
+세미 2주
+-------------------------------------------------
+FINAL 4주
