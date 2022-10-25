@@ -1,0 +1,5 @@
+[JUNIT4]
+- 용도 : 서비스 자바파일 검사하는 라이브러리.jar
+- 방법 
+(1) buildpath추가
+(2) test 패키지에 JUNIT case text 파일 생성

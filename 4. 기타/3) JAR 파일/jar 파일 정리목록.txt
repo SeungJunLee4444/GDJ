@@ -2,6 +2,10 @@
 ojdbc6
 이클립스에서 db 쿼리문(테이블생성 및 실행) 작성 및 연동(JDBC)
 
+tomcat-dbcp
+db 커넥션 풀을 가능하게 만듬,dbcp
+- 획득경로 : 톰캣폴더의 라이브러리내
+
 mybatis-3.5.11
 이클립스에서 DML(SELECT, INSERT, UPDATE, DELETE)를 태그로 구현할 수 있다
 - 다운경로 : https://blog.mybatis.org/p/products.html

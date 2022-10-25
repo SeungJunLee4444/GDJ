@@ -1,2 +1,0 @@
-contextPath 절대경로
-https://heekim0719.tistory.com/122

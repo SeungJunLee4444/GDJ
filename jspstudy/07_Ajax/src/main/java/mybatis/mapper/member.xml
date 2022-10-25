@@ -7,25 +7,24 @@
   
 <mapper namespace="mybatis.mapper.member">
 
-	<!--1.  회원목록 -->
+	<!-- 1. 회원목록 -->
 	<select id="selectAllMembers" resultType="Member">
 		SELECT MEMBER_NO, ID, NAME, GENDER, GRADE, ADDRESS
-		FROM MEMBER
-		ORDER BY MEMBER_NO DESC
+		  FROM MEMBER
+		 ORDER BY MEMBER_NO DESC
 	</select>
 	
 	<!-- 2. 회원수 -->
 	<select id="selectAllMembersCount" resultType="int">
 		SELECT COUNT(*)
-		FROM MEMBER
+		  FROM MEMBER
 	</select>
 	
 	<!-- 3. 회원상세 -->
 	<select id="selectMemberByNo" parameterType="int" resultType="Member">
-	<!-- => 멤버 번호를 받으면, 학생정보를 반환  -->
 		SELECT MEMBER_NO, ID, NAME, GENDER, GRADE, ADDRESS
-		FROM MEMBER
-		WHERE MEMBER_NO = #{memberNo}
+		  FROM MEMBER
+		 WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	<!-- 4. 회원등록 -->
@@ -35,21 +34,33 @@
 		VALUES
 			(MEMBER_SEQ.NEXTVAL, #{id}, #{name}, #{gender}, #{grade}, #{address})
 	</insert>
-	<!--ctrl shift n, y 대문자 소문자변경  -->
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 		
- 		
- 		
+	
+	<!-- 5. 회원수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		   SET NAME = #{name}
+		     , GENDER = #{gender}
+		     , GRADE = #{grade}
+		     , ADDRESS = #{address}
+		 WHERE ID = #{id}
+	</update>
+	
+	<!-- 6. 회원삭제 -->
+	<delete id="deleteMember" parameterType="int">
+		DELETE
+		  FROM MEMBER
+		 WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

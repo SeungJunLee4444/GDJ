@@ -21,8 +21,11 @@ public class BoardDao {
 	private ResultSet rs;
 	private String sql;
 	
-	// Connection Pool 관리
+	
+	// & DataSource : 커넥션 풀 관리 인터페이스---------------------------------
+	// => dbcp는 여러개의 db connection을 하나의 pool에 모아놓고관리 
 	private DataSource dataSource;
+	//--------------------------------------------------------------------------
 	
 	// singleton - pattern
 	private static BoardDao dao = new BoardDao();
@@ -30,10 +33,18 @@ public class BoardDao {
 		try {
 			// DataSource 객체 생성
 			// context.xml에서 name="jdbc/oracle11g"인 Resource를 찾아서 생성(JNDI)
+			
+			// & JNDI  -----------------------------------------------------------
+			// - 서버의 특정 resource를 찾는 방식
+			// - java EE서버에서 resource를 찾는경우 정해진 기본이름이 있음
+			 
+			
 			Context ctx = new InitialContext();
-			Context envCtx = (Context)ctx.lookup("java:comp/env");
-			dataSource = (DataSource)envCtx.lookup("jdbc/oracle11g");
-			// dataSource = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle11g");
+//			Context envCtx = (Context)ctx.lookup("java:comp/env");
+//			dataSource = (DataSource)envCtx.lookup("jdbc/oracle11g");
+			 dataSource = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle11g");
+			 // & dbcp 설정이 저장된 resource를 찾는 경우 사용해야하는 jndl
+			 //--------------------------------------------------------------------
 		} catch(NamingException e) {
 			e.printStackTrace();
 		}
