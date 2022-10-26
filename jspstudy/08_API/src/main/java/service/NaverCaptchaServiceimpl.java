@@ -147,9 +147,10 @@ public class NaverCaptchaServiceimpl implements NaverCaptureService {
 				}
 				
 				// # jsp에 만든 이미지의 이름을 화면상에 알려주기
-				// => 로그인 jsp로 전달할 데이터(캡차이미지 경로 + 파일명)
+				// => 로그인 jsp로 전달할 데이터(캡차이미지 경로 + 파일명 + 캡차키) 
 				map.put("dirname", dirname);
 				map.put("filename", filename);
+				map.put("key", key);
 				
 				
 				
@@ -194,6 +195,7 @@ public class NaverCaptchaServiceimpl implements NaverCaptureService {
 		 {
 		 	"dirname" : "ncaptcha",
 		 	"filename" : "111111111.jpg"	// => login.jsp의 ${}변수로 전달될 값
+		 	"key"	: "이미지별 키값"
 		 } 
 		  
 		 */
@@ -220,8 +222,76 @@ public class NaverCaptchaServiceimpl implements NaverCaptureService {
 
 	@Override
 	public boolean validateUserInput(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		// # 요청 파라미터
+		String key = request.getParameter("key");		// 이미지의 키
+		String value = request.getParameter("value"); 	// 사용자가 입력한 방지문자
+		
+		// # 사용자 검증 요청 url
+		String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=1&key=" + key + "&value=" + value;
+		// - code는 1, key, value 파라미터와 값을 전달해줘야함
+		// - 입력값에 따라 다른값을 전달하도록 변수처리해서 전달
+		
+		
+		// # getCapturekey 메서드를 그대로 이용
+		
+		// 반환할값
+		boolean result = false;
+		
+		try {
+			// # apiURL 접속 : 
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection)url.openConnection();
+			
+			// 요청메서드(http메서드)
+			con.setRequestMethod("GET");
+			
+			// # 요청 헤더 : 헤더에 클라리언트 아이디, 비밀번호를 추가
+			con.setRequestProperty("X-Naver-Client-Id", CLIENT_ID);
+			con.setRequestProperty("X-Naver-Client-Secret", CLIENT_SECRET);
+			
+			// # 입력스트림 생성(네이버 api의 정보를 읽기 위함)
+			BufferedReader reader = null;
+			if(con.getResponseCode() == 200 ) {			// =  HttpUrlConnection.HTTP_OK
+				reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} else {
+				reader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			
+			// # 네이버 api 서버가 보낸 데이터 저장
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			
+		
+		// 네이버에서 api서버가 보낸 데이터 확인 및 반환
+		JSONObject obj = new JSONObject(sb.toString());
+		result = obj.getBoolean("result");				// 응답시 속성 "result"(true, false) 반환
+														// 네이버개발자 참고
+			
+			
+			
+		// 자원반납
+			reader.close();
+			con.disconnect();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+		
+		// & 결과 : key값 획득, key값은 호출마다 다르게 출력
+		// => 획득한 key값으로 이미지를 획득
+
+	
+
+		
+		
+		
+		
+		
 	}
 
 }

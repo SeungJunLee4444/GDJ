@@ -30,16 +30,26 @@ public class BoardDetailService implements BoardService {
 		// 2. 목록보기에서 제목을 클릭한 경우만 상세보기가 진행된 것으로 보고 조회수를 증가한다.
 		// 3. 상세보기가 진행되면 session에 updateHit를 등록하고 목록보기로 빠져 나갈 때 updateHit를 제거한다. 
 		
-		// & 개인해석#####################################################################################
-		// - 목록보기에서 제목을 클릭한 경우에만 조회수를 증가하도록 만들겠다는 뜻
-		// 조건에 해당하는 두 경우
-		// (1) 이전주소가 list.do였을때				
-		// (2) session의 updateHit속성이 null값일때
+		// & 문제해결 정리#####################################################################################
 		
-		// 1) request.getHeader("referer") : 헤더를 통해 얻을 수 있는 이전주소
-		// 2) referer.endsWith("list.do") : list.do로 끝나는 문자열인지 확인
-		// - endswith메서드는 ()안의 문자열로 끝나는 문자열인지 boolean 값으로 응답한다
-		// 3) session.getAttribute("updateHit") == null : 업데이트 속성이 아직 올라가지 않은 경우
+		/*
+		* session.setAttribute("updateHit", "done");
+		=> 업데이트 되었다는 의미로 done을 임의로 붙여준 것이다
+		pdatehit메서드(조회수증가)를 사용하고 updatehit 속성에 done값을 set한다
+
+		1) 목록에서 상세보기로 넘어올때,
+		- 조건 : 이전주소가 list.jsp 게시판이거나 / updateHit(조회수가 증가되었는지 여부확인 속성)
+		- 실행 : updatehit 메서드(조회수증가) / updatehit 속성을 not null 임의의 값을 부여한다
+
+		2) 수정완료후 상세보기로 돌아왔을때
+		- session에 updatehit가 done 값이기 때문에 카운트가 일어나지 않는다
+
+		3) 목록으로 돌아갈때(list.do요청)
+		- 상세보기에서 session에 올려둔 updatehit 속성을 제거해버린다
+		- updatehit가 null값이 아닐경우, removeAttribute
+
+		*/
+		
 		//#####################################################################################
 		
 		
@@ -47,9 +57,10 @@ public class BoardDetailService implements BoardService {
 		HttpSession session = request.getSession();
 		if(referer.endsWith("list.do") && session.getAttribute("updateHit") == null) {  // 목록보기에서 제목을 클릭했다. + session에 updateHit 속성이 없다.
 			// 조회수 늘리기 (조회수 증가 여부는 체크하지 않는다.)
-			BoardDAO.getInstance().updateHit(no);
+			BoardDAO.getInstance().updateHit(no);						// => 조회수 증가는 메서드에서 이루어진다
 			// 조회수 증가를 했다는 의미로 session에 updateHit 속성을 저장해 둔다.
 			session.setAttribute("updateHit", "done");
+			// => 모든 updateHit 속성저장의 시작!
 		}
 		
 		// 조회 결과 가져오기

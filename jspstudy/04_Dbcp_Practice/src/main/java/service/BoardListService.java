@@ -12,6 +12,7 @@ public class BoardListService implements BoardService {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		
 		// 상세보기에서 session에 올려 둔 updateHit 속성을 제거
 		HttpSession session = request.getSession();
 		if(session.getAttribute("updateHit") != null) {

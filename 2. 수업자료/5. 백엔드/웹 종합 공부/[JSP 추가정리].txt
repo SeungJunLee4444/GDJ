@@ -30,3 +30,25 @@ List<Map<String, Object>> cart = (List<Map<String, Object>>)session.getAttribute
 
 5. session.removeAttribute("cart");
 - 설명 : session에 저장된 cart 속성을 제거한다
+
+-------------------------------------------------------------------------------------------------------------
+
+6. getAttribute는 단지 확인하는 메서드다
+session.getAttribute("cart");
+- 설명 : 해당 속성이 없어도 상관없다
+
+-------------------------------------------------------------------------------------------------------------
+7. session.invalidate();	
+- 설명 : 세션에 저장된 값 초기화
+
+-------------------------------------------------------------------------------------------------------------
+
+8. request.getContextPath()
+- 설명 : index.jsp(root)로 가는 메서드
+
+-------------------------------------------------------------------------------------------------------------
+
+9. request로 session얻기
+HttpSession session = request.getSession();
+session.setAttribute("login", login);
+=> request 객체를 이용해 session에 접근할 수 있다

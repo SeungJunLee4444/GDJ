@@ -29,8 +29,9 @@
 	
 	// session에 장바구니를 cart 속성으로 저장한 상황이다.
 	// 1. session에 cart 속성이 있는지 확인한다.
-	// 2. cart 속성이 없으면 새로 만들어서 저장한다.
+	// 2. cart 속성이 없으면 새로 만들어서 저장한다.	
 	List<Map<String, Object>> cart = (List<Map<String, Object>>)session.getAttribute("cart");
+	
 	// & session은 object 타입이기 떄문에 list타입으로 강제캐스팅이 필요하다
 		
 	if(cart == null){

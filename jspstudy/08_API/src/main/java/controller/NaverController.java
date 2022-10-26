@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class NaverController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
+		
 		// # 요청 확인
 		String requestURI = request.getRequestURI();				// 컨텍스트패스 + urlmapping
 		String contextPath = request.getContextPath();				// 컨텍스트 패스
@@ -56,6 +58,7 @@ public class NaverController extends HttpServlet {
 			Map<String, String> map = service.getCaptchaImage(request, key);
 			request.setAttribute("dirname", map.get("dirname"));
 			request.setAttribute("filename", map.get("filename"));
+			request.setAttribute("key", map.get("key"));
 		
 			// actionforward 생성
 			af = new ActionForward("/member/login.jsp", false);
@@ -63,6 +66,21 @@ public class NaverController extends HttpServlet {
 		case "/member/refreshCaptcha.do" :
 			service.refreshCaptcha(request, response);	// 요청, 응답에 저장된 데이터 전송(ajax이동, 페이지이동없이 이동, actionforward x)
 			break;
+			
+		case "/member/validateCaptcha.do":
+			boolean result = service.validateUserInput(request);
+			if(result) {
+				af = new ActionForward("/member/success.jsp", false);
+			} else {
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('자동입력 방지문자를 확인하세요');");
+				out.println("location.href='" + request.getContextPath() + "/member/loginPage.do';");	
+				// loginPage.do => 잘못입력했을경우 새로운 키값, 키값에 따른 새로운 이미지를 발급요청하고, login.jsp로 이동한다
+				// 이때 dirname, filename, key 변수저장
+				out.println("</script>");
+				out.close();
+			}
 		}
 		
 		// # 서비스의 메서드가 복수가 때문에 모양이 변화---------------------(%change!%)

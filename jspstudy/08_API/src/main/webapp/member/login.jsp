@@ -12,20 +12,21 @@
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script>
 
-$(document).ready(function(){
-	$('#btn_refresh').click(function(){
-		$.ajax({
-			/* 요청 */
-			type: 'get',
-			url: '${contextPath}/member/refreshCaptcha.do',
-			/* 응답 */
-			dataType: 'json',
-			success: function(resData){  // resData : {"dirname": "", "filename": ""}
-				$('#ncaptcha').prop('src', '../' + resData.dirname + '/' + resData.filename);
-			}
+	$(document).ready(function(){
+		$('#btn_refresh').click(function(){
+			$.ajax({
+				/* 요청 */
+				type: 'get',
+				url: '${contextPath}/member/refreshCaptcha.do',
+				/* 응답 */
+				dataType: 'json',
+				success: function(resData){  // resData : {"dirname": "", "filename": ""}
+					$('#ncaptcha').prop('src', '../' + resData.dirname + '/' + resData.filename);
+					$('#key').val(resData.key);
+				}
+			});
 		});
 	});
-});
 </script>
 
 
@@ -34,7 +35,7 @@ $(document).ready(function(){
 								<%--# 캡차화면 제작 --%>
 	<div class="wrap">
 		<h1>로그인</h1>
-		<form>
+		<form action="${contextPath}/member/validateCaptcha.do" method="post">
 			<div>
 				<input type="text" name="id" id="id" placeholder="아이디">
 			</div>
@@ -56,10 +57,14 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div>
-				<input type="text" name="user_input" placeholder="자동입력 방지문자">
+				<input type="text" name="value" placeholder="자동입력 방지문자">		<%--=> value 파라미터는 검증에 사용 --%>
+				<input type="text" id="key" name="key" value="${key}">				<%--& hidden, 확인할려면 text --%>
 			</div>
 			<div>
-				<button>로그인</button>
+				<button>로그인</button>	
+				<%--# 사용자 입력값 검증 요청 : code, key, value 파라미터 전달
+				이미지별로 키값이 다름
+				 --%>
 			</div>
 		</form>
 	</div>
