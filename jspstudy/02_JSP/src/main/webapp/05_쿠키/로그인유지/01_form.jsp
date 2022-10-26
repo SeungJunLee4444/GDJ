@@ -8,6 +8,14 @@
 <script src="../../assets/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
+	<%--
+	[로그인 유지] 
+	- session에 저장된값을 쿠키에 저장하여 로그인상태를 유지
+	- session : 브라우저가 종료되면 저장된 값이 사리짐 
+	- cookie  : 정해진 시간동안 유지
+	
+	 --%>
+	
 
 	<%
 		// 로그인 유지하기 상태
@@ -48,7 +56,7 @@
 				</div>
 				<div>
 					<label for="chk_keep_login">
-						<input type="checkbox" name="chk_keep_login" id="chk_keep_login">
+						<input type="checkbox" name="chk_keep_login" id="chk_keep_login">	<%-- & 로그인 유지 파라미터전송 --%>
 						로그인 유지하기
 					</label>
 				</div>
