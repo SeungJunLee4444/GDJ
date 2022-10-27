@@ -1,0 +1,5 @@
+An internal error occurred during: "Initializing Java Tooling". java.lang.NullPointerException
+- 이클립스 오류
+- 해결 : ...\workspace\.metadata\.plugins\org.eclipse.core.resources\.projects
+접근 후 server 폴더 외 전부 제거
+- 출처: https://mine-it-record.tistory.com/183 [나만의 기록들:티스토리]

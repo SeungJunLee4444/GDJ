@@ -32,14 +32,14 @@
 		<tbody>
 			<c:if test="${empty boards}">
 				<tr>
-					<td colspan="6">작성된 게시글이 없습니다.</td>	<%-- & colspan, 테이블에 글이 없을경우(조건) : 한 가로줄에 있는 각 세로셀을 병합(가로방향병합)  --%>
+					<td colspan="6">작성된 게시글이 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:if test="${not empty boards}">
 				<c:forEach items="${boards}" var="board">
 					<tr>
 						<td>${board.no}</td>
-						<td><a href="${contextPath}/detail.do?no=${board.no}">${board.title}</a></td>	
+						<td><a href="${contextPath}/detail.do?no=${board.no}">${board.title}</a></td>
 						<td>${board.writer}</td>
 						<td>${board.hit}</td>
 						<td>${board.create_date}</td>

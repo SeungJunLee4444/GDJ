@@ -1,0 +1,5 @@
+제이쿼리 cdn
+- 주소 : https://releases.jquery.com/
+- 주의 : 3.6.1버전 minified 사용
+- 코드 : 
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

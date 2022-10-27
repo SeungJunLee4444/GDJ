@@ -147,14 +147,14 @@ public class BoardDAO {
 		return board;
 	}
 	
-	// 6. 조회수늘리기	// board.no를 받으면 성공실패여부 int값을 반환
+	// 6. 조회수늘리기
 	public int updateHit(long no) {
 		int res = 0;
 		try {
 			con = dataSource.getConnection();
 			sql = "UPDATE BOARD SET HIT = HIT + 1 WHERE NO = ?";
 			ps = con.prepareStatement(sql);
-			ps.setLong(1, no);	// setlong : 인덱스를 long으로 지정(hit가 long타입)
+			ps.setLong(1, no);
 			res = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
