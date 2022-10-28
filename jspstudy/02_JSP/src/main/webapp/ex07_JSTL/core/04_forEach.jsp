@@ -17,11 +17,20 @@
 </head>
 <body>
 
-	<%-- 1. 1 ~ 5 --%>
-	<c:forEach var="n" begin="1" end="5" step="1">
-		${n}&nbsp;
-	</c:forEach>
+	<%-- # 반복문 : <c:forEach> --%>
+	<%-- - 형태
+	<c:forEach var="변수선언" begin="시작값" end="끝나는값" step="증가값" />
+	- 주의 : 범위는 begin <= n <= end다
+	( * 자바와 달리 end값이 범위에 포함된다)
 	
+	* <c:forEach/> : 태그를 슬래시로 닫는태그를 해도 문제없다
+	
+	 --%>
+	
+	<%-- - 실습 --%>
+	<%-- 1. 1 ~ 5 --%>
+	<c:forEach var="n" begin="1" end="5" step="1"/>
+		${n}&nbsp;
 	<hr>
 	
 	<%-- 2. 5 ~ 1 --%>
@@ -41,11 +50,24 @@
 	
 	<hr>
 	
+	<%-- # 배열 반복문 --%>
+	<%-- - 형태
+	<c:forEach var="menu" items="배열의변수" varStatus="상태용변수">
+	
+	- 출력
+	${상태용변수.속성명}	: 속성값
+	
+	 --%>
 	<%-- 4. 배열 --%>
 	<%
 	String[] menus = {"김밥", "떡볶이", "순대"};
 			pageContext.setAttribute("menus", menus);
 	%>
+	
+	<%-- * setAttrubute는 배열도 저장가능하며,
+	이는 c:forEach문을 이용해서 출력할 수 있다
+	 --%>
+	
 	<c:forEach var="menu" items="${menus}" varStatus="vs">
 		인덱스 : ${vs.index}, 순번 : ${vs.count}, 배열요소 : ${menu}<br>
 	</c:forEach>

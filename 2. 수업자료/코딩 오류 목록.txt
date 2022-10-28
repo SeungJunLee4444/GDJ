@@ -5,3 +5,6 @@ java.lang.IllegalArgumentException :
 duplicate local variable
 - 자바, 중복변수 오류
 
+@webServlet import 오류
+- 라이브러리에 톰캣이 등록되지 않으면 발생
+

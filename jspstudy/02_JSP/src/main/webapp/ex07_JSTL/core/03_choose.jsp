@@ -11,7 +11,13 @@
 </head>
 <body>
 
-	<%-- <c:choose> 태그는 if - else 구조를 가진다. --%>
+	<%-- # <c:choose> 태그는 if - else 구조를 가진다. --%>
+	<%--
+	- 구조
+		(1) 부모자식 : <c:choose>
+		(2) 자식태그 : <c:when>
+			- test 속성 : 조건 작성
+	--%>
 	
 	<c:set var="age" value="400" />
 	

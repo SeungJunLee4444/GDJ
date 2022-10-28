@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<%-- <c:if> 태그는 else 개념이 없다. --%>
+	<%-- # <c:if> 태그는 else 개념이 없다. --%>
 	
 	<c:set var="score" value="100" />
 	
