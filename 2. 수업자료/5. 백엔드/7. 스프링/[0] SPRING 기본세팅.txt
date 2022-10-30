@@ -13,6 +13,10 @@
 
 * sts3는 mvc제공, sts4는 mvc, boot를 제공한다
 
+######################
+* version 1.80 오류 해결방법
+https://aspring.tistory.com/entry/Incompatible-JVM-Version-180281-of-the-JVM-is-not-suitable-for-this-product-Version-11-or-greater-is-required
+######################
 ====================================================
 
 3. 세팅
