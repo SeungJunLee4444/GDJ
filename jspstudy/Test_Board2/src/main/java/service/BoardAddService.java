@@ -28,6 +28,8 @@ public class BoardAddService implements BoardService {
 		
 		// # 파라미터를 전달할 필요없으니 리다이렉트이동
 		return new ActionForward("board/insertResult.jsp?res=" + result, true);
+		
+		// * result를 전달한 이유 : 전달값의 크기에 따라 결과창에서 스크립트로 성공/실패여부를 표현하기 위
 	}
 
 }
